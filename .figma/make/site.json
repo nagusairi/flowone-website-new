@@ -1,0 +1,10 @@
+{
+  "description": "Establishes a scalable, production-ready visual design system with typography, color, spacing, and responsive rules for enterprise AI business platforms.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}

@@ -1,0 +1,32 @@
+import { Icon } from "./components/flowone";
+import { DemoCTA, MegaMenu, MobileAccordion, NavItem, WebsiteHeader } from "./components/navigation-system";
+
+function NavDoc({ index, title, note, children, dark = false }: { index: string; title: string; note: string; children: React.ReactNode; dark?: boolean }) {
+  return <section className={`nav-doc ${dark ? "is-dark" : ""}`}><header><span>{index}</span><div role="heading" aria-level={3}>{title}</div><p>{note}</p></header><div className="nav-doc-stage">{children}</div></section>;
+}
+
+export default function StepSix() {
+  return <div id="navigation-system" className="step-six">
+    <section className="nav-system-intro"><div className="container-wide"><span>STEP 06 · 08 — NAVIGATION SYSTEM</span><div role="heading" aria-level={2}>Depth without<br />complication.</div><p>A calm control surface for a connected business platform.</p><div className="nav-ia-line"><b>Solutions</b><i /><b>Platform</b><i /><b>AI</b><i /><b>Resources</b><i /><b>Company</b><i /><b>Founder’s Diary</b><strong>Book a Demo</strong></div></div></section>
+    <div className="nav-system-body container-wide">
+      <NavDoc index="01" title="Header" note="The logo anchors a compact, balanced control surface."><WebsiteHeader /></NavDoc>
+      <NavDoc index="02" title="Desktop Navigation" note="Five expandable destinations, one editorial destination and one persistent CTA."><div className="desktop-nav-specimen"><WebsiteHeader initialMenu="Solutions" /></div></NavDoc>
+      <NavDoc index="03" title="Navigation Item" note="Subtle hierarchy across interaction and location states."><div className="nav-item-matrix"><div><span>DEFAULT</span><NavItem label="Platform" /></div><div><span>HOVER</span><NavItem label="Platform" state="hover" /></div><div><span>FOCUS</span><NavItem label="Platform" state="focus" /></div><div><span>ACTIVE</span><NavItem label="Platform" state="active" /></div><div><span>OPEN</span><NavItem label="Platform" state="open" /></div></div></NavDoc>
+      <NavDoc index="04" title="Book a Demo" note="Permanent primary action built from the existing button system."><div className="demo-state-matrix">{(["default","hover","focus","pressed","loading","disabled"] as const).map(state=><div key={state}><span>{state}</span><DemoCTA state={state} /></div>)}</div></NavDoc>
+      <NavDoc index="05" title="Solutions Mega Menu" note="Business outcomes organize capability without becoming a sitemap."><MegaMenu menu="Solutions" /></NavDoc>
+      <NavDoc index="06" title="Platform Mega Menu" note="Platform, business flows and capabilities share one grammar."><MegaMenu menu="Platform" /></NavDoc>
+      <NavDoc index="07" title="AI Mega Menu" note="Cyan marks intelligence subtly; AI remains inside the business flow."><MegaMenu menu="AI" /></NavDoc>
+      <NavDoc index="08" title="Resources Mega Menu" note="Company Blog remains distinct from Founder’s Diary."><MegaMenu menu="Resources" /></NavDoc>
+      <NavDoc index="09" title="Company Mega Menu" note="About, trust and connection—without Founder’s Diary."><MegaMenu menu="Company" /></NavDoc>
+      <NavDoc index="10" title="Founder’s Diary" note="A direct editorial destination, deliberately outside corporate navigation."><div className="founder-nav-specimen"><span>DIRECT DESTINATION</span><NavItem label="Founder’s Diary" hasMenu={false} /><p>Founder perspectives · Decisions · Lessons · Building flowOne</p></div></NavDoc>
+      <NavDoc index="11" title="Mobile Header" note="Logo, persistent demo action and accessible menu trigger."><div className="mobile-header-frame"><WebsiteHeader forceMobile /></div></NavDoc>
+      <NavDoc index="12" title="Mobile Menu" note="A near-full-screen tap interface with accordions and clear close behavior."><div className="mobile-menu-frame"><WebsiteHeader forceMobile initialMenu="Solutions" /></div></NavDoc>
+      <NavDoc index="13" title="Mobile Accordion" note="Tap-to-expand content using restrained 180–300ms motion."><div className="accordion-matrix"><MobileAccordion menu="Solutions" expanded={false} onToggle={()=>{}} /><MobileAccordion menu="Platform" expanded onToggle={()=>{}} /><MobileAccordion menu="Company" expanded={false} onToggle={()=>{}} disabled /></div></NavDoc>
+      <NavDoc index="14" title="Header Scroll States" note="Sticky continuity with slight compression and quiet separation."><div className="header-state-stack"><div><span>DEFAULT</span><WebsiteHeader /></div><div><span>SCROLLED</span><WebsiteHeader forceScrolled /></div><div><span>MEGA MENU OPEN</span><WebsiteHeader initialMenu="Platform" /></div></div><div className="progress-specimen"><span>OPTIONAL STORY PROGRESS · 2PX SIGNATURE INDICATOR</span><i /></div></NavDoc>
+      <NavDoc index="15" title="Dark Header" note="Optional dark-surface state; original logo artwork remains unchanged." dark><WebsiteHeader forceDark /></NavDoc>
+      <NavDoc index="16" title="Accessibility States" note="Click-first menus, visible focus, Escape, focus return and semantic disclosure."><div className="nav-access-grid"><button className="nav-focus-example">Visible focus state</button><div><kbd>Enter</kbd><span>Open menu</span></div><div><kbd>Esc</kbd><span>Close and restore focus</span></div><div><kbd>Tab</kbd><span>Logical navigation order</span></div><div><Icon name="check" size={16} tone="success" /><span>No hover-only destinations</span></div></div></NavDoc>
+      <NavDoc index="17" title="Motion States" note="Motion supports orientation and never delays access." dark><div className="nav-motion-grid"><div><span>100–180ms</span><b>Item state</b><i className="motion-item" /></div><div><span>180–300ms</span><b>Mega menu</b><i className="motion-menu" /></div><div><span>250–350ms</span><b>Header compression</b><i className="motion-header" /></div><div><span>REDUCED</span><b>State change only</b><Icon name="check" size={20} tone="success" /></div></div></NavDoc>
+      <NavDoc index="18" title="Responsive States" note="Desktop columns become tablet groups and mobile accordions—not compressed menus."><div className="nav-responsive-grid"><div className="is-desktop"><span>DESKTOP · MULTI-COLUMN</span><WebsiteHeader initialMenu="AI" /></div><div className="is-tablet"><span>TABLET · REDUCED NAVIGATION</span><WebsiteHeader /></div><div className="is-mobile"><span>MOBILE · ACCORDION</span><WebsiteHeader forceMobile initialMenu="AI" /></div></div></NavDoc>
+    </div>
+  </div>;
+}
