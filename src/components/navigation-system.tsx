@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { Button, Icon } from "./flowone";
 
 type MenuKey = "Solutions" | "Platform" | "AI" | "Resources" | "Company";
-type MenuGroup = { title: string; items: Array<{ label: string; description?: string }> };
+type MenuGroup = {
+  title: string;
+  badge?: string;
+  tagline?: string;
+  items: Array<{ label: string; description?: string }>;
+  activeStages?: string[];
+};
 
 type TelemetryObject = {
   headerLabel: string;
@@ -19,11 +25,41 @@ type TelemetryObject = {
 export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry: TelemetryObject }> = {
   Solutions: {
     groups: [
-      { title: "GET PAID FASTER", items: ["Customer-to-Cash", "Accounts Receivable", "Credit & Risk", "Collections & Payments"].map(label => ({ label, description: label === "Customer-to-Cash" ? "Connect every step from order to available cash." : undefined })) },
-      { title: "CONTROL PROCUREMENT", items: ["Procure-to-Pay", "Purchase Orders", "Accounts Payable", "Vendor Management"].map(label => ({ label, description: label === "Procure-to-Pay" ? "Control spend from request through settlement." : undefined })) },
-      { title: "RUN INVENTORY BETTER", items: ["Inventory Intelligence", "Warehouse Management", "Stock & Replenishment", "Order Management"].map(label => ({ label, description: label === "Inventory Intelligence" ? "Real-time stock velocity & warehouse allocation." : undefined })) },
-      { title: "CONTROL CASH & BANKING", items: ["Cash & Banking", "Bank Reconciliation", "Cash Flow Forecasting", "Financial Visibility"].map(label => ({ label, description: label === "Cash & Banking" ? "Automated multi-bank reconciliation & cash visibility." : undefined })) },
-      { title: "STAY COMPLIANT", items: ["GST Hub", "E-Invoicing", "E-Way Bills", "GST Reconciliation"].map(label => ({ label, description: label === "GST Hub" ? "Automated e-invoicing, IRN signing & return filing." : undefined })) },
+      {
+        title: "GET PAID FASTER",
+        badge: "CONNECTED ARCHITECTURE",
+        tagline: "These aren't separate products. They are connected capabilities working inside one unified business system.",
+        items: ["Customer-to-Cash", "Accounts Receivable", "Credit & Risk", "Collections & Payments"].map(label => ({ label })),
+        activeStages: ["INVOICE", "RECEIVABLE", "COLLECTION", "CASH"],
+      },
+      {
+        title: "CONTROL PROCUREMENT",
+        badge: "AP AUTOMATION",
+        tagline: "Control spend from requisition and 3-way matching through automated vendor payments.",
+        items: ["Procure-to-Pay", "Purchase Orders", "Accounts Payable", "Vendor Management"].map(label => ({ label })),
+        activeStages: ["ORDER", "INVENTORY", "INVOICE", "BANK"],
+      },
+      {
+        title: "RUN INVENTORY BETTER",
+        badge: "SUPPLY INTELLIGENCE",
+        tagline: "Real-time multi-location warehouse visibility, batch serialization, and stock replenishment.",
+        items: ["Inventory Intelligence", "Warehouse Management", "Stock & Replenishment", "Order Management"].map(label => ({ label })),
+        activeStages: ["ORDER", "INVENTORY", "GST"],
+      },
+      {
+        title: "CONTROL CASH & BANKING",
+        badge: "TREASURY ENGINE",
+        tagline: "Automated multi-bank statement ingestion, algorithmic matching, and cash forecasting.",
+        items: ["Cash & Banking", "Bank Reconciliation", "Cash Flow Forecasting", "Financial Visibility"].map(label => ({ label })),
+        activeStages: ["RECEIVABLE", "COLLECTION", "BANK", "CASH"],
+      },
+      {
+        title: "STAY COMPLIANT",
+        badge: "STATUTORY RAILS",
+        tagline: "Automated e-invoicing, IRN signing, e-way bills, and direct GSTR-1 to 2B reconciliation.",
+        items: ["GST Hub", "E-Invoicing", "E-Way Bills", "GST Reconciliation"].map(label => ({ label })),
+        activeStages: ["INVOICE", "GST", "RECEIVABLE"],
+      },
     ],
     telemetry: {
       headerLabel: "FLAGSHIP WORKFLOW IN FOCUS",
@@ -42,9 +78,24 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   },
   Platform: {
     groups: [
-      { title: "PLATFORM", items: ["Platform Overview", "Finance Operations", "Business Operations", "Workflow Automation"].map(label => ({ label, description: label === "Platform Overview" ? "One connected operating system for business." : undefined })) },
-      { title: "BUSINESS FLOWS", items: ["Customer → Cash", "Procure → Pay", "Inventory → Cash", "Record → Report"].map(label => ({ label, description: label === "Customer → Cash" ? "End-to-end deterministic transaction journey." : undefined })) },
-      { title: "CAPABILITIES", items: ["Document Intelligence", "Approvals & Workflows", "Integrations", "Reporting & Analytics"].map(label => ({ label, description: label === "Document Intelligence" ? "AI-powered transaction data extraction." : undefined })) },
+      {
+        title: "PLATFORM OVERVIEW",
+        badge: "UNIFIED OS",
+        tagline: "One connected operating fabric uniting finance, operations, statutory rails, and contextual AI.",
+        items: ["Platform Overview", "Finance Operations", "Business Operations", "Workflow Automation"].map(label => ({ label })),
+      },
+      {
+        title: "BUSINESS FLOWS",
+        badge: "DUAL-RAIL BUS",
+        tagline: "Deterministic transaction journeys engineered with continuous real-time synchronization.",
+        items: ["Customer → Cash", "Procure → Pay", "Inventory → Cash", "Record → Report"].map(label => ({ label })),
+      },
+      {
+        title: "CORE CAPABILITIES",
+        badge: "DEEP CONNECTIVITY",
+        tagline: "Document intelligence, multi-tier approvals, 48+ core banking bridges, and real-time analytics.",
+        items: ["Document Intelligence", "Approvals & Workflows", "Integrations", "Reporting & Analytics"].map(label => ({ label })),
+      },
     ],
     telemetry: {
       headerLabel: "PLATFORM ARCHITECTURE",
@@ -63,8 +114,24 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   },
   AI: {
     groups: [
-      { title: "AI", items: ["AI Business Agent", "Document Intelligence", "AI Invoice Processing", "AI Bank Reconciliation", "Cash Flow Forecasting", "Credit Risk Intelligence", "Collections Intelligence", "Anomaly Detection"].map(label => ({ label, description: label === "AI Business Agent" ? "Contextual intelligence that understands and acts." : undefined })) },
-      { title: "AI WORKFLOWS", items: ["Smart Approvals", "Automated Actions", "Exception Management"].map(label => ({ label, description: label === "Smart Approvals" ? "Policy-driven automated clearances." : undefined })) },
+      {
+        title: "AI CAPABILITIES",
+        badge: "AUTONOMOUS AGENTS",
+        tagline: "Autonomous intelligence operating directly inside transaction state—not in disconnected tabs.",
+        items: ["AI Business Agent", "Document Intelligence", "AI Invoice Processing", "AI Bank Reconciliation"].map(label => ({ label })),
+      },
+      {
+        title: "INTELLIGENCE & RISK",
+        badge: "PREDICTIVE MODELS",
+        tagline: "Predictive cash forecasting, credit risk scoring, and real-time ledger anomaly detection.",
+        items: ["Cash Flow Forecasting", "Credit Risk Intelligence", "Collections Intelligence", "Anomaly Detection"].map(label => ({ label })),
+      },
+      {
+        title: "AI WORKFLOWS",
+        badge: "SMART POLICIES",
+        tagline: "Policy-driven automated clearances, smart approvals, and exception resolution at enterprise scale.",
+        items: ["Smart Approvals", "Automated Actions", "Exception Management", "Policy Engine"].map(label => ({ label })),
+      },
     ],
     telemetry: {
       headerLabel: "AI IN TRANSACTION RUNTIME",
@@ -84,10 +151,30 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   },
   Resources: {
     groups: [
-      { title: "LEARN", items: ["Blog", "Finance Guides", "GST Guides", "Cash Flow Guides"].map(label => ({ label, description: label === "Blog" ? "Finance, GST, AI and product education." : undefined })) },
-      { title: "PROOF", items: ["Case Studies", "Customer Stories", "ROI Calculator", "Success Stories"].map(label => ({ label, description: label === "Case Studies" ? "Verified operational outcomes." : undefined })) },
-      { title: "WATCH", items: ["Webinars", "Product Videos", "5-Minute Videos", "Demo Videos"].map(label => ({ label, description: label === "Webinars" ? "Deep-dive operational walkthroughs." : undefined })) },
-      { title: "INSIGHTS", items: ["CFO Insights", "Finance Trends", "AI in Finance", "Business Operations"].map(label => ({ label, description: label === "CFO Insights" ? "Strategic treasury & risk perspectives." : undefined })) },
+      {
+        title: "LEARN & GUIDES",
+        badge: "EXPERT PLAYBOOKS",
+        tagline: "Actionable frameworks, regulatory guides, and operational playbooks for finance leaders.",
+        items: ["Blog", "Finance Guides", "GST Guides", "Cash Flow Guides"].map(label => ({ label })),
+      },
+      {
+        title: "PROOF & CASE STUDIES",
+        badge: "VERIFIED IMPACT",
+        tagline: "Verified operational outcomes, measurable DSO reductions, and real customer case studies.",
+        items: ["Case Studies", "Customer Stories", "ROI Calculator", "Success Stories"].map(label => ({ label })),
+      },
+      {
+        title: "WATCH & WEBINARS",
+        badge: "VIDEO LIBRARY",
+        tagline: "Deep-dive architecture walkthroughs, 5-minute video explainers, and live interactive demos.",
+        items: ["Webinars", "Product Videos", "5-Minute Videos", "Demo Videos"].map(label => ({ label })),
+      },
+      {
+        title: "INSIGHTS & BENCHMARKS",
+        badge: "2026 BENCHMARK",
+        tagline: "Macro CFO trends, statutory regulatory analysis, and working capital velocity benchmarks.",
+        items: ["CFO Insights", "Finance Trends", "AI in Finance", "Business Operations"].map(label => ({ label })),
+      },
     ],
     telemetry: {
       headerLabel: "FEATURED CFO PUBLICATION",
@@ -106,9 +193,24 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   },
   Company: {
     groups: [
-      { title: "ABOUT", items: ["About flowOne", "Our Story", "Leadership", "Careers"].map(label => ({ label, description: label === "About flowOne" ? "Why connected business operations matter." : undefined })) },
-      { title: "TRUST", items: ["Security", "Compliance", "Data & Privacy"].map(label => ({ label, description: label === "Security" ? "Institutional data residency & governance." : undefined })) },
-      { title: "CONNECT", items: ["Contact Us", "Partner With Us"].map(label => ({ label, description: label === "Contact Us" ? "Speak directly with our solutions team." : undefined })) },
+      {
+        title: "ABOUT FLOWONE",
+        badge: "OUR MISSION",
+        tagline: "Built in Mumbai for consequence. We build the connected operating system businesses depend on.",
+        items: ["About flowOne", "Our Story", "Leadership", "Careers"].map(label => ({ label })),
+      },
+      {
+        title: "TRUST & GOVERNANCE",
+        badge: "SOVEREIGN CLOUD",
+        tagline: "Institutional data sovereignty, domestic multi-AZ Indian infrastructure, and dual-key controls.",
+        items: ["Security", "Compliance", "Data & Privacy", "Sovereign Cloud"].map(label => ({ label })),
+      },
+      {
+        title: "CONNECT WITH US",
+        badge: "GET IN TOUCH",
+        tagline: "Speak directly with our enterprise solutions team, partner with us, or explore open roles.",
+        items: ["Contact Us", "Partner With Us", "Press & Media", "Office Locations"].map(label => ({ label })),
+      },
     ],
     telemetry: {
       headerLabel: "COMPANY & MISSION SPOTLIGHT",
@@ -147,94 +249,111 @@ export function DemoCTA({ state = "default", compact = false, onClick }: { state
 export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; state?: "closed" | "opening" | "open" | "closing"; onNavigate?: () => void }) {
   const content = navigationContent[menu];
   const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof", Company: "#trust" }[menu];
+  const [activeGroupIndex, setActiveGroupIndex] = useState(0);
+
+  const currentGroup = content.groups[activeGroupIndex] || content.groups[0];
 
   return (
     <div className={`fo-mega fo-mega-${menu.toLowerCase()} is-${state}`} id={`mega-${menu}`} aria-hidden={state === "closed"}>
       <div className="fo-mega__beam" aria-hidden="true" />
       <div className="fo-mega__inner">
-        <div className="fo-mega__groups">
-          {content.groups.map((group, groupIdx) => (
-            <section className="fo-mega__group" key={group.title}>
-              <div className="fo-mega__group-header">
-                <span className="fo-mega__group-index">0{groupIdx + 1}</span>
-                <span className="fo-mega__group-title">{group.title}</span>
-              </div>
-              <div className="fo-mega__items-grid">
-                {group.items.map((item, i) => (
-                  <a
-                    className={`fo-mega__item ${i === 0 && item.description ? "is-primary" : ""}`}
-                    href={target}
-                    onClick={onNavigate}
-                    key={item.label}
-                  >
-                    <div className="fo-mega__item-content">
-                      <div className="fo-mega__item-heading">
-                        <strong>{item.label}</strong>
-                        {i === 0 && item.description && (
-                          <span className="fo-mega__primary-badge">PRIMARY</span>
-                        )}
-                      </div>
-                      {item.description && <small>{item.description}</small>}
-                    </div>
-                    <span className="fo-mega__item-arrow" aria-hidden="true">
-                      <Icon name="arrow" size={14} tone="action" />
-                    </span>
-                  </a>
-                ))}
-              </div>
-            </section>
-          ))}
+        {/* Left Column: Category Navigator */}
+        <div className="fo-mega__nav-col">
+          <div className="fo-mega__cat-list" role="tablist" aria-label={`${menu} categories`}>
+            {content.groups.map((group, idx) => {
+              const isSelected = activeGroupIndex === idx;
+              return (
+                <button
+                  key={group.title}
+                  type="button"
+                  role="tab"
+                  aria-selected={isSelected}
+                  className={`fo-mega__cat-btn ${isSelected ? "is-active" : ""}`}
+                  onClick={() => setActiveGroupIndex(idx)}
+                  onMouseEnter={() => setActiveGroupIndex(idx)}
+                >
+                  {isSelected && <span className="fo-mega__cat-active-bar" aria-hidden="true" />}
+                  <span className="fo-mega__cat-idx">0{idx + 1}</span>
+                  <span className="fo-mega__cat-title">{group.title}</span>
+                  <span className="fo-mega__cat-count">{group.items.length} Workflows</span>
+                  <span className="fo-mega__cat-arrow" aria-hidden="true">→</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* Architectural HUD Telemetry Aside */}
-        <aside className={`fo-mega__feature ${content.telemetry.accent ? "is-ai" : ""}`}>
-          {/* Target Reticle Corner Brackets */}
-          <span className="fo-hud-reticle fo-hud-reticle--tl" aria-hidden="true" />
-          <span className="fo-hud-reticle fo-hud-reticle--tr" aria-hidden="true" />
-          <span className="fo-hud-reticle fo-hud-reticle--bl" aria-hidden="true" />
-          <span className="fo-hud-reticle fo-hud-reticle--br" aria-hidden="true" />
+        {/* Right Column: Modern Architectural Detail Card */}
+        <div className="fo-mega__detail-col">
+          <div className="fo-mega__card">
+            <div className="fo-mega__card-beam" aria-hidden="true" />
 
-          {/* Header Bar */}
-          <div className="fo-hud-header">
-            <span className="fo-hud-label">{content.telemetry.headerLabel}</span>
-            <span className="fo-hud-badge">
-              <span className="fo-hud-beacon" aria-hidden="true" />
-              {content.telemetry.badgeLabel}
-            </span>
-          </div>
+            {/* Card Header Bar */}
+            <div className="fo-mega__card-header">
+              <span className="fo-mega__card-title">{currentGroup.title}</span>
+              <span className="fo-mega__card-badge">
+                <span className="fo-mega__card-beacon" aria-hidden="true" />
+                {currentGroup.badge || "CONNECTED ARCHITECTURE"}
+              </span>
+            </div>
 
-          {/* Hero Object & Value */}
-          <div className="fo-hud-hero">
-            <div className="fo-hud-id">{content.telemetry.objectId}</div>
-            <div className="fo-hud-val">{content.telemetry.heroValue}</div>
-            <div className="fo-hud-sub">{content.telemetry.subtitle}</div>
-          </div>
+            {/* Contextual Tagline */}
+            <p className="fo-mega__card-tagline">
+              {currentGroup.tagline || "These aren't separate products. They are connected capabilities working inside one unified business system."}
+            </p>
 
-          {/* Inset 3-Column Metrics Tray */}
-          <div className="fo-hud-metrics">
-            {content.telemetry.metrics.map(metric => (
-              <div className="fo-hud-metric-cell" key={metric.label}>
-                <span className="fo-hud-metric-label">{metric.label}</span>
-                <strong className="fo-hud-metric-val">{metric.value}</strong>
+            {/* 2x2 Grid of Modern Workflow Cards */}
+            <div className="fo-mega__card-grid">
+              {currentGroup.items.map(item => (
+                <a
+                  href={target}
+                  onClick={onNavigate}
+                  key={item.label}
+                  className="fo-mega__card-tile"
+                >
+                  <span className="fo-mega__card-tile-label">{item.label}</span>
+                  <span className="fo-mega__card-tile-arrow" aria-hidden="true">
+                    <Icon name="arrow" size={14} tone="action" />
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            {/* Visual Footer: Live Connected Pipeline Flow for Solutions, Telemetry for Others */}
+            {menu === "Solutions" ? (
+              <div className="fo-mega__pipeline" aria-label="Connected transaction pipeline">
+                {["ORDER", "INVENTORY", "INVOICE", "GST", "RECEIVABLE", "COLLECTION", "BANK", "CASH"].map((stage, idx, arr) => {
+                  const isActive = currentGroup.activeStages
+                    ? currentGroup.activeStages.some(s => s.toUpperCase() === stage)
+                    : (stage === "INVOICE" || stage === "RECEIVABLE" || stage === "COLLECTION" || stage === "CASH");
+                  return (
+                    <div className={`fo-pipeline__step ${isActive ? "is-active" : ""}`} key={stage}>
+                      <span className="fo-pipeline__node" />
+                      <span className="fo-pipeline__label">{stage}</span>
+                      {idx < arr.length - 1 && <span className="fo-pipeline__line" />}
+                    </div>
+                  );
+                })}
               </div>
-            ))}
-          </div>
+            ) : (
+              <div className="fo-mega__telemetry-bar">
+                <span className="fo-telemetry-beacon" aria-hidden="true" />
+                <span className="fo-telemetry-mono">{content.telemetry.objectId}</span>
+                <span className="fo-telemetry-sep">/</span>
+                <span className="fo-telemetry-lead">{content.telemetry.heroValue}</span>
+                <span className="fo-telemetry-sub">— {content.telemetry.subtitle}</span>
+              </div>
+            )}
 
-          {/* Contextual Inspection Tag Chips */}
-          <div className="fo-hud-chips">
-            {content.telemetry.chips.map(chip => (
-              <span className="fo-hud-chip" key={chip}>{chip}</span>
-            ))}
+            {/* Action Launcher */}
+            <div className="fo-mega__card-footer">
+              <a href={target} onClick={onNavigate} className="fo-mega__card-action">
+                <span>{menu === "Solutions" ? "Explore Solutions Architecture" : content.telemetry.actionLabel}</span>
+                <Icon name="arrow" size={14} tone="action" />
+              </a>
+            </div>
           </div>
-
-          {/* Bottom Action Launcher */}
-          <div className="fo-hud-action">
-            <a href={target} onClick={onNavigate} className="fo-feature-link-tile">
-              <span>{content.telemetry.actionLabel}</span>
-              <Icon name="arrow" size={14} tone={content.telemetry.accent ? "default" : "action"} />
-            </a>
-          </div>
-        </aside>
+        </div>
       </div>
     </div>
   );
