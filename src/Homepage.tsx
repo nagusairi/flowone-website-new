@@ -1310,9 +1310,67 @@ function LivingProduct({ index }: { index: number }) {
   );
 }
 
+const connectionStages = [
+  { step: "01", name: "Order", status: "Confirmed", state: "complete" },
+  { step: "02", name: "Inventory", status: "Allocated", state: "complete" },
+  { step: "03", name: "Invoice", status: "Issued", state: "complete" },
+  { step: "04", name: "GST", status: "Compliant", state: "complete" },
+  { step: "05", name: "Receivable", status: "Open", state: "active" },
+  { step: "06", name: "Collection", status: "Scheduled", state: "active" },
+  { step: "07", name: "Bank", status: "Matched", state: "complete" },
+  { step: "08", name: "Cash", status: "Received", state: "complete" },
+  { step: "09", name: "Decision", status: "Settled", state: "recommended" },
+] as const;
+
 function ConnectedFlow() {
-  const items=["ORDER","INVENTORY","INVOICE","GST","RECEIVABLE","COLLECTION","BANK","CASH","DECISION"];
-  return <div className="connected-flow">{items.map((x,i,a)=><div key={x}><FlowNode label={x} state={i<4?"complete":i===4?"predictive":i===8?"recommended":"active"}/>{i<a.length-1&&<FlowConnector state={i<4?"completed":i===4?"predictive":"active"} pulse={i===4}/>}</div>)}<p className="fo-sr-only">{items.join(", then ")}.</p></div>;
+  return (
+    <div className="connection-pipeline" aria-label="Connected transaction flow pipeline">
+      <div className="connection-rail" aria-hidden="true">
+        <div className="connection-rail-line" />
+        <div className="connection-rail-pulse" />
+      </div>
+      <div className="connection-grid">
+        {connectionStages.map((stage, i) => {
+          const isComplete = stage.state === "complete";
+          const isActive = stage.state === "active";
+          const isRecommended = stage.state === "recommended";
+
+          return (
+            <div
+              key={stage.name}
+              className={`connection-station ${isComplete ? "is-complete" : ""} ${isActive ? "is-active" : ""} ${isRecommended ? "is-recommended" : ""}`}
+            >
+              <div className="connection-station-node" aria-hidden="true">
+                <span className="connection-node-dot">
+                  {isComplete ? (
+                    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                      <path d="M2 5L4 7L8 3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  ) : isActive ? (
+                    <span className="connection-pulse-ring" />
+                  ) : (
+                    <span className="connection-inner-dot" />
+                  )}
+                </span>
+                {i < connectionStages.length - 1 && (
+                  <span className="connection-arrow" aria-hidden="true">
+                    <svg width="7" height="7" viewBox="0 0 7 7" fill="none">
+                      <path d="M2 1L5 3.5L2 6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                )}
+              </div>
+              <div className="connection-station-card">
+                <span className="connection-station-idx">{stage.step}</span>
+                <strong className="connection-station-name">{stage.name}</strong>
+                <span className="connection-station-status">{stage.status}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 function CapabilityFlow({active}:{active:readonly string[]}) {
