@@ -457,56 +457,127 @@
    OPERATIONAL SPOTLIGHT ASIDE (RIGHT HARDWARE-STYLE CARD)
    ========================================================================== */
 
+/* ==========================================================================
+   ARCHITECTURAL HUD TELEMETRY ASIDE (RIGHT INSPECTOR CARD)
+   Derived from High-Density Operational Telemetry Console Style
+   ========================================================================== */
+
 .fo-mega__feature {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding: 1.5rem;
-  background: linear-gradient(145deg, #f8faff 0%, #edf2ff 100%);
+  justify-content: space-between;
+  gap: 0.9rem;
+  padding: 1.35rem 1.4rem;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(246, 249, 255, 0.94) 100%);
   border: 1px solid rgba(0, 34, 255, 0.14);
-  border-radius: 14px;
-  box-shadow: 0 4px 16px rgba(0, 34, 255, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  box-shadow: 0 8px 24px -4px rgba(0, 34, 255, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
   overflow: hidden;
 }
 
-.fo-mega__feature::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, #0022ff 0%, #00b8e6 100%);
-}
-
 .fo-mega__feature.is-ai {
-  background: linear-gradient(145deg, #f2fbfd 0%, #e6f7fa 100%);
-  border-color: rgba(0, 184, 230, 0.22);
+  background: linear-gradient(165deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 253, 250, 0.92) 100%);
+  border-color: rgba(0, 184, 230, 0.25);
 }
 
-.fo-mega__feature.is-ai::before {
-  background: linear-gradient(90deg, #00b8e6 0%, #e22991 100%);
+/* Four-Corner HUD Reticle Brackets ┌ ┐ └ ┘ */
+.fo-hud-reticle {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  pointer-events: none;
+  color: rgba(0, 34, 255, 0.4);
+  z-index: 2;
 }
 
-.fo-feature-header {
+.fo-mega__feature.is-ai .fo-hud-reticle {
+  color: rgba(0, 184, 230, 0.55);
+}
+
+.fo-hud-reticle--tl {
+  top: 7px;
+  left: 7px;
+  border-top: 1.5px solid currentColor;
+  border-left: 1.5px solid currentColor;
+}
+
+.fo-hud-reticle--tr {
+  top: 7px;
+  right: 7px;
+  border-top: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+.fo-hud-reticle--bl {
+  bottom: 7px;
+  left: 7px;
+  border-bottom: 1.5px solid currentColor;
+  border-left: 1.5px solid currentColor;
+}
+
+.fo-hud-reticle--br {
+  bottom: 7px;
+  right: 7px;
+  border-bottom: 1.5px solid currentColor;
+  border-right: 1.5px solid currentColor;
+}
+
+/* Header Bar */
+.fo-hud-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
 }
 
-.fo-feature-beacon {
-  width: 7px;
-  height: 7px;
+.fo-hud-label {
+  font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-blue);
+  text-transform: uppercase;
+}
+
+.fo-mega__feature.is-ai .fo-hud-label {
+  color: #0891b2;
+}
+
+.fo-hud-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(0, 34, 255, 0.06);
+  border: 1px solid rgba(0, 34, 255, 0.16);
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.5625rem;
+  font-weight: 750;
+  letter-spacing: 0.05em;
+  color: var(--color-brand-blue);
+  text-transform: uppercase;
+}
+
+.fo-mega__feature.is-ai .fo-hud-badge {
+  background: rgba(0, 184, 230, 0.08);
+  border-color: rgba(0, 184, 230, 0.22);
+  color: #0891b2;
+}
+
+.fo-hud-beacon {
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #0022ff;
-  box-shadow: 0 0 0 3px rgba(0, 34, 255, 0.2);
+  box-shadow: 0 0 0 2px rgba(0, 34, 255, 0.25);
   animation: beaconPulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.fo-mega__feature.is-ai .fo-feature-beacon {
+.fo-mega__feature.is-ai .fo-hud-beacon {
   background: #00b8e6;
-  box-shadow: 0 0 0 3px rgba(0, 184, 230, 0.25);
+  box-shadow: 0 0 0 2px rgba(0, 184, 230, 0.3);
   animation: beaconPulseAi 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
@@ -515,7 +586,7 @@
     box-shadow: 0 0 0 0 rgba(0, 34, 255, 0.45);
   }
   50% {
-    box-shadow: 0 0 0 6px rgba(0, 34, 255, 0);
+    box-shadow: 0 0 0 5px rgba(0, 34, 255, 0);
   }
 }
 
@@ -524,160 +595,117 @@
     box-shadow: 0 0 0 0 rgba(0, 184, 230, 0.5);
   }
   50% {
-    box-shadow: 0 0 0 6px rgba(0, 184, 230, 0);
+    box-shadow: 0 0 0 5px rgba(0, 184, 230, 0);
   }
 }
 
-.fo-feature-badge {
-  font-family: var(--font-family-mono, monospace);
-  font-size: 0.625rem;
-  font-weight: 750;
-  letter-spacing: 0.1em;
-  color: var(--color-brand-blue);
-  text-transform: uppercase;
-}
-
-.fo-mega__feature.is-ai .fo-feature-badge {
-  color: #0891b2;
-}
-
-.fo-feature-title {
-  font-size: 1.15rem;
-  font-weight: 650;
-  line-height: 1.3;
-  color: var(--color-brand-ink);
-  letter-spacing: -0.025em;
-  margin: 0;
-}
-
-/* Feature Preview: Mini Connected Flow */
-.fo-feature-flow {
+/* Hero Object & Value Block */
+.fo-hud-hero {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.65rem 0.85rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 34, 255, 0.1);
-  border-radius: 9px;
-  box-shadow: 0 2px 6px rgba(0, 34, 255, 0.03);
+  flex-direction: column;
+  gap: 0.15rem;
 }
 
-.fo-flow-chip {
-  padding: 0.2rem 0.5rem;
-  border-radius: 5px;
-  background: rgba(0, 34, 255, 0.07);
-  color: var(--color-brand-blue);
+.fo-hud-id {
   font-family: var(--font-family-mono, monospace);
-  font-size: 0.6875rem;
-  font-weight: 650;
+  font-size: 0.95rem;
+  font-weight: 750;
   letter-spacing: 0.02em;
+  color: #1e293b;
 }
 
-.fo-flow-chip.is-cash {
-  background: rgba(16, 185, 129, 0.12);
-  color: #047857;
+.fo-hud-val {
+  font-size: 1.65rem;
   font-weight: 750;
+  line-height: 1.15;
+  color: #0b1020;
+  letter-spacing: -0.03em;
+  font-feature-settings: "tnum";
 }
 
-.fo-flow-connector {
-  flex: 1;
-  height: 1.5px;
-  background: rgba(0, 34, 255, 0.2);
-  margin-inline: 0.35rem;
-  position: relative;
-}
-
-.fo-flow-connector::after {
-  content: "";
-  position: absolute;
-  right: -1px;
-  top: -2.5px;
-  width: 0;
-  height: 0;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  border-left: 4px solid rgba(0, 34, 255, 0.35);
-}
-
-/* Feature Preview: Platform Dual Rail */
-.fo-feature-dual-rail {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 0.75rem 0.9rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 34, 255, 0.1);
-  border-radius: 9px;
-}
-
-.fo-rail-track {
-  display: flex;
-  align-items: center;
-}
-
-.fo-rail-node {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #0022ff;
-  color: #ffffff;
-  font-family: var(--font-family-mono, monospace);
-  font-size: 0.58rem;
-  font-weight: 750;
-  display: grid;
-  place-items: center;
-  box-shadow: 0 2px 4px rgba(0, 34, 255, 0.25);
-}
-
-.fo-rail-line {
-  flex: 1;
-  height: 2px;
-  background: linear-gradient(90deg, #0022ff 0%, #00b8e6 100%);
-  margin-inline: 0.25rem;
-}
-
-.fo-rail-caption {
-  font-family: var(--font-family-mono, monospace);
-  font-size: 0.6rem;
-  font-weight: 750;
-  letter-spacing: 0.08em;
-  color: var(--color-brand-blue);
-}
-
-/* Feature Preview: AI Prediction Card */
-.fo-feature-ai-card {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  padding: 0.75rem 0.9rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 184, 230, 0.22);
-  border-radius: 9px;
-}
-
-.fo-ai-card-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-family-mono, monospace);
-  font-size: 0.625rem;
-  font-weight: 750;
-  letter-spacing: 0.05em;
-  color: #0891b2;
-}
-
-.fo-ai-card-sub {
-  font-size: 0.7rem;
-  color: #475467;
+.fo-hud-sub {
+  font-size: 0.6875rem;
+  color: #64748b;
+  font-weight: 500;
   line-height: 1.35;
+  margin-top: 0.15rem;
 }
 
-/* Quick Launcher Links */
-.fo-feature-links {
-  margin-top: auto;
+/* Inset 3-Column Metrics Tray */
+.fo-hud-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  background: #ffffff;
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.fo-hud-metric-cell {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.fo-hud-metric-label {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fo-hud-metric-val {
+  font-size: 0.75rem;
+  font-weight: 750;
+  color: #0b1020;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.fo-mega__feature.is-ai .fo-hud-metric-val {
+  color: #047857;
+}
+
+/* Contextual Inspection Tag Chips */
+.fo-hud-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.fo-hud-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(11, 16, 32, 0.11);
+  border-radius: 5px;
+  font-size: 0.625rem;
+  font-weight: 550;
+  color: #334155;
+  letter-spacing: -0.01em;
+  transition: all 0.15s ease;
+}
+
+.fo-hud-chip:hover {
+  background: #ffffff;
+  border-color: rgba(0, 34, 255, 0.3);
+  color: var(--color-brand-blue);
+  transform: translateY(-0.5px);
+}
+
+/* Bottom Action Launcher */
+.fo-hud-action {
+  margin-top: 0.2rem;
 }
 
 .fo-feature-link-tile {
