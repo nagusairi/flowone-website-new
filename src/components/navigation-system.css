@@ -17,6 +17,12 @@
 .fo-founder-diary::before { content: ""; width: .3rem; height: .3rem; background: var(--color-brand-pink); border-radius: var(--radius-full); }
 .fo-founder-diary:hover { color: var(--color-brand-blue); background: transparent; }
 .fo-header__actions { display: flex; align-items: center; gap: .5rem; }
+.fo-header__actions .fo-button {
+  height: 34px;
+  padding-inline: 1rem;
+  font-size: 0.8125rem;
+  line-height: 1;
+}
 
 /* Founder's Diary Header Pill Button */
 .fd-pill {
