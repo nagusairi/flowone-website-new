@@ -88,6 +88,101 @@ const fragmentItems = [
   { area: "EMAIL", object: "APPROVAL", clean: "IN-FLOW", silo: "DELAY · 42 THREADS" },
 ];
 
+const trustPillars = [
+  {
+    id: "audit",
+    tag: "01 · LINEAGE",
+    title: "Append-Only Transaction Lineage",
+    subtitle: "Cryptographic Event Ledger",
+    description: "Every journal entry, invoice alteration, and payment state is permanently committed into an append-only timeline with actor ID, microsecond timestamp, and delta. No silent edits, no phantom entries.",
+    badge: "IMMUTABLE RECORD",
+    tone: "green",
+    code: "TXN-10482_INV_SEALED",
+    rows: [
+      { label: "ACTOR", value: "priya.s@ananya.in", tag: "FINANCE LEAD" },
+      { label: "RECORD", value: "₹5,90,000 · GST 18% · COMMITTED" },
+      { label: "HASH", value: "sha256:9b2d8e41a7f0c13e...", isHash: true },
+    ],
+  },
+  {
+    id: "governance",
+    tag: "02 · ACCESS",
+    title: "Dual-Key Maker-Checker Governance",
+    subtitle: "Enforced Separation of Duties",
+    description: "Strict least-privilege role boundaries prevent conflicting authority. The sales rep who books an order cannot clear an invoice credit memo; cash disbursements and credit overrides mandate multi-party sign-off.",
+    badge: "DUAL-SIGN POLICY",
+    tone: "blue",
+    code: "POLICY #GOV-204",
+    maker: { role: "MAKER · PROPOSAL", name: "Rohan M. [Sales Ops]", status: "SUBMITTED" },
+    gate: "POLICY GATE: THRESHOLD > ₹2,00,000",
+    checker: { role: "CHECKER · CLEARANCE", name: "Anita V. [VP Finance]", status: "AUTHORIZED" },
+  },
+  {
+    id: "statutory",
+    tag: "03 · STATUTORY",
+    title: "Direct GSTN & IRP Tax Clearing",
+    subtitle: "Zero-Portal Tax Clearance",
+    description: "Built natively into Indian statutory tax infrastructure. Invoices generate signed IRN and QR codes automatically at confirmation; E-Way bills clear without third-party portal hops or manual spreadsheets.",
+    badge: "DIRECT TAX RAILS",
+    tone: "green",
+    code: "ZERO REJECTIONS",
+    grid: [
+      { label: "IRN STATUS", value: "47b9...e281", sub: "CRYPTOGRAPHICALLY SIGNED" },
+      { label: "E-WAY BILL", value: "#1810482029", sub: "DISPATCH PERMIT CLEARED" },
+      { label: "GSTIN VALIDATION", value: "29AABCU9603R1ZM", sub: "ACTIVE IN DATABASE" },
+      { label: "3-WAY RECON", value: "GSTR-1 ↔ 2B ↔ BOOKS", sub: "100% RECONCILED" },
+    ],
+  },
+  {
+    id: "banking",
+    tag: "04 · BANKING",
+    title: "Zero-Variance Bank Reconciliation",
+    subtitle: "Deterministic Ledger-to-Bank Bridge",
+    description: "Automated host-to-host multi-bank statement synchronization. Incoming NEFT/RTGS credits are paired to open receivables in sub-second intervals with zero balance drift.",
+    badge: "OPEN BANKING BRIDGE",
+    tone: "cyan",
+    code: "HDFC DIRECT CONNECT",
+    bank: {
+      credit: "₹5,90,000.00 CR (Direct Feed)",
+      ledger: "₹5,90,000.00 CLR (INV-10482)",
+      variance: "₹0.00",
+      speed: "48ms Auto-Match",
+    },
+  },
+  {
+    id: "residency",
+    tag: "05 · SECURITY",
+    title: "Tenant Sandboxing & India Data Residency",
+    subtitle: "Sovereign Tenant Boundary",
+    description: "Dedicated cryptographic database partitioning ensures complete multi-tenant isolation. All transaction, vendor, and customer data remains strictly resident within Indian sovereign data centers.",
+    badge: "RESIDENT SOVEREIGNTY",
+    tone: "blue",
+    code: "TENANT_0x91F",
+    grid: [
+      { label: "STORAGE CIPHER", value: "AES-256-GCM", sub: "AT REST ENCRYPTION" },
+      { label: "DATA RESIDENCY", value: "Mumbai (ap-south-1)", sub: "DOMESTIC JURISDICTION" },
+      { label: "TRANSPORT PROTOCOL", value: "mTLS · TLS 1.3", sub: "END-TO-END CIPHER" },
+      { label: "TENANT ISOLATION", value: "0% Co-Mingling", sub: "DEDICATED KEY RING" },
+    ],
+  },
+  {
+    id: "continuity",
+    tag: "06 · RUNTIME",
+    title: "Deterministic Operational Continuity",
+    subtitle: "99.99% High-Consequence Runtime",
+    description: "Engineered for continuous financial throughput during peak fiscal closures, quarterly audit deadlines, and month-end dispatch surges with automated multi-zone failover.",
+    badge: "CONTINUOUS RUNTIME",
+    tone: "green",
+    code: "99.99% COMMITMENT",
+    feed: [
+      { label: "Posting & Journal Engine", status: "12ms · NOMINAL" },
+      { label: "Statutory Gateway (GSTN/IRP)", status: "CONNECTED" },
+      { label: "Transaction Multi-AZ Replication", status: "0ms LAG" },
+    ],
+    rpo: "RPO: 0 SECONDS · AUTOMATED FAILOVER",
+  },
+];
+
 export default function Homepage() {
   const [demoOpen,setDemoOpen] = useState(false);
   const [capability,setCapability] = useState(0);
@@ -472,9 +567,16 @@ export default function Homepage() {
       <div className="home-container answer-grid"><div><span className="home-index">A CONNECTED OPERATING MODEL</span><h2 id="what-is-flowone">What is flowOne?</h2></div><div><p>flowOne is a connected Business Operations Platform that brings finance, operations, compliance, cash and AI together around one continuous business flow.</p><dl><div><dt>What does flowOne connect?</dt><dd>Customer-to-Cash, Procure-to-Pay, Inventory-to-Cash and Record-to-Report workflows.</dd></div><div><dt>Who is flowOne for?</dt><dd>Indian businesses, CFOs, finance teams, operations teams and business owners.</dd></div><div><dt>How does flowOne use AI?</dt><dd>AI works inside transactions to understand context, predict change, recommend action and help teams act.</dd></div></dl></div></div>
     </section>
 
-    <section id="trust" className="home-trust home-section">
-      <div className="home-container"><div className="section-heading-row"><div><span className="home-index">12 · TRUST</span><h2>Built for the financial work your business depends on.</h2></div><p>Control, accountability and clear access are part of the operating model—not decorative claims.</p></div>
-        <div className="trust-list">{["Security","Compliance","Data & Privacy","Integrations","Access controls","Auditability"].map((x,i)=><div key={x}><span>0{i+1}</span><strong>{x}</strong><p>{i===0?"Designed to protect operational and financial context.":i===4?"Clear roles and controlled access to business actions.":"Transparent controls that support accountable operations."}</p></div>)}</div>
+    <section id="trust" className="home-trust home-section" aria-labelledby="trust-heading">
+      <div className="home-container">
+        <div className="section-heading-row">
+          <div>
+            <span className="home-index">12 · TRUST</span>
+            <h2 id="trust-heading">Built for the financial work your business depends on.</h2>
+          </div>
+          <p>Control, accountability and clear access are part of the operating model—not decorative claims.</p>
+        </div>
+        <TrustArchitecture />
       </div>
     </section>
 
@@ -497,6 +599,185 @@ export default function Homepage() {
     <HomeFooter onDemo={openDemo}/>
     <DemoDialog open={demoOpen} onClose={closeDemo}/>
   </main>;
+}
+
+function TrustArchitecture() {
+  const [activeCard, setActiveCard] = useState<string>("audit");
+
+  return (
+    <div className="trust-architecture">
+      {/* Live System Governance Bar */}
+      <div className="trust-telemetry-bar" aria-label="System Governance Status">
+        <div className="trust-telemetry-item">
+          <span className="trust-telemetry-beacon" aria-hidden="true" />
+          <span className="trust-telemetry-label">SYSTEM INTEGRITY:</span>
+          <span className="trust-telemetry-value">100% DETERMINISTIC POSTINGS</span>
+        </div>
+        <div className="trust-telemetry-divider" aria-hidden="true" />
+        <div className="trust-telemetry-item">
+          <span className="trust-telemetry-label">STATUTORY RAILS:</span>
+          <span className="trust-telemetry-value">GSTN · E-INVOICE IRP · E-WAY</span>
+        </div>
+        <div className="trust-telemetry-divider" aria-hidden="true" />
+        <div className="trust-telemetry-item">
+          <span className="trust-telemetry-label">GOVERNANCE:</span>
+          <span className="trust-telemetry-value">DUAL-KEY MAKER-CHECKER</span>
+        </div>
+        <div className="trust-telemetry-divider" aria-hidden="true" />
+        <div className="trust-telemetry-item">
+          <span className="trust-telemetry-label">DATA BOUNDARY:</span>
+          <span className="trust-telemetry-value">AES-256 · INDIA RESIDENT</span>
+        </div>
+      </div>
+
+      {/* 6-Card Bento Matrix */}
+      <div className="trust-matrix" role="region" aria-label="Financial trust and control pillars">
+        {trustPillars.map((pillar) => {
+          const p = pillar as any;
+          const isActive = activeCard === p.id;
+          return (
+            <div
+              key={p.id}
+              className={`trust-card ${isActive ? "is-active" : ""}`}
+              onClick={() => setActiveCard(p.id)}
+              onMouseEnter={() => setActiveCard(p.id)}
+              tabIndex={0}
+              role="button"
+              aria-pressed={isActive}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  setActiveCard(p.id);
+                }
+              }}
+            >
+              <div className="trust-card-top">
+                <div className="trust-card-meta">
+                  <span className="trust-card-tag">{p.tag}</span>
+                  <span className="trust-card-status">{p.badge}</span>
+                </div>
+                <h3 className="trust-card-title">{p.title}</h3>
+                <span className="trust-card-sub">{p.subtitle}</span>
+                <p className="trust-card-desc">{p.description}</p>
+              </div>
+
+              {/* Embedded Micro-Visual Terminal */}
+              <div className={`trust-visual trust-visual-${p.id}`}>
+                <div className="trust-v-header">
+                  <span className={`trust-v-badge trust-badge-${p.tone}`}>
+                    <span className="trust-beacon-dot" aria-hidden="true" />
+                    {p.badge}
+                  </span>
+                  <span className="trust-v-code">{p.code}</span>
+                </div>
+
+                {p.id === "audit" && p.rows && (
+                  <div className="trust-v-body">
+                    {p.rows.map((r: any) => (
+                      <div className="trust-v-row" key={r.label}>
+                        <span className="trust-v-dim">{r.label}</span>
+                        <span className={r.isHash ? "trust-v-hash" : "trust-v-bright"}>{r.value}</span>
+                        {r.tag && <span className="trust-v-tag">{r.tag}</span>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {p.id === "governance" && p.maker && p.checker && (
+                  <div className="trust-dual-steps">
+                    <div className="trust-dual-step is-complete">
+                      <div className="trust-step-marker">01</div>
+                      <div className="trust-step-info">
+                        <span className="trust-step-role">{p.maker.role}</span>
+                        <span className="trust-step-actor">{p.maker.name}</span>
+                      </div>
+                      <span className="trust-step-status">{p.maker.status}</span>
+                    </div>
+                    <div className="trust-dual-connector">
+                      <span className="trust-connector-line" />
+                      <span className="trust-connector-lock">{p.gate}</span>
+                      <span className="trust-connector-line" />
+                    </div>
+                    <div className="trust-dual-step is-authorized">
+                      <div className="trust-step-marker">02</div>
+                      <div className="trust-step-info">
+                        <span className="trust-step-role">{p.checker.role}</span>
+                        <span className="trust-step-actor">{p.checker.name}</span>
+                      </div>
+                      <span className="trust-step-status is-approved">{p.checker.status}</span>
+                    </div>
+                  </div>
+                )}
+
+                {p.id === "statutory" && p.grid && (
+                  <div className="trust-tax-grid">
+                    {p.grid.map((cell: any) => (
+                      <div className="trust-tax-cell" key={cell.label}>
+                        <span className="trust-v-dim">{cell.label}</span>
+                        <span className="trust-tax-val">{cell.value}</span>
+                        <span className="trust-tax-sub">{cell.sub}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {p.id === "banking" && p.bank && (
+                  <div className="trust-bank-balance">
+                    <div className="trust-bank-row">
+                      <span>Bank Statement:</span>
+                      <strong>{p.bank.credit}</strong>
+                    </div>
+                    <div className="trust-bank-row">
+                      <span>Ledger Receivable:</span>
+                      <strong>{p.bank.ledger}</strong>
+                    </div>
+                    <div className="trust-bank-divider" />
+                    <div className="trust-bank-summary">
+                      <div>
+                        <span className="trust-v-dim">VARIANCE</span>
+                        <span className="trust-bank-zero">{p.bank.variance} (Zero Drift)</span>
+                      </div>
+                      <div className="trust-bank-align-right">
+                        <span className="trust-v-dim">SPEED</span>
+                        <span className="trust-bank-speed">{p.bank.speed}</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {p.id === "residency" && p.grid && (
+                  <div className="trust-vault-grid">
+                    {p.grid.map((cell: any) => (
+                      <div className="trust-vault-item" key={cell.label}>
+                        <span className="trust-v-dim">{cell.label}</span>
+                        <span className="trust-vault-highlight">{cell.value}</span>
+                        <span className="trust-v-sub">{cell.sub}</span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {p.id === "continuity" && p.feed && (
+                  <div className="trust-heartbeat-feed">
+                    {p.feed.map((hb: any) => (
+                      <div className="trust-hb-item" key={hb.label}>
+                        <span className="trust-hb-indicator is-live" />
+                        <span className="trust-hb-label">{hb.label}</span>
+                        <span className="trust-hb-status">{hb.status}</span>
+                      </div>
+                    ))}
+                    <div className="trust-hb-summary-strip">
+                      <span>{p.rpo}</span>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 function HeroFlow() {
