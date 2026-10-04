@@ -608,26 +608,27 @@
 
 .fo-hud-id {
   font-family: var(--font-family-mono, monospace);
-  font-size: 0.95rem;
+  font-size: 0.72rem;
   font-weight: 750;
-  letter-spacing: 0.02em;
-  color: #1e293b;
+  letter-spacing: 0.05em;
+  color: #475467;
+  text-transform: uppercase;
 }
 
 .fo-hud-val {
-  font-size: 1.65rem;
+  font-size: 1.5rem;
   font-weight: 750;
-  line-height: 1.15;
+  line-height: 1.2;
   color: #0b1020;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.025em;
   font-feature-settings: "tnum";
 }
 
 .fo-hud-sub {
-  font-size: 0.6875rem;
+  font-size: 0.7rem;
   color: #64748b;
   font-weight: 500;
-  line-height: 1.35;
+  line-height: 1.4;
   margin-top: 0.15rem;
 }
 
