@@ -153,6 +153,124 @@ const roleKPIs: Record<string, Array<{ label: string; value: string; change?: st
   ],
 };
 
+const aiStages = [
+  {
+    stepName: "UNDERSTAND",
+    kicker: "01 · AI / UNDERSTAND",
+    badgeLabel: "EXTRACTION COMPLETE",
+    title: "Understand & Extract Business Object",
+    summary: "Understand the business object and extract relevant information.",
+    metrics: [
+      { label: "CONFIDENCE", value: "99.8%" },
+      { label: "EXTRACTION TIME", value: "38ms" },
+      { label: "FIELDS PARSED", value: "18 / 18" },
+    ],
+    details: [
+      { label: "PAYLOAD TYPE", value: "B2B Tax Invoice (PDF / JSON)" },
+      { label: "IDENTIFIED ENTITY", value: "Ananya Enterprises · GSTIN 36AABCA1234F1Z5" },
+      { label: "LINE ITEMS", value: "Cloud Operations · ₹5,00,000 + 18% GST" },
+      { label: "PAYMENT TERMS", value: "Net 30 · Due 28 Jun 2026" },
+    ],
+  },
+  {
+    stepName: "MATCH",
+    kicker: "02 · AI / MATCH",
+    badgeLabel: "3-WAY MATCH VERIFIED",
+    title: "Connect Records & Document Lineage",
+    summary: "Connect relevant records, documents or data.",
+    metrics: [
+      { label: "RECON VARIANCE", value: "₹0.00" },
+      { label: "PO MATCH RATE", value: "100%" },
+      { label: "CORRELATION", value: "Deterministic" },
+    ],
+    details: [
+      { label: "PURCHASE ORDER", value: "PO-8841 · Linked & Approved" },
+      { label: "GOODS RECEIPT", value: "GRN-104 · Inspection Cleared" },
+      { label: "MASTER CONTRACT", value: "MSA-2025-ANANYA · Clause 4.2 Verified" },
+      { label: "LINEAGE INTEGRITY", value: "Immutable Cryptographic Link" },
+    ],
+  },
+  {
+    stepName: "VALIDATE",
+    kicker: "03 · AI / VALIDATE",
+    badgeLabel: "STATUTORY & POLICY PASSED",
+    title: "Verify Statutory & Business Rules",
+    summary: "Check policy, business rules, compliance or tax conditions.",
+    metrics: [
+      { label: "IRN VERIFICATION", value: "Valid & Signed" },
+      { label: "TAX CODE AUDIT", value: "HSN 998313 (18%)" },
+      { label: "POLICY DRIFT", value: "0.0%" },
+    ],
+    details: [
+      { label: "IRP SIGNATURE", value: "NIC Portal Digital Hash Authenticated" },
+      { label: "E-WAY BILL", value: "EWB-9920148 · Cleared & Synced" },
+      { label: "GSTN PORTAL", value: "Active Taxpayer · Return Compliant" },
+      { label: "CREDIT LIMIT", value: "Approved Limit ₹25,00,000 (Within Cap)" },
+    ],
+  },
+  {
+    stepName: "PREDICT",
+    kicker: "04 · AI / PREDICT",
+    badgeLabel: "PREDICTIVE RISK SIGNAL",
+    title: "Forecast Payment Velocity & Delay Risk",
+    summary: "Identify likely outcomes, anomalies, delays or risks.",
+    metrics: [
+      { label: "PAYMENT PROBABILITY", value: "92% in 4 Days" },
+      { label: "CYCLE DRIFT RISK", value: "+12 Days (If Delayed)" },
+      { label: "HISTORICAL VELOCITY", value: "38 Days Avg." },
+    ],
+    details: [
+      { label: "HISTORICAL PATTERN", value: "Customer pays reliably within 38 days" },
+      { label: "CURRENT POSITION", value: "Day 34 · Approaching due window boundary" },
+      { label: "RISK SIGNAL", value: "Probability drops 40% if not prompted before Day 38" },
+      { label: "CASH IMPACT", value: "₹5,90,000 forward liquidity factor" },
+    ],
+  },
+  {
+    stepName: "DECIDE",
+    kicker: "05 · AI / DECIDE",
+    badgeLabel: "DECISION READY",
+    title: "Recommend Optimal Business Action",
+    summary: "Recommend the next appropriate business action.",
+    metrics: [
+      { label: "RECOMMENDED ACTION", value: "Prioritize Collection" },
+      { label: "TARGET CHANNEL", value: "WhatsApp + Email" },
+      { label: "EXPECTED RECOVERY", value: "< 48 Hours" },
+    ],
+    details: [
+      { label: "DECISION RATIONALE", value: "Pre-empt payment drift before customer payment run" },
+      { label: "OUTREACH PROTOCOL", value: "Automated executive summary with instant payment link" },
+      { label: "INCENTIVE MODEL", value: "Highlight 1.5% prompt settlement rebate" },
+      { label: "GOVERNANCE", value: "Pre-approved under Collection Policy v4" },
+    ],
+  },
+  {
+    stepName: "ACT",
+    kicker: "06 · AI / ACT",
+    badgeLabel: "PAYOFF READY",
+    title: "Execute & Route Business Action",
+    summary: "Execute or route the recommended action.",
+    metrics: [
+      { label: "EXECUTION STATE", value: "Ready to Trigger" },
+      { label: "PAYMENT LINK", value: "Generated & Signed" },
+      { label: "AUDIT LINEAGE", value: "Append-Only" },
+    ],
+    details: [
+      { label: "RECIPIENT", value: "finance@ananyaenterprises.com · Accounts Payable" },
+      { label: "PAYMENT RAILS", value: "Dynamic Virtual Account + UPI QR + NEFT Bridge" },
+      { label: "ERP LEDGER", value: "Pre-allocated cash expectation posted to SAP" },
+      { label: "AUDIT TRAIL", value: "TXN-ACT-10482 sealed with cryptographic timestamp" },
+    ],
+    actionBlock: {
+      headline: "Prioritize collection & dispatch payment link",
+      subhead: "AI scheduled authenticated multi-channel outreach with instant reconciliation link.",
+      primaryCta: "Review Collection",
+      secondaryCta: "Schedule Auto-Followup",
+      status: "QUEUED FOR DISPATCH · TODAY, 10:00 AM",
+    },
+  },
+];
+
 const outcomeStories = [
   { title: "GET PAID FASTER", path: ["Receivable", "Collection", "Cash"], metric: "-12 Days DSO", desc: "Automate reminders and reconcile payments the moment they hit the bank." },
   { title: "CONTROL CASH", path: ["Bank", "Reconciliation", "Forecast"], metric: "₹12.4 Cr Forecast", desc: "Know your exact forward treasury without manual spreadsheet reconciliation." },
@@ -277,8 +395,23 @@ export default function Homepage() {
   const livingRef = useRef<HTMLElement>(null);
   const livingPinRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<any>(null);
+
+  const aiPinRef = useRef<HTMLDivElement>(null);
+  const aiTriggerRef = useRef<any>(null);
+  const [aiActiveStage, setAiActiveStage] = useState(0);
+  const [aiActionExecuted, setAiActionExecuted] = useState(false);
+
   const openDemo = useCallback(()=>setDemoOpen(true),[]);
   const closeDemo = useCallback(()=>setDemoOpen(false),[]);
+
+  const scrollToAiStage = useCallback((targetIndex: number) => {
+    setAiActiveStage(targetIndex);
+    if (aiTriggerRef.current) {
+      const trigger = aiTriggerRef.current;
+      const targetScroll = trigger.start + (targetIndex / 5) * (trigger.end - trigger.start);
+      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+    }
+  }, []);
 
   const handleSelectState = useCallback((targetIndex: number) => {
     setLivingState(targetIndex);
@@ -301,7 +434,7 @@ export default function Homepage() {
   },[]);
 
   useLayoutEffect(()=>{
-    if(!livingPinRef.current||window.matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+    if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let cleanup=()=>{};
     let cancelled=false;
     void Promise.all([import("gsap"),import("gsap/ScrollTrigger")]).then(([gsapModule,scrollModule])=>{
@@ -310,22 +443,86 @@ export default function Homepage() {
       const ScrollTrigger=scrollModule.ScrollTrigger;
       gsap.registerPlugin(ScrollTrigger);
       const media=gsap.matchMedia();
-      media.add("(min-width: 769px)",()=>{
-        const trigger=ScrollTrigger.create({
-          trigger:livingPinRef.current,
-          start:"top top+=68",
-          end:"+=900%",
-          pin:true,
-          scrub:.35,
-          anticipatePin:1,
-          onUpdate:self=>setLivingState(Math.min(9,Math.floor(self.progress*10))),
+
+      if (livingPinRef.current) {
+        media.add("(min-width: 769px)",()=>{
+          const trigger=ScrollTrigger.create({
+            trigger:livingPinRef.current,
+            start:"top top+=68",
+            end:"+=900%",
+            pin:true,
+            scrub:.35,
+            anticipatePin:1,
+            onUpdate:self=>setLivingState(Math.min(9,Math.floor(self.progress*10))),
+          });
+          triggerRef.current = trigger;
+          return()=>{
+            trigger.kill();
+            triggerRef.current = null;
+          };
         });
-        triggerRef.current = trigger;
-        return()=>{
-          trigger.kill();
-          triggerRef.current = null;
-        };
-      });
+      }
+
+      if (aiPinRef.current) {
+        media.add("(min-width: 1024px)", () => {
+          if (!aiPinRef.current) return;
+          const cards = aiPinRef.current.querySelectorAll<HTMLElement>(".ai-stack-card");
+          if (!cards || cards.length < 6) return;
+
+          gsap.set(cards[0], { x: 0, y: 0, xPercent: 0, opacity: 1 });
+          for (let i = 1; i < cards.length; i++) {
+            gsap.set(cards[i], { xPercent: 120, x: 0, y: 0, opacity: 0 });
+          }
+
+          const tl = gsap.timeline({
+            scrollTrigger: {
+              trigger: aiPinRef.current,
+              start: "top top+=68",
+              end: "+=360%",
+              pin: true,
+              scrub: 0.4,
+              anticipatePin: 1,
+              onUpdate: (self) => {
+                const stage = Math.min(5, Math.floor(self.progress * 6));
+                setAiActiveStage(stage);
+              },
+            },
+          });
+
+          aiTriggerRef.current = tl.scrollTrigger;
+
+          for (let i = 1; i < cards.length; i++) {
+            tl.to(
+              cards[i],
+              {
+                xPercent: 0,
+                x: i * 24,
+                y: i * 14,
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out",
+              },
+              i - 1
+            );
+            tl.to(
+              cards[i - 1],
+              {
+                opacity: 0.72,
+                duration: 0.4,
+                ease: "power1.out",
+              },
+              i - 1 + 0.3
+            );
+          }
+
+          return () => {
+            tl.scrollTrigger?.kill();
+            tl.kill();
+            aiTriggerRef.current = null;
+          };
+        });
+      }
+
       cleanup=()=>media.revert();
     });
     return()=>{cancelled=true;cleanup()};
@@ -542,50 +739,175 @@ export default function Homepage() {
             <span className="home-index">07 · AI INSIDE THE FLOW</span>
             <h2>AI that works<br/>inside the flow.</h2>
           </div>
-          <p>AI doesn’t sit beside your business. It understands what is happening and helps decide what happens next.</p>
+          <p>{"AI doesn't sit beside your business. It understands what is happening and helps decide what happens next."}</p>
         </div>
-        <div className="ai-object">
-          <div className="ai-invoice">
-            <div className="ai-corner tl" aria-hidden="true" />
-            <div className="ai-corner tr" aria-hidden="true" />
-            <div className="ai-corner bl" aria-hidden="true" />
-            <div className="ai-corner br" aria-hidden="true" />
-            <div className="ai-invoice-meta">
-              <span>INSPECTED BUSINESS OBJECT</span>
-              <span className="ai-pill-active">AI EVALUATION ACTIVE</span>
+
+        {/* Pinned Layered Progression Surface */}
+        <div ref={aiPinRef} className="ai-pin-surface">
+          <div className="ai-pinned-grid">
+            {/* Left Column: Persistent Inspected Business Object */}
+            <div className="ai-invoice-column">
+              <div className="ai-invoice">
+                <div className="ai-corner tl" aria-hidden="true" />
+                <div className="ai-corner tr" aria-hidden="true" />
+                <div className="ai-corner bl" aria-hidden="true" />
+                <div className="ai-corner br" aria-hidden="true" />
+                <div className="ai-invoice-meta">
+                  <span>INSPECTED BUSINESS OBJECT</span>
+                  <span className="ai-pill-active">
+                    <span className="ai-beacon-dot" aria-hidden="true" />
+                    AI EVALUATION ACTIVE
+                  </span>
+                </div>
+                <strong>INV-10482</strong>
+                <b>₹5,90,000</b>
+                <small>Ananya Enterprises · GSTIN 36AABCA1234F1Z5</small>
+                <div className="ai-telemetry-metrics">
+                  <div><small>SCHEMA MATCH</small><strong>99.8%</strong></div>
+                  <div><small>IRN STATUS</small><strong>Verified</strong></div>
+                  <div><small>TIMING CONFIDENCE</small><strong>92.0%</strong></div>
+                </div>
+                <div className="ai-knows">
+                  {["Customer profile", "Invoice line items", "Historical velocity", "Due date window", "IRP status"].map(x => (
+                    <span key={x}>{x}</span>
+                  ))}
+                </div>
+                <div className="ai-invoice-state-tag">
+                  <span className="ai-state-indicator-dot" aria-hidden="true" />
+                  <span>CURRENT EVALUATION: <strong>0{aiActiveStage + 1} · {aiStages[aiActiveStage].stepName}</strong></span>
+                </div>
+              </div>
             </div>
-            <strong>INV-10482</strong>
-            <b>₹5,90,000</b>
-            <small>Ananya Enterprises · GSTIN 36AABCA1234F1Z5</small>
-            <div className="ai-telemetry-metrics">
-              <div><small>SCHEMA MATCH</small><strong>99.8%</strong></div>
-              <div><small>IRN STATUS</small><strong>Verified</strong></div>
-              <div><small>TIMING CONFIDENCE</small><strong>92.0%</strong></div>
+
+            {/* Luminous Stream Connector */}
+            <div className="ai-connector-bridge" aria-hidden="true">
+              <div className="ai-connector-line">
+                <span className="ai-connector-pulse-dot" />
+              </div>
+              <span className="ai-connector-tag">EVENT BUS</span>
             </div>
-            <div className="ai-knows">
-              {["Customer profile", "Invoice line items", "Historical velocity", "Due date window", "IRP status"].map(x => (
-                <span key={x}>{x}</span>
-              ))}
+
+            {/* Right Column: Progressive Layered Stack */}
+            <div className="ai-stack-column">
+              {/* Stage Progress Stepper */}
+              <div className="ai-stage-tracker" role="tablist" aria-label="AI Progression Stages">
+                {aiStages.map((stage, idx) => {
+                  const isActive = aiActiveStage === idx;
+                  const isComplete = idx < aiActiveStage;
+                  return (
+                    <button
+                      key={stage.stepName}
+                      type="button"
+                      role="tab"
+                      aria-selected={isActive}
+                      className={`ai-tracker-step ${isActive ? "is-active" : isComplete ? "is-complete" : ""}`}
+                      onClick={() => scrollToAiStage(idx)}
+                    >
+                      <span className="ai-tracker-num">0{idx + 1}</span>
+                      <span className="ai-tracker-label">{stage.stepName}</span>
+                      {isComplete && <span className="ai-tracker-check" aria-hidden="true">✓</span>}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Viewport for Stacked Cards */}
+              <div className="ai-stack-viewport">
+                {aiStages.map((stage, idx) => {
+                  const isActive = aiActiveStage === idx;
+                  const isComplete = idx < aiActiveStage;
+                  return (
+                    <article
+                      key={stage.stepName}
+                      className={`ai-stack-card ai-card-${idx} ${isActive ? "is-active" : isComplete ? "is-complete" : "is-future"}`}
+                      style={{ zIndex: 10 + idx }}
+                      aria-current={isActive ? "step" : undefined}
+                    >
+                      {/* Top Hairline Gradient Beam */}
+                      <div className="ai-card-beam" aria-hidden="true" />
+
+                      {/* Header row */}
+                      <div className="ai-card-header">
+                        <div className="ai-card-header-left">
+                          <span className="ai-card-spark-icon" aria-hidden="true">
+                            <Icon name="spark" size={16} tone="action" />
+                          </span>
+                          <div>
+                            <span className="ai-card-kicker">{stage.kicker}</span>
+                            <h3 className="ai-card-title">{stage.title}</h3>
+                          </div>
+                        </div>
+                        <span className={`ai-card-status-badge ${isActive ? "is-active" : isComplete ? "is-complete" : ""}`}>
+                          <span className="ai-card-beacon" aria-hidden="true" />
+                          {isComplete ? "✓ COMPLETE" : stage.badgeLabel}
+                        </span>
+                      </div>
+
+                      {/* Summary */}
+                      <p className="ai-card-summary">{stage.summary}</p>
+
+                      {/* Inset Metrics Tray */}
+                      <div className="ai-card-metrics">
+                        {stage.metrics.map(m => (
+                          <div className="ai-card-metric-cell" key={m.label}>
+                            <span className="ai-card-metric-label">{m.label}</span>
+                            <strong className="ai-card-metric-value">{m.value}</strong>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Contextual Verified Details Grid */}
+                      <div className="ai-card-details-grid">
+                        {stage.details.map(d => (
+                          <div className="ai-card-detail-item" key={d.label}>
+                            <span className="ai-card-detail-label">{d.label}</span>
+                            <span className="ai-card-detail-val">{d.value}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Final Payoff Action Module (Stage 06 ACT) */}
+                      {stage.actionBlock && (
+                        <div className="ai-card-payoff-box">
+                          <div className="ai-payoff-top">
+                            <div className="ai-payoff-info">
+                              <span className="ai-payoff-tag">RECOMMENDED ACTION</span>
+                              <strong className="ai-payoff-title">{stage.actionBlock.headline}</strong>
+                              <p className="ai-payoff-sub">{stage.actionBlock.subhead}</p>
+                            </div>
+                            <span className="ai-payoff-status-pill">
+                              <span className="ai-payoff-pulse" aria-hidden="true" />
+                              {stage.actionBlock.status}
+                            </span>
+                          </div>
+                          <div className="ai-payoff-actions">
+                            <button
+                              type="button"
+                              className={`fo-button is-primary ${aiActionExecuted ? "is-executed" : ""}`}
+                              onClick={() => setAiActionExecuted(true)}
+                            >
+                              {aiActionExecuted ? "✓ Collection Dispatched" : stage.actionBlock.primaryCta}
+                            </button>
+                            <button type="button" className="fo-button is-secondary">
+                              {stage.actionBlock.secondaryCta}
+                            </button>
+                          </div>
+                        </div>
+                      )}
+                    </article>
+                  );
+                })}
+              </div>
             </div>
           </div>
-          <div className="ai-sequence">
-            {(["Understand", "Match", "Validate", "Predict", "Decide", "Act"] as const).map((step, i, a) => (
-              <AIFlowStep
-                step={step}
-                state={i < 3 ? "complete" : i === 3 ? "active" : "idle"}
-                last={i === a.length - 1}
-                key={step}
-              />
-            ))}
-          </div>
         </div>
-        <div className="ai-recommendation">
-          <ProductAI type="recommendation" />
-          <AIAction state="ready" />
+
+        {/* Section Explore Action Link */}
+        <div className="home-ai-footer">
+          <a className="section-text-link inverse" href="#ai-inside-flow">
+            Explore AI Inside the Flow <Icon name="arrow" size={16} tone="inverse" />
+          </a>
         </div>
-        <a className="section-text-link inverse" href="#ai-inside-flow">
-          Explore AI Inside the Flow <Icon name="arrow" size={16} tone="inverse" />
-        </a>
       </div>
     </section>
 
