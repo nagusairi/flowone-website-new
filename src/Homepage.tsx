@@ -433,10 +433,10 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">06 · CAPABILITIES</span>
-            <h2>Everything connected to the work that moves your business.</h2>
+            <span className="home-index">03 · EXPLORE THE PLATFORM</span>
+            <h2>Start with the work that matters most.</h2>
           </div>
-          <p>Choose an outcome to see how shared business states work together.</p>
+          <p>Choose an outcome to see how flowOne helps you improve the workflows behind it.</p>
         </div>
         <div className="capability-composition">
           {/* LEFT COLUMN: CAPABILITY NAVIGATOR */}
