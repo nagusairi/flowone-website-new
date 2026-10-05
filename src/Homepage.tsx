@@ -18,11 +18,96 @@ const transactionStates = [
 ] as const;
 
 const capabilities = [
-  { title: "GET PAID FASTER", count: "4 Workflows", items: ["Customer-to-Cash","Accounts Receivable","Credit & Risk","Collections & Payments"], active: ["INVOICE","RECEIVABLE","COLLECTION","CASH"] },
-  { title: "CONTROL PROCUREMENT", count: "4 Workflows", items: ["Procure-to-Pay","Purchase Orders","Accounts Payable","Vendor Management"], active: ["ORDER","INVOICE","BANK"] },
-  { title: "RUN INVENTORY BETTER", count: "4 Workflows", items: ["Inventory Intelligence","Warehouse Management","Stock & Replenishment","Order Management"], active: ["ORDER","INVENTORY","INVOICE"] },
-  { title: "CONTROL CASH & BANKING", count: "4 Workflows", items: ["Cash & Banking","Bank Reconciliation","Cash Flow Forecasting","Financial Visibility"], active: ["COLLECTION","BANK","CASH"] },
-  { title: "STAY COMPLIANT", count: "4 Workflows", items: ["GST Hub","E-Invoicing","E-Way Bills","GST Reconciliation"], active: ["INVOICE","GST","BANK"] },
+  {
+    title: "GET PAID FASTER",
+    subtitle: "Receivables, Invoicing & Cash Velocity",
+    summary: "Automate invoice lifecycle, eliminate DSO friction, and reconcile receivables directly into working cash without manual spreadsheet tracking.",
+    count: "4 Workflows",
+    items: [
+      { name: "Customer-to-Cash", tag: "PIPELINE", desc: "Connect orders, dispatch, and invoices directly to collection ledgers." },
+      { name: "Accounts Receivable", tag: "LEDGER", desc: "Real-time ageing schedules, auto-dispute handling, and invoice matching." },
+      { name: "Credit & Risk", tag: "AI SCORING", desc: "Dynamic counterparty limits and predictive payment default alerts." },
+      { name: "Collections & Payments", tag: "AUTOMATION", desc: "Multi-rail payment collection with automated bank reconciliation." },
+    ],
+    active: ["INVOICE", "RECEIVABLE", "COLLECTION", "CASH"],
+    metrics: [
+      { label: "DSO REDUCTION", value: "-18 Days" },
+      { label: "RECON SPEED", value: "Real-Time" },
+      { label: "CLEARANCE", value: "100% Match" },
+    ],
+  },
+  {
+    title: "CONTROL PROCUREMENT",
+    subtitle: "Spend Governance & Vendor Settlement",
+    summary: "Enforce strict spend controls, automate 3-way matching, and execute vendor disbursements with zero ledger discrepancies.",
+    count: "4 Workflows",
+    items: [
+      { name: "Procure-to-Pay", tag: "WORKFLOW", desc: "End-to-end purchasing governance from requisition to bank clearance." },
+      { name: "Purchase Orders", tag: "GOVERNANCE", desc: "Multi-tier approval matrices with dynamic budget ceiling checks." },
+      { name: "Accounts Payable", tag: "AUTOMATED", desc: "Optical extraction and automated 3-way line item verification." },
+      { name: "Vendor Management", tag: "COMPLIANCE", desc: "Verified GSTIN onboarding, MSME tracking, and payment schedules." },
+    ],
+    active: ["ORDER", "INVOICE", "BANK"],
+    metrics: [
+      { label: "SPEND VARIANCE", value: "₹0.00" },
+      { label: "3-WAY MATCH", value: "99.4%" },
+      { label: "PO APPROVAL", value: "<2 Hours" },
+    ],
+  },
+  {
+    title: "RUN INVENTORY BETTER",
+    subtitle: "Warehouse Allocation & Stock Velocity",
+    summary: "Unify multi-location warehouse inventories with live sales orders, automated reorder thresholds, and demand intelligence.",
+    count: "4 Workflows",
+    items: [
+      { name: "Inventory Intelligence", tag: "PREDICTIVE", desc: "Multi-echelon demand forecasting and automated safety stock alerts." },
+      { name: "Warehouse Management", tag: "FULFILLMENT", desc: "Live bin allocation, pick-and-pack optimization, and dispatch tracking." },
+      { name: "Stock & Replenishment", tag: "AUTOMATION", desc: "Algorithmic reorder triggers linked directly to supplier POs." },
+      { name: "Order Management", tag: "ROUTING", desc: "Split-order routing and fulfillment across regional distribution centers." },
+    ],
+    active: ["ORDER", "INVENTORY", "INVOICE"],
+    metrics: [
+      { label: "STOCKOUT RISK", value: "Zero" },
+      { label: "DISPATCH TURN", value: "4.2 Hours" },
+      { label: "PICK ACCURACY", value: "99.9%" },
+    ],
+  },
+  {
+    title: "CONTROL CASH & BANKING",
+    subtitle: "Treasury Forecasting & Auto-Reconciliation",
+    summary: "Consolidate multi-bank balances, eliminate manual bank statement reconciliations, and forecast forward cash runways with precision.",
+    count: "4 Workflows",
+    items: [
+      { name: "Cash & Banking", tag: "TREASURY", desc: "Unified multi-bank position dashboard with live transaction feeds." },
+      { name: "Bank Reconciliation", tag: "ZERO DRIFT", desc: "Sub-second ledger-to-bank statement matching with zero variance." },
+      { name: "Cash Flow Forecasting", tag: "PREDICTIVE", desc: "Scenario-based cash runways factoring in scheduled AP and expected AR." },
+      { name: "Financial Visibility", tag: "REAL-TIME", desc: "CFO-ready executive liquidity telemetry and working capital metrics." },
+    ],
+    active: ["COLLECTION", "BANK", "CASH"],
+    metrics: [
+      { label: "FORWARD RUNWAY", value: "18 Months" },
+      { label: "BANK SYNC", value: "Automated" },
+      { label: "RECON DRIFT", value: "₹0.00" },
+    ],
+  },
+  {
+    title: "STAY COMPLIANT",
+    subtitle: "Statutory Clearances & Audit Lineage",
+    summary: "Generate authenticated IRN e-invoices, auto-clear e-way bills, and reconcile GST returns directly within transaction state.",
+    count: "4 Workflows",
+    items: [
+      { name: "GST Hub", tag: "TAX ENGINE", desc: "Unified statutory compliance terminal for multi-GSTIN enterprises." },
+      { name: "E-Invoicing", tag: "INSTANT IRN", desc: "Automated direct IRP handshake and QR code stamping on issuance." },
+      { name: "E-Way Bills", tag: "LOGISTICS", desc: "Automated dispatch generation synchronized with transporter portals." },
+      { name: "GST Reconciliation", tag: "AUTOMATION", desc: "Real-time GSTR-1, 2B, and 3B auto-population with zero tax credit loss." },
+    ],
+    active: ["INVOICE", "GST", "BANK"],
+    metrics: [
+      { label: "IRN CLEARANCE", value: "Instant" },
+      { label: "GSTR-1 DRIFT", value: "0.0%" },
+      { label: "AUDIT LINEAGE", value: "Append-Only" },
+    ],
+  },
 ];
 
 const roles = [
@@ -354,43 +439,97 @@ export default function Homepage() {
           <p>Choose an outcome to see how shared business states work together.</p>
         </div>
         <div className="capability-composition">
+          {/* LEFT COLUMN: CAPABILITY NAVIGATOR */}
           <div className="capability-list" role="tablist" aria-label="Capability areas">
             {capabilities.map((group, i) => (
               <button
+                type="button"
                 role="tab"
                 aria-selected={capability === i}
                 onClick={() => setCapability(i)}
                 key={group.title}
+                className={`capability-nav-card ${capability === i ? "is-active" : ""}`}
               >
-                <div className="capability-btn-left">
+                <div className="capability-nav-top">
                   <span className="capability-num">0{i + 1}</span>
-                  <strong>{group.title}</strong>
-                </div>
-                <div className="capability-btn-right">
                   <span className="capability-count">{group.count}</span>
-                  <Icon name="arrow" size={16} />
+                </div>
+                <div className="capability-nav-body">
+                  <strong className="capability-nav-title">{group.title}</strong>
+                  <span className="capability-nav-sub">{group.subtitle}</span>
+                </div>
+                <div className="capability-nav-arrow" aria-hidden="true">
+                  <Icon name="arrow" size={16} tone={capability === i ? "action" : "muted"} />
                 </div>
               </button>
             ))}
           </div>
+
+          {/* RIGHT COLUMN: MODERN ARCHITECTURAL CARD */}
           <div className="capability-detail">
+            {/* Top signature hairline beam */}
+            <div className="capability-detail-beam" aria-hidden="true" />
+
+            {/* Header row */}
             <div className="capability-detail-header">
-              <span className="capability-detail-kicker">{capabilities[capability].title}</span>
-              <span className="capability-live-badge">CONNECTED ARCHITECTURE</span>
+              <div className="capability-detail-kicker-group">
+                <span className="capability-detail-kicker">0{capability + 1} · UNIFIED ARCHITECTURE</span>
+                <h3 className="capability-detail-title">{capabilities[capability].title}</h3>
+              </div>
+              <span className="capability-live-badge">
+                <span className="capability-beacon" aria-hidden="true" />
+                LIVE OPERATIONAL FABRIC
+              </span>
             </div>
-            <p>These aren’t separate products. They are connected capabilities working inside one unified business system.</p>
+
+            <p className="capability-detail-summary">
+              {capabilities[capability].summary}
+            </p>
+
+            {/* 2×2 Tactile Workflow Cards */}
             <div className="capability-items-grid">
-              {capabilities[capability].items.map(x => (
-                <a href="#living-transaction" key={x}>
-                  <span>{x}</span>
-                  <Icon name="arrow" size={14} tone="action" />
+              {capabilities[capability].items.map((item, idx) => (
+                <a href="#living-transaction" key={item.name} className="capability-workflow-card">
+                  <div className="capability-card-top">
+                    <span className="capability-card-tag">{item.tag}</span>
+                    <span className="capability-card-index">0{idx + 1}</span>
+                  </div>
+                  <strong className="capability-card-name">{item.name}</strong>
+                  <span className="capability-card-desc">{item.desc}</span>
+                  <div className="capability-card-arrow" aria-hidden="true">
+                    <span>Explore workflow</span>
+                    <Icon name="arrow" size={14} tone="action" />
+                  </div>
                 </a>
               ))}
             </div>
-            <CapabilityFlow active={capabilities[capability].active} />
-            <a className="capability-explore" href="#connection">
-              Explore Solutions Architecture <Icon name="arrow" size={16} tone="action" />
-            </a>
+
+            {/* Active Pipeline Stage Visualizer */}
+            <div className="capability-pipeline-panel">
+              <div className="capability-pipeline-header">
+                <span className="capability-pipeline-label">SYNCHRONIZED PIPELINE STAGES</span>
+                <span className="capability-pipeline-status">4 OF 8 ACTIVE IN REAL-TIME</span>
+              </div>
+              <CapabilityFlow active={capabilities[capability].active} />
+            </div>
+
+            {/* Operational Impact Metrics Ribbon */}
+            <div className="capability-metrics-ribbon">
+              {capabilities[capability].metrics.map(m => (
+                <div className="capability-metric-cell" key={m.label}>
+                  <span className="capability-metric-label">{m.label}</span>
+                  <strong className="capability-metric-value">{m.value}</strong>
+                </div>
+              ))}
+            </div>
+
+            {/* Footer action */}
+            <div className="capability-detail-footer">
+              <a className="capability-explore" href="#connection">
+                <span>Explore Solutions Architecture</span>
+                <Icon name="arrow" size={16} tone="action" />
+              </a>
+            </div>
           </div>
         </div>
       </div>

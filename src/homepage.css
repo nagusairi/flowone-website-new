@@ -1089,192 +1089,518 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* SECTION 06: Capabilities Deck */
-.home-capabilities { background: var(--color-white); }
+/* SECTION 06: Capabilities Deck — Modern Two-Column Layout */
+.home-capabilities {
+  background: var(--color-surface-page, #f8faff);
+  padding-block: var(--section-large);
+}
+
 .capability-composition {
   display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-xs);
+  grid-template-columns: minmax(310px, 0.95fr) minmax(520px, 1.45fr);
+  gap: 2.25rem;
+  align-items: start;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
 }
+
+/* ==========================================================================
+   LEFT COLUMN: CAPABILITY NAVIGATOR
+   ========================================================================== */
 .capability-list {
   display: flex;
   flex-direction: column;
-  background: var(--color-neutral-50);
-  border-right: 1px solid var(--color-border-default);
-}
-.capability-list button {
-  min-height: 4.8rem;
-  padding: 1rem 1.25rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: left;
-  color: var(--color-text-secondary);
+  gap: 0.75rem;
   background: transparent;
   border: 0;
-  border-bottom: 1px solid var(--color-border-default);
-  font: 600 var(--font-caption)/1 var(--font-family-primary);
-  cursor: pointer;
-  transition: all var(--motion-fast);
 }
-.capability-list button:hover {
-  background: var(--color-white);
-  color: var(--color-brand-blue);
-}
-.capability-list button[aria-selected="true"] {
-  color: var(--color-brand-blue);
-  background: var(--color-white);
-  box-shadow: inset 3px 0 var(--color-brand-blue);
-}
-.capability-btn-left {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-}
-.capability-num {
-  font-size: 0.68rem;
-  font-weight: 700;
-  color: var(--color-brand-blue);
-}
-.capability-btn-left strong {
-  font-size: 0.82rem;
-  letter-spacing: -0.01em;
-}
-.capability-btn-right {
-  display: flex;
-  align-items: center;
+
+.capability-nav-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
   gap: 0.5rem;
+  padding: 1.15rem 1.35rem;
+  text-align: left;
+  background: #ffffff;
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  user-select: none;
 }
+
+.capability-nav-card::before {
+  content: "";
+  position: absolute;
+  top: 12px;
+  bottom: 12px;
+  left: 0;
+  width: 3.5px;
+  border-radius: 0 4px 4px 0;
+  background: #0022ff;
+  opacity: 0;
+  transform: scaleY(0.4);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.capability-nav-card:hover {
+  background: #ffffff;
+  border-color: rgba(0, 34, 255, 0.25);
+  transform: translateX(4px);
+  box-shadow: 0 4px 16px -2px rgba(0, 34, 255, 0.08);
+}
+
+.capability-nav-card.is-active {
+  background: #ffffff;
+  border-color: rgba(0, 34, 255, 0.35);
+  box-shadow: 0 8px 24px -4px rgba(0, 34, 255, 0.12), 0 2px 6px rgba(0, 34, 255, 0.04);
+}
+
+.capability-nav-card.is-active::before {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.capability-nav-top {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.2rem;
+}
+
+.capability-num {
+  font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
+  font-size: 0.6875rem;
+  font-weight: 750;
+  color: var(--color-brand-blue);
+  letter-spacing: 0.06em;
+}
+
 .capability-count {
+  font-family: var(--font-family-mono, monospace);
   font-size: 0.58rem;
-  font-weight: 600;
-  color: var(--color-text-tertiary);
-  padding: 0.15rem 0.4rem;
-  border-radius: var(--radius-sm);
-  background: var(--color-neutral-100);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #64748b;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(11, 16, 32, 0.04);
+  text-transform: uppercase;
 }
-.capability-detail {
-  padding: var(--spacing-6);
+
+.capability-nav-card.is-active .capability-count {
+  color: var(--color-brand-blue);
+  background: rgba(0, 34, 255, 0.08);
+}
+
+.capability-nav-body {
   display: flex;
   flex-direction: column;
-  background: var(--color-white);
+  gap: 0.2rem;
+  min-width: 0;
 }
-.capability-detail-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+
+.capability-nav-title {
+  font-size: 0.92rem;
+  font-weight: 650;
+  color: #0b1020;
+  letter-spacing: -0.015em;
+  transition: color 0.15s ease;
 }
-.capability-detail-kicker {
+
+.capability-nav-card.is-active .capability-nav-title,
+.capability-nav-card:hover .capability-nav-title {
   color: var(--color-brand-blue);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
 }
-.capability-live-badge {
-  font-size: 0.56rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--color-status-success);
-  background: rgba(19, 138, 91, 0.1);
-  padding: 0.15rem 0.45rem;
-  border-radius: var(--radius-sm);
-  border: 1px solid rgba(19, 138, 91, 0.25);
+
+.capability-nav-sub {
+  font-size: 0.72rem;
+  line-height: 1.35;
+  color: #64748b;
 }
-.capability-detail > p {
-  max-width: 35rem;
-  margin-top: var(--spacing-3);
-  color: var(--color-text-secondary);
-  font-size: var(--font-small);
-  line-height: 1.6;
-}
-.capability-items-grid {
-  margin-top: var(--spacing-5);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-}
-.capability-items-grid a {
-  min-height: 3.25rem;
-  padding: 0.75rem 1rem;
+
+.capability-nav-arrow {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  color: var(--color-text-primary);
-  background: var(--color-neutral-50);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  font-size: var(--font-small);
-  font-weight: 600;
-  transition: all var(--motion-fast);
+  justify-content: center;
+  padding-left: 0.5rem;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.capability-items-grid a:hover {
-  background: var(--color-white);
-  border-color: var(--color-brand-blue);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-xs);
-}
-.capability-items-grid a .fo-icon {
-  transition: transform var(--motion-fast);
-}
-.capability-items-grid a:hover .fo-icon {
+
+.capability-nav-card:hover .capability-nav-arrow,
+.capability-nav-card.is-active .capability-nav-arrow {
   transform: translateX(3px);
 }
-.capability-detail .capability-explore {
-  width: fit-content;
-  margin-top: var(--spacing-4);
+
+/* ==========================================================================
+   RIGHT COLUMN: MODERN ARCHITECTURAL CARD
+   ========================================================================== */
+.capability-detail {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2.25rem 2.25rem 2rem;
+  background: #ffffff;
+  border: 1px solid rgba(0, 34, 255, 0.12);
+  border-radius: 20px;
+  box-shadow: 0 20px 48px -12px rgba(0, 34, 255, 0.08), 0 4px 16px -2px rgba(11, 16, 32, 0.03);
+  overflow: hidden;
+}
+
+/* Top Signature Hairline Gradient Beam */
+.capability-detail-beam {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #0022ff 0%, #00b8e6 50%, #e22991 100%);
+}
+
+.capability-detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.capability-detail-kicker-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.capability-detail-kicker {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 750;
+  letter-spacing: 0.1em;
+  color: var(--color-brand-blue);
+  text-transform: uppercase;
+}
+
+.capability-detail-title {
+  font-size: 1.65rem;
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: #0b1020;
+  margin: 0;
+}
+
+.capability-live-badge {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  color: var(--color-brand-blue);
-  font-size: var(--font-small);
-  font-weight: 700;
-  text-decoration: none;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.58rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  color: #047857;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
-.capability-flow {
-  margin-top: auto;
-  padding-top: var(--spacing-6);
+
+.capability-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  animation: beaconPulseGreen 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes beaconPulseGreen {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(16, 185, 129, 0);
+  }
+}
+
+.capability-detail-summary {
+  max-width: 44rem;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #475467;
+  margin: -0.25rem 0 0;
+}
+
+/* 2×2 Grid of Tactile Workflow Cards */
+.capability-items-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+}
+
+.capability-workflow-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 1.15rem 1.25rem;
+  background: linear-gradient(165deg, rgba(255, 255, 255, 1) 0%, rgba(248, 250, 255, 0.85) 100%);
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  border-radius: 12px;
+  text-decoration: none;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.capability-workflow-card:hover {
+  background: #ffffff;
+  border-color: rgba(0, 34, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(0, 34, 255, 0.1);
+}
+
+.capability-card-top {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
+
+.capability-card-tag {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.5625rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  background: rgba(0, 34, 255, 0.08);
+  color: var(--color-brand-blue);
+  text-transform: uppercase;
+}
+
+.capability-card-index {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #94a3b8;
+}
+
+.capability-card-name {
+  font-size: 0.875rem;
+  font-weight: 650;
+  color: #0b1020;
+  letter-spacing: -0.01em;
+  transition: color 0.15s ease;
+}
+
+.capability-workflow-card:hover .capability-card-name {
+  color: var(--color-brand-blue);
+}
+
+.capability-card-desc {
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #64748b;
+  flex: 1;
+}
+
+.capability-card-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.25rem;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: var(--color-brand-blue);
+  opacity: 0.85;
+  transition: all 0.2s ease;
+}
+
+.capability-card-arrow .fo-icon {
+  transition: transform 0.2s ease;
+}
+
+.capability-workflow-card:hover .capability-card-arrow {
+  opacity: 1;
+}
+
+.capability-workflow-card:hover .capability-card-arrow .fo-icon {
+  transform: translateX(4px);
+}
+
+/* Synchronized Pipeline Stage Visualizer */
+.capability-pipeline-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.15rem 1.25rem;
+  background: rgba(248, 250, 255, 0.9);
+  border: 1px solid rgba(0, 34, 255, 0.1);
+  border-radius: 12px;
+}
+
+.capability-pipeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.capability-pipeline-label {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.625rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  color: var(--color-brand-blue);
+  text-transform: uppercase;
+}
+
+.capability-pipeline-status {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: #64748b;
+}
+
+.capability-flow {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  padding: 0.25rem 0;
+}
+
 .capability-flow > div {
   min-width: 0;
   display: flex;
   align-items: center;
   flex: 1;
   opacity: 0.35;
-  transition: opacity var(--motion-standard);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
+
 .capability-flow > div.is-relevant {
   opacity: 1;
 }
+
 .capability-flow i {
-  width: 0.65rem;
-  height: 0.65rem;
+  width: 0.7rem;
+  height: 0.7rem;
   flex: 0 0 auto;
-  background: var(--color-border-strong);
+  background: #cbd5e1;
   border-radius: var(--radius-full);
+  transition: all 0.25s ease;
 }
+
 .capability-flow .is-relevant i {
-  background: var(--color-brand-blue);
-  box-shadow: 0 0 6px var(--color-brand-blue);
+  background: #0022ff;
+  box-shadow: 0 0 8px rgba(0, 34, 255, 0.6);
+  transform: scale(1.15);
 }
+
 .capability-flow span {
   margin-left: 0.4rem;
-  font-size: 0.52rem;
-  font-weight: 700;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.5625rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: #64748b;
 }
+
+.capability-flow .is-relevant span {
+  color: #0b1020;
+}
+
 .capability-flow b {
-  height: 1.5px;
+  height: 2px;
   flex: 1;
   margin-inline: 0.35rem;
-  background: var(--color-border-strong);
+  background: #e2e8f0;
 }
+
 .capability-flow .is-relevant b {
+  background: linear-gradient(90deg, #0022ff 0%, #00b8e6 100%);
+}
+
+/* Operational Impact Metrics Ribbon */
+.capability-metrics-ribbon {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #ffffff;
+  border: 1px solid rgba(11, 16, 32, 0.08);
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.capability-metric-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.capability-metric-label {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #64748b;
+  text-transform: uppercase;
+}
+
+.capability-metric-value {
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: #0b1020;
+  letter-spacing: -0.015em;
+  font-feature-settings: "tnum";
+}
+
+/* Footer Action */
+.capability-detail-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.25rem;
+}
+
+.capability-explore {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  background: rgba(0, 34, 255, 0.06);
+  border: 1px solid rgba(0, 34, 255, 0.16);
+  border-radius: 8px;
+  color: var(--color-brand-blue);
+  text-decoration: none;
+  font-size: 0.8125rem;
+  font-weight: 650;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.capability-explore:hover {
   background: var(--color-brand-blue);
+  color: #ffffff;
+  border-color: var(--color-brand-blue);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 34, 255, 0.2);
+}
+
+.capability-explore .fo-icon {
+  transition: transform 0.2s ease;
+}
+
+.capability-explore:hover .fo-icon {
+  transform: translateX(3px);
+  filter: brightness(0) invert(1);
 }
 
 /* SECTION 07: AI Inside Flow */
@@ -2326,9 +2652,10 @@
   .section-heading-row { grid-template-columns:1fr; gap:var(--spacing-4); }
   .footer-links { grid-template-columns:repeat(4,1fr); gap:var(--spacing-5); }
   .ai-object { grid-template-columns:1fr; }
-  .capability-composition { grid-template-columns:1fr; }
-  .capability-list { display:grid; grid-template-columns:repeat(2,1fr); border-right:0; border-bottom:1px solid var(--color-border-default); }
-  .capability-detail { min-height:28rem; }
+  .capability-composition { grid-template-columns:1fr; gap:1.75rem; }
+  .capability-list { display:grid; grid-template-columns:repeat(2,1fr); gap:0.75rem; border:none; }
+  .capability-list > .capability-nav-card:last-child { grid-column:span 2; }
+  .capability-detail { min-height:auto; }
   .predictive-steps { grid-template-columns:repeat(2, 1fr); }
   .outcome-editorial { grid-template-columns:repeat(2, 1fr); }
   .role-selector { grid-template-columns:1fr; }
@@ -2404,8 +2731,10 @@
   .connection-station-node { display:none; }
 
   .capability-list { grid-template-columns:1fr; }
-  .capability-detail { min-height:auto; padding:var(--spacing-3); }
+  .capability-list > .capability-nav-card:last-child { grid-column:auto; }
+  .capability-detail { min-height:auto; padding:1.25rem; }
   .capability-items-grid { grid-template-columns:1fr; }
+  .capability-metrics-ribbon { grid-template-columns:1fr; gap:0.65rem; }
   .capability-flow { flex-direction:column; align-items:flex-start; gap:0.5rem; }
   .capability-flow > div { width:100%; min-height:2rem; }
   .capability-flow b { display:none; }
