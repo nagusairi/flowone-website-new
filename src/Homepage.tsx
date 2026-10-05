@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { memo, startTransition, useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { AIAction, Badge, Button, FlowConnector, FlowNode, Icon, Status } from "./components/flowone";
 import { AIFlowStep, Decision, Outcome, StateIndicator } from "./components/flow-system";
 import { Forecast, InvoiceUI, ProductAI, ProductKPI, Reconciliation } from "./components/product-ui";
@@ -405,33 +405,49 @@ export default function Homepage() {
   const closeDemo = useCallback(()=>setDemoOpen(false),[]);
 
   const scrollToAiStage = useCallback((targetIndex: number) => {
-    setAiActiveStage(targetIndex);
+    startTransition(() => {
+      setAiActiveStage(targetIndex);
+    });
     if (aiTriggerRef.current) {
       const trigger = aiTriggerRef.current;
       const targetScroll = trigger.start + (targetIndex / 5) * (trigger.end - trigger.start);
-      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+      window.scrollTo({ top: targetScroll, behavior: "auto" });
     }
   }, []);
 
   const handleSelectState = useCallback((targetIndex: number) => {
-    setLivingState(targetIndex);
+    startTransition(() => {
+      setLivingState(targetIndex);
+    });
     if (triggerRef.current) {
       const trigger = triggerRef.current;
       const progress = (targetIndex + 0.5) / 10;
       const targetScroll = trigger.start + progress * (trigger.end - trigger.start);
-      window.scrollTo({ top: targetScroll, behavior: "smooth" });
+      window.scrollTo({ top: targetScroll, behavior: "auto" });
     }
   }, []);
 
   useEffect(() => {
-    const onScroll = () => {
+    let ticking = false;
+    let rAF = 0;
+    const updateProgress = () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      document.documentElement.style.setProperty("--fo-scroll-progress",String(maxScroll > 0 ? window.scrollY / maxScroll : 0));
+      document.documentElement.style.setProperty("--fo-scroll-progress", String(maxScroll > 0 ? window.scrollY / maxScroll : 0));
+      ticking = false;
     };
-    window.addEventListener("scroll",onScroll,{passive:true});
-    onScroll();
-    return () => window.removeEventListener("scroll",onScroll);
-  },[]);
+    const onScroll = () => {
+      if (!ticking) {
+        ticking = true;
+        rAF = requestAnimationFrame(updateProgress);
+      }
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    updateProgress();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rAF);
+    };
+  }, []);
 
   useLayoutEffect(()=>{
     if(window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -453,7 +469,10 @@ export default function Homepage() {
             pin:true,
             scrub:.35,
             anticipatePin:1,
-            onUpdate:self=>setLivingState(Math.min(9,Math.floor(self.progress*10))),
+            onUpdate: (self) => {
+              const next = Math.min(9, Math.floor(self.progress * 10));
+              setLivingState((prev) => (prev !== next ? next : prev));
+            },
           });
           triggerRef.current = trigger;
           return()=>{
@@ -484,7 +503,7 @@ export default function Homepage() {
               anticipatePin: 1,
               onUpdate: (self) => {
                 const stage = Math.min(5, Math.floor(self.progress * 6));
-                setAiActiveStage(stage);
+                setAiActiveStage((prev) => (prev !== stage ? stage : prev));
               },
             },
           });
@@ -1062,7 +1081,7 @@ export default function Homepage() {
   </main>;
 }
 
-function TrustArchitecture() {
+const TrustArchitecture = memo(function TrustArchitecture() {
   const [activeCard, setActiveCard] = useState<string>("audit");
 
   return (
@@ -1239,9 +1258,9 @@ function TrustArchitecture() {
       </div>
     </div>
   );
-}
+});
 
-function HeroFlow() {
+const HeroFlow = memo(function HeroFlow() {
   const [stage, setStage] = useState(0);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -1354,9 +1373,9 @@ function HeroFlow() {
       </ol>
     </div>
   );
-}
+});
 
-function BusinessLoop() {
+const BusinessLoop = memo(function BusinessLoop() {
   const items = [
     ["BUSINESS ACTIVITY", "Demand begins", "Commercial terms agreed"],
     ["TRANSACTION", "Context forms", "TXN-10482 generated"],
@@ -1438,9 +1457,9 @@ function BusinessLoop() {
       <p className="fo-sr-only">{items.map(item => item[0]).join(", then ")}.</p>
     </div>
   );
-}
+});
 
-function LivingNarrative({
+const LivingNarrative = memo(function LivingNarrative({
   index,
   setIndex,
   onSelectState,
@@ -1449,20 +1468,35 @@ function LivingNarrative({
   setIndex?: (i: number) => void;
   onSelectState?: (i: number) => void;
 }) {
+  const columnRef = useRef<HTMLDivElement>(null);
   const activePillRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (activePillRef.current) {
-      activePillRef.current.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    const col = columnRef.current;
+    const pill = activePillRef.current;
+    if (col && pill) {
+      const colTop = col.scrollTop;
+      const colHeight = col.clientHeight;
+      const pillTop = pill.offsetTop;
+      const pillHeight = pill.offsetHeight;
+
+      // Only scroll if outside the visible boundaries of the pill column
+      if (pillTop < colTop) {
+        col.scrollTop = pillTop;
+      } else if (pillTop + pillHeight > colTop + colHeight) {
+        col.scrollTop = pillTop + pillHeight - colHeight;
+      }
     }
   }, [index]);
 
   const handleSelect = (targetIndex: number) => {
-    if (onSelectState) {
-      onSelectState(targetIndex);
-    } else if (setIndex) {
-      setIndex(targetIndex);
-    }
+    startTransition(() => {
+      if (onSelectState) {
+        onSelectState(targetIndex);
+      } else if (setIndex) {
+        setIndex(targetIndex);
+      }
+    });
   };
 
   const handlePrev = () => {
@@ -1541,7 +1575,7 @@ function LivingNarrative({
       </div>
 
       {/* Vertical Pill List with Inline Accordion Description */}
-      <div className="apple-pills-column" role="tablist" aria-orientation="vertical">
+      <div ref={columnRef} className="apple-pills-column" role="tablist" aria-orientation="vertical">
         {transactionStates.map((x, i) => {
           const isActive = i === index;
           return (
@@ -1604,9 +1638,9 @@ function LivingNarrative({
       </div>
     </aside>
   );
-}
+});
 
-function LivingProduct({ index }: { index: number }) {
+const LivingProduct = memo(function LivingProduct({ index }: { index: number }) {
   const [reminderSent, setReminderSent] = useState(false);
   const currentValue = index >= 2 ? "₹5,90,000" : "₹5,00,000";
 
@@ -2050,7 +2084,7 @@ function LivingProduct({ index }: { index: number }) {
       </footer>
     </div>
   );
-}
+});
 
 const connectionStages = [
   { step: "01", name: "Order", status: "Confirmed", state: "complete" },
@@ -2064,7 +2098,7 @@ const connectionStages = [
   { step: "09", name: "Decision", status: "Settled", state: "recommended" },
 ] as const;
 
-function ConnectedFlow() {
+const ConnectedFlow = memo(function ConnectedFlow() {
   return (
     <div className="connection-pipeline" aria-label="Connected transaction flow pipeline">
       <div className="connection-rail" aria-hidden="true">
@@ -2113,7 +2147,7 @@ function ConnectedFlow() {
       </div>
     </div>
   );
-}
+});
 
 function CapabilityFlow({active}:{active:readonly string[]}) {
   const items=["ORDER","INVENTORY","INVOICE","GST","RECEIVABLE","COLLECTION","BANK","CASH"];
