@@ -2205,31 +2205,34 @@ const LivingMobileCarousel = memo(function LivingMobileCarousel({
 
   return (
     <div
-      className="living-mobile-carousel home-container"
+      className="living-mobile-carousel"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
       aria-roledescription="carousel"
       aria-label="Transaction stages explorer"
     >
       {/* 1. Visual Stage: Centered LivingProduct */}
-      <div className="living-mobile-product-stage">
+      <div className="living-mobile-product-stage home-container">
         <LivingProduct index={index} />
       </div>
 
-      {/* 2. Interactive Narrative Card flanked by Left/Right Chevrons */}
+      {/* 2. Full-bleed Controls Row with Screen-Edge Arrow Wrappers */}
       <div className="living-mobile-controls-row">
-        <button
-          type="button"
-          className="apple-flank-chevron apple-flank-prev"
-          disabled={index === 0}
-          aria-label="Previous transaction stage"
-          onClick={handlePrev}
-        >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-            <path d="M11 4.5L6.5 9L11 13.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+        {/* Left Edge Arrow: Hidden on first slide (index === 0) */}
+        {index > 0 && (
+          <button
+            type="button"
+            className="apple-edge-arrow apple-edge-arrow--prev"
+            aria-label="Previous transaction stage"
+            onClick={handlePrev}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M12.5 5L7.5 10L12.5 15" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        )}
 
+        {/* Centered Description Card with proportional width */}
         <div className="apple-mobile-desc-card">
           <p className="apple-desc-lead">
             <strong className="apple-desc-bold">{current.pillLabel}.</strong>{" "}
@@ -2247,17 +2250,19 @@ const LivingMobileCarousel = memo(function LivingMobileCarousel({
           )}
         </div>
 
-        <button
-          type="button"
-          className="apple-flank-chevron apple-flank-next"
-          disabled={index === transactionStates.length - 1}
-          aria-label="Next transaction stage"
-          onClick={handleNext}
-        >
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
-            <path d="M7 4.5L11.5 9L7 13.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+        {/* Right Edge Arrow: Hidden on last slide (index === length - 1) */}
+        {index < transactionStates.length - 1 && (
+          <button
+            type="button"
+            className="apple-edge-arrow apple-edge-arrow--next"
+            aria-label="Next transaction stage"
+            onClick={handleNext}
+          >
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+              <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        )}
       </div>
 
       {/* 3. Horizontal Progress Track Indicator as shown in Apple reference image */}
