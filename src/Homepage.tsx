@@ -560,7 +560,13 @@ export default function Homepage() {
     </section>
 
     <section id="living-transaction" className="home-living">
-      <div className="home-container living-intro"><span className="home-index">LIVING TRANSACTION</span><h2>One transaction.<br/>Connected from start to cash.</h2><p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p></div>
+      <div className="home-container living-intro">
+        <div>
+          <span className="home-index">LIVING TRANSACTION</span>
+          <h2>One transaction.<br/>Connected from start to cash.</h2>
+        </div>
+        <p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p>
+      </div>
       <div className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState}/></div></div>
       <div className="living-mobile home-container">{transactionStates.map((_,i)=><div className="living-mobile-state" key={i}><LivingNarrative index={i}/><LivingProduct index={i}/></div>)}</div>
     </section>
