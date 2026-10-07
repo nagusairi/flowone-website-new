@@ -560,6 +560,19 @@ export default function Homepage() {
             <span className="hero-gradient-text">AI into one continuous flow</span>
             —uniting the workflows, systems and intelligence that move your business forward.
           </p>
+          <div className="hero-progression" aria-label="Start where it matters. Connect the flow. Scale across the business.">
+            <span className="hero-progression-phase">
+              <span>Start where it matters.</span>
+              <span className="hero-progression-arrow" aria-hidden="true">→</span>
+            </span>
+            <span className="hero-progression-phase">
+              <span>Connect the flow.</span>
+              <span className="hero-progression-arrow" aria-hidden="true">→</span>
+            </span>
+            <span className="hero-progression-phase is-final">
+              <span>Scale across the business.</span>
+            </span>
+          </div>
           <div className="hero-actions"><Button size="large" onClick={openDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse"/>}>Book a Demo</Button><a className="home-secondary-cta" href="#living-transaction">See How It Flows <Icon name="arrow" size={16} tone="action"/></a></div>
           <div className="hero-trust" aria-label="flowOne connects five areas of business"><span>FINANCE</span><i/><span>OPERATIONS</span><i/><span>COMPLIANCE</span><i/><span>CASH</span><i/><span>AI</span></div>
           <small>One connected platform for the work that moves your business.</small>

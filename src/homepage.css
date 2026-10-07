@@ -121,8 +121,35 @@
   font-weight: 600;
   display: inline;
 }
+.hero-progression {
+  margin-top: clamp(0.75rem, 1.4vh, 1rem);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.5rem;
+  font-size: clamp(0.92rem, 1.05vw, 1.02rem);
+  font-weight: 650;
+  letter-spacing: -0.015em;
+  color: var(--flow-ink, #0d0d0d);
+  line-height: 1.45;
+  animation: home-enter var(--motion-expressive) 0.15s both;
+}
+.hero-progression-phase {
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.hero-progression-arrow {
+  display: inline-block;
+  margin-left: 0.45rem;
+  margin-right: 0.15rem;
+  color: var(--color-brand-blue);
+  font-weight: 700;
+  opacity: 0.85;
+  user-select: none;
+}
 .hero-actions {
-  margin-top: clamp(1.35rem, 2.5vh, 1.95rem);
+  margin-top: clamp(1.1rem, 2vh, 1.5rem);
   display: flex;
   align-items: center;
   gap: clamp(0.85rem, 1.5vw, 1.25rem);
@@ -4140,7 +4167,7 @@
 }
 
 @media (prefers-reduced-motion:reduce) {
-  .hero-copy h1,.hero-copy > p,.hero-actions,.hero-operating-surface,.living-ui-canvas,.outcome-story { animation:none; }
+  .hero-copy h1,.hero-copy > p,.hero-progression,.hero-actions,.hero-operating-surface,.living-ui-canvas,.outcome-story { animation:none; }
   .hero-minimal-pulse,.hero-live-beacon i,.business-flow-rail-pulse,.fragment-pulse-dot,.living-rail-pulse { animation:none; }
   .business-flow-rail-fill,.living-rail-fill { transition:none; }
   .hero-inline-ai,.hero-inline-cash,.loop-item,.home-fragment-visual .fragment-items > div,.home-demo-layer,.home-demo-dialog { transition:none; }
