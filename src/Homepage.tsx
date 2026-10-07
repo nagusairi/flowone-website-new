@@ -555,7 +555,11 @@ export default function Homepage() {
         <div className="hero-copy">
           <span className="home-eyebrow">CONNECTED BUSINESS OPERATIONS PLATFORM</span>
           <h1>Your business moves as one.<br/><em>Your software should too.</em></h1>
-          <p>flowOne connects finance, operations, compliance and AI into one continuous business flow.</p>
+          <p>
+            flowOne is a composable business platform that connects finance, operations, compliance and{" "}
+            <span className="hero-gradient-text">AI into one continuous flow</span>
+            —uniting the workflows, systems and intelligence that move your business forward.
+          </p>
           <div className="hero-actions"><Button size="large" onClick={openDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse"/>}>Book a Demo</Button><a className="home-secondary-cta" href="#living-transaction">See How It Flows <Icon name="arrow" size={16} tone="action"/></a></div>
           <div className="hero-trust" aria-label="flowOne connects five areas of business"><span>FINANCE</span><i/><span>OPERATIONS</span><i/><span>COMPLIANCE</span><i/><span>CASH</span><i/><span>AI</span></div>
           <small>One connected platform for the work that moves your business.</small>
