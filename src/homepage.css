@@ -2071,22 +2071,6 @@
   font-feature-settings: "tnum";
 }
 
-/* Footer Action */
-.capability-detail-footer {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-top: 0.5rem;
-}
-
-.capability-detail-footer .fo-button {
-  box-shadow: 0 4px 14px rgba(5, 40, 242, 0.22);
-}
-
-.capability-detail-footer .fo-button:hover {
-  box-shadow: 0 6px 20px rgba(5, 40, 242, 0.35);
-  transform: translateY(-1px);
-}
 
 /* SECTION 07: AI Inside Flow */
 .home-ai {

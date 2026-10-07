@@ -781,7 +781,6 @@ export default function Homepage() {
                       <CapabilityDetailContent
                         group={group}
                         index={i}
-                        onOpenDemo={openDemo}
                       />
                     </div>
                   </div>
@@ -795,7 +794,6 @@ export default function Homepage() {
             <CapabilityDetailContent
               group={capabilities[capability >= 0 && capability < capabilities.length ? capability : 0]}
               index={capability >= 0 && capability < capabilities.length ? capability : 0}
-              onOpenDemo={openDemo}
             />
           </div>
         </div>
@@ -2422,11 +2420,9 @@ const ConnectedFlow = memo(function ConnectedFlow() {
 function CapabilityDetailContent({
   group,
   index,
-  onOpenDemo,
 }: {
   group: (typeof capabilities)[number];
   index: number;
-  onOpenDemo: () => void;
 }) {
   return (
     <>
@@ -2472,13 +2468,6 @@ function CapabilityDetailContent({
           <span className="capability-pipeline-status">{group.active.length} OF 8 ACTIVE IN REAL-TIME</span>
         </div>
         <CapabilityFlow active={group.active} />
-      </div>
-
-      {/* Footer action */}
-      <div className="capability-detail-footer">
-        <Button size="medium" onClick={onOpenDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse" />}>
-          Schedule a Demo
-        </Button>
       </div>
     </>
   );
