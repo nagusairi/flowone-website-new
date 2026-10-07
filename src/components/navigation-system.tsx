@@ -565,10 +565,9 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
       <div className="fo-mega__inner">
         <div className="fo-mega__groups">
           {content.groups.map(group => (
-            <section className="fo-mega__group" key={group.title}>
+            <section className="fo-mega__group" key={group.eyebrow}>
               <div className="fo-mega__group-header">
-                <span className="fo-mega__group-eyebrow">{group.eyebrow}</span>
-                <h3 className="fo-mega__group-title">{group.title}</h3>
+                <h3 className="fo-mega__group-eyebrow">{group.eyebrow}</h3>
               </div>
               <div className="fo-mega__items-grid">
                 {group.items.map((item, i) => (
@@ -663,7 +662,7 @@ export function MobileAccordion({ menu, expanded, onToggle, onNavigate, disabled
   const menuSlug = menu.toLowerCase().replace(/\s+/g, "-");
   return <div className={`fo-mobile-accordion ${expanded ? "is-expanded" : "is-collapsed"} ${disabled ? "is-disabled" : ""}`}>
     <button type="button" aria-expanded={expanded} aria-controls={`mobile-${menuSlug}`} onClick={onToggle} disabled={disabled}><span>{menu}</span><Icon name="chevron" size={20} /></button>
-    <div id={`mobile-${menuSlug}`} className="fo-mobile-accordion__content">{content.groups.map(group => <section key={group.title}><span>{group.title}</span>{group.items.map(item => <a href={target} onClick={onNavigate} key={item.label}>{item.label}</a>)}</section>)}</div>
+    <div id={`mobile-${menuSlug}`} className="fo-mobile-accordion__content">{content.groups.map(group => <section key={group.eyebrow}><span>{group.eyebrow}</span>{group.items.map(item => <a href={target} onClick={onNavigate} key={item.label}>{item.label}</a>)}</section>)}</div>
   </div>;
 }
 
