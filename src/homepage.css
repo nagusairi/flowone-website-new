@@ -2355,8 +2355,9 @@
 }
 
 .ai-payoff-actions .fo-button.is-primary:hover {
-  background: var(--flow-primary-deep);
-  border-color: var(--flow-primary-deep);
+  background: var(--gradient-flow);
+  border-color: #049DD9;
+  box-shadow: 0 4px 14px rgba(5, 40, 242, 0.45), 0 0 10px rgba(5, 199, 242, 0.35);
   transform: translateY(-1px);
 }
 
