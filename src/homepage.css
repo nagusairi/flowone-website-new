@@ -961,7 +961,12 @@
 .apple-chip-v { color:var(--neutral-900); font-weight:600; font-variant-numeric:tabular-nums; font-family:var(--font-family-mono); }
 
 /* 03b · Apple-style Mobile & Tablet Interactive Carousel */
-.living-mobile-wrapper { display:none; width:100%; }
+.living-mobile-wrapper {
+  display: none;
+  width: 100%;
+  padding-inline: clamp(1rem, 3.8vw, 2.25rem);
+  box-sizing: border-box;
+}
 .living-mobile-carousel {
   display: flex;
   flex-direction: column;
@@ -982,7 +987,8 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  width: 100%;
+  width: calc(100% + clamp(1rem, 3.8vw, 2.25rem) * 2);
+  margin-inline: calc(clamp(1rem, 3.8vw, 2.25rem) * -1);
   position: relative;
   min-height: 4rem;
   padding-inline: 0;

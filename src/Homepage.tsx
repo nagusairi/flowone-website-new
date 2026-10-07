@@ -2212,7 +2212,7 @@ const LivingMobileCarousel = memo(function LivingMobileCarousel({
       aria-label="Transaction stages explorer"
     >
       {/* 1. Visual Stage: Centered LivingProduct */}
-      <div className="living-mobile-product-stage home-container">
+      <div className="living-mobile-product-stage">
         <LivingProduct index={index} />
       </div>
 
