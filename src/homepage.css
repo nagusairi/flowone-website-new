@@ -3443,11 +3443,11 @@
   line-height: 1;
 }
 
-/* Layer 2: 5-Pillar Sitemap */
+/* Layer 2: 6-Pillar Sitemap */
 .footer-sitemap {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: clamp(1.5rem, 2.5vw, 2.5rem);
+  grid-template-columns: repeat(6, 1fr);
+  gap: clamp(1.25rem, 2vw, 2.25rem);
   padding-block: 1rem 1.75rem;
   border-top: 1px solid rgba(255, 255, 255, 0.07);
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);

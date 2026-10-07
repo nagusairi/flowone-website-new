@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Icon } from "./flowone";
 
-type MenuKey = "Solutions" | "Platform" | "AI" | "Resources";
+type MenuKey = "Solutions" | "Platform" | "AI" | "Built for" | "Resources";
 type MenuGroup = {
   eyebrow: string;
   title: string;
@@ -355,6 +355,74 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
       accent: "ai",
     },
   },
+  "Built for": {
+    groups: [
+      {
+        eyebrow: "PERSPECTIVE 01 · BY ROLE",
+        title: "Role-Based Operating Surfaces",
+        items: [
+          { label: "CFOs & Finance Leaders", description: "Executive visibility, working capital velocity & instant close." },
+          { label: "Finance & Accounting", description: "Deterministic ledgers, automated reconciliation & GST returns." },
+          { label: "AR & Collections", description: "Payment links, conversational follow-ups & auto-matching." },
+          { label: "AP & Procurement", description: "3-way matching, PO controls & MSME 45-day tracking." },
+          { label: "Treasury & Banking", description: "Multi-bank cash visibility & real-time liquidity." },
+          { label: "Operations & Warehouse", description: "Stock allocation, multi-facility movement & fulfillment." },
+        ],
+        hoverTelemetry: {
+          headerLabel: "ROLE PERSPECTIVES · OPERATING VIEWS",
+          badgeLabel: "UNIFIED CONTEXT",
+          objectId: "ROLE-BASED RUNTIME",
+          heroValue: "Tailored Operating Surfaces",
+          subtitle: "Every stakeholder interacts through an optimized view matched to their daily responsibilities—without data silos or out-of-sync spreadsheets.",
+          metrics: [
+            { label: "PERSPECTIVES", value: "6 Executive & Ops" },
+            { label: "DATA DRIFT", value: "Zero Variance" },
+            { label: "ACCESS", value: "Role-Governed" },
+          ],
+          chips: ["CFO Cockpit", "Controller View", "AR Inboxes", "AP Approvals", "Treasury Feeds", "Warehouse Floor"],
+          actionLabel: "Explore Role Perspectives",
+        },
+      },
+      {
+        eyebrow: "PERSPECTIVE 02 · BY BUSINESS",
+        title: "Tailored to Scale & Operations",
+        items: [
+          { label: "Growing Businesses", description: "Start lean with a connected core and scale without ERP bloat." },
+          { label: "Multi-Location Businesses", description: "Unify branches, warehouses & GSTINs on one single ledger." },
+          { label: "Complex Operations", description: "Compose around existing systems with zero rip-and-replace." },
+          { label: "Distributors & Manufacturers", description: "Supply chain velocity, batch tracking & working capital limits." },
+        ],
+        hoverTelemetry: {
+          headerLabel: "BUSINESS SCALE · TOPOLOGY",
+          badgeLabel: "OPERATING MODELS",
+          objectId: "ORGANIZATION ARCHITECTURE",
+          heroValue: "Engineered for Your Scale",
+          subtitle: "Whether managing high-velocity trade or coordinating multi-entity facilities across India, flowOne adapts to organizational complexity seamlessly.",
+          metrics: [
+            { label: "ENTITIES", value: "Multi-GSTIN & Branch" },
+            { label: "DEPLOYMENT", value: "Zero Rip-and-Replace" },
+            { label: "SETTLEMENT", value: "Inter-Entity Direct" },
+          ],
+          chips: ["Growing Enterprises", "Multi-Warehouse", "GSTIN Consolidations", "Batch Tracked", "Legacy ERP Coexistence"],
+          actionLabel: "Explore Business Topologies",
+        },
+      },
+    ],
+    telemetry: {
+      headerLabel: "CONNECTED PERSPECTIVES",
+      badgeLabel: "SHARED REALITY",
+      objectId: "PERSPECTIVE RUNTIME",
+      heroValue: "One Connected Flow.",
+      subtitle: "Every team sees what matters. The order is the dispatch, is the invoice, is the bank entry. Every role operates in their own optimized view without data duplication.",
+      metrics: [
+        { label: "ROLES", value: "Executive to Ops" },
+        { label: "VISIBILITY", value: "Role-Governed" },
+        { label: "DATA DRIFT", value: "Zero Variance" },
+      ],
+      chips: ["CFO Cockpit", "Shared Context", "Multi-Location", "Zero Silos", "Role-Based Access"],
+      actionLabel: "Explore Role Perspectives",
+    },
+  },
   Resources: {
     groups: [
       {
@@ -482,10 +550,17 @@ export function DemoCTA({ state = "default", compact = false, onClick }: { state
 
 export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; state?: "closed" | "opening" | "open" | "closing"; onNavigate?: () => void }) {
   const content = navigationContent[menu];
-  const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof" }[menu];
+  const target = {
+    Solutions: "#capabilities",
+    Platform: "#connection",
+    AI: "#ai-inside-flow",
+    "Built for": "#roles",
+    Resources: "#proof",
+  }[menu];
+  const menuSlug = menu.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <div className={`fo-mega fo-mega-${menu.toLowerCase()} is-${state}`} id={`mega-${menu}`} aria-hidden={state === "closed"}>
+    <div className={`fo-mega fo-mega-${menuSlug} is-${state}`} id={`mega-${menuSlug}`} aria-hidden={state === "closed"}>
       <div className="fo-mega__beam" aria-hidden="true" />
       <div className="fo-mega__inner">
         <div className="fo-mega__groups">
@@ -578,10 +653,17 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
 
 export function MobileAccordion({ menu, expanded, onToggle, onNavigate, disabled = false }: { menu: MenuKey; expanded: boolean; onToggle: () => void; onNavigate?: () => void; disabled?: boolean }) {
   const content = navigationContent[menu];
-  const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof" }[menu];
+  const target = {
+    Solutions: "#capabilities",
+    Platform: "#connection",
+    AI: "#ai-inside-flow",
+    "Built for": "#roles",
+    Resources: "#proof",
+  }[menu];
+  const menuSlug = menu.toLowerCase().replace(/\s+/g, "-");
   return <div className={`fo-mobile-accordion ${expanded ? "is-expanded" : "is-collapsed"} ${disabled ? "is-disabled" : ""}`}>
-    <button type="button" aria-expanded={expanded} aria-controls={`mobile-${menu}`} onClick={onToggle} disabled={disabled}><span>{menu}</span><Icon name="chevron" size={20} /></button>
-    <div id={`mobile-${menu}`} className="fo-mobile-accordion__content">{content.groups.map(group => <section key={group.title}><span>{group.title}</span>{group.items.map(item => <a href={target} onClick={onNavigate} key={item.label}>{item.label}</a>)}</section>)}</div>
+    <button type="button" aria-expanded={expanded} aria-controls={`mobile-${menuSlug}`} onClick={onToggle} disabled={disabled}><span>{menu}</span><Icon name="chevron" size={20} /></button>
+    <div id={`mobile-${menuSlug}`} className="fo-mobile-accordion__content">{content.groups.map(group => <section key={group.title}><span>{group.title}</span>{group.items.map(item => <a href={target} onClick={onNavigate} key={item.label}>{item.label}</a>)}</section>)}</div>
   </div>;
 }
 

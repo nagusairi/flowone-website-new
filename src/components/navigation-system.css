@@ -322,7 +322,8 @@
 }
 
 .fo-mega-platform .fo-mega__groups,
-.fo-mega-resources .fo-mega__groups {
+.fo-mega-resources .fo-mega__groups,
+.fo-mega-built-for .fo-mega__groups {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem 2.5rem;
 }

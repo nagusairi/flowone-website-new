@@ -981,7 +981,7 @@ export default function Homepage() {
       </div>
     </section>
 
-    <section className="home-roles home-section">
+    <section id="roles" className="home-roles home-section">
       <div className="home-container">
         <div className="section-heading-row">
           <div>
@@ -2266,7 +2266,7 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
           </div>
         </section>
 
-        {/* LAYER 2: 5-PILLAR ARCHITECTURAL SITEMAP */}
+        {/* LAYER 2: 6-PILLAR ARCHITECTURAL SITEMAP */}
         <nav className="footer-sitemap" aria-label="Complete Sitemap & Solutions Directory">
           {/* Pillar 1: Solutions */}
           <div className="footer-col">
@@ -2316,7 +2316,23 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
             </ul>
           </div>
 
-          {/* Pillar 4: Resources */}
+          {/* Pillar 4: Built for */}
+          <div className="footer-col">
+            <div className="footer-col__header">
+              <h3 className="footer-col__title">BUILT FOR</h3>
+            </div>
+            <ul className="footer-col__links">
+              <li><a href="#roles">CFOs & Finance Leaders</a></li>
+              <li><a href="#roles">Finance & Accounting</a></li>
+              <li><a href="#roles">AR & Collections Teams</a></li>
+              <li><a href="#roles">AP & Procurement Controls</a></li>
+              <li><a href="#roles">Treasury & Banking</a></li>
+              <li><a href="#roles">Operations & Warehouse</a></li>
+              <li><a href="#roles">Growing & Multi-Location</a></li>
+            </ul>
+          </div>
+
+          {/* Pillar 5: Resources */}
           <div className="footer-col">
             <div className="footer-col__header">
               <h3 className="footer-col__title">RESOURCES & GUIDES</h3>
@@ -2332,7 +2348,7 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
             </ul>
           </div>
 
-          {/* Pillar 5: Company & Ecosystem (Transferred from header nav) */}
+          {/* Pillar 6: Company & Ecosystem (Transferred from header nav) */}
           <div className="footer-col" id="founder-diary">
             <div className="footer-col__header">
               <h3 className="footer-col__title">COMPANY & ECOSYSTEM</h3>
