@@ -1717,6 +1717,35 @@
 }
 
 /* ==========================================================================
+   TABLET & MOBILE IN-PLACE ACCORDION
+   ========================================================================== */
+.capability-accordion-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.capability-accordion-panel {
+  display: none;
+  width: 100%;
+}
+
+.capability-accordion-inner {
+  margin-top: 0.5rem;
+}
+
+@keyframes capabilityAccordionSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==========================================================================
    RIGHT COLUMN: MODERN ARCHITECTURAL CARD
    ========================================================================== */
 .capability-detail {
@@ -4391,10 +4420,27 @@
   .ai-stack-column { padding-left:0; }
   .ai-stack-viewport { position:static; height:auto; min-height:auto; display:flex; flex-direction:column; gap:1rem; }
   .ai-stack-card { position:static; width:100%; max-width:100%; min-height:auto; transform:none !important; opacity:1 !important; box-shadow:0 10px 25px -5px rgba(0,0,0,0.5); }
-  .capability-composition { grid-template-columns:1fr; gap:1.75rem; }
-  .capability-list { display:grid; grid-template-columns:repeat(2,1fr); gap:0.75rem; border:none; }
-  .capability-list > .capability-nav-card:last-child { grid-column:span 2; }
-  .capability-detail { min-height:auto; }
+  .capability-composition {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+  .capability-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    border: none;
+    width: 100%;
+  }
+  .capability-composition > .capability-detail {
+    display: none !important;
+  }
+  .capability-accordion-item.is-expanded .capability-accordion-panel {
+    display: block !important;
+    animation: capabilityAccordionSlideDown 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .capability-accordion-item.is-expanded .capability-nav-arrow {
+    transform: rotate(90deg) !important;
+  }
   .predictive-steps { grid-template-columns:repeat(2, 1fr); }
   .outcome-editorial { grid-template-columns:repeat(2, 1fr); }
   .role-mobile-capsule {

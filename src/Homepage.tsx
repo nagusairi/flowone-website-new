@@ -398,6 +398,19 @@ const trustPillars = [
 export default function Homepage() {
   const [demoOpen,setDemoOpen] = useState(false);
   const [capability,setCapability] = useState(0);
+
+  const handleCapabilityClick = useCallback((i: number) => {
+    setCapability((prev) => {
+      if (prev === i) {
+        if (typeof window !== "undefined" && window.innerWidth <= 1024) {
+          return -1;
+        }
+        return i;
+      }
+      return i;
+    });
+  }, []);
+
   const [role,setRole] = useState(0);
   const [roleTouchStartX, setRoleTouchStartX] = useState<number | null>(null);
 
@@ -728,86 +741,62 @@ export default function Homepage() {
           <p>Choose an outcome to see how flowOne helps you improve the workflows behind it.</p>
         </div>
         <div className="capability-composition">
-          {/* LEFT COLUMN: CAPABILITY NAVIGATOR */}
+          {/* LEFT COLUMN: CAPABILITY NAVIGATOR (Becomes accordion on tablet & mobile) */}
           <div className="capability-list" role="tablist" aria-label="Capability areas">
-            {capabilities.map((group, i) => (
-              <button
-                type="button"
-                role="tab"
-                aria-selected={capability === i}
-                onClick={() => setCapability(i)}
-                key={group.title}
-                className={`capability-nav-card ${capability === i ? "is-active" : ""}`}
-              >
-                <div className="capability-nav-top">
-                  <span className="capability-num">0{i + 1}</span>
-                  <span className="capability-count">{group.count}</span>
+            {capabilities.map((group, i) => {
+              const isSelected = capability === i;
+              return (
+                <div
+                  key={group.title}
+                  className={`capability-accordion-item ${isSelected ? "is-expanded" : ""}`}
+                >
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={isSelected}
+                    aria-expanded={isSelected}
+                    onClick={() => handleCapabilityClick(i)}
+                    className={`capability-nav-card ${isSelected ? "is-active" : ""}`}
+                  >
+                    <div className="capability-nav-top">
+                      <span className="capability-num">0{i + 1}</span>
+                      <span className="capability-count">{group.count}</span>
+                    </div>
+                    <div className="capability-nav-body">
+                      <strong className="capability-nav-title">{group.title}</strong>
+                      <span className="capability-nav-sub">{group.subtitle}</span>
+                    </div>
+                    <div className="capability-nav-arrow" aria-hidden="true">
+                      <Icon name="arrow" size={16} tone={isSelected ? "action" : "muted"} />
+                    </div>
+                  </button>
+
+                  {/* Tablet & Mobile In-Place Accordion Body */}
+                  <div
+                    className="capability-accordion-panel"
+                    hidden={!isSelected}
+                    aria-hidden={!isSelected}
+                  >
+                    <div className="capability-accordion-inner capability-detail">
+                      <CapabilityDetailContent
+                        group={group}
+                        index={i}
+                        onOpenDemo={openDemo}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="capability-nav-body">
-                  <strong className="capability-nav-title">{group.title}</strong>
-                  <span className="capability-nav-sub">{group.subtitle}</span>
-                </div>
-                <div className="capability-nav-arrow" aria-hidden="true">
-                  <Icon name="arrow" size={16} tone={capability === i ? "action" : "muted"} />
-                </div>
-              </button>
-            ))}
+              );
+            })}
           </div>
 
-          {/* RIGHT COLUMN: MODERN ARCHITECTURAL CARD */}
-          <div className="capability-detail">
-            {/* Top signature hairline beam */}
-            <div className="capability-detail-beam" aria-hidden="true" />
-
-            {/* Header row */}
-            <div className="capability-detail-header">
-              <div className="capability-detail-kicker-group">
-                <span className="capability-detail-kicker">0{capability + 1} · UNIFIED ARCHITECTURE</span>
-                <h3 className="capability-detail-title">{capabilities[capability].title}</h3>
-              </div>
-              <span className="capability-live-badge">
-                <span className="capability-beacon" aria-hidden="true" />
-                LIVE OPERATIONAL FABRIC
-              </span>
-            </div>
-
-            <p className="capability-detail-summary">
-              {capabilities[capability].summary}
-            </p>
-
-            {/* 2×2 Tactile Workflow Cards */}
-            <div className="capability-items-grid">
-              {capabilities[capability].items.map((item, idx) => (
-                <a href="#living-transaction" key={item.name} className="capability-workflow-card">
-                  <div className="capability-card-top">
-                    <span className="capability-card-tag">{item.tag}</span>
-                    <span className="capability-card-index">0{idx + 1}</span>
-                  </div>
-                  <strong className="capability-card-name">{item.name}</strong>
-                  <span className="capability-card-desc">{item.desc}</span>
-                  <div className="capability-card-arrow" aria-hidden="true">
-                    <span>Explore workflow</span>
-                    <Icon name="arrow" size={14} tone="action" />
-                  </div>
-                </a>
-              ))}
-            </div>
-
-            {/* Active Pipeline Stage Visualizer */}
-            <div className="capability-pipeline-panel">
-              <div className="capability-pipeline-header">
-                <span className="capability-pipeline-label">SYNCHRONIZED PIPELINE STAGES</span>
-                <span className="capability-pipeline-status">4 OF 8 ACTIVE IN REAL-TIME</span>
-              </div>
-              <CapabilityFlow active={capabilities[capability].active} />
-            </div>
-
-            {/* Footer action */}
-            <div className="capability-detail-footer">
-              <Button size="medium" onClick={openDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse" />}>
-                Schedule a Demo
-              </Button>
-            </div>
+          {/* RIGHT COLUMN: MODERN ARCHITECTURAL CARD (Visible on Desktop only) */}
+          <div className="capability-detail" aria-live="polite">
+            <CapabilityDetailContent
+              group={capabilities[capability >= 0 && capability < capabilities.length ? capability : 0]}
+              index={capability >= 0 && capability < capabilities.length ? capability : 0}
+              onOpenDemo={openDemo}
+            />
           </div>
         </div>
       </div>
@@ -2429,6 +2418,71 @@ const ConnectedFlow = memo(function ConnectedFlow() {
     </div>
   );
 });
+
+function CapabilityDetailContent({
+  group,
+  index,
+  onOpenDemo,
+}: {
+  group: (typeof capabilities)[number];
+  index: number;
+  onOpenDemo: () => void;
+}) {
+  return (
+    <>
+      {/* Top signature hairline beam */}
+      <div className="capability-detail-beam" aria-hidden="true" />
+
+      {/* Header row */}
+      <div className="capability-detail-header">
+        <div className="capability-detail-kicker-group">
+          <span className="capability-detail-kicker">0{index + 1} · UNIFIED ARCHITECTURE</span>
+          <h3 className="capability-detail-title">{group.title}</h3>
+        </div>
+        <span className="capability-live-badge">
+          <span className="capability-beacon" aria-hidden="true" />
+          LIVE OPERATIONAL FABRIC
+        </span>
+      </div>
+
+      <p className="capability-detail-summary">{group.summary}</p>
+
+      {/* 2×2 Tactile Workflow Cards */}
+      <div className="capability-items-grid">
+        {group.items.map((item, idx) => (
+          <a href="#living-transaction" key={item.name} className="capability-workflow-card">
+            <div className="capability-card-top">
+              <span className="capability-card-tag">{item.tag}</span>
+              <span className="capability-card-index">0{idx + 1}</span>
+            </div>
+            <strong className="capability-card-name">{item.name}</strong>
+            <span className="capability-card-desc">{item.desc}</span>
+            <div className="capability-card-arrow" aria-hidden="true">
+              <span>Explore workflow</span>
+              <Icon name="arrow" size={14} tone="action" />
+            </div>
+          </a>
+        ))}
+      </div>
+
+      {/* Active Pipeline Stage Visualizer */}
+      <div className="capability-pipeline-panel">
+        <div className="capability-pipeline-header">
+          <span className="capability-pipeline-label">SYNCHRONIZED PIPELINE STAGES</span>
+          <span className="capability-pipeline-status">{group.active.length} OF 8 ACTIVE IN REAL-TIME</span>
+        </div>
+        <CapabilityFlow active={group.active} />
+      </div>
+
+      {/* Footer action */}
+      <div className="capability-detail-footer">
+        <Button size="medium" onClick={onOpenDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse" />}>
+          Schedule a Demo
+        </Button>
+      </div>
+    </>
+  );
+}
 
 function CapabilityFlow({active}:{active:readonly string[]}) {
   const items=["ORDER","INVENTORY","INVOICE","GST","RECEIVABLE","COLLECTION","BANK","CASH"];
