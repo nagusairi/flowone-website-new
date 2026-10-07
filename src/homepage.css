@@ -960,6 +960,94 @@
 .apple-chip-k { color:var(--color-neutral-500); font-weight:700; letter-spacing:.06em; font-size:.55rem; }
 .apple-chip-v { color:var(--neutral-900); font-weight:600; font-variant-numeric:tabular-nums; font-family:var(--font-family-mono); }
 
+/* 03b · Apple-style Mobile & Tablet Interactive Carousel */
+.living-mobile-wrapper { display:none; width:100%; }
+.living-mobile-carousel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.35rem;
+  width: 100%;
+  margin-top: clamp(1.25rem, 2.5vh, 2rem);
+  user-select: none;
+}
+.living-mobile-product-stage {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+}
+.living-mobile-controls-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(0.5rem, 1.5vw, 0.9rem);
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+}
+.apple-flank-chevron {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: var(--radius-full);
+  background: var(--neutral-100);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--neutral-900);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 180ms cubic-bezier(.16, 1, .3, 1);
+  padding: 0;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+.apple-flank-chevron:hover:not(:disabled) {
+  background: var(--neutral-200);
+  transform: scale(1.08);
+}
+.apple-flank-chevron:active:not(:disabled) {
+  transform: scale(0.92);
+}
+.apple-flank-chevron:focus-visible {
+  outline: 2px solid var(--state-focus);
+  outline-offset: 2px;
+}
+.apple-flank-chevron:disabled {
+  opacity: 0.18;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.apple-mobile-desc-card {
+  flex: 1;
+  min-width: 0;
+  max-width: 580px;
+  background: var(--neutral-100);
+  border-radius: 1.25rem;
+  padding: 1.1rem 1.3rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  animation: apple-desc-in 220ms cubic-bezier(.16, 1, .3, 1) both;
+}
+.living-mobile-progress {
+  width: 100%;
+  max-width: 580px;
+  height: 4px;
+  background: var(--neutral-200);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-inline: auto;
+  position: relative;
+}
+.living-mobile-progress-bar {
+  height: 100%;
+  background: var(--color-brand-blue);
+  border-radius: var(--radius-full);
+  transition: width 280ms cubic-bezier(.16, 1, .3, 1);
+}
+
 .living-ui { min-height:auto; display:flex; flex-direction:column; overflow:hidden; background:var(--color-white); border:1px solid var(--color-border-strong); border-radius:var(--radius-xl); box-shadow:var(--shadow-md); position:relative; }
 .living-ui-header { min-height:3.6rem; padding:.65rem 1.15rem; display:flex; flex-direction:column; justify-content:space-between; gap:.3rem; color:var(--color-white); background:var(--color-brand-ink); border-bottom:1px solid rgb(255 255 255 / .12); }
 .living-ui-topline { display:flex; justify-content:space-between; align-items:center; font-size:.6rem; font-weight:700; letter-spacing:.08em; }
@@ -4129,7 +4217,8 @@
   .hero-copy { max-width:52rem; }
   .hero-pipeline-console { width:100%; max-width:44rem; }
   .living-intro { grid-template-columns:1fr; gap:var(--spacing-4); }
-  .living-sticky { grid-template-columns:.8fr 1.2fr; }
+  .living-desktop { display:none; }
+  .living-mobile-wrapper { display:block; width:100%; }
   .section-heading-row { grid-template-columns:1fr; gap:var(--spacing-4); }
   .footer-launchpad { flex-direction: column; align-items: flex-start; gap: 1.75rem; }
   .footer-launchpad__actions { width: 100%; flex-direction: row; align-items: center; }
@@ -4184,15 +4273,10 @@
 
   .home-living { min-height:auto; padding-block: clamp(2.25rem, 4.5vh, 3rem); }
   .living-intro { grid-template-columns:1fr; }
-  .living-intro p { grid-column:auto; }
-  .living-desktop { display:none; }
-  .living-mobile { margin-top:var(--spacing-8); display:flex; flex-direction:column; gap:var(--spacing-10); }
-  .living-mobile-state { display:flex; flex-direction:column; gap:var(--spacing-4); }
-  .apple-nav-chevrons { display:none; }
-  .apple-explorer { gap:0; }
-  .apple-desc-card { border-radius:1.15rem; padding:1.1rem; }
-  .apple-pill-btn { font-size:.9rem; padding:.45rem 1rem .45rem .5rem; }
-  .living-narrative-title { font-size:var(--font-h3); }
+  .living-mobile-carousel { gap:1.15rem; }
+  .apple-flank-chevron { width:2.15rem; height:2.15rem; }
+  .apple-mobile-desc-card { padding:0.95rem 1.05rem; border-radius:1.1rem; }
+  .apple-desc-lead { font-size:0.86rem; line-height:1.48; }
   .living-ui { min-height:auto; }
   .living-ui-header { padding:var(--spacing-2); }
   .living-ui-headline { flex-direction:column; align-items:flex-start; gap:.5rem; }

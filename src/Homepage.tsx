@@ -620,7 +620,9 @@ export default function Homepage() {
         <p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p>
       </div>
       <div className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState}/></div></div>
-      <div className="living-mobile home-container">{transactionStates.map((_,i)=><div className="living-mobile-state" key={i}><LivingNarrative index={i}/><LivingProduct index={i}/></div>)}</div>
+      <div className="living-mobile-wrapper">
+        <LivingMobileCarousel index={livingState} onSelectState={handleSelectState} />
+      </div>
     </section>
 
     <section className="home-fragmentation home-section">
@@ -2152,6 +2154,126 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
           <span>Stage {String(index + 1).padStart(2, "0")} of 10 · {transactionStates[index].pillLabel}</span>
         </div>
       </footer>
+    </div>
+  );
+});
+
+const LivingMobileCarousel = memo(function LivingMobileCarousel({
+  index,
+  onSelectState,
+}: {
+  index: number;
+  onSelectState: (i: number) => void;
+}) {
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handlePrev = () => {
+    if (index > 0) {
+      onSelectState(index - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (index < transactionStates.length - 1) {
+      onSelectState(index + 1);
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null || touchStartY.current === null) return;
+    const deltaX = e.changedTouches[0].clientX - touchStartX.current;
+    const deltaY = e.changedTouches[0].clientY - touchStartY.current;
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 40) {
+      if (deltaX < 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
+
+  const current = transactionStates[index];
+  const progressPercent = ((index + 1) / transactionStates.length) * 100;
+
+  return (
+    <div
+      className="living-mobile-carousel home-container"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      aria-roledescription="carousel"
+      aria-label="Transaction stages explorer"
+    >
+      {/* 1. Visual Stage: Centered LivingProduct */}
+      <div className="living-mobile-product-stage">
+        <LivingProduct index={index} />
+      </div>
+
+      {/* 2. Interactive Narrative Card flanked by Left/Right Chevrons */}
+      <div className="living-mobile-controls-row">
+        <button
+          type="button"
+          className="apple-flank-chevron apple-flank-prev"
+          disabled={index === 0}
+          aria-label="Previous transaction stage"
+          onClick={handlePrev}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M11 4.5L6.5 9L11 13.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+
+        <div className="apple-mobile-desc-card">
+          <p className="apple-desc-lead">
+            <strong className="apple-desc-bold">{current.pillLabel}.</strong>{" "}
+            <span className="apple-desc-text">{current.summary}</span>
+          </p>
+          {current.facts && current.facts.length > 0 && (
+            <div className="apple-desc-chips" aria-label="Key facts">
+              {current.facts.map(([label, val]) => (
+                <div key={label} className="apple-desc-chip">
+                  <span className="apple-chip-k">{label}</span>
+                  <span className="apple-chip-v">{val}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <button
+          type="button"
+          className="apple-flank-chevron apple-flank-next"
+          disabled={index === transactionStates.length - 1}
+          aria-label="Next transaction stage"
+          onClick={handleNext}
+        >
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M7 4.5L11.5 9L7 13.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+      </div>
+
+      {/* 3. Horizontal Progress Track Indicator as shown in Apple reference image */}
+      <div
+        className="living-mobile-progress"
+        role="progressbar"
+        aria-valuenow={index + 1}
+        aria-valuemin={1}
+        aria-valuemax={transactionStates.length}
+        aria-label={`Stage ${index + 1} of ${transactionStates.length} - ${current.pillLabel}`}
+      >
+        <div
+          className="living-mobile-progress-bar"
+          style={{ width: `${progressPercent}%` }}
+        />
+      </div>
     </div>
   );
 });
