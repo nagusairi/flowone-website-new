@@ -25,14 +25,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   Solutions: {
     groups: [
       {
-        eyebrow: "PILLAR 01 · REVENUE",
+        eyebrow: "REVENUE & RECEIVABLES",
         title: "Get Paid Faster",
         items: ["Customer-to-Cash", "Accounts Receivable", "Credit & Risk", "Collections & Payments"].map(label => ({
           label,
           description: label === "Customer-to-Cash" ? "Connect every step from order to available cash." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PILLAR 01 · REVENUE & RECEIVABLES",
+          headerLabel: "REVENUE & RECEIVABLES",
           badgeLabel: "FOCUS WORKFLOW",
           objectId: "ACCOUNTS RECEIVABLE LIFECYCLE",
           heroValue: "Accelerate Cash Velocity",
@@ -47,14 +47,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "PILLAR 02 · SPEND",
+        eyebrow: "SPEND & PROCUREMENT",
         title: "Control Procurement",
         items: ["Procure-to-Pay", "Purchase Orders", "Accounts Payable", "Vendor Management"].map(label => ({
           label,
           description: label === "Procure-to-Pay" ? "Control spend from request through settlement." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PILLAR 02 · SPEND & PROCUREMENT",
+          headerLabel: "SPEND & PROCUREMENT",
           badgeLabel: "FOCUS WORKFLOW",
           objectId: "PROCURE-TO-PAY CONTROLS",
           heroValue: "Spend Governance & Settlement",
@@ -69,14 +69,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "PILLAR 03 · WAREHOUSE",
+        eyebrow: "INVENTORY & WAREHOUSE",
         title: "Run Inventory Better",
         items: ["Inventory Intelligence", "Warehouse Management", "Stock & Replenishment", "Order Management"].map(label => ({
           label,
           description: label === "Inventory Intelligence" ? "Real-time stock velocity & warehouse allocation." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PILLAR 03 · INVENTORY & WAREHOUSE",
+          headerLabel: "INVENTORY & WAREHOUSE",
           badgeLabel: "FOCUS WORKFLOW",
           objectId: "STOCK ALLOCATION RUNTIME",
           heroValue: "Live Stock Allocation & Velocity",
@@ -91,14 +91,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "PILLAR 04 · TREASURY",
+        eyebrow: "CASH & BANKING",
         title: "Control Cash & Banking",
         items: ["Cash & Banking", "Bank Reconciliation", "Cash Flow Forecasting", "Financial Visibility"].map(label => ({
           label,
           description: label === "Cash & Banking" ? "Automated multi-bank reconciliation & cash visibility." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PILLAR 04 · TREASURY & LIQUIDITY",
+          headerLabel: "CASH & BANKING",
           badgeLabel: "FOCUS WORKFLOW",
           objectId: "MULTI-BANK RECON ENGINE",
           heroValue: "Automated Banking & Cash Flow",
@@ -113,14 +113,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "PILLAR 05 · STATUTORY",
+        eyebrow: "STATUTORY COMPLIANCE",
         title: "Stay Compliant",
         items: ["GST Hub", "E-Invoicing", "E-Way Bills", "GST Reconciliation"].map(label => ({
           label,
           description: label === "GST Hub" ? "Automated e-invoicing, IRN signing & return filing." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PILLAR 05 · STATUTORY & TAX",
+          headerLabel: "STATUTORY & TAX",
           badgeLabel: "FOCUS WORKFLOW",
           objectId: "NATIVE COMPLIANCE GATEWAY",
           heroValue: "Automated GST & Statutory Hub",
@@ -153,14 +153,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   Platform: {
     groups: [
       {
-        eyebrow: "FOUNDATION 01 · SYSTEM",
+        eyebrow: "CORE ARCHITECTURE",
         title: "Platform Architecture",
         items: ["Platform Overview", "Finance Operations", "Business Operations", "Workflow Automation"].map(label => ({
           label,
           description: label === "Platform Overview" ? "One connected operating system for business." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PLATFORM · CORE ENGINE",
+          headerLabel: "CORE ARCHITECTURE",
           badgeLabel: "ARCHITECTURAL SPEC",
           objectId: "SYSTEM OVERVIEW",
           heroValue: "Unified Operating System",
@@ -175,14 +175,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "FOUNDATION 02 · PIPELINES",
+        eyebrow: "TRANSACTION PIPELINES",
         title: "Business Flows",
         items: ["Customer → Cash", "Procure → Pay", "Inventory → Cash", "Record → Report"].map(label => ({
           label,
           description: label === "Customer → Cash" ? "End-to-end deterministic transaction journey." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PLATFORM · TRANSACTION PIPELINES",
+          headerLabel: "TRANSACTION PIPELINES",
           badgeLabel: "FLOW ARCHITECTURE",
           objectId: "CROSS-FUNCTIONAL JOURNEYS",
           heroValue: "End-to-End Event Pipelines",
@@ -197,14 +197,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "FOUNDATION 03 · RUNTIME",
+        eyebrow: "CAPABILITIES & RUNTIME",
         title: "Platform Capabilities",
         items: ["Document Intelligence", "Approvals & Workflows", "Integrations", "Reporting & Analytics"].map(label => ({
           label,
           description: label === "Document Intelligence" ? "AI-powered transaction data extraction." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PLATFORM · EXTENSIBILITY",
+          headerLabel: "CAPABILITIES & RUNTIME",
           badgeLabel: "INFRASTRUCTURE",
           objectId: "INTELLIGENCE & INTEGRATIONS",
           heroValue: "Extensible Infrastructure",
@@ -219,14 +219,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "FOUNDATION 04 · SECURITY",
+        eyebrow: "SECURITY & SOVEREIGN TRUST",
         title: "Security & Trust",
         items: ["Security", "Compliance", "Data & Privacy"].map(label => ({
           label,
           description: label === "Security" ? "Institutional data residency & governance." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "PLATFORM · INSTITUTIONAL TRUST",
+          headerLabel: "SECURITY & SOVEREIGN TRUST",
           badgeLabel: "DATA RESIDENCY",
           objectId: "GOVERNANCE STANDARDS",
           heroValue: "Institutional Security & Residency",
@@ -259,7 +259,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   AI: {
     groups: [
       {
-        eyebrow: "INTELLIGENCE 01 · TRANSACTION AI",
+        eyebrow: "TRANSACTION INTELLIGENCE",
         title: "AI Inside The Flow",
         items: [
           "AI Business Agent",
@@ -272,7 +272,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
           description: label === "AI Business Agent" ? "Contextual intelligence that understands and acts." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "TRANSACTION AI · DECISION ENGINES",
+          headerLabel: "TRANSACTION AI",
           badgeLabel: "EMBEDDED INTELLIGENCE",
           objectId: "DOMAIN-SPECIFIC MODELS",
           heroValue: "Operational Intelligence",
@@ -288,7 +288,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "INTELLIGENCE 02 · COMMUNICATIONS",
+        eyebrow: "CONVERSATIONAL CHANNELS",
         title: "Channel Intelligence",
         items: [
           { label: "WhatsApp Intelligence", description: "Conversational collections, payment links & live status over WhatsApp." },
@@ -298,7 +298,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
           { label: "Anomaly Detection" },
         ],
         hoverTelemetry: {
-          headerLabel: "CHANNEL AI · CONVERSATIONAL COMMS",
+          headerLabel: "CHANNEL AI",
           badgeLabel: "VERIFIED CHANNELS",
           objectId: "COMMUNICATION INTELLIGENCE",
           heroValue: "Conversational Transaction Rails",
@@ -314,7 +314,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "INTELLIGENCE 03 · EXECUTION",
+        eyebrow: "POLICY AUTOMATION",
         title: "Autonomous Workflows",
         items: [
           { label: "Smart Approvals", description: "Policy-driven automated clearances." },
@@ -323,7 +323,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
           { label: "Policy Clearance Matrix" },
         ],
         hoverTelemetry: {
-          headerLabel: "AI WORKFLOWS · POLICY AUTOMATION",
+          headerLabel: "AI WORKFLOWS",
           badgeLabel: "GOVERNANCE GATES",
           objectId: "EXECUTION RUNTIME",
           heroValue: "Policy-Governed Autonomy",
@@ -358,7 +358,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   "Built for": {
     groups: [
       {
-        eyebrow: "PERSPECTIVE 01 · BY ROLE",
+        eyebrow: "BY ROLE & FUNCTION",
         title: "Role-Based Operating Surfaces",
         items: [
           { label: "CFOs & Finance Leaders", description: "Executive visibility, working capital velocity & instant close." },
@@ -369,7 +369,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
           { label: "Operations & Warehouse", description: "Stock allocation, multi-facility movement & fulfillment." },
         ],
         hoverTelemetry: {
-          headerLabel: "ROLE PERSPECTIVES · OPERATING VIEWS",
+          headerLabel: "ROLE PERSPECTIVES",
           badgeLabel: "UNIFIED CONTEXT",
           objectId: "ROLE-BASED RUNTIME",
           heroValue: "Tailored Operating Surfaces",
@@ -384,7 +384,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "PERSPECTIVE 02 · BY BUSINESS",
+        eyebrow: "BY BUSINESS SCALE",
         title: "Tailored to Scale & Operations",
         items: [
           { label: "Growing Businesses", description: "Start lean with a connected core and scale without ERP bloat." },
@@ -393,7 +393,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
           { label: "Distributors & Manufacturers", description: "Supply chain velocity, batch tracking & working capital limits." },
         ],
         hoverTelemetry: {
-          headerLabel: "BUSINESS SCALE · TOPOLOGY",
+          headerLabel: "BUSINESS TOPOLOGY",
           badgeLabel: "OPERATING MODELS",
           objectId: "ORGANIZATION ARCHITECTURE",
           heroValue: "Engineered for Your Scale",
@@ -426,14 +426,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   Resources: {
     groups: [
       {
-        eyebrow: "DOCS 01 · EDUCATION",
+        eyebrow: "GUIDES & PLAYBOOKS",
         title: "Guides & Playbooks",
         items: ["Blog", "Finance Guides", "GST Guides", "Cash Flow Guides"].map(label => ({
           label,
           description: label === "Blog" ? "Finance, GST, AI and product education." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "KNOWLEDGE · GUIDES & PLAYBOOKS",
+          headerLabel: "GUIDES & PLAYBOOKS",
           badgeLabel: "STATUTORY DOCS",
           objectId: "PRACTITIONER EDUCATION",
           heroValue: "Operational & Tax Handbooks",
@@ -448,14 +448,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "DOCS 02 · VALIDATION",
+        eyebrow: "PROOF & CASE STUDIES",
         title: "Proof & Case Studies",
         items: ["Case Studies", "Customer Stories", "ROI Calculator", "Success Stories"].map(label => ({
           label,
           description: label === "Case Studies" ? "Verified operational outcomes." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "KNOWLEDGE · VERIFIED OUTCOMES",
+          headerLabel: "VERIFIED OUTCOMES",
           badgeLabel: "OPERATIONAL PROOF",
           objectId: "FIELD VALIDATION",
           heroValue: "Verified Enterprise Case Studies",
@@ -470,14 +470,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "DOCS 03 · SESSIONS",
+        eyebrow: "DEMOS & WEBINARS",
         title: "Videos & Walkthroughs",
         items: ["Webinars", "Product Videos", "5-Minute Videos", "Demo Videos"].map(label => ({
           label,
           description: label === "Webinars" ? "Deep-dive operational walkthroughs." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "KNOWLEDGE · VIDEO SESSIONS",
+          headerLabel: "DEMOS & WEBINARS",
           badgeLabel: "WALKTHROUGHS",
           objectId: "MEDIA REPOSITORY",
           heroValue: "Technical Demos & Webinars",
@@ -492,14 +492,14 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "DOCS 04 · STRATEGY",
+        eyebrow: "CFO PERSPECTIVES",
         title: "CFO Perspectives",
         items: ["CFO Insights", "Finance Trends", "AI in Finance", "Business Operations"].map(label => ({
           label,
           description: label === "CFO Insights" ? "Strategic treasury & risk perspectives." : undefined,
         })),
         hoverTelemetry: {
-          headerLabel: "KNOWLEDGE · EXECUTIVE STRATEGY",
+          headerLabel: "EXECUTIVE STRATEGY",
           badgeLabel: "CFO BRIEFS",
           objectId: "EXECUTIVE BENCHMARKS",
           heroValue: "Strategic Working Capital Insights",

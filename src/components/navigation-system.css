@@ -349,24 +349,47 @@
 .fo-mega__group-eyebrow {
   display: inline-flex;
   align-items: center;
+  gap: 0.38rem;
   font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: 0.5625rem;
+  font-size: 0.58rem;
   font-weight: 750;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   color: var(--flow-primary);
   text-transform: uppercase;
   background: rgba(5, 40, 242, 0.05);
   border: 1px solid rgba(5, 40, 242, 0.14);
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
+  padding: 0.18rem 0.55rem;
+  border-radius: var(--radius-full);
   line-height: 1.25;
   transition: all 0.2s ease;
+}
+
+.fo-mega__group-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--flow-cyan-bright);
+  box-shadow: 0 0 6px rgba(5, 199, 242, 0.75);
+  flex-shrink: 0;
 }
 
 .fo-mega__group:hover .fo-mega__group-eyebrow {
   background: rgba(5, 40, 242, 0.1);
   border-color: rgba(5, 40, 242, 0.3);
   box-shadow: 0 0 8px rgba(5, 40, 242, 0.12);
+}
+
+.fo-mega-ai .fo-mega__group-eyebrow {
+  color: var(--flow-magenta);
+  background: rgba(217, 41, 155, 0.06);
+  border-color: rgba(217, 41, 155, 0.2);
+}
+
+.fo-mega-ai .fo-mega__group-eyebrow::before {
+  background: var(--flow-magenta);
+  box-shadow: 0 0 6px rgba(217, 41, 155, 0.85);
 }
 
 .fo-mega__group-title {

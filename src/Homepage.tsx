@@ -5,16 +5,16 @@ import { Forecast, InvoiceUI, ProductAI, ProductKPI, Reconciliation } from "./co
 import { WebsiteHeader } from "./components/navigation-system";
 
 const transactionStates = [
-  { label: "ORDER", pillLabel: "Order", eyebrow: "STATE 01", title: "Order confirmed", summary: "A ₹5,00,000 order begins one continuous business journey.", state: "complete", facts: [["ORDER VALUE","₹5,00,000"],["UNITS","125"],["CUSTOMER","Ananya Enterprises"],["STATUS","Confirmed"]] },
-  { label: "INVENTORY", pillLabel: "Inventory", eyebrow: "STATE 02", title: "Inventory allocated", summary: "The same transaction reserves stock in the Hyderabad warehouse.", state: "complete", facts: [["STOCK","125 units allocated"],["WAREHOUSE","Hyderabad"],["STATUS","Allocated"]] },
-  { label: "INVOICE", pillLabel: "Invoice", eyebrow: "STATE 03", title: "Invoice issued", summary: "Operational activity becomes a financial obligation without losing context.", state: "active", facts: [["INVOICE","INV-10482"],["SUBTOTAL","₹5,00,000"],["GST","₹90,000"],["TOTAL","₹5,90,000"]] },
-  { label: "GST", pillLabel: "GST Compliance", eyebrow: "STATE 04", title: "Compliance validated", summary: "Tax context stays attached to the transaction.", state: "complete", facts: [["GST","₹90,000"],["E-INVOICE","Generated"],["VALIDATION","Passed"],["E-WAY BILL","Ready"],["STATUS","Compliant"]] },
-  { label: "RECEIVABLE", pillLabel: "Receivable", eyebrow: "STATE 05", title: "Receivable open", summary: "Finance sees the amount, customer and due date in the same flow.", state: "active", facts: [["AMOUNT","₹5,90,000"],["CUSTOMER","Ananya Enterprises"],["DUE","In 4 days"],["STATUS","Open"]] },
-  { label: "AI PREDICTION", pillLabel: "AI Prediction", eyebrow: "STATE 06", title: "Intelligence enters the flow", summary: "92% probability of payment within 4 days.", state: "predictive", facts: [["PAYMENT PROBABILITY","92%"],["EXPECTED","Within 4 days"],["RECOMMENDED ACTION","Prioritize only if behaviour changes"]] },
-  { label: "COLLECTION", pillLabel: "Collection", eyebrow: "STATE 07", title: "Insight becomes action", summary: "A payment reminder is ready when the business context calls for it.", state: "recommended", facts: [["REMINDER","Payment due"],["STATUS","Scheduled"],["ACTION","Send Reminder"]] },
-  { label: "BANK", pillLabel: "Bank Recon", eyebrow: "STATE 08", title: "Payment matched", summary: "The bank receipt reconnects to the same invoice automatically.", state: "processing", facts: [["PAYMENT","₹5,90,000"],["STATUS","Received"],["MATCH","INV-10482"],["CONFIDENCE","98%"]] },
-  { label: "CASH", pillLabel: "Cash Liquidity", eyebrow: "STATE 09", title: "Cash available", summary: "The transaction completes its operational and financial journey.", state: "complete", facts: [["AVAILABLE CASH","₹5,90,000"],["STATUS","Received"],["TRANSACTION","TXN-10482"]] },
-  { label: "DECISION", pillLabel: "Decision", eyebrow: "STATE 10", title: "Decision ready", summary: "The transaction is no longer just an invoice. It is part of the business’s financial picture.", state: "recommended", facts: [["OUTCOME","Cash collected"],["CONTEXT","Restored"],["NEXT","Decision ready"]] },
+  { label: "ORDER", pillLabel: "Order", eyebrow: "ORDER CONFIRMATION", title: "Order confirmed", summary: "A ₹5,00,000 order begins one continuous business journey.", state: "complete", facts: [["ORDER VALUE","₹5,00,000"],["UNITS","125"],["CUSTOMER","Ananya Enterprises"],["STATUS","Confirmed"]] },
+  { label: "INVENTORY", pillLabel: "Inventory", eyebrow: "STOCK ALLOCATION", title: "Inventory allocated", summary: "The same transaction reserves stock in the Hyderabad warehouse.", state: "complete", facts: [["STOCK","125 units allocated"],["WAREHOUSE","Hyderabad"],["STATUS","Allocated"]] },
+  { label: "INVOICE", pillLabel: "Invoice", eyebrow: "COMMERCIAL INVOICE", title: "Invoice issued", summary: "Operational activity becomes a financial obligation without losing context.", state: "active", facts: [["INVOICE","INV-10482"],["SUBTOTAL","₹5,00,000"],["GST","₹90,000"],["TOTAL","₹5,90,000"]] },
+  { label: "GST", pillLabel: "GST Compliance", eyebrow: "STATUTORY VALIDATION", title: "Compliance validated", summary: "Tax context stays attached to the transaction.", state: "complete", facts: [["GST","₹90,000"],["E-INVOICE","Generated"],["VALIDATION","Passed"],["E-WAY BILL","Ready"],["STATUS","Compliant"]] },
+  { label: "RECEIVABLE", pillLabel: "Receivable", eyebrow: "OPEN RECEIVABLE", title: "Receivable open", summary: "Finance sees the amount, customer and due date in the same flow.", state: "active", facts: [["AMOUNT","₹5,90,000"],["CUSTOMER","Ananya Enterprises"],["DUE","In 4 days"],["STATUS","Open"]] },
+  { label: "AI PREDICTION", pillLabel: "AI Prediction", eyebrow: "PREDICTIVE INTELLIGENCE", title: "Intelligence enters the flow", summary: "92% probability of payment within 4 days.", state: "predictive", facts: [["PAYMENT PROBABILITY","92%"],["EXPECTED","Within 4 days"],["RECOMMENDED ACTION","Prioritize only if behaviour changes"]] },
+  { label: "COLLECTION", pillLabel: "Collection", eyebrow: "ACTIONABLE REMINDER", title: "Insight becomes action", summary: "A payment reminder is ready when the business context calls for it.", state: "recommended", facts: [["REMINDER","Payment due"],["STATUS","Scheduled"],["ACTION","Send Reminder"]] },
+  { label: "BANK", pillLabel: "Bank Recon", eyebrow: "AUTO RECONCILIATION", title: "Payment matched", summary: "The bank receipt reconnects to the same invoice automatically.", state: "processing", facts: [["PAYMENT","₹5,90,000"],["STATUS","Received"],["MATCH","INV-10482"],["CONFIDENCE","98%"]] },
+  { label: "CASH", pillLabel: "Cash Liquidity", eyebrow: "AVAILABLE LIQUIDITY", title: "Cash available", summary: "The transaction completes its operational and financial journey.", state: "complete", facts: [["AVAILABLE CASH","₹5,90,000"],["STATUS","Received"],["TRANSACTION","TXN-10482"]] },
+  { label: "DECISION", pillLabel: "Decision", eyebrow: "EXECUTIVE CLOSURE", title: "Decision ready", summary: "The transaction is no longer just an invoice. It is part of the business’s financial picture.", state: "recommended", facts: [["OUTCOME","Cash collected"],["CONTEXT","Restored"],["NEXT","Decision ready"]] },
 ] as const;
 
 const capabilities = [
@@ -553,7 +553,7 @@ export default function Homepage() {
     <section id="home-hero" className="home-hero">
       <div className="home-container hero-grid">
         <div className="hero-copy">
-          <span className="home-eyebrow">CONNECTED BUSINESS OPERATIONS PLATFORM</span>
+          <span className="home-eyebrow">CONNECTED BUSINESS PLATFORM</span>
           <h1>Your business moves as one.<br/><em>Your software should too.</em></h1>
           <p>
             flowOne is a composable business platform that connects finance, operations, compliance and{" "}
@@ -570,14 +570,14 @@ export default function Homepage() {
 
     <section className="home-problem home-section">
       <div className="home-container problem-grid">
-        <div><span className="home-index">02 · THE BUSINESS LOOP</span><h2>Business doesn’t happen in modules.</h2></div>
+        <div><span className="home-index">THE BUSINESS LOOP</span><h2>Business doesn’t happen in modules.</h2></div>
         <div className="problem-copy"><p>An order becomes inventory.<br/>Inventory becomes an invoice.<br/>An invoice becomes a receivable.<br/>A payment becomes cash.<br/>A business decision follows.</p><strong>This is one business event.<br/>Your software should understand the whole journey.</strong></div>
       </div>
       <BusinessLoop />
     </section>
 
     <section id="living-transaction" ref={livingRef} className="home-living">
-      <div className="home-container living-intro"><span className="home-index">03 · LIVING TRANSACTION</span><h2>One transaction.<br/>Connected from start to cash.</h2><p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p></div>
+      <div className="home-container living-intro"><span className="home-index">LIVING TRANSACTION</span><h2>One transaction.<br/>Connected from start to cash.</h2><p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p></div>
       <div ref={livingPinRef} className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState}/></div></div>
       <div className="living-mobile home-container">{transactionStates.map((_,i)=><div className="living-mobile-state" key={i}><LivingNarrative index={i}/><LivingProduct index={i}/></div>)}</div>
     </section>
@@ -586,7 +586,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">04 · FRAGMENTATION</span>
+            <span className="home-index">THE COST OF SILOS</span>
             <h2>The transaction is connected.<br/>The systems usually aren’t.</h2>
           </div>
           <p>Sales sees the order. Operations sees the stock. Finance sees the invoice. GST sees the tax. The bank sees the payment.<br/><strong>Everyone sees a piece. Nobody sees the whole flow.</strong></p>
@@ -632,7 +632,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">05 · CONNECTION</span>
+            <span className="home-index">CONTINUOUS BUSINESS FLOW</span>
             <h2>flowOne connects the work that moves your business.</h2>
           </div>
           <p>Finance, operations, compliance, cash and AI work from the same business context.</p>
@@ -653,7 +653,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">03 · EXPLORE THE PLATFORM</span>
+            <span className="home-index">PLATFORM CAPABILITIES</span>
             <h2>Start with the work that matters most.</h2>
           </div>
           <p>Choose an outcome to see how flowOne helps you improve the workflows behind it.</p>
@@ -748,7 +748,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">07 · AI INSIDE THE FLOW</span>
+            <span className="home-index">AI INSIDE THE FLOW</span>
             <h2>AI that works<br/>inside the flow.</h2>
           </div>
           <p>{"AI doesn't sit beside your business. It understands what is happening and helps decide what happens next."}</p>
@@ -927,7 +927,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">08 · PREDICTIVE FLOW</span>
+            <span className="home-index">PREDICTIVE SETTLEMENT</span>
             <h2>Once everything is connected,<br/>the business becomes predictable.</h2>
           </div>
           <p>Connected data turns reporting into foresight—and foresight into action.</p>
@@ -955,14 +955,14 @@ export default function Homepage() {
 
     <section className="home-outcomes home-section">
       <div className="home-container">
-        <span className="home-index">09 · BUSINESS OUTCOMES</span>
+        <span className="home-index">PROVEN OUTCOMES</span>
         <h2>Better flow.<br/>Better decisions.<br/>Better business.</h2>
         <div className="outcome-editorial">
           {outcomeStories.map((story, i) => (
             <article className={`outcome-story story-${i}`} key={story.title}>
               <span className="outcome-watermark">0{i + 1}</span>
               <div className="outcome-story-topline">
-                <span className="outcome-index-tag">[ 0{i + 1} · OUTCOME ]</span>
+                <span className="outcome-index-tag">[ OUTCOME ]</span>
                 <span className="outcome-metric-pill">{story.metric}</span>
               </div>
               <div className="outcome-story-body">
@@ -989,7 +989,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">10 · WHO IT’S FOR</span>
+            <span className="home-index">BUILT FOR EVERY ROLE</span>
             <h2>One flow.<br/>Different views.</h2>
           </div>
           <p>Every team works from the same transaction context—focused on the decisions that matter to them.</p>
@@ -1031,7 +1031,7 @@ export default function Homepage() {
     </section>
 
     <section id="proof" className="home-proof home-section">
-      <div className="home-container"><div className="section-heading-row"><div><span className="home-index">11 · PROOF</span><h2>Built for businesses that need the whole picture.</h2></div><p>Verified customer evidence will live here. Until supplied, every proof point remains explicitly marked.</p></div>
+      <div className="home-container"><div className="section-heading-row"><div><span className="home-index">VERIFIED PROOF</span><h2>Built for businesses that need the whole picture.</h2></div><p>Verified customer evidence will live here. Until supplied, every proof point remains explicitly marked.</p></div>
         <div className="proof-placeholder"><div><span>PROOF COMING SOON · VERIFIED EVIDENCE ONLY</span><strong>[Customer name and verified quote]</strong><div className="proof-fields">{["CUSTOMER LOGO","INDUSTRY","PROBLEM","FLOW IMPLEMENTED","MEASURED OUTCOME"].map(x=><p key={x}><b>{x}</b><span>[To be supplied]</span></p>)}</div></div><a href="#final-cta">[Case study link] <Icon name="arrow" size={16} tone="action"/></a></div>
       </div>
     </section>
@@ -1044,7 +1044,7 @@ export default function Homepage() {
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">12 · TRUST</span>
+            <span className="home-index">SECURITY & SOVEREIGN TRUST</span>
             <h2 id="trust-heading">Built for the financial work your business depends on.</h2>
           </div>
           <p>Control, accountability and clear access are part of the operating model—not decorative claims.</p>
