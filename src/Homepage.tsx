@@ -553,8 +553,60 @@ export default function Homepage() {
 
     <section className="home-problem home-section">
       <div className="home-container problem-grid">
-        <div><span className="home-index">THE BUSINESS LOOP</span><h2>Business doesn’t happen in modules.</h2></div>
-        <div className="problem-copy"><p>An order becomes inventory.<br/>Inventory becomes an invoice.<br/>An invoice becomes a receivable.<br/>A payment becomes cash.<br/>A business decision follows.</p><strong>This is one business event.<br/>Your software should understand the whole journey.</strong></div>
+        <div>
+          <span className="home-index">THE BUSINESS LOOP</span>
+          <h2>Business doesn’t happen in modules.</h2>
+        </div>
+        <div className="problem-copy">
+          <div className="causality-thread" aria-label="Business causality progression">
+            <div className="causality-step">
+              <span className="causality-node" aria-hidden="true" />
+              <span className="causality-text">
+                <strong>An order</strong>
+                <span className="causality-arrow" aria-hidden="true">→</span>
+                <span>becomes</span>
+                <strong>inventory.</strong>
+              </span>
+            </div>
+            <div className="causality-step">
+              <span className="causality-node" aria-hidden="true" />
+              <span className="causality-text">
+                <strong>Inventory</strong>
+                <span className="causality-arrow" aria-hidden="true">→</span>
+                <span>becomes</span>
+                <strong>an invoice.</strong>
+              </span>
+            </div>
+            <div className="causality-step">
+              <span className="causality-node" aria-hidden="true" />
+              <span className="causality-text">
+                <strong>An invoice</strong>
+                <span className="causality-arrow" aria-hidden="true">→</span>
+                <span>becomes</span>
+                <strong>a receivable.</strong>
+              </span>
+            </div>
+            <div className="causality-step">
+              <span className="causality-node" aria-hidden="true" />
+              <span className="causality-text">
+                <strong>A payment</strong>
+                <span className="causality-arrow" aria-hidden="true">→</span>
+                <span>becomes</span>
+                <strong>cash.</strong>
+              </span>
+            </div>
+            <div className="causality-step is-final">
+              <span className="causality-node" aria-hidden="true" />
+              <span className="causality-text">
+                <strong>A business decision follows.</strong>
+              </span>
+            </div>
+          </div>
+          <div className="causality-payoff">
+            <strong>This is one business event.</strong>
+            <p>Your software should understand the whole journey.</p>
+          </div>
+        </div>
       </div>
       <BusinessLoop />
     </section>
