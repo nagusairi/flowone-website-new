@@ -3275,9 +3275,9 @@
    ========================================================================== */
 .home-footer {
   position: relative;
-  background: linear-gradient(180deg, #03142C 0%, #020C1C 52%, #010712 100%);
-  border-top: 1px solid rgba(5, 199, 242, 0.22);
-  box-shadow: 0 -24px 48px -12px rgba(3, 20, 44, 0.35);
+  background: linear-gradient(180deg, #041938 0%, #021126 50%, #010916 100%);
+  border-top: 1px solid rgba(5, 199, 242, 0.28);
+  box-shadow: 0 -24px 48px -12px rgba(4, 25, 56, 0.45);
   color: #F8FAFC;
   padding-top: clamp(3rem, 5vw, 4.5rem);
   padding-bottom: clamp(2rem, 3.5vw, 3rem);
@@ -3289,7 +3289,7 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 380px;
-  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(5, 199, 242, 0.1) 0%, rgba(3, 20, 44, 0.16) 45%, transparent 75%);
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(5, 199, 242, 0.14) 0%, rgba(5, 33, 73, 0.22) 45%, transparent 75%);
   pointer-events: none;
   z-index: 0;
 }
@@ -3302,19 +3302,20 @@
   gap: clamp(2.5rem, 4vw, 3.5rem);
 }
 
-/* Layer 1: Conversion Launchpad */
+/* Layer 1: Conversion Launchpad (Sapphire Glass Deck) */
 .footer-launchpad {
   position: relative;
   border-radius: 1.25rem;
-  background: radial-gradient(ellipse 80% 90% at 100% 0%, rgba(5, 199, 242, 0.08) 0%, rgba(3, 20, 44, 0.28) 50%, rgba(255, 255, 255, 0.02) 100%), #020D1E;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  background: radial-gradient(ellipse 90% 100% at 100% 0%, rgba(5, 199, 242, 0.14) 0%, rgba(5, 33, 73, 0.45) 55%, rgba(2, 14, 32, 0.9) 100%);
+  border: 1px solid rgba(5, 199, 242, 0.25);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.7), 0 0 24px -6px rgba(5, 199, 242, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.16);
   padding: clamp(2rem, 3.5vw, 2.75rem);
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2.5rem;
   overflow: hidden;
+  backdrop-filter: blur(12px);
 }
 
 .footer-launchpad__ambient-glow {
@@ -3324,7 +3325,7 @@
   width: 320px;
   height: 320px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(5, 199, 242, 0.16), transparent 70%);
+  background: radial-gradient(circle, rgba(5, 199, 242, 0.22), transparent 70%);
   filter: blur(40px);
   pointer-events: none;
 }
@@ -3532,7 +3533,7 @@
 }
 
 .footer-trust-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(5, 33, 73, 0.22);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 0.85rem;
   padding: 1.25rem 1.4rem;
@@ -3544,15 +3545,16 @@
 }
 
 .footer-trust-card:hover {
-  border-color: rgba(5, 199, 242, 0.4);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(5, 199, 242, 0.45);
+  background: rgba(5, 33, 73, 0.38);
   transform: translateY(-2px);
-  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.55), 0 0 16px rgba(5, 199, 242, 0.12);
 }
 
 .footer-trust-card--highlight {
-  background: radial-gradient(ellipse at top right, rgba(5, 199, 242, 0.07), rgba(3, 20, 44, 0.28) 65%);
-  border-color: rgba(5, 199, 242, 0.22);
+  background: radial-gradient(ellipse at top right, rgba(5, 199, 242, 0.1), rgba(5, 33, 73, 0.45) 65%);
+  border-color: rgba(5, 199, 242, 0.3);
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
 }
 
 .footer-trust-card__header {
@@ -3620,8 +3622,9 @@
   gap: 1.25rem;
   padding: 0.85rem 1.25rem;
   border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(5, 33, 73, 0.24);
+  border: 1px solid rgba(5, 199, 242, 0.16);
+  backdrop-filter: blur(8px);
 }
 
 .footer-telemetry-bar__status {
