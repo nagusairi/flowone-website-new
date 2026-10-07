@@ -699,10 +699,47 @@ export function MobileAccordion({ menu, expanded, onToggle, onNavigate, disabled
     Resources: "#proof",
   }[menu];
   const menuSlug = menu.toLowerCase().replace(/\s+/g, "-");
-  return <div className={`fo-mobile-accordion ${expanded ? "is-expanded" : "is-collapsed"} ${disabled ? "is-disabled" : ""}`}>
-    <button type="button" aria-expanded={expanded} aria-controls={`mobile-${menuSlug}`} onClick={onToggle} disabled={disabled}><span>{menu}</span><Icon name="chevron" size={20} /></button>
-    <div id={`mobile-${menuSlug}`} className="fo-mobile-accordion__content">{content.groups.map(group => <section key={group.eyebrow}><span>{group.eyebrow}</span>{group.items.map(item => <a href={target} onClick={onNavigate} key={item.label}>{item.label}</a>)}</section>)}</div>
-  </div>;
+  return (
+    <div className={`fo-mobile-accordion ${expanded ? "is-expanded" : "is-collapsed"} ${disabled ? "is-disabled" : ""}`}>
+      <button
+        type="button"
+        className="fo-mobile-accordion__btn"
+        aria-expanded={expanded}
+        aria-controls={`mobile-${menuSlug}`}
+        onClick={onToggle}
+        disabled={disabled}
+      >
+        <span className="fo-mobile-accordion__label">{menu}</span>
+        <span className="fo-mobile-accordion__chevron" aria-hidden="true">
+          <Icon name="chevron" size={16} />
+        </span>
+      </button>
+      <div id={`mobile-${menuSlug}`} className="fo-mobile-accordion__content">
+        <div className="fo-mobile-accordion__inner">
+          {content.groups.map(group => (
+            <div key={group.eyebrow} className="fo-mobile-group">
+              <span className="fo-mobile-group__eyebrow">{group.eyebrow}</span>
+              <div className="fo-mobile-group__items">
+                {group.items.map(item => (
+                  <a
+                    href={target}
+                    onClick={onNavigate}
+                    key={item.label}
+                    className="fo-mobile-item"
+                  >
+                    <span className="fo-mobile-item__label">{item.label}</span>
+                    <span className="fo-mobile-item__arrow" aria-hidden="true">
+                      <Icon name="arrow" size={14} tone="action" />
+                    </span>
+                  </a>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScrolled = false, initialMenu = null, onDemo }: { forceMobile?: boolean; forceDark?: boolean; forceScrolled?: boolean; initialMenu?: MenuKey | null; onDemo?: () => void }) {
@@ -842,9 +879,45 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
       />
     )}
     <div className="fo-mobile-nav" ref={mobilePanel} aria-hidden={!mobileOpen} inert={!mobileOpen}>
-      <div className="fo-mobile-nav__top"><span>NAVIGATION</span><button type="button" onClick={closeMobile} aria-label="Close navigation"><Icon name="close" size={20} /></button></div>
-      <div className="fo-mobile-nav__body">{(Object.keys(navigationContent) as MenuKey[]).map(menu => <MobileAccordion key={menu} menu={menu} expanded={mobileSection === menu} onToggle={() => setMobileSection(current => current === menu ? null : menu)} onNavigate={closeMobile} />)}<a className="fo-mobile-founder" href="/founders-diary/" onClick={closeMobile}>Founder’s Diary<span>Founder perspectives, decisions and the flowOne journey.</span></a></div>
-      <div className="fo-mobile-nav__footer"><DemoCTA onClick={handleDemo} /><small>REIMAGINE BUSINESS WITH AI.</small></div>
+      <div className="fo-mobile-nav__top">
+        <a className="fo-mobile-nav__logo" href="#home-hero" onClick={closeMobile} aria-label="flowOne home">
+          <img src="/assets/flowone-logo.svg" alt="flowOne" />
+        </a>
+        <button type="button" className="fo-mobile-nav__close" onClick={closeMobile} aria-label="Close navigation">
+          <Icon name="close" size={20} />
+        </button>
+      </div>
+      <div className="fo-mobile-nav__body">
+        {(Object.keys(navigationContent) as MenuKey[]).map(menu => (
+          <MobileAccordion
+            key={menu}
+            menu={menu}
+            expanded={mobileSection === menu}
+            onToggle={() => setMobileSection(current => current === menu ? null : menu)}
+            onNavigate={closeMobile}
+          />
+        ))}
+        <a className="fo-mobile-founder" href="/founders-diary/" onClick={closeMobile}>
+          <div className="fo-mobile-founder__top">
+            <div className="fo-mobile-founder__avatars">
+              <span className="fo-mf-avatar fo-mf-avatar-1" />
+              <span className="fo-mf-avatar fo-mf-avatar-2" />
+            </div>
+            <span className="fo-mobile-founder__badge">FOUNDER PERSPECTIVES</span>
+          </div>
+          <div className="fo-mobile-founder__title">
+            <span>{"Founder's Diary"}</span>
+            <Icon name="arrow" size={14} tone="action" />
+          </div>
+          <p className="fo-mobile-founder__sub">Founder perspectives, decisions and the flowOne journey.</p>
+        </a>
+      </div>
+      <div className="fo-mobile-nav__footer">
+        <DemoCTA compact={false} onClick={handleDemo} />
+        <div className="fo-mobile-nav__statutory">
+          <small>REIMAGINE BUSINESS WITH AI · 100% SOVEREIGN INDIAN CLOUD</small>
+        </div>
+      </div>
     </div>
     {mobileOpen && <button className="fo-mobile-scrim" aria-label="Close navigation overlay" onClick={closeMobile} />}
   </div>;
