@@ -3745,10 +3745,9 @@
 }
 
 .footer-baseline__logo {
-  height: 1.35rem;
+  height: 1.85rem;
   width: auto;
-  opacity: 0.85;
-  filter: brightness(1.1);
+  opacity: 0.92;
   transition: opacity 180ms ease;
 }
 

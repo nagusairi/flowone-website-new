@@ -2451,7 +2451,7 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
         {/* LAYER 5: BRAND & LEGAL BASELINE */}
         <section className="footer-baseline">
           <div className="footer-baseline__brand">
-            <img src="/assets/flowone-logo.svg" alt="flowOne" className="footer-baseline__logo" />
+            <img src="/assets/flowOne-Logo_Inverse.svg" alt="flowOne" className="footer-baseline__logo" />
             <span className="footer-baseline__motto">REIMAGINE BUSINESS WITH AI</span>
           </div>
 
