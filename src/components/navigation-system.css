@@ -313,31 +313,61 @@
 .fo-mega__group {
   display: flex;
   flex-direction: column;
+  transition: opacity 0.2s ease;
+  position: relative;
+}
+
+/* Subtle dimming of other groups when one group is hovered */
+.fo-mega__groups:hover .fo-mega__group:not(:hover) {
+  opacity: 0.6;
+}
+
+.fo-mega__group:hover {
+  opacity: 1;
 }
 
 .fo-mega__group-header {
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  margin-bottom: 0.75rem;
-  padding-bottom: 0.45rem;
-  border-bottom: 1px solid rgba(11, 16, 32, 0.07);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(11, 16, 32, 0.08);
+  cursor: default;
+  user-select: none;
 }
 
-.fo-mega__group-index {
+.fo-mega__group-eyebrow {
+  display: inline-flex;
+  align-items: center;
   font-family: var(--font-family-mono, ui-monospace, SFMono-Regular, Menlo, monospace);
-  font-size: 0.65rem;
-  font-weight: 700;
+  font-size: 0.5625rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
   color: var(--color-brand-blue);
-  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: rgba(0, 34, 255, 0.05);
+  border: 1px solid rgba(0, 34, 255, 0.14);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  line-height: 1.25;
+  transition: all 0.2s ease;
+}
+
+.fo-mega__group:hover .fo-mega__group-eyebrow {
+  background: rgba(0, 34, 255, 0.1);
+  border-color: rgba(0, 34, 255, 0.3);
+  box-shadow: 0 0 8px rgba(0, 34, 255, 0.12);
 }
 
 .fo-mega__group-title {
-  font-size: 0.6875rem;
+  font-size: 0.825rem;
   font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #64748b;
+  letter-spacing: -0.015em;
+  color: #0b1020;
+  margin: 0;
+  line-height: 1.3;
 }
 
 .fo-mega__items-grid {
@@ -820,6 +850,12 @@
   .fo-header__bar { gap: var(--spacing-2); }
   .fo-nav { gap: 0; }.fo-nav-item { padding-inline: .5rem; font-size: .8rem; }
   .fo-founder-diary { margin-left: 0; }
+  .fo-mega__feature { display: none !important; }
+  .fo-mega__inner { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
+}
+@media (max-width: 1024px) {
+  .fo-mega__feature { display: none !important; }
+  .fo-mega__inner { grid-template-columns: 1fr !important; gap: 1.5rem !important; }
 }
 @media (max-width: 64rem) {
   .fo-header__bar { grid-template-columns: auto 1fr auto; }
