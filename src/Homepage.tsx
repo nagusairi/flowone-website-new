@@ -2219,8 +2219,265 @@ function RoleFlow({areas}:{areas:readonly string[]}) {
 }
 
 function HomeFooter({onDemo}:{onDemo:()=>void}) {
-  const cols=[["SOLUTIONS","Get Paid Faster","Control Procurement","Run Inventory Better","Control Cash & Banking","Stay Compliant"],["PLATFORM","Platform Overview","Finance Operations","Business Operations","Workflow Automation","Business Flows"],["AI","AI Business Agent","Document Intelligence","AI Invoice Processing","Cash Flow Forecasting","Credit Risk Intelligence"],["RESOURCES","Blog","Finance Guides","GST Guides","Case Studies","Webinars","Product Videos"],["COMPANY","About flowOne","Our Story","Leadership","Careers","Contact Us"],["TRUST","Security","Compliance","Data & Privacy"],["FOUNDER’S DIARY","Founder’s Diary"]];
-  return <footer className="home-footer"><div className="home-container footer-cta"><div><span>ONE CONNECTED BUSINESS FLOW</span><strong>Ready to connect your business?</strong></div><Button onClick={onDemo}>Book a Demo</Button></div><div className="home-container footer-links">{cols.map(col=><div id={col[0]==="FOUNDER’S DIARY"?"founder-diary":undefined} key={col[0]}><strong>{col[0]}</strong>{col.slice(1).map(x=><a href="#home-hero" key={x}>{x}</a>)}</div>)}</div><div className="home-container footer-bottom"><img src="/assets/flowone-logo.svg" alt="flowOne"/><p>REIMAGINE BUSINESS WITH AI.</p><div><a href="#home-hero">Privacy</a><a href="#home-hero">Terms</a><a href="#home-hero">Cookies</a></div></div></footer>;
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  return (
+    <footer className="home-footer" id="flowone-footer" role="contentinfo">
+      <div className="home-container footer-shell">
+        {/* LAYER 1: CONVERSION LAUNCHPAD */}
+        <section className="footer-launchpad" aria-label="Ready to connect your business flow">
+          <div className="footer-launchpad__ambient-glow" aria-hidden="true" />
+          <div className="footer-launchpad__content">
+            <div className="footer-launchpad__eyebrow">
+              <span className="footer-beacon" aria-hidden="true" />
+              <span>ONE CONNECTED BUSINESS FLOW</span>
+            </div>
+            <h2 className="footer-launchpad__title">
+              Ready to connect the work that moves your business?
+            </h2>
+            <p className="footer-launchpad__desc">
+              Join forward-looking Indian mid-market enterprises replacing fragmented ERPs and manual spreadsheet workarounds with one continuous, deterministic transaction flow.
+            </p>
+            <div className="footer-launchpad__trust-pills">
+              <span className="footer-pill">
+                <svg className="footer-pill__icon" viewBox="0 0 16 16" fill="none"><path d="M13.333 4 6 11.333 2.667 8" stroke="#05C7F2" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                Zero Rip-and-Replace
+              </span>
+              <span className="footer-pill">
+                <svg className="footer-pill__icon" viewBox="0 0 16 16" fill="none"><path d="M8 1.333 2.667 4v4c0 3.333 2.266 6.467 5.333 7.333 3.067-.866 5.333-4 5.333-7.333V4L8 1.333z" stroke="#05C7F2" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                100% Domestic Cloud Vault
+              </span>
+              <span className="footer-pill">
+                <svg className="footer-pill__icon" viewBox="0 0 16 16" fill="none"><path d="M2 4.667h12M2 8h12M2 11.333h12" stroke="#05C7F2" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                Native GSTN & 48+ Indian Banks
+              </span>
+            </div>
+          </div>
+          <div className="footer-launchpad__actions">
+            <Button size="large" onClick={onDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse" />}>
+              Book a Live Demo
+            </Button>
+            <a href="#living-transaction" className="footer-launchpad__sandbox-btn">
+              <span>Explore Interactive Sandbox</span>
+              <span className="footer-launchpad__spark">⚡</span>
+            </a>
+          </div>
+        </section>
+
+        {/* LAYER 2: 5-PILLAR ARCHITECTURAL SITEMAP */}
+        <nav className="footer-sitemap" aria-label="Complete Sitemap & Solutions Directory">
+          {/* Pillar 1: Solutions */}
+          <div className="footer-col">
+            <div className="footer-col__header">
+              <span className="footer-col__num">01</span>
+              <h3 className="footer-col__title">SOLUTIONS & SUITES</h3>
+            </div>
+            <ul className="footer-col__links">
+              <li><a href="#capabilities">Customer-to-Cash (AR)</a></li>
+              <li><a href="#capabilities">Procure-to-Pay (AP)</a></li>
+              <li><a href="#capabilities">Inventory & Warehouse</a></li>
+              <li><a href="#capabilities">Cash, Treasury & Banking</a></li>
+              <li><a href="#capabilities">GST Compliance & E-Way</a></li>
+              <li><a href="#capabilities">Financial Closure & Controls</a></li>
+              <li><a href="#capabilities">Working Capital Velocity</a></li>
+            </ul>
+          </div>
+
+          {/* Pillar 2: Platform */}
+          <div className="footer-col">
+            <div className="footer-col__header">
+              <span className="footer-col__num">02</span>
+              <h3 className="footer-col__title">CORE PLATFORM</h3>
+            </div>
+            <ul className="footer-col__links">
+              <li><a href="#connection">Platform Architecture</a></li>
+              <li><a href="#connection">Unified Event Fabric</a></li>
+              <li><a href="#connection">Deterministic Flow Pipelines</a></li>
+              <li><a href="#connection">48+ Bank & GSTN Gateways</a></li>
+              <li><a href="#connection">Document Extraction OCR</a></li>
+              <li><a href="#connection">Policy Clearance Matrices</a></li>
+              <li><a href="#connection">Security & Trust Architecture</a></li>
+            </ul>
+          </div>
+
+          {/* Pillar 3: AI Runtime */}
+          <div className="footer-col">
+            <div className="footer-col__header">
+              <span className="footer-col__num">03</span>
+              <h3 className="footer-col__title">AGENTIC AI RUNTIME</h3>
+            </div>
+            <ul className="footer-col__links">
+              <li><a href="#ai-inside-flow">flowOne AI Business Agent</a></li>
+              <li><a href="#ai-inside-flow">WhatsApp Business AI Rails</a></li>
+              <li><a href="#ai-inside-flow">Email Intelligence & Ingestion</a></li>
+              <li><a href="#ai-inside-flow">Predictive Cash Forecasting</a></li>
+              <li><a href="#ai-inside-flow">Credit Risk & Anomaly Alerts</a></li>
+              <li><a href="#ai-inside-flow">Autonomous Bank Reconciliation</a></li>
+              <li><a href="#ai-inside-flow">Maker-Checker Governance</a></li>
+            </ul>
+          </div>
+
+          {/* Pillar 4: Resources */}
+          <div className="footer-col">
+            <div className="footer-col__header">
+              <span className="footer-col__num">04</span>
+              <h3 className="footer-col__title">RESOURCES & GUIDES</h3>
+            </div>
+            <ul className="footer-col__links">
+              <li><a href="#proof">Practitioner Blog</a></li>
+              <li><a href="#proof">GST & E-Invoicing Playbooks</a></li>
+              <li><a href="#proof">MSME 45-Day Payment Rule Guide</a></li>
+              <li><a href="#proof">Working Capital Benchmarks</a></li>
+              <li><a href="#proof">Architecture Demos & Videos</a></li>
+              <li><a href="#proof">CFO Perspectives & Strategy</a></li>
+              <li><a href="#proof">Interactive ROI Calculator</a></li>
+            </ul>
+          </div>
+
+          {/* Pillar 5: Company & Ecosystem (Transferred from header nav) */}
+          <div className="footer-col" id="founder-diary">
+            <div className="footer-col__header">
+              <span className="footer-col__num">05</span>
+              <h3 className="footer-col__title">COMPANY & ECOSYSTEM</h3>
+            </div>
+            <ul className="footer-col__links">
+              <li><a href="#trust">About flowOne</a></li>
+              <li><a href="#trust">Our Story & Mission</a></li>
+              <li><a href="#trust">Leadership & Values</a></li>
+              <li>
+                <a href="/founders-diary/" className="footer-link-highlight">
+                  <span>Founder’s Diary</span>
+                  <span className="footer-link-badge">INSIGHTS</span>
+                </a>
+              </li>
+              <li>
+                <a href="#trust" className="footer-link-highlight">
+                  <span>Careers</span>
+                  <span className="footer-link-badge footer-link-badge--hiring">WE’RE HIRING</span>
+                </a>
+              </li>
+              <li><a href="#trust">Partner & Integrator Program</a></li>
+              <li><a href="#trust">Contact & Enterprise Advisory</a></li>
+            </ul>
+          </div>
+        </nav>
+
+        {/* LAYER 3: INSTITUTIONAL TRUST & SOVEREIGN FOOTPRINT */}
+        <section className="footer-trust-deck" aria-label="Physical Offices and Sovereign Data Residency">
+          <div className="footer-trust-card">
+            <div className="footer-trust-card__header">
+              <div className="footer-trust-card__icon-box">
+                <svg viewBox="0 0 24 24" fill="none" className="footer-trust-card__icon"><path d="M3 21h18M5 21V7l8-4v18M13 7l6 3v11M9 9v.01M9 13v.01M9 17v.01M17 13v.01M17 17v.01" stroke="#05C7F2" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </div>
+              <div>
+                <span className="footer-trust-card__tag">LEGAL ENTITY</span>
+                <h4 className="footer-trust-card__title">Registered Office</h4>
+              </div>
+            </div>
+            <address className="footer-trust-card__address">
+              Building #. 9-1-66, (501) Shyam Chabbrss Vihar,<br />
+              SD Road, Secunderabad, Telangana 500003, India
+            </address>
+          </div>
+
+          <div className="footer-trust-card">
+            <div className="footer-trust-card__header">
+              <div className="footer-trust-card__icon-box">
+                <svg viewBox="0 0 24 24" fill="none" className="footer-trust-card__icon"><path d="M12 21s-7-4.35-7-10a7 7 0 1 1 14 0c0 5.65-7 10-7 10z" stroke="#05C7F2" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/><circle cx="12" cy="11" r="2.5" stroke="#05C7F2" strokeWidth="1.75"/></svg>
+              </div>
+              <div>
+                <span className="footer-trust-card__tag">PRODUCT & TECH HQ</span>
+                <h4 className="footer-trust-card__title">Corporate Office</h4>
+              </div>
+            </div>
+            <address className="footer-trust-card__address">
+              Office 207 & 208 (2nd Floor), Manjeera Trinity Corporate,<br />
+              JNTU-Hitech City Road, Kukatpally, Hyderabad, Telangana 500072, India
+            </address>
+          </div>
+
+          <div className="footer-trust-card footer-trust-card--highlight">
+            <div className="footer-trust-card__header">
+              <div className="footer-trust-card__icon-box">
+                <svg viewBox="0 0 24 24" fill="none" className="footer-trust-card__icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="#05C7F2" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/><path d="m9 12 2 2 4-4" stroke="#05C7F2" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </div>
+              <div>
+                <span className="footer-trust-card__tag footer-trust-card__tag--sovereign">SOVEREIGN RESIDENCY</span>
+                <h4 className="footer-trust-card__title">Institutional Cloud Security</h4>
+              </div>
+            </div>
+            <p className="footer-trust-card__info">
+              100% Domestic Indian Cloud Vault (AWS Mumbai / GCP Delhi) · AES-256-GCM encryption at rest & in transit · SOC 2 Type II / ISO 27001 readiness · Deterministic cryptographic audit trail.
+            </p>
+          </div>
+        </section>
+
+        {/* LAYER 4: TELEMETRY & DIRECT CONTACT RAILS */}
+        <section className="footer-telemetry-bar" aria-label="System status and contact channels">
+          <div className="footer-telemetry-bar__status">
+            <span className="footer-telemetry-beacon">
+              <i className="footer-telemetry-beacon__dot" aria-hidden="true" />
+              <strong className="footer-telemetry-beacon__label">ALL SYSTEMS OPERATIONAL</strong>
+            </span>
+            <span className="footer-telemetry-sep" aria-hidden="true">/</span>
+            <span className="footer-telemetry-metric">99.99% PLATFORM UPTIME</span>
+            <span className="footer-telemetry-sep" aria-hidden="true">/</span>
+            <span className="footer-telemetry-metric">TRANSACTION ENGINE ACTIVE</span>
+          </div>
+
+          <div className="footer-telemetry-bar__channels">
+            <a href="tel:+917670890889" className="footer-channel-link">
+              <svg viewBox="0 0 24 24" fill="none" className="footer-channel-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              <span>+91 7670890889</span>
+            </a>
+            <a href="mailto:sales@flowone.in" className="footer-channel-link">
+              <svg viewBox="0 0 24 24" fill="none" className="footer-channel-icon"><rect width="20" height="16" x="2" y="4" rx="2" stroke="currentColor" strokeWidth="1.75"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round"/></svg>
+              <span>sales@flowone.in</span>
+            </a>
+            <div className="footer-social-links" aria-label="Social media channels">
+              <a href="https://linkedin.com/company/flowone" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="footer-social-icon"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+              </a>
+              <a href="https://twitter.com/flowone_in" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="X (formerly Twitter)">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="footer-social-icon"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://youtube.com/@flowone" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="footer-social-icon"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+              <a href="https://github.com/flowone" target="_blank" rel="noopener noreferrer" className="footer-social-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" className="footer-social-icon"><path fillRule="evenodd" clipRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* LAYER 5: BRAND & LEGAL BASELINE */}
+        <section className="footer-baseline">
+          <div className="footer-baseline__brand">
+            <img src="/assets/flowone-logo.svg" alt="flowOne" className="footer-baseline__logo" />
+            <span className="footer-baseline__motto">REIMAGINE BUSINESS WITH AI</span>
+          </div>
+
+          <p className="footer-baseline__copy">
+            © 2026 flowOne Technologies Pvt. Ltd. All rights reserved.
+          </p>
+
+          <div className="footer-baseline__legal">
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+            <a href="#security">Data & Sovereign Residency</a>
+            <a href="#cookies">Cookie Policy</a>
+            <button type="button" onClick={scrollToTop} className="footer-back-to-top" aria-label="Scroll back to top">
+              <span>Back to top</span>
+              <svg viewBox="0 0 16 16" fill="none" className="footer-back-to-top__icon"><path d="M8 12.667V3.333m0 0L4 7.333m4-4 4 4" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round"/></svg>
+            </button>
+          </div>
+        </section>
+      </div>
+    </footer>
+  );
 }
 
 function DemoDialog({open,onClose}:{open:boolean;onClose:()=>void}) {

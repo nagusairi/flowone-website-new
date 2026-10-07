@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Button, Icon } from "./flowone";
 
-type MenuKey = "Solutions" | "Platform" | "AI" | "Resources" | "Company";
+type MenuKey = "Solutions" | "Platform" | "AI" | "Resources";
 type MenuGroup = {
   eyebrow: string;
   title: string;
@@ -461,68 +461,6 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
       actionLabel: "Browse Resource Library",
     },
   },
-  Company: {
-    groups: [
-      {
-        eyebrow: "IDENTITY 01 · MISSION",
-        title: "About flowOne",
-        items: ["About flowOne", "Our Story", "Leadership", "Careers"].map(label => ({
-          label,
-          description: label === "About flowOne" ? "Why connected business operations matter." : undefined,
-        })),
-        hoverTelemetry: {
-          headerLabel: "COMPANY · VISION & ORIGINS",
-          badgeLabel: "FOUNDING THESIS",
-          objectId: "OUR MISSION",
-          heroValue: "Reimagining Enterprise Work",
-          subtitle: "Why connected business operations matter. Our story, founding values, and leadership team building modern software infrastructure for Indian businesses.",
-          metrics: [
-            { label: "FOUNDED", value: "2024" },
-            { label: "LOCATION", value: "Mumbai, India" },
-            { label: "TALENT", value: "Engineering-First" },
-          ],
-          chips: ["About flowOne", "Our Story", "Leadership", "Careers"],
-          actionLabel: "Read Our Story",
-        },
-      },
-      {
-        eyebrow: "IDENTITY 02 · CHANNELS",
-        title: "Connect & Partner",
-        items: ["Contact Us", "Partner With Us"].map(label => ({
-          label,
-          description: label === "Contact Us" ? "Speak directly with our solutions team." : undefined,
-        })),
-        hoverTelemetry: {
-          headerLabel: "COMPANY · COMMUNICATIONS",
-          badgeLabel: "ENGAGEMENT",
-          objectId: "SOLUTIONS ADVISORY",
-          heroValue: "Direct Enterprise Engagement",
-          subtitle: "Speak directly with our solutions architects, enterprise deployment team, or explore partnership and integration opportunities.",
-          metrics: [
-            { label: "SUPPORT", value: "Dedicated Advisors" },
-            { label: "DEPLOYMENT", value: "Guided Onboarding" },
-            { label: "ECOSYSTEM", value: "ERP & Bank Partners" },
-          ],
-          chips: ["Contact Us", "Partner With Us", "Enterprise Advisory"],
-          actionLabel: "Contact Our Team",
-        },
-      },
-    ],
-    telemetry: {
-      headerLabel: "ORGANIZATION PROFILE",
-      badgeLabel: "MISSION & PRINCIPLES",
-      objectId: "ABOUT FLOWONE",
-      heroValue: "Engineered for High-Consequence Ops",
-      subtitle: "Built specifically to eliminate enterprise software fragmentation in India. Engineered from the ground up with domestic sovereign cloud data residency, immutable cryptographic auditability, and dedicated support for Indian statutory compliance.",
-      metrics: [
-        { label: "HEADQUARTERS", value: "Mumbai, MH" },
-        { label: "SECURITY", value: "SOC 2 · ISO 27001" },
-        { label: "DATA", value: "100% Domestic Vault" },
-      ],
-      chips: ["Our Story", "Founder's Diary", "Leadership", "Sovereign Residency", "Open Positions"],
-      actionLabel: "Meet flowOne & Our Team",
-    },
-  },
 };
 
 export function NavItem({ label, state = "default", hasMenu = true, onClick }: { label: string; state?: "default" | "hover" | "focus" | "active" | "open"; hasMenu?: boolean; onClick?: () => void }) {
@@ -544,7 +482,7 @@ export function DemoCTA({ state = "default", compact = false, onClick }: { state
 
 export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; state?: "closed" | "opening" | "open" | "closing"; onNavigate?: () => void }) {
   const content = navigationContent[menu];
-  const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof", Company: "#trust" }[menu];
+  const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof" }[menu];
 
   return (
     <div className={`fo-mega fo-mega-${menu.toLowerCase()} is-${state}`} id={`mega-${menu}`} aria-hidden={state === "closed"}>
@@ -640,7 +578,7 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
 
 export function MobileAccordion({ menu, expanded, onToggle, onNavigate, disabled = false }: { menu: MenuKey; expanded: boolean; onToggle: () => void; onNavigate?: () => void; disabled?: boolean }) {
   const content = navigationContent[menu];
-  const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof", Company: "#trust" }[menu];
+  const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof" }[menu];
   return <div className={`fo-mobile-accordion ${expanded ? "is-expanded" : "is-collapsed"} ${disabled ? "is-disabled" : ""}`}>
     <button type="button" aria-expanded={expanded} aria-controls={`mobile-${menu}`} onClick={onToggle} disabled={disabled}><span>{menu}</span><Icon name="chevron" size={20} /></button>
     <div id={`mobile-${menu}`} className="fo-mobile-accordion__content">{content.groups.map(group => <section key={group.title}><span>{group.title}</span>{group.items.map(item => <a href={target} onClick={onNavigate} key={item.label}>{item.label}</a>)}</section>)}</div>
