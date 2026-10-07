@@ -1038,13 +1038,14 @@ export default function Homepage() {
           <p>Every team works from the same transaction context—focused on the decisions that matter to them.</p>
         </div>
         <div className="role-selector">
-          <div role="tablist" aria-label="Business roles">
+          <div role="tablist" aria-label="Business roles" className="role-tablist">
             {roles.map((x, i) => (
               <button
                 role="tab"
                 aria-selected={role === i}
                 onClick={() => setRole(i)}
                 key={x[0]}
+                className="role-tab-btn"
               >
                 <span>{x[0]}</span>
               </button>

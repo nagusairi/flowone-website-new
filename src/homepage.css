@@ -2931,49 +2931,74 @@
 .home-roles { background: var(--neutral-0); }
 .role-selector {
   display: grid;
-  grid-template-columns: 0.35fr 1fr;
-  background: var(--color-white);
-  border: 1px solid var(--color-border-default);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-xs);
+  grid-template-columns: minmax(210px, 0.32fr) 1fr;
+  gap: 1.75rem;
+  align-items: start;
 }
+.role-tablist,
 .role-selector > div:first-child {
   display: flex;
   flex-direction: column;
-  background: var(--color-neutral-50);
-  border-right: 1px solid var(--color-border-default);
+  gap: 0.5rem;
+  background: transparent;
+  border: 0;
 }
+.role-tab-btn,
 .role-selector > div:first-child button {
-  min-height: 3.8rem;
+  min-height: 3.4rem;
   padding: 0.85rem 1.25rem;
   text-align: left;
   color: var(--color-text-secondary);
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid var(--color-border-default);
+  background: var(--color-neutral-50);
+  border: 1px solid rgba(11, 16, 32, 0.05);
+  border-radius: var(--radius-lg);
   font: 600 var(--font-caption)/1 var(--font-family-primary);
   cursor: pointer;
+  position: relative;
   transition: all var(--motion-fast);
 }
+.role-tab-btn:hover,
 .role-selector > div:first-child button:hover {
   background: var(--neutral-0);
   color: var(--flow-primary-deep);
+  border-color: var(--color-border-default);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  transform: translateX(3px);
 }
+.role-tab-btn:focus-visible,
 .role-selector > div:first-child button:focus-visible {
   outline: 2px solid var(--state-focus);
-  outline-offset: -2px;
+  outline-offset: 2px;
 }
+.role-tab-btn[aria-selected="true"],
 .role-selector button[aria-selected="true"] {
   color: var(--flow-primary);
   background: var(--neutral-0);
-  box-shadow: inset 3px 0 var(--flow-primary);
+  border-color: rgba(5, 40, 242, 0.22);
+  box-shadow: 0 4px 16px rgba(5, 40, 242, 0.08);
   font-weight: 700;
+  transform: translateX(4px);
+}
+.role-tab-btn[aria-selected="true"]::before,
+.role-selector button[aria-selected="true"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 3.5px;
+  background: var(--flow-primary);
+  border-radius: 0 4px 4px 0;
 }
 .role-view {
   padding: var(--spacing-6);
   display: flex;
   flex-direction: column;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 10px 30px -4px rgba(11, 16, 32, 0.06), 0 2px 6px rgba(11, 16, 32, 0.03);
+  min-height: 25rem;
 }
 .role-view-header {
   display: flex;
@@ -4263,9 +4288,15 @@
   .capability-detail { min-height:auto; }
   .predictive-steps { grid-template-columns:repeat(2, 1fr); }
   .outcome-editorial { grid-template-columns:repeat(2, 1fr); }
-  .role-selector { grid-template-columns:1fr; }
-  .role-selector > div:first-child { flex-direction:row; overflow-x:auto; border-right:0; border-bottom:1px solid var(--color-border-default); }
-  .role-selector > div:first-child button { min-width:max-content; }
+  .role-selector { grid-template-columns: 1fr; gap: 1.25rem; }
+  .role-tablist,
+  .role-selector > div:first-child { flex-direction: row; overflow-x: auto; padding-bottom: 0.35rem; gap: 0.5rem; border: 0; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .role-tablist::-webkit-scrollbar,
+  .role-selector > div:first-child::-webkit-scrollbar { display: none; }
+  .role-tab-btn,
+  .role-selector > div:first-child button { min-width: max-content; min-height: 2.6rem; padding: 0.55rem 1rem; transform: none !important; }
+  .role-tab-btn[aria-selected="true"]::before,
+  .role-selector button[aria-selected="true"]::before { display: none; }
   .trust-matrix { grid-template-columns:repeat(2, 1fr); }
 }
 
@@ -4362,7 +4393,7 @@
   .outcome-editorial { grid-template-columns:1fr; margin-top:var(--spacing-7); }
   .outcome-story { min-height:12rem; }
 
-  .role-view { min-height:auto; padding:var(--spacing-3); }
+  .role-view { min-height: auto; padding: 1.25rem; border-radius: var(--radius-lg); }
   .role-metrics { grid-template-columns:1fr; }
   .role-flow { flex-direction:column; align-items:flex-start; gap:0.4rem; }
   .role-flow > div { width:100%; min-height:1.75rem; }
