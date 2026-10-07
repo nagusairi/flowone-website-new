@@ -9,42 +9,140 @@
 @import "./homepage.css";
 
 :root {
-  /* Brand and semantic color */
-  --color-brand-blue: #0022ff;
-  --color-brand-pink: #e22991;
-  --color-brand-cyan: #00b8e6;
-  --color-brand-ink: #0b1020;
-  --color-neutral-900: #111827;
-  --color-neutral-700: #374151;
-  --color-neutral-500: #6b7280;
-  --color-neutral-400: #9ca3af;
-  --color-neutral-300: #d1d5db;
-  --color-neutral-200: #e5e7eb;
-  --color-neutral-100: #f7f8fc;
-  --color-neutral-50: #fbfcfe;
-  --color-white: #ffffff;
-  --color-text-primary: var(--color-neutral-900);
-  --color-text-secondary: var(--color-neutral-700);
-  --color-text-tertiary: var(--color-neutral-500);
-  --color-text-disabled: var(--color-neutral-400);
-  --color-text-inverse: var(--color-white);
-  --color-surface-page: var(--color-neutral-100);
-  --color-surface-default: var(--color-white);
-  --color-surface-subtle: var(--color-neutral-50);
-  --color-surface-elevated: var(--color-white);
-  --color-surface-dark: var(--color-brand-ink);
-  --color-border-default: var(--color-neutral-200);
-  --color-border-strong: var(--color-neutral-300);
-  --color-border-focus: var(--color-brand-blue);
-  --color-action-primary: var(--color-brand-blue);
-  --color-action-primary-hover: #001bd1;
-  --color-action-primary-pressed: #0015a3;
-  --color-action-secondary: var(--color-brand-ink);
-  --color-status-success: #138a5b;
-  --color-status-warning: #b76a00;
-  --color-status-danger: #c43d56;
-  --color-status-info: #2866c7;
-  --gradient-brand-signature: linear-gradient(135deg, #0022ff 0%, #00b8e6 52%, #e22991 100%);
+  /* ==========================================================================
+     FLOWONE BRAND (flowOne_Color_Design_System.md §3)
+     ========================================================================== */
+  --flow-primary: #0528F2;
+  --flow-primary-deep: #0540F2;
+  --flow-primary-pressed: #0A2BC7;
+
+  --flow-cyan: #049DD9;
+  --flow-cyan-bright: #05C7F2;
+
+  --flow-magenta: #D9299B;
+
+  --flow-ink: #0D0D0D;
+
+  /* ==========================================================================
+     NEUTRALS (§4)
+     ========================================================================== */
+  --neutral-0: #FFFFFF;
+  --neutral-50: #F7F8FA;
+  --neutral-100: #F1F4F8;
+  --neutral-200: #E6EAF0;
+  --neutral-300: #DDE3EA;
+  --neutral-500: #6B7280;
+  --neutral-700: #374151;
+  --neutral-900: #0D0D0D;
+
+  /* ==========================================================================
+     DARK (§5)
+     ========================================================================== */
+  --dark-900: #0D0D0D;
+  --dark-800: #12151C;
+  --dark-700: #1A1F2A;
+
+  /* ==========================================================================
+     SEMANTIC COLOR SYSTEM (§7 & §38)
+     ========================================================================== */
+  --success: #16803C;
+  --success-bg: #EAF7EF;
+
+  --warning: #B7791F;
+  --warning-bg: #FFF7E6;
+
+  --error: #C62828;
+  --error-bg: #FDECEC;
+
+  --info: #0528F2;
+  --info-bg: #EEF2FF;
+
+  /* ==========================================================================
+     OFFICIAL GRADIENTS (§6)
+     ========================================================================== */
+  --gradient-flow: linear-gradient(
+    135deg,
+    #0528F2 0%,
+    #049DD9 55%,
+    #05C7F2 100%
+  );
+
+  --gradient-intelligence: linear-gradient(
+    135deg,
+    #05C7F2 0%,
+    #0540F2 48%,
+    #D9299B 100%
+  );
+
+  /* ==========================================================================
+     INTERACTION-STATE TOKEN LAYER (§41)
+     ========================================================================== */
+  --state-hover-bg: #F7F8FA;
+  --state-active-bg: #EEF2FF;
+
+  --state-focus: #0528F2;
+  --state-focus-ring: rgba(5, 40, 242, 0.12);
+
+  --state-disabled-bg: #F1F4F8;
+  --state-disabled-border: #E6EAF0;
+  --state-disabled-text: #6B7280;
+
+  --state-selected: #0528F2;
+
+  --state-success: #16803C;
+  --state-success-bg: #EAF7EF;
+
+  --state-warning: #B7791F;
+  --state-warning-bg: #FFF7E6;
+
+  --state-error: #C62828;
+  --state-error-bg: #FDECEC;
+
+  /* ==========================================================================
+     GLOW RULES (§16)
+     ========================================================================== */
+  --glow-blue: 0 0 40px rgba(5, 40, 242, 0.12);
+  --glow-cyan: 0 0 40px rgba(5, 199, 242, 0.12);
+  --glow-magenta: 0 0 40px rgba(217, 41, 155, 0.10);
+
+  /* ==========================================================================
+     CANONICAL SYSTEM & COMPATIBILITY ALIASES
+     ========================================================================== */
+  --color-brand-blue: var(--flow-primary);
+  --color-brand-pink: var(--flow-magenta);
+  --color-brand-cyan: var(--flow-cyan);
+  --color-brand-ink: var(--flow-ink);
+  --color-neutral-900: var(--neutral-900);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-500: var(--neutral-500);
+  --color-neutral-400: #9CA3AF;
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-100: var(--neutral-100);
+  --color-neutral-50: var(--neutral-50);
+  --color-white: var(--neutral-0);
+  --color-text-primary: var(--neutral-900);
+  --color-text-secondary: var(--neutral-700);
+  --color-text-tertiary: var(--neutral-500);
+  --color-text-disabled: var(--state-disabled-text);
+  --color-text-inverse: var(--neutral-0);
+  --color-surface-page: var(--neutral-0);
+  --color-surface-default: var(--neutral-0);
+  --color-surface-subtle: var(--neutral-50);
+  --color-surface-elevated: var(--neutral-0);
+  --color-surface-dark: var(--flow-ink);
+  --color-border-default: var(--neutral-200);
+  --color-border-strong: var(--neutral-300);
+  --color-border-focus: var(--state-focus);
+  --color-action-primary: var(--flow-primary);
+  --color-action-primary-hover: var(--flow-primary-deep);
+  --color-action-primary-pressed: var(--flow-primary-pressed);
+  --color-action-secondary: var(--flow-ink);
+  --color-status-success: var(--success);
+  --color-status-warning: var(--warning);
+  --color-status-danger: var(--error);
+  --color-status-info: var(--info);
+  --gradient-brand-signature: var(--gradient-flow);
 
   /* Typography */
   --font-family-primary: "Manrope", sans-serif;
@@ -159,8 +257,8 @@ body {
 }
 .fo-skip-link:focus { transform: none; }
 :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-  outline: 2px solid var(--color-border-focus);
-  outline-offset: 2px;
+  outline: 2px solid var(--state-focus);
+  outline-offset: 3px;
 }
 p { margin: 0; }
 code { font-family: var(--font-family-primary); }

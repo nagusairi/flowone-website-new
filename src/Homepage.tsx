@@ -729,22 +729,11 @@ export default function Homepage() {
               <CapabilityFlow active={capabilities[capability].active} />
             </div>
 
-            {/* Operational Impact Metrics Ribbon */}
-            <div className="capability-metrics-ribbon">
-              {capabilities[capability].metrics.map(m => (
-                <div className="capability-metric-cell" key={m.label}>
-                  <span className="capability-metric-label">{m.label}</span>
-                  <strong className="capability-metric-value">{m.value}</strong>
-                </div>
-              ))}
-            </div>
-
             {/* Footer action */}
             <div className="capability-detail-footer">
-              <a className="capability-explore" href="#connection">
-                <span>Explore Solutions Architecture</span>
-                <Icon name="arrow" size={16} tone="action" />
-              </a>
+              <Button size="medium" onClick={openDemo} iconAfter={<Icon name="arrow" size={16} tone="inverse" />}>
+                Schedule a Demo
+              </Button>
             </div>
           </div>
         </div>
@@ -1260,117 +1249,187 @@ const TrustArchitecture = memo(function TrustArchitecture() {
   );
 });
 
+const heroLeftFragments = [
+  { id: "sales", label: "SALES & CRM", metric: "SO-10482", detail: "Order Confirmed", status: "CONNECTED" },
+  { id: "stock", label: "WAREHOUSE & STOCK", metric: "125 Units", detail: "Allocated DC-02", status: "IN SYNC" },
+  { id: "finance", label: "FINANCE & LEDGER", metric: "INV-10482", detail: "₹5,90,000 Open", status: "REAL-TIME" },
+] as const;
+
+const heroRightFragments = [
+  { id: "gst", label: "GST COMPLIANCE", metric: "IRN Cleared", detail: "Instant E-Invoice", status: "VALIDATED" },
+  { id: "bank", label: "BANKING & CASH", metric: "Auto-Recon", detail: "HDFC Matched", status: "RECEIVED" },
+  { id: "ai", label: "AI INTELLIGENCE", metric: "92% Accuracy", detail: "Cash Probability", status: "ACTIVE" },
+] as const;
+
 const HeroFlow = memo(function HeroFlow() {
-  const [stage, setStage] = useState(0);
+  const [pulseIndex, setPulseIndex] = useState(0);
+
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setStage(3);
-      return;
-    }
-    const timers = [
-      window.setTimeout(() => setStage(1), 300),
-      window.setTimeout(() => setStage(2), 650),
-      window.setTimeout(() => setStage(3), 1000),
-    ];
-    return () => timers.forEach(window.clearTimeout);
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const interval = window.setInterval(() => {
+      setPulseIndex(i => (i + 1) % 3);
+    }, 2400);
+    return () => window.clearInterval(interval);
   }, []);
 
   return (
     <div
-      className={`hero-operating-surface is-stage-${stage}`}
-      aria-label="Transaction TXN-10482 for Ananya Enterprises becomes a ₹5,90,000 invoice, receives an AI payment prediction, and results in cash received."
+      className="hero-pipeline-console"
+      aria-label="flowOne Central Architecture: 6 business fragments connected to the central flowOne engine via live pipelines."
     >
-      <div className="hero-operating-header">
+      <div className="hero-pipeline-beam" aria-hidden="true" />
+
+      {/* Top Telemetry Header */}
+      <div className="hero-pipeline-topbar">
         <div className="hero-live-beacon" aria-label="System status: Live operating telemetry">
           <i aria-hidden="true" />
-          <span>LIVE OPERATIONAL FEED</span>
+          <span>LIVE OPERATIONAL CONDUIT</span>
         </div>
-        <div className="hero-header-metadata">
-          <span className="hero-mono-capsule">TXN-10482</span>
-          <span className="hero-latency-tag">LATENCY 14ms · SECURE</span>
-        </div>
-      </div>
-
-      <div className="hero-primary-object">
-        <div className="hero-object-top">
-          <div>
-            <span className="hero-kicker">COMMERCIAL INVOICE · STATE 03</span>
-            <strong>Ananya Enterprises</strong>
-          </div>
-          <span className="hero-badge-pill is-info">Due in 4 days</span>
-        </div>
-        <div className="hero-object-value-row">
-          <b>₹5,90,000</b>
-          <span className="hero-subtotal-hint">Subtotal ₹5,00,000 + GST ₹90,000</span>
-        </div>
-        <div className="hero-object-pipeline-route">
-          <span>PIPELINE: HYDERABAD DC-02 → GST IRP → HDFC TREASURY</span>
+        <div className="hero-topbar-sync">
+          <span className="hero-sync-pulse-badge">6 OF 6 FRAGMENTS IN SYNC</span>
+          <span className="hero-latency-tag">TXN-10482 · 14ms</span>
         </div>
       </div>
 
-      <div className="hero-minimal-flow" aria-hidden="true">
-        <div className="hero-rail-track-line" />
-        <i className="hero-minimal-pulse" />
-        {["ORDER", "INVOICE", "AI", "CASH"].map((item, index) => {
-          const stateClass =
-            item === "AI" && stage >= 2
-              ? "is-active"
-              : index < stage || (index === 3 && stage === 3)
-              ? "is-complete"
-              : index === stage
-              ? "is-current"
-              : "";
-          return (
+      {/* Main Dual-Flank Converging Pipeline Canvas */}
+      <div className="hero-pipeline-stage">
+        {/* LEFT FLANK (3 Fragments) */}
+        <div className="hero-flank hero-flank-left">
+          {heroLeftFragments.map((frag, idx) => (
             <div
-              className={`hero-flow-node-col ${stateClass} ${item === "AI" ? "is-intelligence" : ""}`}
-              key={item}
+              className={`hero-frag-card is-${frag.id} ${pulseIndex === idx ? "is-pulsing" : ""}`}
+              key={frag.id}
             >
-              <span className="hero-flow-node-label">{item}</span>
-              <div className="hero-flow-node-housing">
-                <i className="hero-node-dot" />
+              <div className="hero-frag-meta">
+                <span className="hero-frag-tag">{frag.label}</span>
+                <span className="hero-frag-status">{frag.status}</span>
               </div>
-              {index < 3 && <b className="hero-flow-connector-line" />}
+              <div className="hero-frag-body">
+                <strong>{frag.metric}</strong>
+                <small>{frag.detail}</small>
+              </div>
+              <div className="hero-frag-port hero-port-right" aria-hidden="true">
+                <i />
+              </div>
             </div>
-          );
-        })}
+          ))}
+        </div>
+
+        {/* LEFT PIPELINES (SVG Conduits converging into Center) */}
+        <div className="hero-conduits-col hero-conduits-left" aria-hidden="true">
+          <svg className="hero-conduit-svg" viewBox="0 0 70 210" fill="none">
+            {/* Top branch: left top card to center top */}
+            <path d="M 0 35 C 35 35, 35 75, 70 75" className="conduit-rail-path" />
+            <path d="M 0 35 C 35 35, 35 75, 70 75" className="conduit-rail-glow" />
+            {/* Mid branch: straight into center */}
+            <path d="M 0 105 L 70 105" className="conduit-rail-path" />
+            <path d="M 0 105 L 70 105" className="conduit-rail-glow" />
+            {/* Bottom branch: left bottom card to center bottom */}
+            <path d="M 0 175 C 35 175, 35 135, 70 135" className="conduit-rail-path" />
+            <path d="M 0 175 C 35 175, 35 135, 70 135" className="conduit-rail-glow" />
+
+            {/* Inward Moving Energy Pulses */}
+            <circle className="conduit-pulse-bead conduit-pulse-left-1" r="3.5" />
+            <circle className="conduit-pulse-bead conduit-pulse-left-2" r="3.5" />
+            <circle className="conduit-pulse-bead conduit-pulse-left-3" r="3.5" />
+          </svg>
+        </div>
+
+        {/* CENTER ENGINE HUB (flowOne Core) */}
+        <div className="hero-hub-center">
+          <div className="hero-hub-beacon-rings" aria-hidden="true">
+            <span className="hub-ring hub-ring-1" />
+            <span className="hub-ring hub-ring-2" />
+          </div>
+
+          <div className="hero-hub-card">
+            <div className="hero-hub-header">
+              <div className="hero-hub-emblem" aria-hidden="true">
+                <img src="/assets/flowone-spark-mark.png" alt="" className="hero-hub-logo-img" />
+                <span className="hero-hub-beacon-dot" />
+              </div>
+              <div className="hero-hub-branding">
+                <strong className="hero-hub-brand-name">flowOne</strong>
+                <span className="hero-hub-brand-sub">CORE ENGINE</span>
+              </div>
+            </div>
+
+            <div className="hero-hub-payload">
+              <span className="hero-hub-kicker">UNIFIED TRANSACTION FABRIC</span>
+              <strong className="hero-hub-txn">TXN-10482</strong>
+              <div className="hero-hub-val-row">
+                <span className="hero-hub-amount">₹5,90,000</span>
+                <span className="hero-hub-state-pill">IN SYNC</span>
+              </div>
+            </div>
+
+            <div className="hero-hub-sync-status">
+              <span className="hero-hub-status-dot" aria-hidden="true" />
+              <span>Zero Silo Drift · Single Source of Truth</span>
+            </div>
+          </div>
+        </div>
+
+        {/* RIGHT PIPELINES (SVG Conduits converging into Center) */}
+        <div className="hero-conduits-col hero-conduits-right" aria-hidden="true">
+          <svg className="hero-conduit-svg" viewBox="0 0 70 210" fill="none">
+            {/* Top branch: right top card to center top */}
+            <path d="M 70 35 C 35 35, 35 75, 0 75" className="conduit-rail-path" />
+            <path d="M 70 35 C 35 35, 35 75, 0 75" className="conduit-rail-glow" />
+            {/* Mid branch: straight into center */}
+            <path d="M 70 105 L 0 105" className="conduit-rail-path" />
+            <path d="M 70 105 L 0 105" className="conduit-rail-glow" />
+            {/* Bottom branch: right bottom card to center bottom */}
+            <path d="M 70 175 C 35 175, 35 135, 0 135" className="conduit-rail-path" />
+            <path d="M 70 175 C 35 175, 35 135, 0 135" className="conduit-rail-glow" />
+
+            {/* Inward Moving Energy Pulses */}
+            <circle className="conduit-pulse-bead conduit-pulse-right-1" r="3.5" />
+            <circle className="conduit-pulse-bead conduit-pulse-right-2" r="3.5" />
+            <circle className="conduit-pulse-bead conduit-pulse-right-3" r="3.5" />
+          </svg>
+        </div>
+
+        {/* RIGHT FLANK (3 Fragments) */}
+        <div className="hero-flank hero-flank-right">
+          {heroRightFragments.map((frag, idx) => (
+            <div
+              className={`hero-frag-card is-${frag.id} ${pulseIndex === idx ? "is-pulsing" : ""}`}
+              key={frag.id}
+            >
+              <div className="hero-frag-port hero-port-left" aria-hidden="true">
+                <i />
+              </div>
+              <div className="hero-frag-meta">
+                <span className="hero-frag-tag">{frag.label}</span>
+                <span className="hero-frag-status">{frag.status}</span>
+              </div>
+              <div className="hero-frag-body">
+                <strong>{frag.metric}</strong>
+                <small>{frag.detail}</small>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      <div className="hero-split-cards">
-        <div className={`hero-inline-ai ${stage >= 2 ? "is-visible" : ""}`}>
-          <div className="hero-card-tag">
-            <Icon name="spark" size={14} tone="action" />
-            <span>FLOW INTELLIGENCE</span>
-          </div>
-          <div className="hero-ai-metric">
-            <strong>92%</strong>
-            <span>Payment Probability</span>
-          </div>
-          <small>Based on 24 prior settlements · Expected in 4d</small>
+      {/* Bottom Telemetry Bar */}
+      <div className="hero-pipeline-footer">
+        <div className="hero-footer-stat">
+          <span>PIPELINE LATENCY</span>
+          <strong>&lt; 14ms</strong>
         </div>
-        <div className={`hero-inline-cash ${stage >= 3 ? "is-visible" : ""}`}>
-          <div className="hero-card-tag">
-            <i className="hero-cash-dot" />
-            <span>OPERATING TREASURY</span>
-          </div>
-          <div className="hero-cash-metric">
-            <strong>₹5,90,000</strong>
-            <span className="hero-cash-cleared-pill">✓ RECEIVED</span>
-          </div>
-          <small>HDFC Auto-reconciled · Value date settled</small>
+        <div className="hero-footer-divider" aria-hidden="true" />
+        <div className="hero-footer-stat">
+          <span>CONTEXT INTEGRITY</span>
+          <strong>100%</strong>
+        </div>
+        <div className="hero-footer-divider" aria-hidden="true" />
+        <div className="hero-footer-stat">
+          <span>STATUTORY AUDIT</span>
+          <strong>IMMUTABLE</strong>
         </div>
       </div>
-
-      <div className="hero-context-metadata">
-        <span><b>GST</b> Validated &amp; Filed</span>
-        <span><b>125 units</b> Allocated DC-02</span>
-        <span><b>Cash</b> Available</span>
-      </div>
-      <ol className="fo-sr-only">
-        <li>Order confirmed.</li>
-        <li>Invoice issued for ₹5,90,000.</li>
-        <li>AI predicts 92% probability of payment within 4 days.</li>
-        <li>₹5,90,000 cash received.</li>
-      </ol>
     </div>
   );
 });
