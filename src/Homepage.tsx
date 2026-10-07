@@ -392,9 +392,6 @@ export default function Homepage() {
   const [role,setRole] = useState(0);
   const [fragmented,setFragmented] = useState(false);
   const [livingState,setLivingState] = useState(0);
-  const livingRef = useRef<HTMLElement>(null);
-  const livingPinRef = useRef<HTMLDivElement>(null);
-  const triggerRef = useRef<any>(null);
 
   const aiPinRef = useRef<HTMLDivElement>(null);
   const aiTriggerRef = useRef<any>(null);
@@ -419,12 +416,6 @@ export default function Homepage() {
     startTransition(() => {
       setLivingState(targetIndex);
     });
-    if (triggerRef.current) {
-      const trigger = triggerRef.current;
-      const progress = (targetIndex + 0.5) / 10;
-      const targetScroll = trigger.start + progress * (trigger.end - trigger.start);
-      window.scrollTo({ top: targetScroll, behavior: "auto" });
-    }
   }, []);
 
   useEffect(() => {
@@ -460,27 +451,6 @@ export default function Homepage() {
       gsap.registerPlugin(ScrollTrigger);
       const media=gsap.matchMedia();
 
-      if (livingPinRef.current) {
-        media.add("(min-width: 769px)",()=>{
-          const trigger=ScrollTrigger.create({
-            trigger:livingPinRef.current,
-            start:"top top+=68",
-            end:"+=900%",
-            pin:true,
-            scrub:.35,
-            anticipatePin:1,
-            onUpdate: (self) => {
-              const next = Math.min(9, Math.floor(self.progress * 10));
-              setLivingState((prev) => (prev !== next ? next : prev));
-            },
-          });
-          triggerRef.current = trigger;
-          return()=>{
-            trigger.kill();
-            triggerRef.current = null;
-          };
-        });
-      }
 
       if (aiPinRef.current) {
         media.add("(min-width: 1024px)", () => {
@@ -589,9 +559,9 @@ export default function Homepage() {
       <BusinessLoop />
     </section>
 
-    <section id="living-transaction" ref={livingRef} className="home-living">
+    <section id="living-transaction" className="home-living">
       <div className="home-container living-intro"><span className="home-index">LIVING TRANSACTION</span><h2>One transaction.<br/>Connected from start to cash.</h2><p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p></div>
-      <div ref={livingPinRef} className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState}/></div></div>
+      <div className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState}/></div></div>
       <div className="living-mobile home-container">{transactionStates.map((_,i)=><div className="living-mobile-state" key={i}><LivingNarrative index={i}/><LivingProduct index={i}/></div>)}</div>
     </section>
 
@@ -1544,27 +1514,6 @@ const LivingNarrative = memo(function LivingNarrative({
   setIndex?: (i: number) => void;
   onSelectState?: (i: number) => void;
 }) {
-  const columnRef = useRef<HTMLDivElement>(null);
-  const activePillRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const col = columnRef.current;
-    const pill = activePillRef.current;
-    if (col && pill) {
-      const colTop = col.scrollTop;
-      const colHeight = col.clientHeight;
-      const pillTop = pill.offsetTop;
-      const pillHeight = pill.offsetHeight;
-
-      // Only scroll if outside the visible boundaries of the pill column
-      if (pillTop < colTop) {
-        col.scrollTop = pillTop;
-      } else if (pillTop + pillHeight > colTop + colHeight) {
-        col.scrollTop = pillTop + pillHeight - colHeight;
-      }
-    }
-  }, [index]);
-
   const handleSelect = (targetIndex: number) => {
     startTransition(() => {
       if (onSelectState) {
@@ -1651,13 +1600,12 @@ const LivingNarrative = memo(function LivingNarrative({
       </div>
 
       {/* Vertical Pill List with Inline Accordion Description */}
-      <div ref={columnRef} className="apple-pills-column" role="tablist" aria-orientation="vertical">
+      <div className="apple-pills-column" role="tablist" aria-orientation="vertical">
         {transactionStates.map((x, i) => {
           const isActive = i === index;
           return (
             <div
               key={x.label}
-              ref={isActive ? activePillRef : null}
               className={`apple-pill-group ${isActive ? "is-active" : ""}`}
             >
               <button

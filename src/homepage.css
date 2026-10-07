@@ -794,20 +794,20 @@
 .living-intro { display: grid; grid-template-columns: .5fr 1.2fr 1fr; gap: var(--spacing-5); align-items: end; }
 .living-intro h2 { margin: 0; font-size: var(--font-h2); line-height: 1.05; letter-spacing: -.05em; }.living-intro p { color: var(--color-text-secondary); line-height: 1.7; }
 .living-desktop { margin-top:var(--section-medium); background:var(--color-white); }
-.living-sticky { min-height:calc(100vh - 4.25rem); max-height:100vh; padding-block:var(--spacing-2); display:grid; grid-template-columns:minmax(320px, .36fr) 1fr; gap:var(--spacing-6); align-items:center; }
+.living-sticky { min-height:auto; padding-block:var(--spacing-2); display:grid; grid-template-columns:minmax(320px, .36fr) 1fr; gap:var(--spacing-6); align-items:start; }
 
 /* 03 · Apple-style "Take a closer look" Interactive Explorer */
 .apple-explorer { display:flex; align-items:flex-start; gap:1rem; width:100%; }
 .apple-explorer-single { display:block; width:100%; }
 
-.apple-nav-chevrons { display:flex; flex-direction:column; gap:.4rem; padding-top:.2rem; flex-shrink:0; position:sticky; top:5.5rem; }
+.apple-nav-chevrons { display:flex; flex-direction:column; gap:.4rem; padding-top:.2rem; flex-shrink:0; }
 .apple-chevron-btn { width:2rem; height:2rem; border-radius:var(--radius-full); background:var(--neutral-100); border:1px solid var(--neutral-200); color:var(--neutral-900); display:grid; place-items:center; cursor:pointer; transition:all 180ms cubic-bezier(.16, 1, .3, 1); padding:0; }
 .apple-chevron-btn:hover:not(:disabled) { background:var(--neutral-200); transform:scale(1.08); }
 .apple-chevron-btn:active:not(:disabled) { transform:scale(.94); }
 .apple-chevron-btn:focus-visible { outline:2px solid var(--state-focus); outline-offset:2px; }
 .apple-chevron-btn:disabled { opacity:.28; cursor:not-allowed; }
 
-.apple-pills-column { display:flex; flex-direction:column; gap:.35rem; flex:1; min-width:0; max-height:calc(100vh - 6.5rem); overflow-y:auto; scrollbar-width:none; padding-right:.25rem; }
+.apple-pills-column { display:flex; flex-direction:column; gap:.35rem; flex:1; min-width:0; padding-right:.25rem; }
 .apple-pills-column::-webkit-scrollbar { display:none; }
 .apple-pill-group { display:flex; flex-direction:column; gap:.45rem; width:100%; scroll-margin-block:.5rem; }
 
@@ -836,7 +836,7 @@
 .apple-chip-k { color:var(--color-neutral-500); font-weight:700; letter-spacing:.06em; font-size:.55rem; }
 .apple-chip-v { color:var(--neutral-900); font-weight:600; font-variant-numeric:tabular-nums; font-family:var(--font-family-mono); }
 
-.living-ui { max-height:min(570px, calc(100vh - 6.5rem)); display:flex; flex-direction:column; overflow:hidden; background:var(--color-white); border:1px solid var(--color-border-strong); border-radius:var(--radius-xl); box-shadow:var(--shadow-md); position:relative; }
+.living-ui { min-height:auto; display:flex; flex-direction:column; overflow:hidden; background:var(--color-white); border:1px solid var(--color-border-strong); border-radius:var(--radius-xl); box-shadow:var(--shadow-md); position:relative; }
 .living-ui-header { min-height:3.6rem; padding:.65rem 1.15rem; display:flex; flex-direction:column; justify-content:space-between; gap:.3rem; color:var(--color-white); background:var(--color-brand-ink); border-bottom:1px solid rgb(255 255 255 / .12); }
 .living-ui-topline { display:flex; justify-content:space-between; align-items:center; font-size:.6rem; font-weight:700; letter-spacing:.08em; }
 .living-ui-crumb { display:flex; align-items:center; gap:.4rem; color:var(--color-neutral-400); }
@@ -4176,9 +4176,6 @@
   .apple-chevron-btn, .apple-pill-btn, .apple-pill-icon { transition:none; }
   .connection-rail-pulse { animation:none; }
   .connection-station-card { transition:none; }
-  .living-desktop { display:none; }
-  .living-mobile { margin-top:var(--spacing-8); display:flex; flex-direction:column; gap:var(--spacing-10); }
-  .living-mobile-state { display:flex; flex-direction:column; gap:var(--spacing-4); }
   .ai-stack-card { position:static !important; width:100% !important; max-width:100% !important; transform:none !important; opacity:1 !important; transition:none !important; }
   .ai-stack-viewport { height:auto !important; min-height:auto !important; position:static !important; display:flex !important; flex-direction:column !important; gap:1rem !important; }
   .ai-connector-pulse-dot { animation:none !important; }
