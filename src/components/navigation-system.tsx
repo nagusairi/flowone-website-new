@@ -734,7 +734,17 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
     return () => { document.removeEventListener("keydown", onKey); document.body.classList.remove("fo-nav-lock"); };
   }, [forceMobile, mobileOpen]);
 
+  const headerRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Hover is enabled ONLY for desktop environments with a fine pointer (mouse) and viewport > 1024px.
+  // For mobile and tablet devices (touchscreens, iPads, Android tablets, coarse pointers), menus open strictly on click.
+  const isHoverSupported = () => {
+    if (typeof window === "undefined") return false;
+    const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const isDesktopWidth = window.innerWidth > 1024;
+    return hasFinePointer && isDesktopWidth;
+  };
 
   const clearCloseTimer = () => {
     if (closeTimerRef.current) {
@@ -751,19 +761,23 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
   };
 
   const handleNavMouseEnter = (menu: MenuKey) => {
+    if (!isHoverSupported()) return;
     clearCloseTimer();
     setOpenMenu(menu);
   };
 
   const handleNavMouseLeave = () => {
+    if (!isHoverSupported()) return;
     scheduleClose(180);
   };
 
   const handleMegaMouseEnter = () => {
+    if (!isHoverSupported()) return;
     clearCloseTimer();
   };
 
   const handleMegaMouseLeave = () => {
+    if (!isHoverSupported()) return;
     scheduleClose(180);
   };
 
@@ -773,12 +787,30 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
     };
   }, []);
 
+  // Click outside listener: ensures menus opened on mobile/tablet close cleanly when tapping outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
+        clearCloseTimer();
+        setOpenMenu(null);
+      }
+    };
+    if (openMenu) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener("touchstart", handleClickOutside, { passive: true });
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [openMenu]);
+
   const toggleMenu = (menu: MenuKey) => setOpenMenu(current => current === menu ? null : menu);
   const closeMobile = () => { setMobileOpen(false); menuTrigger.current?.focus(); };
   const handleDemo = () => { clearCloseTimer(); setOpenMenu(null); setMobileOpen(false); onDemo?.(); };
   const classes = `fo-header ${scrolled ? "is-scrolled" : ""} ${forceDark ? "is-dark" : ""} ${openMenu ? "has-mega-open" : ""} ${mobileOpen ? "has-mobile-open" : ""} ${forceMobile ? "is-forced-mobile" : ""}`;
 
-  return <div className={classes} onMouseLeave={handleNavMouseLeave}>
+  return <div ref={headerRef} className={classes} onMouseLeave={handleNavMouseLeave}>
     <div className="fo-scroll-progress" aria-hidden="true"><i /></div>
     <header className="fo-header__bar">
       <a className="fo-header__logo" href="#home-hero" aria-label="flowOne home" onMouseEnter={() => scheduleClose(0)}><img src="/assets/flowone-logo.svg" alt="" /></a>
