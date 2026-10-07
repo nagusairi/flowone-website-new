@@ -520,28 +520,14 @@ export function DemoCTA({ state = "default", compact = false, onClick }: { state
 export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; state?: "closed" | "opening" | "open" | "closing"; onNavigate?: () => void }) {
   const content = navigationContent[menu];
   const target = { Solutions: "#capabilities", Platform: "#connection", AI: "#ai-inside-flow", Resources: "#proof", Company: "#trust" }[menu];
-  const [hoveredGroupIdx, setHoveredGroupIdx] = useState<number | null>(null);
-
-  useEffect(() => {
-    setHoveredGroupIdx(null);
-  }, [menu]);
-
-  const activeTelemetry = (hoveredGroupIdx !== null && content.groups[hoveredGroupIdx]?.hoverTelemetry)
-    ? content.groups[hoveredGroupIdx].hoverTelemetry!
-    : content.telemetry;
 
   return (
     <div className={`fo-mega fo-mega-${menu.toLowerCase()} is-${state}`} id={`mega-${menu}`} aria-hidden={state === "closed"}>
       <div className="fo-mega__beam" aria-hidden="true" />
       <div className="fo-mega__inner">
         <div className="fo-mega__groups">
-          {content.groups.map((group, groupIdx) => (
-            <section
-              className={`fo-mega__group ${hoveredGroupIdx === groupIdx ? "is-hovered" : ""}`}
-              key={group.title}
-              onMouseEnter={() => setHoveredGroupIdx(groupIdx)}
-              onMouseLeave={() => setHoveredGroupIdx(null)}
-            >
+          {content.groups.map(group => (
+            <section className="fo-mega__group" key={group.title}>
               <div className="fo-mega__group-header">
                 <span className="fo-mega__group-eyebrow">{group.eyebrow}</span>
                 <h3 className="fo-mega__group-title">{group.title}</h3>
@@ -573,8 +559,8 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
           ))}
         </div>
 
-        {/* Architectural HUD Telemetry Aside */}
-        <aside className={`fo-mega__feature ${activeTelemetry.accent ? "is-ai" : ""}`}>
+        {/* Architectural HUD Telemetry Aside (Option 1: Static Domain Synopsis) */}
+        <aside className={`fo-mega__feature ${content.telemetry.accent ? "is-ai" : ""}`}>
           {/* Target Reticle Corner Brackets */}
           <span className="fo-hud-reticle fo-hud-reticle--tl" aria-hidden="true" />
           <span className="fo-hud-reticle fo-hud-reticle--tr" aria-hidden="true" />
@@ -583,23 +569,23 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
 
           {/* Header Bar */}
           <div className="fo-hud-header">
-            <span className="fo-hud-label">{activeTelemetry.headerLabel}</span>
+            <span className="fo-hud-label">{content.telemetry.headerLabel}</span>
             <span className="fo-hud-badge">
               <span className="fo-hud-beacon" aria-hidden="true" />
-              {activeTelemetry.badgeLabel}
+              {content.telemetry.badgeLabel}
             </span>
           </div>
 
           {/* Hero Object & Value */}
           <div className="fo-hud-hero">
-            <div className="fo-hud-id">{activeTelemetry.objectId}</div>
-            <div className="fo-hud-val">{activeTelemetry.heroValue}</div>
-            <div className="fo-hud-sub">{activeTelemetry.subtitle}</div>
+            <div className="fo-hud-id">{content.telemetry.objectId}</div>
+            <div className="fo-hud-val">{content.telemetry.heroValue}</div>
+            <div className="fo-hud-sub">{content.telemetry.subtitle}</div>
           </div>
 
           {/* Inset 3-Column Metrics Tray */}
           <div className="fo-hud-metrics">
-            {activeTelemetry.metrics.map(metric => (
+            {content.telemetry.metrics.map(metric => (
               <div className="fo-hud-metric-cell" key={metric.label}>
                 <span className="fo-hud-metric-label">{metric.label}</span>
                 <strong className="fo-hud-metric-val">{metric.value}</strong>
@@ -609,7 +595,7 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
 
           {/* Contextual Inspection Tag Chips */}
           <div className="fo-hud-chips">
-            {activeTelemetry.chips.map(chip => (
+            {content.telemetry.chips.map(chip => (
               <span className="fo-hud-chip" key={chip}>{chip}</span>
             ))}
           </div>
@@ -617,8 +603,8 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
           {/* Bottom Action Launcher */}
           <div className="fo-hud-action">
             <a href={target} onClick={onNavigate} className="fo-feature-link-tile">
-              <span>{activeTelemetry.actionLabel}</span>
-              <Icon name="arrow" size={14} tone={activeTelemetry.accent ? "default" : "action"} />
+              <span>{content.telemetry.actionLabel}</span>
+              <Icon name="arrow" size={14} tone={content.telemetry.accent ? "default" : "action"} />
             </a>
           </div>
         </aside>

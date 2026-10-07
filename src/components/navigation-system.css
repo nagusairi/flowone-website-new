@@ -313,17 +313,7 @@
 .fo-mega__group {
   display: flex;
   flex-direction: column;
-  transition: opacity 0.2s ease;
   position: relative;
-}
-
-/* Subtle dimming of other groups when one group is hovered */
-.fo-mega__groups:hover .fo-mega__group:not(:hover) {
-  opacity: 0.6;
-}
-
-.fo-mega__group:hover {
-  opacity: 1;
 }
 
 .fo-mega__group-header {
