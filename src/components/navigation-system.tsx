@@ -531,10 +531,31 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
   },
 };
 
-export function NavItem({ label, state = "default", hasMenu = true, onClick }: { label: string; state?: "default" | "hover" | "focus" | "active" | "open"; hasMenu?: boolean; onClick?: () => void }) {
+export function NavItem({
+  label,
+  state = "default",
+  hasMenu = true,
+  onClick,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  label: string;
+  state?: "default" | "hover" | "focus" | "active" | "open";
+  hasMenu?: boolean;
+  onClick?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}) {
   if (!hasMenu) return <a className={`fo-nav-item fo-founder-diary is-${state}`} href="#founder-diary">{label}</a>;
   return (
-    <button className={`fo-nav-item is-${state}`} type="button" aria-expanded={state === "open"} onClick={onClick}>
+    <button
+      className={`fo-nav-item is-${state}`}
+      type="button"
+      aria-expanded={state === "open"}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <span className="fo-nav-label">{label}</span>
       <span className="fo-nav-chevron" aria-hidden="true">
         <Icon name="chevron" size={14} tone="muted" />
@@ -548,7 +569,19 @@ export function DemoCTA({ state = "default", compact = false, onClick }: { state
   return <Button size={compact ? "small" : "medium"} state={state} onClick={onClick} iconAfter={!compact ? <Icon name="arrow" size={16} tone="inverse" /> : undefined}>Book a Demo</Button>;
 }
 
-export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; state?: "closed" | "opening" | "open" | "closing"; onNavigate?: () => void }) {
+export function MegaMenu({
+  menu,
+  state = "open",
+  onNavigate,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  menu: MenuKey;
+  state?: "closed" | "opening" | "open" | "closing";
+  onNavigate?: () => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
+}) {
   const content = navigationContent[menu];
   const target = {
     Solutions: "#capabilities",
@@ -560,7 +593,13 @@ export function MegaMenu({ menu, state = "open", onNavigate }: { menu: MenuKey; 
   const menuSlug = menu.toLowerCase().replace(/\s+/g, "-");
 
   return (
-    <div className={`fo-mega fo-mega-${menuSlug} is-${state}`} id={`mega-${menuSlug}`} aria-hidden={state === "closed"}>
+    <div
+      className={`fo-mega fo-mega-${menuSlug} is-${state}`}
+      id={`mega-${menuSlug}`}
+      aria-hidden={state === "closed"}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    >
       <div className="fo-mega__beam" aria-hidden="true" />
       <div className="fo-mega__inner">
         <div className="fo-mega__groups">
@@ -695,19 +734,66 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
     return () => { document.removeEventListener("keydown", onKey); document.body.classList.remove("fo-nav-lock"); };
   }, [forceMobile, mobileOpen]);
 
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimer = () => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = (delayMs = 180) => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      setOpenMenu(null);
+    }, delayMs);
+  };
+
+  const handleNavMouseEnter = (menu: MenuKey) => {
+    clearCloseTimer();
+    setOpenMenu(menu);
+  };
+
+  const handleNavMouseLeave = () => {
+    scheduleClose(180);
+  };
+
+  const handleMegaMouseEnter = () => {
+    clearCloseTimer();
+  };
+
+  const handleMegaMouseLeave = () => {
+    scheduleClose(180);
+  };
+
+  useEffect(() => {
+    return () => {
+      clearCloseTimer();
+    };
+  }, []);
+
   const toggleMenu = (menu: MenuKey) => setOpenMenu(current => current === menu ? null : menu);
   const closeMobile = () => { setMobileOpen(false); menuTrigger.current?.focus(); };
-  const handleDemo = () => { setOpenMenu(null); setMobileOpen(false); onDemo?.(); };
+  const handleDemo = () => { clearCloseTimer(); setOpenMenu(null); setMobileOpen(false); onDemo?.(); };
   const classes = `fo-header ${scrolled ? "is-scrolled" : ""} ${forceDark ? "is-dark" : ""} ${openMenu ? "has-mega-open" : ""} ${mobileOpen ? "has-mobile-open" : ""} ${forceMobile ? "is-forced-mobile" : ""}`;
 
-  return <div className={classes}>
+  return <div className={classes} onMouseLeave={handleNavMouseLeave}>
     <div className="fo-scroll-progress" aria-hidden="true"><i /></div>
     <header className="fo-header__bar">
-      <a className="fo-header__logo" href="#home-hero" aria-label="flowOne home"><img src="/assets/flowone-logo.svg" alt="" /></a>
-      <nav className="fo-nav" aria-label="Primary navigation">
-        {(Object.keys(navigationContent) as MenuKey[]).map(menu => <NavItem key={menu} label={menu} state={openMenu === menu ? "open" : menu === "Solutions" ? "active" : "default"} onClick={() => toggleMenu(menu)} />)}
+      <a className="fo-header__logo" href="#home-hero" aria-label="flowOne home" onMouseEnter={() => scheduleClose(0)}><img src="/assets/flowone-logo.svg" alt="" /></a>
+      <nav className="fo-nav" aria-label="Primary navigation" onMouseLeave={handleNavMouseLeave}>
+        {(Object.keys(navigationContent) as MenuKey[]).map(menu => (
+          <NavItem
+            key={menu}
+            label={menu}
+            state={openMenu === menu ? "open" : (openMenu === null && menu === "Solutions") ? "active" : "default"}
+            onClick={() => toggleMenu(menu)}
+            onMouseEnter={() => handleNavMouseEnter(menu)}
+          />
+        ))}
       </nav>
-      <div className="fo-header__actions">
+      <div className="fo-header__actions" onMouseEnter={() => scheduleClose(0)}>
         <div className="fd-pill">
           <a className="fd-pill__btn" href="/founders-diary/">{"Founder's Diary"}</a>
         </div>
@@ -715,7 +801,14 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
         <button ref={menuTrigger} className="fo-mobile-trigger" type="button" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileOpen} onClick={() => mobileOpen ? closeMobile() : setMobileOpen(true)}>{mobileOpen ? <Icon name="close" size={20} /> : <span><i /><i /><i /></span>}</button>
       </div>
     </header>
-    {openMenu && <MegaMenu menu={openMenu} onNavigate={() => setOpenMenu(null)} />}
+    {openMenu && (
+      <MegaMenu
+        menu={openMenu}
+        onNavigate={() => { clearCloseTimer(); setOpenMenu(null); }}
+        onMouseEnter={handleMegaMouseEnter}
+        onMouseLeave={handleMegaMouseLeave}
+      />
+    )}
     <div className="fo-mobile-nav" ref={mobilePanel} aria-hidden={!mobileOpen} inert={!mobileOpen}>
       <div className="fo-mobile-nav__top"><span>NAVIGATION</span><button type="button" onClick={closeMobile} aria-label="Close navigation"><Icon name="close" size={20} /></button></div>
       <div className="fo-mobile-nav__body">{(Object.keys(navigationContent) as MenuKey[]).map(menu => <MobileAccordion key={menu} menu={menu} expanded={mobileSection === menu} onToggle={() => setMobileSection(current => current === menu ? null : menu)} onNavigate={closeMobile} />)}<a className="fo-mobile-founder" href="/founders-diary/" onClick={closeMobile}>Founder’s Diary<span>Founder perspectives, decisions and the flowOne journey.</span></a></div>
