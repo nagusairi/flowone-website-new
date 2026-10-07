@@ -2271,7 +2271,6 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
           {/* Pillar 1: Solutions */}
           <div className="footer-col">
             <div className="footer-col__header">
-              <span className="footer-col__num">01</span>
               <h3 className="footer-col__title">SOLUTIONS & SUITES</h3>
             </div>
             <ul className="footer-col__links">
@@ -2288,7 +2287,6 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
           {/* Pillar 2: Platform */}
           <div className="footer-col">
             <div className="footer-col__header">
-              <span className="footer-col__num">02</span>
               <h3 className="footer-col__title">CORE PLATFORM</h3>
             </div>
             <ul className="footer-col__links">
@@ -2305,7 +2303,6 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
           {/* Pillar 3: AI Runtime */}
           <div className="footer-col">
             <div className="footer-col__header">
-              <span className="footer-col__num">03</span>
               <h3 className="footer-col__title">AGENTIC AI RUNTIME</h3>
             </div>
             <ul className="footer-col__links">
@@ -2322,7 +2319,6 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
           {/* Pillar 4: Resources */}
           <div className="footer-col">
             <div className="footer-col__header">
-              <span className="footer-col__num">04</span>
               <h3 className="footer-col__title">RESOURCES & GUIDES</h3>
             </div>
             <ul className="footer-col__links">
@@ -2339,7 +2335,6 @@ function HomeFooter({onDemo}:{onDemo:()=>void}) {
           {/* Pillar 5: Company & Ecosystem (Transferred from header nav) */}
           <div className="footer-col" id="founder-diary">
             <div className="footer-col__header">
-              <span className="footer-col__num">05</span>
               <h3 className="footer-col__title">COMPANY & ECOSYSTEM</h3>
             </div>
             <ul className="footer-col__links">

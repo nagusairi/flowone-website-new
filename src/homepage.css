@@ -3460,18 +3460,9 @@
 
 .footer-col__header {
   display: flex;
-  align-items: baseline;
-  gap: 0.45rem;
-  padding-bottom: 0.45rem;
+  align-items: center;
+  padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-}
-
-.footer-col__num {
-  font-family: var(--font-family-mono, monospace);
-  font-size: 0.62rem;
-  font-weight: 700;
-  color: #05C7F2;
-  letter-spacing: 0.08em;
 }
 
 .footer-col__title {
