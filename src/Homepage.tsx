@@ -1600,17 +1600,9 @@ const LivingNarrative = memo(function LivingNarrative({
     return (
       <aside className="apple-explorer apple-explorer-single">
         <div className="apple-pill-group is-active">
-          <div className="apple-pill-btn is-active">
-            <span className="apple-pill-icon" aria-hidden="true">
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M2.5 6H9.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-              </svg>
-            </span>
-            <span className="apple-pill-label">{x.pillLabel}</span>
-          </div>
           <div className="apple-desc-card">
             <p className="apple-desc-lead">
-              <strong className="apple-desc-bold">{x.title}.</strong>{" "}
+              <strong className="apple-desc-bold">{x.pillLabel}.</strong>{" "}
               <span className="apple-desc-text">{x.summary}</span>
             </p>
             {x.facts && x.facts.length > 0 && (
@@ -1641,7 +1633,7 @@ const LivingNarrative = memo(function LivingNarrative({
           onClick={handlePrev}
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 8.5L7 4.5L11 8.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M3 8.5L7 4.5L11 8.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
         <button
@@ -1652,12 +1644,12 @@ const LivingNarrative = memo(function LivingNarrative({
           onClick={handleNext}
         >
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-            <path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            <path d="M3 5.5L7 9.5L11 5.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
 
-      {/* Vertical Pill List with Inline Accordion Description */}
+      {/* Vertical Pill List with In-Situ Expanded Card (Apple "Take a closer look" pattern) */}
       <div className="apple-pills-column" role="tablist" aria-orientation="vertical">
         {transactionStates.map((x, i) => {
           const isActive = i === index;
@@ -1666,32 +1658,8 @@ const LivingNarrative = memo(function LivingNarrative({
               key={x.label}
               className={`apple-pill-group ${isActive ? "is-active" : ""}`}
             >
-              <button
-                type="button"
-                role="tab"
-                id={`apple-pill-tab-${i}`}
-                aria-selected={isActive}
-                aria-expanded={isActive}
-                aria-controls={`apple-desc-${i}`}
-                className={`apple-pill-btn ${isActive ? "is-active" : ""}`}
-                onClick={() => handleSelect(i)}
-              >
-                <span className="apple-pill-icon" aria-hidden="true">
-                  {isActive ? (
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M2.5 6H9.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-                    </svg>
-                  ) : (
-                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                      <path d="M6 2.5V9.5M2.5 6H9.5" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-                    </svg>
-                  )}
-                </span>
-                <span className="apple-pill-label">{x.pillLabel}</span>
-              </button>
-
-              {/* Description displays directly under the active pill on scroll and click */}
-              {isActive && (
+              {isActive ? (
+                /* In-situ expanded card replaces the pill button directly */
                 <div
                   id={`apple-desc-${i}`}
                   role="tabpanel"
@@ -1699,7 +1667,7 @@ const LivingNarrative = memo(function LivingNarrative({
                   className="apple-desc-card"
                 >
                   <p className="apple-desc-lead">
-                    <strong className="apple-desc-bold">{x.title}.</strong>{" "}
+                    <strong className="apple-desc-bold">{x.pillLabel}.</strong>{" "}
                     <span className="apple-desc-text">{x.summary}</span>
                   </p>
                   {x.facts && x.facts.length > 0 && (
@@ -1713,6 +1681,26 @@ const LivingNarrative = memo(function LivingNarrative({
                     </div>
                   )}
                 </div>
+              ) : (
+                /* Inactive pill button with circular (+) icon */
+                <button
+                  type="button"
+                  role="tab"
+                  id={`apple-pill-tab-${i}`}
+                  aria-selected={false}
+                  aria-expanded={false}
+                  aria-controls={`apple-desc-${i}`}
+                  className="apple-pill-btn"
+                  onClick={() => handleSelect(i)}
+                >
+                  <span className="apple-pill-icon" aria-hidden="true">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                      <circle cx="8" cy="8" r="6.75" stroke="currentColor" strokeWidth="1.2" />
+                      <path d="M8 4.75V11.25M4.75 8H11.25" stroke="currentColor" strokeWidth="1.25" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                  <span className="apple-pill-label">{x.pillLabel}</span>
+                </button>
               )}
             </div>
           );
