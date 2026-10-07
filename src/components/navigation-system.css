@@ -130,7 +130,7 @@
   border: 1.5px solid #fff;
   background-size: cover;
   background-position: center top;
-  box-shadow: 0 2px 8px rgba(5, 40, 242, 0.2);
+  box-shadow: 0 2px 8px rgba(5, 199, 242, 0.25);
   z-index: 2;
   pointer-events: none;
   transition: left 0.3s ease;
@@ -161,14 +161,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   text-decoration: none;
-  color: var(--flow-primary);
+  color: #027491;
   background-color: #fff;
-  border: 1.5px solid var(--neutral-300);
+  border: 1.5px solid #05c7f2;
   border-radius: 999px;
-  background-image: linear-gradient(var(--flow-primary), var(--flow-primary));
+  background-image: linear-gradient(135deg, #05c7f2 0%, #049dd9 100%);
   background-repeat: no-repeat;
   background-size: 0% 100%;
-  box-shadow: 0 2px 8px rgba(5, 40, 242, 0.08);
+  box-shadow: 0 2px 8px rgba(5, 199, 242, 0.16);
   transform-origin: 50% 60%;
   transition: background-size 0.45s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, padding-right 0.3s ease, padding-left 0.3s ease;
   animation: fdWiggle 6s ease-in-out infinite;
@@ -185,27 +185,37 @@
   width: 22px;
   height: 22px;
   border-radius: 50%;
-  background: var(--flow-primary-deep);
+  background: #05c7f2;
   color: #fff;
   font-size: 12px;
   line-height: 1;
+  box-shadow: 0 1px 4px rgba(5, 199, 242, 0.3);
   transition: transform 0.22s ease, background 0.3s ease, color 0.3s ease;
   animation: fdArrow 6s ease-in-out infinite;
 }
 .fd-pill__btn:hover {
   background-size: 100% 100%;
   color: #fff;
-  border-color: var(--flow-primary);
-  box-shadow: 0 3px 10px rgba(5, 40, 242, 0.16);
+  border-color: #049dd9;
+  box-shadow: 0 4px 14px rgba(5, 199, 242, 0.35);
   padding-left: 49.5px;
   padding-right: 32px;
   animation: none;
 }
 .fd-pill__btn:hover::after {
   background: #fff;
-  color: var(--flow-primary);
+  color: #027491;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
   transform: rotate(-45deg);
   animation: none;
+}
+.fd-pill__btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 6px rgba(5, 199, 242, 0.25);
+}
+.fd-pill__btn:focus-visible {
+  outline: 2px solid #05c7f2;
+  outline-offset: 2px;
 }
 @keyframes fdWiggle {
   0%, 84%, 100% { transform: rotate(0); }
@@ -240,8 +250,9 @@
 .fo-header.is-dark { color: var(--color-white); background: var(--color-brand-ink); border-color: rgb(255 255 255 / .12); }
 .fo-header.is-dark .fo-header__logo { background: var(--color-white); }
 .fo-header.is-dark .fo-nav-item { color: var(--color-neutral-300); }
-.fo-header.is-dark .fo-nav-item:hover, .fo-header.is-dark .fo-nav-item.is-open { color: var(--color-white); background: rgb(255 255 255 / .07); }
 .fo-header.is-dark .fo-founder-diary { color: var(--color-white); }
+.fo-header.is-dark .fd-pill__btn { background-color: rgba(255, 255, 255, 0.06); color: #05c7f2; border-color: #05c7f2; }
+.fo-header.is-dark .fd-pill__btn:hover { color: #ffffff; }
 .fo-header.is-dark .fo-mobile-trigger { color: var(--color-white); background: transparent; border-color: rgb(255 255 255 / .2); }
 /* ==========================================================================
    MEGA MENU — WORLD-CLASS ELEVATED DESIGN & MICRO-INTERACTIONS
