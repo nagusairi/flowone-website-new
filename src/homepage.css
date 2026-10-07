@@ -3275,9 +3275,9 @@
    ========================================================================== */
 .home-footer {
   position: relative;
-  background: linear-gradient(180deg, #041B3B 0%, #021024 55%, #010814 100%);
-  border-top: 1px solid rgba(5, 199, 242, 0.25);
-  box-shadow: 0 -24px 48px -12px rgba(4, 27, 59, 0.4);
+  background: linear-gradient(180deg, #03142C 0%, #020C1C 52%, #010712 100%);
+  border-top: 1px solid rgba(5, 199, 242, 0.22);
+  box-shadow: 0 -24px 48px -12px rgba(3, 20, 44, 0.35);
   color: #F8FAFC;
   padding-top: clamp(3rem, 5vw, 4.5rem);
   padding-bottom: clamp(2rem, 3.5vw, 3rem);
@@ -3289,7 +3289,7 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 380px;
-  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(5, 199, 242, 0.12) 0%, rgba(5, 33, 73, 0.18) 45%, transparent 75%);
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(5, 199, 242, 0.1) 0%, rgba(3, 20, 44, 0.16) 45%, transparent 75%);
   pointer-events: none;
   z-index: 0;
 }
@@ -3306,9 +3306,9 @@
 .footer-launchpad {
   position: relative;
   border-radius: 1.25rem;
-  background: radial-gradient(ellipse 80% 90% at 100% 0%, rgba(5, 199, 242, 0.09) 0%, rgba(5, 33, 73, 0.25) 50%, rgba(255, 255, 255, 0.02) 100%), #021128;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  background: radial-gradient(ellipse 80% 90% at 100% 0%, rgba(5, 199, 242, 0.08) 0%, rgba(3, 20, 44, 0.28) 50%, rgba(255, 255, 255, 0.02) 100%), #020D1E;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   padding: clamp(2rem, 3.5vw, 2.75rem);
   display: flex;
   justify-content: space-between;
@@ -3551,8 +3551,8 @@
 }
 
 .footer-trust-card--highlight {
-  background: radial-gradient(ellipse at top right, rgba(5, 199, 242, 0.08), rgba(5, 33, 73, 0.25) 65%);
-  border-color: rgba(5, 199, 242, 0.25);
+  background: radial-gradient(ellipse at top right, rgba(5, 199, 242, 0.07), rgba(3, 20, 44, 0.28) 65%);
+  border-color: rgba(5, 199, 242, 0.22);
 }
 
 .footer-trust-card__header {
