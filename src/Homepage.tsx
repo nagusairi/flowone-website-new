@@ -115,6 +115,15 @@ const roles = [
   ["OPERATIONS",["Orders","Inventory","Fulfillment"]],["PROCUREMENT",["PO","Suppliers","Commitments"]],["WAREHOUSE",["Orders","Inventory","Movement","Replenishment"]],["COMPLIANCE",["GST","E-Invoice","E-Way Bill","Reconciliation"]],
 ] as const;
 
+function formatRoleTitle(name: string) {
+  if (name === "CFO" || name === "GST" || name === "PO") return name;
+  return name
+    .toLowerCase()
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");
+}
+
 const roleKPIs: Record<string, Array<{ label: string; value: string; change?: string; type: "standard" | "comparison" | "alert" | "trend" | "predictive" }>> = {
   "CFO": [
     { label: "DSO (DAYS SALES OUTSTANDING)", value: "28 Days", change: "-6d vs last mo", type: "trend" },
@@ -390,6 +399,23 @@ export default function Homepage() {
   const [demoOpen,setDemoOpen] = useState(false);
   const [capability,setCapability] = useState(0);
   const [role,setRole] = useState(0);
+  const [roleTouchStartX, setRoleTouchStartX] = useState<number | null>(null);
+
+  const handleRoleTouchStart = useCallback((e: React.TouchEvent) => {
+    setRoleTouchStartX(e.touches[0].clientX);
+  }, []);
+
+  const handleRoleTouchEnd = useCallback((e: React.TouchEvent) => {
+    if (roleTouchStartX === null) return;
+    const deltaX = e.changedTouches[0].clientX - roleTouchStartX;
+    if (deltaX > 40) {
+      setRole((r) => (r - 1 + roles.length) % roles.length);
+    } else if (deltaX < -40) {
+      setRole((r) => (r + 1) % roles.length);
+    }
+    setRoleTouchStartX(null);
+  }, [roleTouchStartX]);
+
   const [fragmented,setFragmented] = useState(false);
   const [livingState,setLivingState] = useState(0);
 
@@ -1038,6 +1064,59 @@ export default function Homepage() {
           <p>Every team works from the same transaction context—focused on the decisions that matter to them.</p>
         </div>
         <div className="role-selector">
+          {/* Mobile / Tablet Pill Carousel Selector (Matches reference design) */}
+          <div
+            className="role-mobile-capsule"
+            onTouchStart={handleRoleTouchStart}
+            onTouchEnd={handleRoleTouchEnd}
+            role="region"
+            aria-label="Role selector"
+          >
+            <button
+              type="button"
+              className="role-capsule-arrow role-capsule-arrow--prev"
+              onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
+              aria-label={`Previous role: ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+
+            <button
+              type="button"
+              className="role-capsule-ghost role-capsule-ghost--prev"
+              onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
+              aria-label={`Select ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
+            >
+              <span>{formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}</span>
+            </button>
+
+            <div className="role-capsule-active">
+              <span>{formatRoleTitle(roles[role][0])}</span>
+            </div>
+
+            <button
+              type="button"
+              className="role-capsule-ghost role-capsule-ghost--next"
+              onClick={() => setRole((r) => (r + 1) % roles.length)}
+              aria-label={`Select ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
+            >
+              <span>{formatRoleTitle(roles[(role + 1) % roles.length][0])}</span>
+            </button>
+
+            <button
+              type="button"
+              className="role-capsule-arrow role-capsule-arrow--next"
+              onClick={() => setRole((r) => (r + 1) % roles.length)}
+              aria-label={`Next role: ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
+            >
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6" />
+              </svg>
+            </button>
+          </div>
+
           <div role="tablist" aria-label="Business roles" className="role-tablist">
             {roles.map((x, i) => (
               <button
@@ -1051,7 +1130,11 @@ export default function Homepage() {
               </button>
             ))}
           </div>
-          <div className="role-view">
+          <div
+            className="role-view"
+            onTouchStart={handleRoleTouchStart}
+            onTouchEnd={handleRoleTouchEnd}
+          >
             <div className="role-view-header">
               <span className="role-view-kicker">{roles[role][0]} VIEW · SAME BUSINESS REALITY</span>
               <span className="role-view-badge">SYNCHRONIZED CONTEXT</span>
