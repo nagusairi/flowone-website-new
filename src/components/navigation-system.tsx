@@ -218,6 +218,28 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
           actionLabel: "Explore Capabilities",
         },
       },
+      {
+        eyebrow: "FOUNDATION 04 · SECURITY",
+        title: "Security & Trust",
+        items: ["Security", "Compliance", "Data & Privacy"].map(label => ({
+          label,
+          description: label === "Security" ? "Institutional data residency & governance." : undefined,
+        })),
+        hoverTelemetry: {
+          headerLabel: "PLATFORM · INSTITUTIONAL TRUST",
+          badgeLabel: "DATA RESIDENCY",
+          objectId: "GOVERNANCE STANDARDS",
+          heroValue: "Institutional Security & Residency",
+          subtitle: "Enterprise data isolation, AES-256 encryption at rest and in transit, India-only data residency, and deterministic cryptographic audit logging.",
+          metrics: [
+            { label: "RESIDENCY", value: "India Sovereign Vault" },
+            { label: "ENCRYPTION", value: "AES-256-GCM" },
+            { label: "ACCESS", value: "Role-Based & MFA" },
+          ],
+          chips: ["Security", "Compliance", "Data & Privacy", "Audit Lineage"],
+          actionLabel: "View Security Architecture",
+        },
+      },
     ],
     telemetry: {
       headerLabel: "PLATFORM FOUNDATION",
@@ -464,29 +486,7 @@ export const navigationContent: Record<MenuKey, { groups: MenuGroup[]; telemetry
         },
       },
       {
-        eyebrow: "IDENTITY 02 · SECURITY",
-        title: "Security & Trust",
-        items: ["Security", "Compliance", "Data & Privacy"].map(label => ({
-          label,
-          description: label === "Security" ? "Institutional data residency & governance." : undefined,
-        })),
-        hoverTelemetry: {
-          headerLabel: "COMPANY · INSTITUTIONAL TRUST",
-          badgeLabel: "DATA RESIDENCY",
-          objectId: "GOVERNANCE STANDARDS",
-          heroValue: "Institutional Security & Residency",
-          subtitle: "Enterprise data isolation, AES-256 encryption at rest and in transit, India-only data residency, and deterministic cryptographic audit logging.",
-          metrics: [
-            { label: "RESIDENCY", value: "India Sovereign Vault" },
-            { label: "ENCRYPTION", value: "AES-256-GCM" },
-            { label: "ACCESS", value: "Role-Based & MFA" },
-          ],
-          chips: ["Security", "Compliance", "Data & Privacy", "Audit Lineage"],
-          actionLabel: "View Security Architecture",
-        },
-      },
-      {
-        eyebrow: "IDENTITY 03 · CHANNELS",
+        eyebrow: "IDENTITY 02 · CHANNELS",
         title: "Connect & Partner",
         items: ["Contact Us", "Partner With Us"].map(label => ({
           label,

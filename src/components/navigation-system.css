@@ -321,6 +321,13 @@
   gap: 1.75rem 2.25rem;
 }
 
+.fo-mega-platform .fo-mega__groups,
+.fo-mega-resources .fo-mega__groups,
+.fo-mega-company .fo-mega__groups {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem 2.5rem;
+}
+
 .fo-mega__group {
   display: flex;
   flex-direction: column;
