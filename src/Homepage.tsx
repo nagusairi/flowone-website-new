@@ -1063,60 +1063,60 @@ export default function Homepage() {
           </div>
           <p>Every team works from the same transaction context—focused on the decisions that matter to them.</p>
         </div>
-        <div className="role-selector">
-          {/* Mobile / Tablet Pill Carousel Selector (Matches reference design) */}
-          <div
-            className="role-mobile-capsule"
-            onTouchStart={handleRoleTouchStart}
-            onTouchEnd={handleRoleTouchEnd}
-            role="region"
-            aria-label="Role selector"
+        {/* Mobile / Tablet Pill Carousel Selector (Matches reference design) */}
+        <div
+          className="role-mobile-capsule"
+          onTouchStart={handleRoleTouchStart}
+          onTouchEnd={handleRoleTouchEnd}
+          role="region"
+          aria-label="Role selector"
+        >
+          <button
+            type="button"
+            className="role-capsule-arrow role-capsule-arrow--prev"
+            onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
+            aria-label={`Previous role: ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
           >
-            <button
-              type="button"
-              className="role-capsule-arrow role-capsule-arrow--prev"
-              onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
-              aria-label={`Previous role: ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="15 18 9 12 15 6" />
-              </svg>
-            </button>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
 
-            <button
-              type="button"
-              className="role-capsule-ghost role-capsule-ghost--prev"
-              onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
-              aria-label={`Select ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
-            >
-              <span>{formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}</span>
-            </button>
+          <button
+            type="button"
+            className="role-capsule-ghost role-capsule-ghost--prev"
+            onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
+            aria-label={`Select ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
+          >
+            <span>{formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}</span>
+          </button>
 
-            <div className="role-capsule-active">
-              <span>{formatRoleTitle(roles[role][0])}</span>
-            </div>
-
-            <button
-              type="button"
-              className="role-capsule-ghost role-capsule-ghost--next"
-              onClick={() => setRole((r) => (r + 1) % roles.length)}
-              aria-label={`Select ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
-            >
-              <span>{formatRoleTitle(roles[(role + 1) % roles.length][0])}</span>
-            </button>
-
-            <button
-              type="button"
-              className="role-capsule-arrow role-capsule-arrow--next"
-              onClick={() => setRole((r) => (r + 1) % roles.length)}
-              aria-label={`Next role: ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
-            >
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="9 18 15 12 9 6" />
-              </svg>
-            </button>
+          <div className="role-capsule-active">
+            <span>{formatRoleTitle(roles[role][0])}</span>
           </div>
 
+          <button
+            type="button"
+            className="role-capsule-ghost role-capsule-ghost--next"
+            onClick={() => setRole((r) => (r + 1) % roles.length)}
+            aria-label={`Select ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
+          >
+            <span>{formatRoleTitle(roles[(role + 1) % roles.length][0])}</span>
+          </button>
+
+          <button
+            type="button"
+            className="role-capsule-arrow role-capsule-arrow--next"
+            onClick={() => setRole((r) => (r + 1) % roles.length)}
+            aria-label={`Next role: ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </div>
+
+        <div className="role-selector">
           <div role="tablist" aria-label="Business roles" className="role-tablist">
             {roles.map((x, i) => (
               <button
