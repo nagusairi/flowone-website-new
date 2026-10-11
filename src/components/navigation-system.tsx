@@ -743,10 +743,17 @@ export function MobileAccordion({ menu, expanded, onToggle, onNavigate, disabled
 }
 
 export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScrolled = false, initialMenu = null, onDemo }: { forceMobile?: boolean; forceDark?: boolean; forceScrolled?: boolean; initialMenu?: MenuKey | null; onDemo?: () => void }) {
-  const [openMenu, setOpenMenu] = useState<MenuKey | null>(initialMenu);
-  const [mobileOpen, setMobileOpen] = useState(forceMobile && initialMenu !== null);
-  const [mobileSection, setMobileSection] = useState<MenuKey | null>(initialMenu);
-  const [scrolled, setScrolled] = useState(forceScrolled);
+  const searchParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
+  const paramMenu = searchParams?.get("menu") as MenuKey | null;
+  const paramScrolled = searchParams?.get("scrolled") === "1";
+  const paramMobile = searchParams?.get("mobile") === "1";
+  const paramDrawer = searchParams?.get("drawer") === "1";
+  const paramHover = searchParams?.get("hover");
+
+  const [openMenu, setOpenMenu] = useState<MenuKey | null>(paramMenu || initialMenu);
+  const [mobileOpen, setMobileOpen] = useState(paramDrawer || (paramMobile && paramMenu !== null) || (forceMobile && initialMenu !== null));
+  const [mobileSection, setMobileSection] = useState<MenuKey | null>(paramMenu || initialMenu);
+  const [scrolled, setScrolled] = useState(paramScrolled || forceScrolled);
   const menuTrigger = useRef<HTMLButtonElement>(null);
   const mobilePanel = useRef<HTMLDivElement>(null);
 
@@ -856,7 +863,7 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
           <NavItem
             key={menu}
             label={menu}
-            state={openMenu === menu ? "open" : (openMenu === null && menu === "Solutions") ? "active" : "default"}
+            state={openMenu === menu ? "open" : (paramHover === "nav" && menu === "Platform") ? "hover" : (openMenu === null && menu === "Solutions") ? "active" : "default"}
             onClick={() => toggleMenu(menu)}
             onMouseEnter={() => handleNavMouseEnter(menu)}
           />
@@ -864,9 +871,9 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
       </nav>
       <div className="fo-header__actions" onMouseEnter={() => scheduleClose(0)}>
         <div className="fd-pill">
-          <a className="fd-pill__btn" href="/founders-diary/">{"Founder's Diary"}</a>
+          <a className={`fd-pill__btn ${paramHover === "fd" ? "is-hover" : ""}`} href="/founders-diary/">{"Founder's Diary"}</a>
         </div>
-        <DemoCTA compact={forceMobile} onClick={handleDemo} />
+        <DemoCTA state={paramHover === "demo" ? "hover" : "default"} compact={forceMobile} onClick={handleDemo} />
         <button ref={menuTrigger} className="fo-mobile-trigger" type="button" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileOpen} onClick={() => mobileOpen ? closeMobile() : setMobileOpen(true)}>{mobileOpen ? <Icon name="close" size={20} /> : <span><i /><i /><i /></span>}</button>
       </div>
     </header>

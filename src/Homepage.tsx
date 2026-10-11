@@ -5,16 +5,196 @@ import { Forecast, InvoiceUI, ProductAI, ProductKPI, Reconciliation } from "./co
 import { WebsiteHeader } from "./components/navigation-system";
 
 const transactionStates = [
-  { label: "ORDER", pillLabel: "Order", eyebrow: "ORDER CONFIRMATION", title: "Order confirmed", summary: "A ₹5,00,000 order begins one continuous business journey.", state: "complete", facts: [["ORDER VALUE","₹5,00,000"],["UNITS","125"],["CUSTOMER","Ananya Enterprises"],["STATUS","Confirmed"]] },
-  { label: "INVENTORY", pillLabel: "Inventory", eyebrow: "STOCK ALLOCATION", title: "Inventory allocated", summary: "The same transaction reserves stock in the Hyderabad warehouse.", state: "complete", facts: [["STOCK","125 units allocated"],["WAREHOUSE","Hyderabad"],["STATUS","Allocated"]] },
-  { label: "INVOICE", pillLabel: "Invoice", eyebrow: "COMMERCIAL INVOICE", title: "Invoice issued", summary: "Operational activity becomes a financial obligation without losing context.", state: "active", facts: [["INVOICE","INV-10482"],["SUBTOTAL","₹5,00,000"],["GST","₹90,000"],["TOTAL","₹5,90,000"]] },
-  { label: "GST", pillLabel: "GST Compliance", eyebrow: "STATUTORY VALIDATION", title: "Compliance validated", summary: "Tax context stays attached to the transaction.", state: "complete", facts: [["GST","₹90,000"],["E-INVOICE","Generated"],["VALIDATION","Passed"],["E-WAY BILL","Ready"],["STATUS","Compliant"]] },
-  { label: "RECEIVABLE", pillLabel: "Receivable", eyebrow: "OPEN RECEIVABLE", title: "Receivable open", summary: "Finance sees the amount, customer and due date in the same flow.", state: "active", facts: [["AMOUNT","₹5,90,000"],["CUSTOMER","Ananya Enterprises"],["DUE","In 4 days"],["STATUS","Open"]] },
-  { label: "AI PREDICTION", pillLabel: "AI Prediction", eyebrow: "PREDICTIVE INTELLIGENCE", title: "Intelligence enters the flow", summary: "92% probability of payment within 4 days.", state: "predictive", facts: [["PAYMENT PROBABILITY","92%"],["EXPECTED","Within 4 days"],["RECOMMENDED ACTION","Prioritize only if behaviour changes"]] },
-  { label: "COLLECTION", pillLabel: "Collection", eyebrow: "ACTIONABLE REMINDER", title: "Insight becomes action", summary: "A payment reminder is ready when the business context calls for it.", state: "recommended", facts: [["REMINDER","Payment due"],["STATUS","Scheduled"],["ACTION","Send Reminder"]] },
-  { label: "BANK", pillLabel: "Bank Recon", eyebrow: "AUTO RECONCILIATION", title: "Payment matched", summary: "The bank receipt reconnects to the same invoice automatically.", state: "processing", facts: [["PAYMENT","₹5,90,000"],["STATUS","Received"],["MATCH","INV-10482"],["CONFIDENCE","98%"]] },
-  { label: "CASH", pillLabel: "Cash Liquidity", eyebrow: "AVAILABLE LIQUIDITY", title: "Cash available", summary: "The transaction completes its operational and financial journey.", state: "complete", facts: [["AVAILABLE CASH","₹5,90,000"],["STATUS","Received"],["TRANSACTION","TXN-10482"]] },
-  { label: "DECISION", pillLabel: "Decision", eyebrow: "EXECUTIVE CLOSURE", title: "Decision ready", summary: "The transaction is no longer just an invoice. It is part of the business’s financial picture.", state: "recommended", facts: [["OUTCOME","Cash collected"],["CONTEXT","Restored"],["NEXT","Decision ready"]] },
+  {
+    label: "ORDER",
+    pillLabel: "Order",
+    titleUpper: "ORDER",
+    eyebrow: "ORDER CONFIRMATION",
+    lead: "Order SO-10482 is confirmed for ₹5,00,000. The living workspace captures customer GSTIN, locks Net 30 terms, and initiates automated fulfillment routing directly to Hyderabad inventory.",
+    summary: "A ₹5,00,000 order begins one continuous business journey across sales, warehouse, and finance.",
+    pills: [
+      { text: "SO-10482", tone: "blue" },
+      { text: "₹5,00,000 Total", tone: "blue" },
+      { text: "125 Units", tone: "neutral" },
+      { text: "Hyderabad DC-02", tone: "neutral" },
+    ],
+    statusLabel: "Confirmed",
+    statusTone: "success",
+    facts: [["ORDER VALUE", "₹5,00,000"], ["UNITS", "125"], ["CUSTOMER", "Ananya Enterprises"], ["STATUS", "Confirmed"]],
+    calloutKicker: "COMMERCIAL WORKFLOW ROUTE",
+    calloutText: "Commercial agreement confirmed for 125 units. The sales order initiates an automated fulfillment workflow directly in Hyderabad inventory.",
+  },
+  {
+    label: "INVENTORY",
+    pillLabel: "Inventory",
+    titleUpper: "INVENTORY",
+    eyebrow: "STOCK ALLOCATION",
+    lead: "Stock reserved in real time at Hyderabad Central DC. The transaction locks Rack HYD-B4 without manual warehouse emails, ensuring physical goods match commercial commitments with zero stockout drift.",
+    summary: "The same transaction reserves stock in the Hyderabad warehouse, clearing fulfillment without spreadsheet handoffs.",
+    pills: [
+      { text: "SO-10482", tone: "blue" },
+      { text: "Rack HYD-B4", tone: "blue" },
+      { text: "125 Units (100% Reserved)", tone: "neutral" },
+      { text: "Hyderabad DC-02", tone: "neutral" },
+    ],
+    statusLabel: "Allocated",
+    statusTone: "info",
+    facts: [["STOCK", "125 units allocated"], ["WAREHOUSE", "Hyderabad"], ["STATUS", "Allocated"]],
+    calloutKicker: "CONTINUOUS INVENTORY INTEGRATION",
+    calloutText: "The same transaction reserves stock in the Hyderabad warehouse. Operations clears fulfillment without manual re-entry or detached warehouse spreadsheets.",
+  },
+  {
+    label: "INVOICE",
+    pillLabel: "Invoice",
+    titleUpper: "INVOICE",
+    eyebrow: "COMMERCIAL INVOICE",
+    lead: "Operational dispatch converts directly into Tax Invoice INV-10482. Contract value advances from ₹5,00,000 to ₹5,90,000 with 18% GST (CGST+SGST) attached, eliminating manual billing re-entry.",
+    summary: "Operational activity becomes a financial obligation without losing context.",
+    pills: [
+      { text: "INV-10482", tone: "blue" },
+      { text: "₹5,90,000 Total", tone: "blue" },
+      { text: "18% GST Attached", tone: "blue" },
+      { text: "Net 30 Terms", tone: "neutral" },
+    ],
+    statusLabel: "Processing",
+    statusTone: "warning",
+    facts: [["INVOICE", "INV-10482"], ["SUBTOTAL", "₹5,00,000"], ["GST", "₹90,000"], ["TOTAL", "₹5,90,000"]],
+    calloutKicker: "FINANCIAL OBLIGATION FORMED",
+    calloutText: "Operational fulfillment automatically converts into a tax invoice. Commercial value advances from ₹5,00,000 to ₹5,90,000 with complete tax metadata attached.",
+  },
+  {
+    label: "GST",
+    pillLabel: "GST Compliance",
+    titleUpper: "GST COMPLIANCE",
+    eyebrow: "STATUTORY VALIDATION",
+    lead: "Statutory validation runs autonomously in the flow. flowOne handshakes with the government IRP portal, generating verified IRN hash and QR codes ready for e-way bill generation with zero portal logins.",
+    summary: "Tax context stays attached to the transaction, clearing government e-invoicing validations autonomously.",
+    pills: [
+      { text: "INV-10482", tone: "blue" },
+      { text: "IRN Verified", tone: "blue" },
+      { text: "₹90,000 GST", tone: "neutral" },
+      { text: "GSTR-1 Mapped", tone: "neutral" },
+    ],
+    statusLabel: "Compliant",
+    statusTone: "success",
+    facts: [["GST", "₹90,000"], ["E-INVOICE", "Generated"], ["VALIDATION", "Passed"], ["E-WAY BILL", "Ready"], ["STATUS", "Compliant"]],
+    calloutKicker: "COMPLIANCE IN THE FLOW",
+    calloutText: "Tax context stays attached to the transaction. Government e-invoicing validations pass autonomously without logging into separate statutory portals.",
+  },
+  {
+    label: "RECEIVABLE",
+    pillLabel: "Receivable",
+    titleUpper: "RECEIVABLE",
+    eyebrow: "OPEN RECEIVABLE",
+    lead: "Open receivable posted directly to the finance ledger. Finance gains sub-second visibility into due date (28 Jun), payment terms, and aging without waiting for month-end reconciliation.",
+    summary: "Finance sees the amount, customer and due date in the same flow with zero ledger drift.",
+    pills: [
+      { text: "INV-10482", tone: "blue" },
+      { text: "₹5,90,000 Open", tone: "blue" },
+      { text: "Due in 4 Days", tone: "warning" },
+      { text: "Net 30 Terms", tone: "neutral" },
+    ],
+    statusLabel: "Open",
+    statusTone: "warning",
+    facts: [["AMOUNT", "₹5,90,000"], ["CUSTOMER", "Ananya Enterprises"], ["DUE", "In 4 days"], ["STATUS", "Open"]],
+    calloutKicker: "LEDGER DISCIPLINE AT DISPATCH",
+    calloutText: "Finance sees the amount, customer and due date in the same flow. No manual journal entry or reconciliation lag between operations and accounting.",
+  },
+  {
+    label: "AI PREDICTION",
+    pillLabel: "AI Prediction",
+    titleUpper: "AI PREDICTION",
+    eyebrow: "PREDICTIVE INTELLIGENCE",
+    lead: "Predictive intelligence analyzes counterparty payment patterns. flowOne calculates a 92% confidence score for on-time settlement, advising the credit team not to expend manual follow-up effort.",
+    summary: "92% probability of payment within 4 days based on counterparty payment history.",
+    pills: [
+      { text: "INV-10482", tone: "blue" },
+      { text: "92% Probability", tone: "purple" },
+      { text: "4-Day Window", tone: "neutral" },
+      { text: "Credit Risk: Low", tone: "neutral" },
+    ],
+    statusLabel: "Predictive",
+    statusTone: "purple",
+    facts: [["PAYMENT PROBABILITY", "92%"], ["EXPECTED", "Within 4 days"], ["RECOMMENDED ACTION", "Prioritize only if behaviour changes"]],
+    calloutKicker: "INTELLIGENCE BEFORE DELINQUENCY",
+    calloutText: "Payment behavior analyzed in real time. The model confirms Ananya Enterprises consistently settles within 4 days, suppressing unnecessary reminder alerts.",
+  },
+  {
+    label: "COLLECTION",
+    pillLabel: "Collection",
+    titleUpper: "COLLECTION",
+    eyebrow: "ACTIONABLE REMINDER",
+    lead: "Intelligent, context-aware payment reminders. Rather than aggressive spam, flowOne prepares a personalized link with UPI & NEFT payment rails only if behavioral drift is detected.",
+    summary: "A payment reminder is ready when the business context calls for it, with multi-rail links.",
+    pills: [
+      { text: "INV-10482", tone: "blue" },
+      { text: "Scheduled Reminder", tone: "blue" },
+      { text: "UPI / NEFT Rails", tone: "neutral" },
+      { text: "1-Click Link", tone: "neutral" },
+    ],
+    statusLabel: "Scheduled",
+    statusTone: "info",
+    facts: [["REMINDER", "Payment due"], ["STATUS", "Scheduled"], ["ACTION", "Send Reminder"]],
+    calloutKicker: "TIMED, DIGNIFIED ENGAGEMENT",
+    calloutText: "A payment reminder is ready when the business context calls for it. Single-click dispatch over WhatsApp or email with embedded UPI/NEFT payment link.",
+  },
+  {
+    label: "BANK",
+    pillLabel: "Bank Recon",
+    titleUpper: "BANK RECONCILIATION",
+    eyebrow: "AUTO RECONCILIATION",
+    lead: "Inbound bank payment matches invoice INV-10482 at 98% confidence. Real-time ledger matching clears the receivable and logs bank reference UTR-98231 with zero manual statement ticking.",
+    summary: "The bank receipt reconnects to the same invoice automatically with zero statement ticking.",
+    pills: [
+      { text: "INV-10482", tone: "blue" },
+      { text: "₹5,90,000 Matched", tone: "blue" },
+      { text: "UTR-98231", tone: "neutral" },
+      { text: "98% Confidence", tone: "neutral" },
+    ],
+    statusLabel: "Reconciled",
+    statusTone: "success",
+    facts: [["PAYMENT", "₹5,90,000"], ["STATUS", "Received"], ["MATCH", "INV-10482"], ["CONFIDENCE", "98%"]],
+    calloutKicker: "SUB-SECOND RECONCILIATION",
+    calloutText: "The bank receipt reconnects to the same invoice automatically. No manual statement ticking, no unapplied credits, and zero ledger drift.",
+  },
+  {
+    label: "CASH",
+    pillLabel: "Cash Liquidity",
+    titleUpper: "CASH LIQUIDITY",
+    eyebrow: "AVAILABLE LIQUIDITY",
+    lead: "Collected funds immediately unlock into available working capital. Treasury dashboards reflect ₹5,90,000 in liquid runway, automatically updating 90-day cash flow forecasts.",
+    summary: "The transaction completes its operational and financial journey, unlocking liquid working capital.",
+    pills: [
+      { text: "TXN-10482", tone: "blue" },
+      { text: "₹5,90,000 Liquid", tone: "blue" },
+      { text: "Treasury Synced", tone: "neutral" },
+      { text: "HDFC Primary", tone: "neutral" },
+    ],
+    statusLabel: "Received",
+    statusTone: "success",
+    facts: [["AVAILABLE CASH", "₹5,90,000"], ["STATUS", "Received"], ["TRANSACTION", "TXN-10482"]],
+    calloutKicker: "INSTANT CAPITAL RECYCLING",
+    calloutText: "The transaction completes its operational and financial journey. Cash is instantly recognized in working capital forecasts, funding the next procurement cycle.",
+  },
+  {
+    label: "DECISION",
+    pillLabel: "Decision",
+    titleUpper: "EXECUTIVE DECISION",
+    eyebrow: "EXECUTIVE CLOSURE",
+    lead: "The transaction loop closes with executive-grade intelligence. Commercial margin, DSO performance, and working capital impact are indexed into the CFO dashboard for growth decisions.",
+    summary: "The transaction is no longer just an invoice. It is part of the business’s financial picture.",
+    pills: [
+      { text: "TXN-10482", tone: "blue" },
+      { text: "Loop Closed", tone: "blue" },
+      { text: "DSO Optimized", tone: "neutral" },
+      { text: "CFO Telemetry", tone: "purple" },
+    ],
+    statusLabel: "Decision Ready",
+    statusTone: "purple",
+    facts: [["OUTCOME", "Cash collected"], ["CONTEXT", "Restored"], ["NEXT", "Decision ready"]],
+    calloutKicker: "CONNECTED BUSINESS CLOSURE",
+    calloutText: "The transaction is no longer just an invoice—it is part of the business’s financial intelligence, proving how operations and cash flow move as one.",
+  },
 ] as const;
 
 const capabilities = [
@@ -111,8 +291,104 @@ const capabilities = [
 ];
 
 const roles = [
-  ["CFO",["Cash","Receivables","Forecast","Risk","Decision"]],["FINANCE CONTROLLER",["Receivables","Payables","Reconciliation"]],["BUSINESS OWNER",["Business health","Cash","Decisions"]],
-  ["OPERATIONS",["Orders","Inventory","Fulfillment"]],["PROCUREMENT",["PO","Suppliers","Commitments"]],["WAREHOUSE",["Orders","Inventory","Movement","Replenishment"]],["COMPLIANCE",["GST","E-Invoice","E-Way Bill","Reconciliation"]],
+  {
+    id: "cfo",
+    name: "CFO",
+    headline: "Cash Realization · Collections · Capital Forecast",
+    description: "Monitors cash realization across open receivables, collection turnaround velocity, and forward liquidity runways.",
+    stages: ["Order", "Invoice", "Receivable", "Collection", "Bank", "Cash"],
+    activeStageIndex: 3, // "Collection"
+    activeStageStatus: "COLLECTION ACTIVE",
+    metrics: [
+      { label: "OUTSTANDING RECEIVABLES", value: "₹5,90,000", change: "Due in 4 days", type: "standard" },
+      { label: "CASH POSITION", value: "₹1.42 Cr", change: "Optimal runway", type: "standard" },
+      { label: "EXPECTED COLLECTIONS", value: "₹14.8 Lakh", change: "4 Invoices this week", type: "predictive" },
+    ],
+  },
+  {
+    id: "controller",
+    name: "FINANCE CONTROLLER",
+    headline: "Financial Accuracy · GST Treatment · Ledger Reconciliation",
+    description: "Verifies invoice tax metadata, monitors statutory GSTR filings, and ensures zero drift between ledger and bank statements.",
+    stages: ["Invoice", "GST", "Receivable", "Bank", "Reconciliation"],
+    activeStageIndex: 4, // "Reconciliation"
+    activeStageStatus: "AUTO-MATCHING",
+    metrics: [
+      { label: "UNRECONCILED TRANSACTIONS", value: "0 Invoices", change: "100% matched", type: "trend" },
+      { label: "GST RECONCILIATION STATUS", value: "100% Matched", change: "Zero tax credit drift", type: "standard" },
+      { label: "INVOICE EXCEPTIONS", value: "0 Discrepancies", change: "Zero variance", type: "alert" },
+    ],
+  },
+  {
+    id: "owner",
+    name: "BUSINESS OWNER",
+    headline: "Business Performance · Revenue Realization · Cash Visibility",
+    description: "Tracks end-to-end commercial momentum, operational health, and available working cash without waiting for month-end reports.",
+    stages: ["Order", "Inventory", "Invoice", "Receivable", "Cash", "Forecast"],
+    activeStageIndex: 4, // "Cash"
+    activeStageStatus: "FUNDS REALIZED",
+    metrics: [
+      { label: "REVENUE", value: "₹8.4 Cr ARR", change: "+18.4% YoY", type: "standard" },
+      { label: "AVAILABLE CASH", value: "₹1.42 Cr", change: "Optimal runway", type: "trend" },
+      { label: "CASH FLOW FORECAST", value: "18 Months", change: "92% confidence", type: "predictive" },
+    ],
+  },
+  {
+    id: "operations",
+    name: "OPERATIONS",
+    headline: "Order Processing · Inventory Allocation · Fulfillment",
+    description: "Orchestrates order routing, warehouse stock commitments, and outbound fulfillment with live inventory synchronization.",
+    stages: ["Order", "Inventory", "Allocation", "Fulfillment", "Invoice"],
+    activeStageIndex: 3, // "Fulfillment"
+    activeStageStatus: "DISPATCH READY",
+    metrics: [
+      { label: "ORDERS IN PROGRESS", value: "12 Orders", change: "On schedule", type: "standard" },
+      { label: "INVENTORY ALLOCATED", value: "125 / 125 Units", change: "DC-02 Reserved", type: "standard" },
+      { label: "FULFILLMENT PROGRESS", value: "99.4%", change: "Optimal turnaround", type: "trend" },
+    ],
+  },
+  {
+    id: "procurement",
+    name: "PROCUREMENT",
+    headline: "Purchase Orders · Suppliers · Receipts",
+    description: "Governs purchase requisitions, supplier master records, purchase order releases, and automated 3-way invoice matching.",
+    stages: ["Demand", "Purchase Request", "Purchase Order", "Vendor", "Receipt", "Invoice"],
+    activeStageIndex: 2, // "Purchase Order"
+    activeStageStatus: "PO COMMITTED",
+    metrics: [
+      { label: "OPEN PURCHASE COMMITMENTS", value: "₹18.2 Lakh", change: "12 Approved", type: "standard" },
+      { label: "PENDING PURCHASE ORDERS", value: "3 Orders", change: "Awaiting receipt", type: "alert" },
+      { label: "INVOICE PRICE DISCREPANCIES", value: "₹0", change: "Zero variance", type: "standard" },
+    ],
+  },
+  {
+    id: "warehouse",
+    name: "WAREHOUSE",
+    headline: "Stock Availability · Picking · Dispatch & Replenishment",
+    description: "Controls physical bin movements, pick-and-pack routing, outbound dispatch manifests, and automated safety stock reorders.",
+    stages: ["Order", "Stock", "Allocation", "Pick", "Dispatch", "Replenishment"],
+    activeStageIndex: 3, // "Pick"
+    activeStageStatus: "PICKING ACTIVE",
+    metrics: [
+      { label: "AVAILABLE STOCK", value: "1,420 Units", change: "Optimal levels", type: "standard" },
+      { label: "ORDERS AWAITING PICK", value: "4 Orders", change: "Rack HYD-B4", type: "standard" },
+      { label: "REPLENISHMENT REQUIRED", value: "0 SKUs", change: "Safe thresholds", type: "trend" },
+    ],
+  },
+  {
+    id: "compliance",
+    name: "COMPLIANCE",
+    headline: "Document Generation · GST Compliance · Statutory Reconciliation",
+    description: "Generates authenticated IRP e-invoices, issues signed QR payloads, clears logistics E-Way bills, and reconciles GSTR returns.",
+    stages: ["Invoice", "E-Invoice", "E-Way Bill", "GST", "Reconciliation"],
+    activeStageIndex: 3, // "GST"
+    activeStageStatus: "GST VERIFIED",
+    metrics: [
+      { label: "E-INVOICE STATUS", value: "100% Signed", change: "IRP validated", type: "standard" },
+      { label: "GST RECONCILIATION STATUS", value: "Auto-Populated", change: "GSTR-1 aligned", type: "trend" },
+      { label: "OPEN COMPLIANCE EXCEPTIONS", value: "0 Exceptions", change: "Audit ready", type: "standard" },
+    ],
+  },
 ] as const;
 
 function formatRoleTitle(name: string) {
@@ -123,44 +399,6 @@ function formatRoleTitle(name: string) {
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
 }
-
-const roleKPIs: Record<string, Array<{ label: string; value: string; change?: string; type: "standard" | "comparison" | "alert" | "trend" | "predictive" }>> = {
-  "CFO": [
-    { label: "DSO (DAYS SALES OUTSTANDING)", value: "28 Days", change: "-6d vs last mo", type: "trend" },
-    { label: "WORKING CAPITAL VELOCITY", value: "+₹1.2 Cr", change: "+8.4%", type: "standard" },
-    { label: "FORWARD CASH RUNWAY", value: "18 Months", change: "Predictive", type: "predictive" },
-  ],
-  "FINANCE CONTROLLER": [
-    { label: "UNMATCHED LEDGER ITEMS", value: "0 Invoices", change: "100% matched", type: "trend" },
-    { label: "AUTOMATED RECONCILIATION", value: "98.4%", change: "+2.1%", type: "standard" },
-    { label: "COLLECTIONS DUE THIS WEEK", value: "₹14.8 Lakh", change: "4 Invoices", type: "alert" },
-  ],
-  "BUSINESS OWNER": [
-    { label: "OPERATING MARGIN", value: "24.2%", change: "+3.1%", type: "standard" },
-    { label: "CASH CONVERSION CYCLE", value: "3.2x", change: "Optimal", type: "trend" },
-    { label: "PIPELINE ARR FORECAST", value: "₹8.4 Cr", change: "92% conf", type: "predictive" },
-  ],
-  "OPERATIONS": [
-    { label: "FULFILLMENT SLA", value: "99.4%", change: "+0.8%", type: "standard" },
-    { label: "HYDERABAD DC CAPACITY", value: "84%", change: "Optimal", type: "standard" },
-    { label: "STOCKOUT RISK", value: "0 Items", change: "Protected", type: "trend" },
-  ],
-  "PROCUREMENT": [
-    { label: "COMMITTED PURCHASE ORDERS", value: "₹18.2 Lakh", change: "12 Approved", type: "standard" },
-    { label: "SUPPLIER SLA COMPLIANCE", value: "96.5%", change: "+1.8%", type: "trend" },
-    { label: "INVOICE PRICE DISCREPANCIES", value: "₹0", change: "Zero variance", type: "standard" },
-  ],
-  "WAREHOUSE": [
-    { label: "ALLOCATED DISPATCH UNITS", value: "125 Units", change: "HYD-B4 Ready", type: "standard" },
-    { label: "PICK & PACK ACCURACY", value: "99.9%", change: "Verified", type: "trend" },
-    { label: "DISPATCH TURNAROUND", value: "4.2 Hours", change: "-1.5h vs target", type: "standard" },
-  ],
-  "COMPLIANCE": [
-    { label: "E-INVOICE GENERATION", value: "100% Passed", change: "IRP signed", type: "standard" },
-    { label: "GSTR-1 RECONCILIATION", value: "Auto-Populated", change: "Zero drift", type: "trend" },
-    { label: "STATUTORY AUDIT READINESS", value: "100%", change: "Real-time logs", type: "standard" },
-  ],
-};
 
 const aiStages = [
   {
@@ -658,7 +896,7 @@ export default function Homepage() {
         </div>
         <p>Follow a single ₹5,00,000 order as it moves through operations, finance, compliance, collection and cash.</p>
       </div>
-      <div className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState}/></div></div>
+      <div className="living-desktop home-container"><div className="living-sticky"><LivingNarrative index={livingState} setIndex={setLivingState} onSelectState={handleSelectState}/><LivingProduct index={livingState} onSelect={setLivingState}/></div></div>
       <div className="living-mobile-wrapper">
         <LivingMobileCarousel index={livingState} onSelectState={handleSelectState} />
       </div>
@@ -1062,7 +1300,7 @@ export default function Homepage() {
             type="button"
             className="role-capsule-arrow role-capsule-arrow--prev"
             onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
-            aria-label={`Previous role: ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
+            aria-label={`Previous role: ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length].name)}`}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="15 18 9 12 15 6" />
@@ -1073,29 +1311,29 @@ export default function Homepage() {
             type="button"
             className="role-capsule-ghost role-capsule-ghost--prev"
             onClick={() => setRole((r) => (r - 1 + roles.length) % roles.length)}
-            aria-label={`Select ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}`}
+            aria-label={`Select ${formatRoleTitle(roles[(role - 1 + roles.length) % roles.length].name)}`}
           >
-            <span>{formatRoleTitle(roles[(role - 1 + roles.length) % roles.length][0])}</span>
+            <span>{formatRoleTitle(roles[(role - 1 + roles.length) % roles.length].name)}</span>
           </button>
 
           <div className="role-capsule-active">
-            <span>{formatRoleTitle(roles[role][0])}</span>
+            <span>{formatRoleTitle(roles[role].name)}</span>
           </div>
 
           <button
             type="button"
             className="role-capsule-ghost role-capsule-ghost--next"
             onClick={() => setRole((r) => (r + 1) % roles.length)}
-            aria-label={`Select ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
+            aria-label={`Select ${formatRoleTitle(roles[(role + 1) % roles.length].name)}`}
           >
-            <span>{formatRoleTitle(roles[(role + 1) % roles.length][0])}</span>
+            <span>{formatRoleTitle(roles[(role + 1) % roles.length].name)}</span>
           </button>
 
           <button
             type="button"
             className="role-capsule-arrow role-capsule-arrow--next"
             onClick={() => setRole((r) => (r + 1) % roles.length)}
-            aria-label={`Next role: ${formatRoleTitle(roles[(role + 1) % roles.length][0])}`}
+            aria-label={`Next role: ${formatRoleTitle(roles[(role + 1) % roles.length].name)}`}
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
               <polyline points="9 18 15 12 9 6" />
@@ -1110,10 +1348,10 @@ export default function Homepage() {
                 role="tab"
                 aria-selected={role === i}
                 onClick={() => setRole(i)}
-                key={x[0]}
+                key={x.name}
                 className="role-tab-btn"
               >
-                <span>{x[0]}</span>
+                <span>{x.name}</span>
               </button>
             ))}
           </div>
@@ -1123,13 +1361,27 @@ export default function Homepage() {
             onTouchEnd={handleRoleTouchEnd}
           >
             <div className="role-view-header">
-              <span className="role-view-kicker">{roles[role][0]} VIEW · SAME BUSINESS REALITY</span>
+              <div className="role-view-header-left">
+                <span className="role-view-kicker">{roles[role].name} VIEW · SAME BUSINESS REALITY</span>
+                <div
+                  className="role-view-active-pill"
+                  aria-label={`Active workflow stage: ${roles[role].stages[roles[role].activeStageIndex]}`}
+                >
+                  <span className="role-view-active-dot" aria-hidden="true" />
+                  <span>{roles[role].activeStageStatus} · {roles[role].stages[roles[role].activeStageIndex].toUpperCase()}</span>
+                </div>
+              </div>
               <span className="role-view-badge">SYNCHRONIZED CONTEXT</span>
             </div>
-            <strong>{roles[role][1].join(" · ")}</strong>
-            <RoleFlow areas={roles[role][1]} />
+            <strong className="role-view-heading">{roles[role].headline}</strong>
+            <p className="role-view-desc">{roles[role].description}</p>
+            <RoleFlow
+              stages={roles[role].stages}
+              activeIndex={roles[role].activeStageIndex}
+              roleName={roles[role].name}
+            />
             <div className="role-metrics">
-              {(roleKPIs[roles[role][0]] || []).map(kpi => (
+              {roles[role].metrics.map(kpi => (
                 <ProductKPI
                   key={kpi.label}
                   label={kpi.label}
@@ -1783,77 +2035,95 @@ const LivingNarrative = memo(function LivingNarrative({
   );
 });
 
-const LivingProduct = memo(function LivingProduct({ index }: { index: number }) {
-  const [reminderSent, setReminderSent] = useState(false);
-  const currentValue = index >= 2 ? "₹5,90,000" : "₹5,00,000";
+const LivingCallout = memo(function LivingCallout({
+  kicker,
+  text,
+  action,
+}: {
+  kicker: string;
+  text: string;
+  action?: React.ReactNode;
+}) {
+  return (
+    <div className="living-callout-panel">
+      <div className="living-callout-icon-box" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3L13.8 8.2L19 10L13.8 11.8L12 17L10.2 11.8L5 10L10.2 8.2L12 3Z" fill="white" />
+          <path d="M18 15L18.8 17.2L21 18L18.8 18.8L18 21L17.2 18.8L15 18L17.2 17.2L18 15Z" fill="white" />
+        </svg>
+      </div>
+      <div className="living-callout-body">
+        <strong className="living-callout-kicker">{kicker}</strong>
+        <p className="living-callout-text">{text}</p>
+        {action && <div className="living-callout-action">{action}</div>}
+      </div>
+    </div>
+  );
+});
 
-  const statusLabel =
-    index >= 9
-      ? "Completed"
-      : index === 8
-      ? "Paid"
-      : index === 7
-      ? "Processing"
-      : index === 6
-      ? "Pending"
-      : index === 5
-      ? "Processing"
-      : index === 4
-      ? "Pending"
-      : index === 3
-      ? "Approved"
-      : index >= 1
-      ? "Processing"
-      : "Approved";
+const LivingProduct = memo(function LivingProduct({
+  index,
+  onSelect,
+}: {
+  index: number;
+  onSelect?: (i: number) => void;
+}) {
+  const [reminderSent, setReminderSent] = useState(false);
+  const cur = transactionStates[index];
 
   return (
-    <div className="living-ui" aria-label="Living Transaction Workspace">
-      <header className="living-ui-header">
-        <div className="living-ui-topline">
-          <div className="living-ui-crumb">
-            <span>flowOne</span>
-            <i>/</i>
-            <span>Commercial Ops</span>
-            <i>/</i>
-            <span>Fulfillment to Cash</span>
-          </div>
-          <span className="living-ui-txn-tag">TXN-10482</span>
-        </div>
-        <div className="living-ui-headline">
-          <div className="living-ui-entity">
-            <strong>Ananya Enterprises</strong>
-            <span>Enterprise Commercial Contract · Standard Terms</span>
-          </div>
-          <div className="living-ui-headline-right">
-            <div className="living-ui-value-box">
-              <small>CURRENT TRANSACTION VALUE</small>
-              <b>{currentValue}</b>
-            </div>
-            <Status label={statusLabel} />
-          </div>
-        </div>
-      </header>
+    <div className="living-workspace-v2" aria-label="Living Transaction Workspace">
+      {/* 1. Stage Header: Title, Option 1 Lead, and Enhanced Metadata Pills */}
+      <div className="living-stage-header">
+        <h3 className="living-stage-title">{cur.titleUpper}</h3>
+        <p className="living-stage-lead">{cur.lead}</p>
 
-      <div className="living-ui-meta-strip" aria-label="Transaction metadata">
-        <div className="living-meta-item">
-          <span>CUSTOMER / GSTIN</span>
-          <strong>Ananya Enterprises (36AABCA1234F1Z5)</strong>
-        </div>
-        <div className="living-meta-item">
-          <span>OPERATIONAL HUB</span>
-          <strong>Hyderabad Central DC (DC-02)</strong>
-        </div>
-        <div className="living-meta-item">
-          <span>ORIGIN DATE</span>
-          <strong>18 Jun 2026</strong>
-        </div>
-        <div className="living-meta-item">
-          <span>COMMERCIAL TERMS</span>
-          <strong>Net 30 Days · E-Invoice Eligible</strong>
+        {/* Enhanced Pills Row */}
+        <div className="living-stage-pills-row" aria-label="Transaction Highlights">
+          {/* Reference pill */}
+          <div className="living-pill is-blue">
+            <span>{cur.pills[0].text}</span>
+          </div>
+
+          {/* Customer & GSTIN Badge */}
+          <div className="living-pill is-entity" title="Customer & Statutory GSTIN">
+            <span className="living-pill-avatar">AE</span>
+            <span className="living-pill-entity-name">Ananya Enterprises</span>
+            <span className="living-pill-gst-divider">·</span>
+            <span className="living-pill-gst-val">GST: 36AABCA1234F1Z5</span>
+          </div>
+
+          {/* Remaining contextual pills */}
+          {cur.pills.slice(1).map((p, pIdx) => (
+            <div key={pIdx} className={`living-pill is-${p.tone}`}>
+              <span>{p.text}</span>
+            </div>
+          ))}
+
+          {/* Dynamic Status Pill */}
+          <div className={`living-pill is-status is-${cur.statusTone}`}>
+            <span className="living-status-indicator" />
+            <span>Status: {cur.statusLabel}</span>
+          </div>
         </div>
       </div>
 
-      <div key={index} className="living-ui-canvas">
+      {/* 2. Center Card Container with SVG Gradient Overlays */}
+      <div className="living-card-shell" key={index}>
+        <img
+          src="/assets/gradient-top.svg"
+          alt=""
+          className="living-card-gradient-top"
+          aria-hidden="true"
+        />
+        <img
+          src="/assets/gradient-bottom.svg"
+          alt=""
+          className="living-card-gradient-bottom"
+          aria-hidden="true"
+        />
+
+        <div className="living-card-content">
         {index === 0 && (
           <div className="living-enterprise-card">
             <div className="living-card-header">
@@ -1884,13 +2154,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
               <div><span>Subtotal</span><b>₹5,00,000</b></div>
               <div className="grand-total"><span>Sales Order Total</span><b>₹5,00,000</b></div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>COMMERCIAL WORKFLOW ROUTE</span>
-                <small>Demand Initiated</small>
-              </div>
-              <p>Commercial agreement confirmed for 125 units. The sales order initiates an automated fulfillment workflow directly in Hyderabad inventory.</p>
-            </div>
+            <LivingCallout
+              kicker="COMMERCIAL WORKFLOW ROUTE"
+              text="Commercial agreement confirmed for 125 units. The sales order initiates an automated fulfillment workflow directly in Hyderabad inventory."
+            />
           </div>
         )}
 
@@ -1918,13 +2185,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>Allocated · Outbound Ready</strong>
               </div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>CONTINUOUS INVENTORY INTEGRATION</span>
-                <small>Zero Silo Handoff</small>
-              </div>
-              <p>The same transaction reserves stock in the Hyderabad warehouse. Operations clears fulfillment without manual re-entry or detached warehouse spreadsheets.</p>
-            </div>
+            <LivingCallout
+              kicker="CONTINUOUS INVENTORY INTEGRATION"
+              text="The same transaction reserves stock in the Hyderabad warehouse. Operations clears fulfillment without manual re-entry or detached warehouse spreadsheets."
+            />
           </div>
         )}
 
@@ -1961,13 +2225,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
               <div><span>Total GST (18%)</span><b>₹90,000</b></div>
               <div className="grand-total"><span>Invoice Amount</span><b>₹5,90,000</b></div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>FINANCIAL OBLIGATION FORMED</span>
-                <small>Context Preserved</small>
-              </div>
-              <p>Operational fulfillment automatically converts into a tax invoice. Commercial value advances from ₹5,00,000 to ₹5,90,000 with complete tax metadata attached.</p>
-            </div>
+            <LivingCallout
+              kicker="FINANCIAL OBLIGATION FORMED"
+              text="Operational fulfillment automatically converts into a tax invoice. Commercial value advances from ₹5,00,000 to ₹5,90,000 with complete tax metadata attached."
+            />
           </div>
         )}
 
@@ -1995,13 +2256,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>Passed · Auto-mapped to GSTR-1</strong>
               </div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>COMPLIANCE IN THE FLOW</span>
-                <small>E-Way Bill Ready</small>
-              </div>
-              <p>Tax context stays attached to the transaction. Government e-invoicing validations pass autonomously without logging into separate statutory portals.</p>
-            </div>
+            <LivingCallout
+              kicker="COMPLIANCE IN THE FLOW"
+              text="Tax context stays attached to the transaction. Government e-invoicing validations pass autonomously without logging into separate statutory portals."
+            />
           </div>
         )}
 
@@ -2029,13 +2287,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>Ananya Enterprises · Clean Record</strong>
               </div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>CONNECTED LEDGER CONTEXT</span>
-                <small>Real-Time Exposure</small>
-              </div>
-              <p>Finance sees the exact amount, customer profile, and due date in the same flow. Operations and finance share one unified view of customer commitments.</p>
-            </div>
+            <LivingCallout
+              kicker="CONNECTED LEDGER CONTEXT"
+              text="Finance sees the exact amount, customer profile, and due date in the same flow. Operations and finance share one unified view of customer commitments."
+            />
           </div>
         )}
 
@@ -2063,14 +2318,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>Average turnaround: 28 days</strong>
               </div>
             </div>
-            <div className="living-callout-panel is-ai">
-              <div className="living-callout-header">
-                <span>AI WORKING INSIDE THE TRANSACTION</span>
-                <small>Behavioral Confidence</small>
-              </div>
-              <strong>Recommended action: Prioritize collection only if payment behaviour changes.</strong>
-              <p>Intelligence analyzes Ananya Enterprises&apos;s settlement velocity in the context of seasonal cash flows. No speculative reminders are needed at this stage.</p>
-            </div>
+            <LivingCallout
+              kicker="AI WORKING INSIDE THE TRANSACTION"
+              text="Intelligence analyzes Ananya Enterprises' settlement velocity in the context of seasonal cash flows. Recommended action: Prioritize collection only if payment behaviour changes."
+            />
           </div>
         )}
 
@@ -2098,18 +2349,15 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>{reminderSent ? "Sent · Verified" : "Scheduled · Ready to Trigger"}</strong>
               </div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>INSIGHT BECOMES ACTION</span>
-                <small>Contextual Outreach</small>
-              </div>
-              <p>A payment reminder is calibrated and ready when the business context calls for it. The reminder includes instant verified payment settlement links.</p>
-              <div style={{ marginTop: "0.5rem" }}>
+            <LivingCallout
+              kicker="INSIGHT BECOMES ACTION"
+              text="A payment reminder is calibrated and ready when the business context calls for it. The reminder includes instant verified payment settlement links."
+              action={
                 <Button size="small" onClick={() => setReminderSent(true)}>
                   {reminderSent ? "Reminder Sent ✓" : "Send Reminder"}
                 </Button>
-              </div>
-            </div>
+              }
+            />
           </div>
         )}
 
@@ -2138,13 +2386,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <small>Exact amount &amp; entity match</small>
               </div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>ZERO MANUAL RECONCILIATION</span>
-                <small>Instant Matching</small>
-              </div>
-              <p>The bank receipt reconnects to the same invoice automatically. Bank fee, timestamp, and remittance identifiers match without human intervention.</p>
-            </div>
+            <LivingCallout
+              kicker="ZERO MANUAL RECONCILIATION"
+              text="The bank receipt reconnects to the same invoice automatically. Bank fee, timestamp, and remittance identifiers match without human intervention."
+            />
           </div>
         )}
 
@@ -2172,13 +2417,10 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>TXN-10482 (Fully Cleared)</strong>
               </div>
             </div>
-            <div className="living-callout-panel is-dark">
-              <div className="living-callout-header">
-                <span>LIQUIDITY CONFIRMED</span>
-                <small>Funds Available</small>
-              </div>
-              <p>The transaction completes its operational and financial journey. ₹5,90,000 is now active operating cash for forward deployment.</p>
-            </div>
+            <LivingCallout
+              kicker="LIQUIDITY CONFIRMED"
+              text="The transaction completes its operational and financial journey. ₹5,90,000 is now active operating cash for forward deployment."
+            />
           </div>
         )}
 
@@ -2206,25 +2448,32 @@ const LivingProduct = memo(function LivingProduct({ index }: { index: number }) 
                 <strong>Bank reconciled · +₹5,90,000 cash</strong>
               </div>
             </div>
-            <div className="living-callout-panel">
-              <div className="living-callout-header">
-                <span>THE LOOP IS CLOSED</span>
-                <small>Decision Ready</small>
-              </div>
-              <strong>The transaction is now part of the business’s financial picture.</strong>
-              <p>Working capital updated, forward cash forecast hardened, and Ananya Enterprises&apos;s commercial credit limit refreshed for the next order.</p>
-            </div>
+            <LivingCallout
+              kicker="THE LOOP IS CLOSED"
+              text="The transaction is now part of the business’s financial picture. Working capital updated, forward cash forecast hardened, and Ananya Enterprises' commercial credit limit refreshed for the next order."
+            />
           </div>
         )}
+        </div>
       </div>
 
-      <footer className="living-ui-footer">
-        <span className="living-footer-tag">TXN-10482 · CONTINUOUS LEDGER</span>
-        <div className="living-footer-status">
-          <i className="living-telemetry-dot is-active" />
-          <span>Stage {String(index + 1).padStart(2, "0")} of 10 · {transactionStates[index].pillLabel}</span>
+      {/* 3. Bottom Step Dash Indicators */}
+      <div className="living-bottom-nav">
+        <div className="living-step-indicators" aria-label="Step progress">
+          {transactionStates.map((step, i) => (
+            <button
+              key={step.label}
+              type="button"
+              className={`living-step-segment ${i <= index ? "is-filled" : ""}`}
+              onClick={() => onSelect && onSelect(i)}
+              aria-label={`Jump to stage ${i + 1}: ${step.pillLabel}`}
+            />
+          ))}
         </div>
-      </footer>
+        <span className="living-step-counter">
+          Stage {String(index + 1).padStart(2, "0")} of {transactionStates.length} · {cur.pillLabel}
+        </span>
+      </div>
     </div>
   );
 });
@@ -2284,7 +2533,7 @@ const LivingMobileCarousel = memo(function LivingMobileCarousel({
     >
       {/* 1. Visual Stage: Centered LivingProduct */}
       <div className="living-mobile-product-stage">
-        <LivingProduct index={index} />
+        <LivingProduct index={index} onSelect={onSelectState} />
       </div>
 
       {/* 2. Full-bleed Controls Row with Screen-Edge Arrow Wrappers */}
@@ -2478,9 +2727,64 @@ function CapabilityFlow({active}:{active:readonly string[]}) {
   return <div className="capability-flow">{items.map((x,i)=><div className={active.includes(x)?"is-relevant":""} key={x}><i/><span>{x}</span>{i<items.length-1&&<b/>}</div>)}</div>;
 }
 
-function RoleFlow({areas}:{areas:readonly string[]}) {
-  const states=["Order","Inventory","Invoice","GST","Receivable","Cash","Forecast","Decision"];
-  return <div className="role-flow" aria-label={`Shared flow highlighting ${areas.join(", ")}`}>{states.map((x,i)=><div className={areas.some(area=>x.toLowerCase().includes(area.toLowerCase().split(" ")[0])||area.toLowerCase().includes(x.toLowerCase()))?"is-active":""} key={x}><i/><span>{x}</span>{i<states.length-1&&<b/>}</div>)}</div>;
+function RoleFlow({
+  stages,
+  activeIndex,
+  roleName,
+}: {
+  stages: readonly string[];
+  activeIndex: number;
+  roleName: string;
+}) {
+  return (
+    <div
+      className="role-flow"
+      role="region"
+      aria-label={`${roleName} workflow timeline: ${stages.join(" → ")}`}
+    >
+      {stages.map((stage, i) => {
+        const isComplete = i < activeIndex;
+        const isActive = i === activeIndex;
+        const isPending = i > activeIndex;
+
+        return (
+          <div
+            key={stage}
+            className={`role-flow-step ${
+              isComplete ? "is-complete" : isActive ? "is-active" : "is-pending"
+            }`}
+            aria-current={isActive ? "step" : undefined}
+          >
+            <div className="role-flow-node-wrap">
+              <i className="role-flow-node" aria-hidden="true">
+                {isComplete && (
+                  <svg width="7" height="6" viewBox="0 0 7 6" fill="none">
+                    <path
+                      d="M1 3L2.6 4.6L6 1.2"
+                      stroke="white"
+                      strokeWidth="1.4"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+                {isActive && <span className="role-flow-active-beacon" />}
+              </i>
+              <span className="role-flow-label">{stage}</span>
+            </div>
+            {i < stages.length - 1 && (
+              <b
+                className={`role-flow-line ${
+                  i < activeIndex ? "is-complete" : "is-pending"
+                }`}
+                aria-hidden="true"
+              />
+            )}
+          </div>
+        );
+      })}
+    </div>
+  );
 }
 
 function HomeFooter({onDemo}:{onDemo:()=>void}) {
