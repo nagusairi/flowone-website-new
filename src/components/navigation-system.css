@@ -22,9 +22,11 @@
   background: transparent;
   border: 1px solid transparent;
   border-radius: 999px;
-  font-family: var(--font-family-primary);
-  font-size: 0.84rem;
-  font-weight: 550;
+  font-family: "Lorin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   line-height: 1;
   text-decoration: none;
   cursor: pointer;
@@ -33,6 +35,10 @@
 }
 .fo-nav-label {
   display: inline-block;
+  font-family: "Lorin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   transition: transform 0.2s ease, color 0.2s ease;
 }
 .fo-nav-chevron {
@@ -347,7 +353,8 @@
   pointer-events: none;
 }
 
-.fo-mega__group-eyebrow {
+.fo-mega__group-eyebrow,
+h3.fo-mega__group-eyebrow {
   display: inline-flex;
   align-items: center;
   gap: 0.42rem;
@@ -866,10 +873,11 @@
 }
 
 .fo-mobile-accordion__label {
-  font-family: var(--font-family-primary);
-  font-size: 1.15rem;
-  font-weight: 650;
-  letter-spacing: -0.015em;
+  font-family: "Lorin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   color: var(--flow-ink);
   transition: color 0.2s ease;
 }

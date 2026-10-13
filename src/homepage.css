@@ -3346,6 +3346,27 @@
 
 /* SECTION 10: Role-Based Views */
 .home-roles { background: var(--neutral-0); }
+.home-roles .role-main-title,
+.home-roles .section-heading-row h2 {
+  font-family: var(--font-family-primary, "Lorin", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(2.25rem, 3.4vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  font-weight: 700;
+  text-transform: none;
+  color: var(--neutral-900, #0D0D0D);
+  margin-top: 1rem;
+}
+
+.home-roles .role-main-desc,
+.home-roles .section-heading-row p {
+  font-family: var(--font-family-body, "Lorin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: clamp(1rem, 1.2vw, 1.12rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary, #4B5563);
+  margin: 0;
+}
+
 .role-selector {
   display: grid;
   grid-template-columns: minmax(210px, 0.32fr) 1fr;

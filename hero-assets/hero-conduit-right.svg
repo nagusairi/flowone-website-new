@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 70 210" fill="none">
+  <path d="M 70 35 C 35 35, 35 75, 0 75" class="conduit-rail-path" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" stroke-linecap="round" />
+  <path d="M 70 35 C 35 35, 35 75, 0 75" class="conduit-rail-glow" stroke="#05C7F2" stroke-width="1.5" stroke-dasharray="6 12" opacity="0.75" />
+  <path d="M 70 105 L 0 105" class="conduit-rail-path" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" stroke-linecap="round" />
+  <path d="M 70 105 L 0 105" class="conduit-rail-glow" stroke="#05C7F2" stroke-width="1.5" stroke-dasharray="6 12" opacity="0.75" />
+  <path d="M 70 175 C 35 175, 35 135, 0 135" class="conduit-rail-path" stroke="rgba(255, 255, 255, 0.12)" stroke-width="2" stroke-linecap="round" />
+  <path d="M 70 175 C 35 175, 35 135, 0 135" class="conduit-rail-glow" stroke="#05C7F2" stroke-width="1.5" stroke-dasharray="6 12" opacity="0.75" />
+  <circle class="conduit-pulse-bead conduit-pulse-right-1" r="3.5" fill="#ffffff" />
+  <circle class="conduit-pulse-bead conduit-pulse-right-2" r="3.5" fill="#ffffff" />
+  <circle class="conduit-pulse-bead conduit-pulse-right-3" r="3.5" fill="#ffffff" />
+</svg>

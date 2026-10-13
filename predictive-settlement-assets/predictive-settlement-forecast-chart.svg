@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 220" width="700" height="220" fill="none">
+  <!-- Confidence Range Area -->
+  <path class="forecast-range" d="M350 100 C440 55 510 70 700 30 L700 150 C520 130 450 150 350 100Z" fill="rgba(4, 157, 217, 0.08)" />
+  <!-- Historical Actual Curve -->
+  <path class="forecast-actual" d="M0 170 C80 150 120 90 190 120 S300 130 350 100" stroke="#0D0D0D" stroke-width="2" fill="none" stroke-linecap="round" />
+  <!-- Predicted Future Projection (Dashed) -->
+  <path class="forecast-future" d="M350 100 C440 78 510 115 700 62" stroke="#049DD9" stroke-width="2" stroke-dasharray="6 4" fill="none" stroke-linecap="round" />
+  <!-- Current Timeline Divider -->
+  <line x1="350" x2="350" y1="10" y2="210" stroke="#DDE3EA" stroke-width="1" stroke-dasharray="4" />
+</svg>
