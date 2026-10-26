@@ -1,0 +1,367 @@
+/* ==========================================================================
+   flowOne Section 07 — Business Outcomes: Direction 02
+   "02 — One Business. Four Breakthroughs."
+   Scoped Stylesheet (.fo-breakthroughs-section)
+   Creative Direction: Asymmetric editorial composition with connected thread
+   Typography: Bebas Neue (Headings) · Lorin (Body & Interface)
+   Motion: Subtle entrance sequence, primarily static
+   ========================================================================== */
+
+.fo-breakthroughs-section {
+  position: relative;
+  width: 100%;
+  background: #FFFFFF;
+  color: var(--neutral-900, #0D0D0D);
+  padding: 6.5rem 0 7rem;
+  border-top: 1px solid rgba(13, 13, 13, 0.06);
+  border-bottom: 1px solid rgba(13, 13, 13, 0.06);
+  font-family: var(--font-family-body, "Lorin", "Manrope", sans-serif);
+  box-sizing: border-box;
+}
+
+.fo-breakthroughs__container {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   1. ASYMMETRIC TWO-COLUMN EDITORIAL COMPOSITION
+   Left: ~42% Editorial introduction with generous whitespace
+   Right: ~58% Four vertically connected outcome rows
+   ========================================================================== */
+
+.fo-breakthroughs__layout {
+  display: grid;
+  grid-template-columns: 42% 1fr;
+  gap: clamp(3rem, 5.5vw, 5rem);
+  align-items: start;
+}
+
+/* ==========================================================================
+   2. LEFT EDITORIAL COLUMN
+   ========================================================================== */
+
+.fo-breakthroughs__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-breakthroughs-section.is-entered .fo-breakthroughs__intro {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fo-breakthroughs__heading {
+  margin: 0;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0B1020;
+  max-width: 440px; /* Intentional editorial line break */
+}
+
+.fo-breakthroughs__copy {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.25vw, 1.15rem);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 400px;
+}
+
+/* ==========================================================================
+   3. RIGHT COLUMN — FOUR CONNECTED OUTCOME ROWS
+   ========================================================================== */
+
+.fo-breakthroughs__outcomes-col {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.fo-breakthroughs__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Single Outcome Row */
+.fo-breakthrough-row {
+  display: grid;
+  grid-template-columns: 46px 1fr 64px;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 2rem 0;
+  border-bottom: 1px solid #E2E8F0;
+  position: relative;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(6px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-breakthrough-row:last-child {
+  border-bottom: none;
+  padding-bottom: 0.5rem;
+}
+
+.fo-breakthrough-row:first-child {
+  padding-top: 0.25rem;
+}
+
+/* Entrance Stagger */
+.fo-breakthroughs-section.is-entered .fo-breakthrough-row {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fo-breakthroughs-section.is-entered .fo-breakthrough-row:nth-child(1) { transition-delay: 50ms; }
+.fo-breakthroughs-section.is-entered .fo-breakthrough-row:nth-child(2) { transition-delay: 120ms; }
+.fo-breakthroughs-section.is-entered .fo-breakthrough-row:nth-child(3) { transition-delay: 190ms; }
+.fo-breakthroughs-section.is-entered .fo-breakthrough-row:nth-child(4) { transition-delay: 260ms; }
+
+/* ==========================================================================
+   4. SIGNATURE DETAIL — THE CONNECTED THREAD & SEQUENCE NODES
+   Begins at first node, ends at fourth node. Never extends beyond.
+   ========================================================================== */
+
+.fo-breakthrough-thread-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  align-self: stretch;
+}
+
+/* Continuous Vertical Thread Segment (Positioned behind node) */
+.fo-breakthrough-thread-line {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  background: #E2E8F0;
+  z-index: 1;
+}
+
+/* First item: thread starts at node center and goes down to bottom */
+.fo-breakthrough-row:first-child .fo-breakthrough-thread-line {
+  top: 14px;
+  bottom: 0;
+}
+
+/* Middle items (2 & 3): thread spans full height */
+.fo-breakthrough-row:nth-child(2) .fo-breakthrough-thread-line,
+.fo-breakthrough-row:nth-child(3) .fo-breakthrough-thread-line {
+  top: 0;
+  bottom: 0;
+}
+
+/* Last item: thread comes from top and ends exactly at node center */
+.fo-breakthrough-row:last-child .fo-breakthrough-thread-line {
+  top: 0;
+  height: 14px;
+}
+
+/* Thread Node Container */
+.fo-breakthrough-node-wrap {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  padding: 4px 0;
+}
+
+.fo-breakthrough-node {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #185FA5;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Node 2 subtle lavender accent */
+.fo-breakthrough-row:nth-child(2) .fo-breakthrough-node {
+  background: #534AB7;
+  box-shadow: 0 0 0 3px rgba(83, 74, 183, 0.14);
+}
+
+/* Sequence Number (Readable, positioned directly below node) */
+.fo-breakthrough-seq-num {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  color: #94A3B8;
+  margin-top: 0.45rem;
+  z-index: 2;
+  background: #FFFFFF;
+  padding: 0 2px;
+}
+
+/* ==========================================================================
+   5. TEXT CONTENT COLUMN (Title & Description)
+   ========================================================================== */
+
+.fo-breakthrough-text-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+.fo-breakthrough-title {
+  margin: 0;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(1.7rem, 2.2vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #0F172A;
+}
+
+.fo-breakthrough-desc {
+  margin: 0;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: #475569;
+  max-width: 520px;
+}
+
+/* ==========================================================================
+   6. OPTIONAL MICRO-ILLUSTRATIONS COLUMN (~48-64px)
+   Lightweight, static SVG representations
+   ========================================================================== */
+
+.fo-breakthrough-visual-col {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 60px;
+  height: 52px;
+}
+
+.fo-micro-illustration {
+  width: 58px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+}
+
+/* ==========================================================================
+   7. RESPONSIVE BREAKPOINTS
+   Desktop: 1440px / 1024px
+   Tablet: 860px - 1024px
+   Mobile: <= 768px, 390px, 360px
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .fo-breakthroughs-section {
+    padding: 5rem 0 5.5rem;
+  }
+
+  .fo-breakthroughs__layout {
+    gap: 3rem;
+  }
+
+  .fo-breakthrough-row {
+    padding: 1.75rem 0;
+    gap: 1.25rem;
+  }
+}
+
+/* Stack layout before columns become cramped */
+@media (max-width: 860px) {
+  .fo-breakthroughs__layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .fo-breakthroughs__intro {
+    max-width: 600px;
+  }
+
+  .fo-breakthroughs__heading {
+    max-width: 100%;
+  }
+
+  .fo-breakthroughs__copy {
+    max-width: 540px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fo-breakthroughs-section {
+    padding: 4rem 0 4.5rem;
+  }
+
+  .fo-breakthroughs__container {
+    padding-inline: 1.15rem;
+  }
+
+  .fo-breakthrough-row {
+    grid-template-columns: 38px 1fr 52px;
+    gap: 1rem;
+    padding: 1.5rem 0;
+  }
+
+  .fo-breakthrough-title {
+    font-size: 1.6rem;
+  }
+
+  .fo-breakthrough-desc {
+    font-size: 0.92rem;
+  }
+
+  .fo-micro-illustration {
+    width: 48px;
+    height: 42px;
+  }
+}
+
+/* On mobile phones, hide micro-illustrations to let copy breathe */
+@media (max-width: 580px) {
+  .fo-breakthrough-row {
+    grid-template-columns: 34px 1fr;
+    gap: 0.85rem;
+  }
+
+  .fo-breakthrough-visual-col {
+    display: none;
+  }
+
+  .fo-breakthrough-seq-num {
+    font-size: 0.7rem;
+  }
+
+  .fo-breakthrough-title {
+    font-size: 1.45rem;
+  }
+}
+
+/* ==========================================================================
+   8. REDUCED MOTION PREFERENCES
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .fo-breakthroughs__intro,
+  .fo-breakthrough-row {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

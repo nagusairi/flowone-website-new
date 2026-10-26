@@ -1,0 +1,48 @@
+{
+  "version": "0.4",
+  "title": "flowOne — Eyebrow Capsule V2 (Advanced Widget - Static No Hover)",
+  "type": "container",
+  "content": [
+    {
+      "id": "fo_eyebrow_v2_root",
+      "elType": "widget",
+      "widgetType": "flowone_eyebrow_v2",
+      "settings": {
+        "align": "flex-start",
+        "title_text": "CONNECTED BUSINESS PLATFORM",
+        "title_html_tag": "span",
+        "show_chip": "yes",
+        "chip_icon": "spark",
+        "chip_text": "PLATFORM",
+        "show_arrow": "yes",
+        "enable_link": "no",
+        "enable_hover_effects": "no",
+        "capsule_min_height": {
+          "unit": "px",
+          "size": 34
+        },
+        "chip_height": {
+          "unit": "px",
+          "size": 22
+        },
+        "capsule_padding": {
+          "unit": "px",
+          "top": "5",
+          "right": "12",
+          "bottom": "5",
+          "left": "6",
+          "isLinked": false
+        },
+        "chip_padding": {
+          "unit": "px",
+          "top": "3",
+          "right": "9",
+          "bottom": "3",
+          "left": "7",
+          "isLinked": false
+        }
+      },
+      "elements": []
+    }
+  ]
+}

@@ -1,0 +1,863 @@
+/* ==========================================================================
+   flowOne New Homepage — Section 05: AI Advantage
+   Direction 01: The Intelligence Current (Organic Editorial Divider)
+   Scoped CSS: .fo-ai-current-section
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Section Canvas Shell (Light, Calm, Spacious)
+   -------------------------------------------------------------------------- */
+.fo-ai-current-section {
+  position: relative;
+  background: linear-gradient(180deg, #F8FAFC 0%, #F8FAFF 40%, #FAFBFD 100%);
+  color: #0F172A;
+  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  padding-bottom: clamp(5rem, 9vw, 8.5rem);
+  isolation: isolate;
+  overflow: clip;
+}
+
+.fo-ai-current__container {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. Two-Part Composition Workspace (52% Visual | Divider | 48% Editorial)
+   -------------------------------------------------------------------------- */
+.fo-ai-current__workspace {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(460px, 1.15fr) 70px minmax(380px, 1fr);
+  align-items: center;
+  gap: 0;
+}
+
+/* --------------------------------------------------------------------------
+   3. Left-Side Visual: From Transaction to Intelligence
+   -------------------------------------------------------------------------- */
+.fo-ai-current__visual-col {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-right: 1.25rem;
+}
+
+.fo-ai-current__canvas {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  padding: 2.25rem 1.25rem;
+}
+
+/* Central Refined Invoice Card */
+.fo-ai-current__invoice {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow: 
+    0 20px 45px rgba(15, 23, 42, 0.07),
+    0 2px 8px rgba(15, 23, 42, 0.04),
+    0 0 0 1px rgba(24, 95, 165, 0.05);
+  z-index: 5;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.fo-ai-current__invoice:hover {
+  box-shadow: 
+    0 24px 50px rgba(15, 23, 42, 0.1),
+    0 4px 12px rgba(24, 95, 165, 0.08),
+    0 0 0 1px rgba(24, 95, 165, 0.15);
+}
+
+/* Invoice Header */
+.fo-ai-current__inv-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.fo-ai-current__inv-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+.fo-ai-current__inv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #0284C7;
+  background: #E0F2FE;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.fo-ai-current__inv-badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0284C7;
+}
+
+/* Invoice Primary Payload */
+.fo-ai-current__inv-payload {
+  margin-bottom: 1.35rem;
+}
+
+.fo-ai-current__inv-ref {
+  display: block;
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #0F172A;
+}
+
+.fo-ai-current__inv-amount {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #185FA5;
+  margin: 0.15rem 0 0.35rem 0;
+}
+
+.fo-ai-current__inv-client {
+  font-size: 0.82rem;
+  color: #64748B;
+  margin: 0;
+}
+
+/* Line Items / Financial Breakdown Rows */
+.fo-ai-current__inv-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 0.9rem 0;
+  border-top: 1px solid #F1F5F9;
+  border-bottom: 1px solid #F1F5F9;
+  margin-bottom: 1.15rem;
+}
+
+.fo-ai-current__inv-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.76rem;
+  color: #475569;
+}
+
+.fo-ai-current__inv-row span:last-child {
+  font-weight: 600;
+  color: #1E293B;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Telemetry Footer */
+.fo-ai-current__inv-telemetry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.fo-ai-current__inv-metric {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.fo-ai-current__inv-metric small {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.fo-ai-current__inv-metric strong {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #1E293B;
+}
+
+.fo-ai-current__inv-metric strong.is-highlight {
+  color: #185FA5;
+}
+
+/* Connected Business Signal Badges */
+.fo-ai-current__signal {
+  position: absolute;
+  background: #FFFFFF;
+  border: 1px solid rgba(24, 95, 165, 0.22);
+  border-radius: 12px;
+  padding: 0.65rem 0.95rem;
+  box-shadow: 0 10px 24px rgba(24, 95, 165, 0.08), 0 2px 6px rgba(15, 23, 42, 0.04);
+  z-index: 6;
+  max-width: 220px;
+  pointer-events: auto;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.fo-ai-current__signal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(24, 95, 165, 0.14);
+}
+
+.fo-ai-current__signal-kicker {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #185FA5;
+  display: block;
+  margin-bottom: 0.2rem;
+}
+
+.fo-ai-current__signal-text {
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #1E293B;
+  line-height: 1.35;
+  margin: 0;
+}
+
+.fo-ai-current__signal-meta {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #534AB7;
+  display: block;
+  margin-top: 0.25rem;
+}
+
+/* Strategic Positioning around Central Invoice */
+.fo-ai-current__signal--top-right {
+  top: 0;
+  right: -10px;
+}
+
+.fo-ai-current__signal--bottom-right {
+  bottom: 0;
+  right: -5px;
+}
+
+.fo-ai-current__signal--bottom-left {
+  bottom: 12px;
+  left: 0;
+}
+
+/* SVG Routing Connectors */
+.fo-ai-current__connectors-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Intelligence Focal Convergence Point (Near Animated Divider) */
+.fo-ai-current__focal-point {
+  position: absolute;
+  top: 50%;
+  right: -32px;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  border: 1px solid rgba(83, 74, 183, 0.35);
+  border-radius: 9999px;
+  padding: 0.35rem 0.85rem 0.35rem 0.5rem;
+  box-shadow: 
+    0 10px 24px rgba(83, 74, 183, 0.12),
+    0 0 16px rgba(24, 95, 165, 0.15);
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.fo-ai-current__focal-lottie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+}
+
+.fo-ai-current__focal-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.fo-ai-current__focal-text strong {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+.fo-ai-current__focal-text small {
+  font-size: 0.58rem;
+  color: #64748B;
+}
+
+/* --------------------------------------------------------------------------
+   4. Center Feature: Animated Organic Vertical Divider (The Current)
+   -------------------------------------------------------------------------- */
+.fo-ai-current__divider-col {
+  position: relative;
+  width: 70px;
+  height: 100%;
+  min-height: 520px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  pointer-events: none;
+  user-select: none;
+}
+
+.fo-ai-current__vertical-divider-shell {
+  position: relative;
+  width: 70px;
+  height: 100%;
+  min-height: 520px;
+}
+
+.fo-ai-current__vertical-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 70px;
+  height: 100%;
+  overflow: visible;
+}
+
+/* 3 Overlapping Organic Layers with Subtle Tonal Variations */
+.fo-ai-current__layer-back {
+  fill: #E5E8FA;
+  opacity: 0.55;
+  animation: foCurrentVertical1 35s linear infinite alternate;
+  will-change: transform;
+}
+
+.fo-ai-current__layer-mid {
+  fill: #DCEBFA;
+  opacity: 0.72;
+  animation: foCurrentVertical2 28s linear infinite alternate;
+  will-change: transform;
+}
+
+.fo-ai-current__layer-front {
+  fill: url(#fo-current-grad-front);
+  opacity: 0.88;
+  animation: foCurrentVertical3 42s linear infinite alternate;
+  will-change: transform;
+}
+
+/* Subtle, Understated Vertical Animations */
+@keyframes foCurrentVertical1 {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-16px) scaleY(1.02);
+  }
+  100% {
+    transform: translateY(14px) scaleY(0.98);
+  }
+}
+
+@keyframes foCurrentVertical2 {
+  0% {
+    transform: translateY(0) scaleX(1);
+  }
+  50% {
+    transform: translateY(18px) scaleX(1.06);
+  }
+  100% {
+    transform: translateY(-12px) scaleX(0.96);
+  }
+}
+
+@keyframes foCurrentVertical3 {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-12px) scaleY(0.98);
+  }
+  100% {
+    transform: translateY(16px) scaleY(1.03);
+  }
+}
+
+/* Horizontal Divider for Mobile Stack (Hidden on Desktop) */
+.fo-ai-current__horizontal-divider-shell {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   5. Right-Side Editorial Content Treatment
+   -------------------------------------------------------------------------- */
+.fo-ai-current__content-col {
+  padding-left: clamp(1.75rem, 3.5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 580px;
+}
+
+/* Eyebrow */
+.fo-ai-current__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(24, 95, 165, 0.08);
+  border: 1px solid rgba(24, 95, 165, 0.22);
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  align-self: flex-start;
+}
+
+.fo-ai-current__eyebrow-lottie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.fo-ai-current__eyebrow-text {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+/* Headline (Bebas Neue) */
+.fo-ai-current__headline {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.06;
+  letter-spacing: 0.02em;
+  color: #0F172A;
+  margin: 0 0 1.25rem 0;
+}
+
+/* Description (Lorin) */
+.fo-ai-current__desc {
+  font-family: var(--font-family-body, "Lorin", sans-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.68;
+  color: #334155;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* --------------------------------------------------------------------------
+   5b. Compact Info Pills & Progression Pipeline (Option A & Option B)
+   -------------------------------------------------------------------------- */
+.fo-ai-current__pills-wrapper {
+  margin-top: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: 540px;
+}
+
+.fo-ai-current__pills-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-current__pills-caption {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+/* Option A vs Option B Mode Toggle */
+.fo-ai-current__mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem;
+  background: #EEF2F6;
+  border-radius: 9999px;
+  border: 1px solid #E2E8F0;
+}
+
+.fo-ai-current__mode-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0.22rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fo-ai-current__mode-btn.is-active {
+  background: #FFFFFF;
+  color: #185FA5;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+
+/* Horizontal Pills Track */
+.fo-ai-current__pills-track {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  background: rgba(241, 245, 249, 0.85);
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fo-ai-current__pills-track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Individual Pill Button */
+.fo-ai-current__pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #64748B;
+  font-family: var(--font-family-interface, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-ai-current__pill-btn:hover {
+  color: #0F172A;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.fo-ai-current__pill-btn.is-active {
+  background: #FFFFFF;
+  border-color: rgba(24, 95, 165, 0.32);
+  color: #0284C7;
+  font-weight: 700;
+  box-shadow: 
+    0 2px 8px rgba(24, 95, 165, 0.1),
+    0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.fo-ai-current__pill-num {
+  font-size: 0.66rem;
+  opacity: 0.8;
+  font-variant-numeric: tabular-nums;
+}
+
+.fo-ai-current__pill-label {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+/* Option B: Ambient Live Dot */
+.fo-ai-current__pill-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0284C7;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.7);
+  animation: foPillPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes foPillPulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+}
+
+/* Option B: Ambient Subtle Stream Caption */
+.fo-ai-current__ambient-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(241, 245, 249, 0.75);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  font-size: 0.72rem;
+  animation: foPillFadeIn 0.3s ease;
+}
+
+.fo-ai-current__ambient-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #185FA5;
+  font-size: 0.69rem;
+  text-transform: uppercase;
+}
+
+.fo-ai-current__ambient-tagline {
+  font-size: 0.69rem;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+/* Detail Card (Option A) */
+.fo-ai-current__pill-detail {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 1rem 1.25rem;
+  box-shadow: 
+    0 8px 20px rgba(15, 23, 42, 0.04),
+    0 1px 3px rgba(15, 23, 42, 0.02);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  animation: foPillFadeIn 0.28s ease;
+}
+
+@keyframes foPillFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fo-ai-current__detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-current__detail-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+.fo-ai-current__detail-metric {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #0284C7;
+  background: #E0F2FE;
+  padding: 0.2rem 0.55rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(2, 132, 199, 0.2);
+}
+
+.fo-ai-current__detail-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  line-height: 1.35;
+}
+
+.fo-ai-current__detail-tagline {
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #475569;
+  margin: 0;
+}
+
+/* Desktop line break helper */
+@media (min-width: 1024px) {
+  .fo-ai-current__br-desktop {
+    display: inline;
+  }
+}
+@media (max-width: 1023px) {
+  .fo-ai-current__br-desktop {
+    display: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsive Layouts & Mobile Horizontal Transition
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .fo-ai-current__workspace {
+    grid-template-columns: minmax(420px, 1.1fr) 50px minmax(320px, 1fr);
+  }
+
+  .fo-ai-current__divider-col {
+    width: 50px;
+  }
+
+  .fo-ai-current__vertical-divider-shell {
+    width: 50px;
+  }
+
+  .fo-ai-current__vertical-svg {
+    width: 50px;
+  }
+
+  .fo-ai-current__content-col {
+    padding-left: 1.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .fo-ai-current__workspace {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .fo-ai-current__visual-col {
+    padding-right: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .fo-ai-current__focal-point {
+    right: 10px;
+    bottom: -15px;
+    top: auto;
+    transform: none;
+  }
+
+  /* Hide vertical divider on tablet/mobile */
+  .fo-ai-current__divider-col {
+    display: none;
+  }
+
+  /* Display horizontal organic transition between visual and text */
+  .fo-ai-current__horizontal-divider-shell {
+    display: block;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin: 2.25rem 0;
+    pointer-events: none;
+  }
+
+  .fo-ai-current__horizontal-track {
+    width: 100%;
+    transform-origin: 100% 50%;
+    transform: scale(4);
+    animation: foCurrentHorizontalSlide 35s linear infinite alternate;
+  }
+
+  .fo-ai-current__horizontal-svg {
+    display: block;
+    width: 100%;
+    height: 32px;
+  }
+
+  @keyframes foCurrentHorizontalSlide {
+    0% {
+      transform: scale(4) translateX(0);
+    }
+    100% {
+      transform: scale(4) translateX(calc(100% - 100% / 4));
+    }
+  }
+
+  .fo-ai-current__content-col {
+    padding-left: 0;
+    max-width: 520px;
+    margin: 0 auto;
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .fo-ai-current__canvas {
+    padding: 1.5rem 0.5rem;
+  }
+
+  .fo-ai-current__invoice {
+    padding: 1.25rem;
+  }
+
+  .fo-ai-current__signal {
+    position: relative;
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    max-width: 100%;
+    margin-top: 0.75rem;
+  }
+
+  .fo-ai-current__connectors-svg {
+    display: none;
+  }
+
+  .fo-ai-current__focal-point {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    margin-top: 0.85rem;
+    align-self: flex-start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Accessibility: Reduced Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fo-ai-current__layer-back,
+  .fo-ai-current__layer-mid,
+  .fo-ai-current__layer-front,
+  .fo-ai-current__horizontal-track {
+    animation: none !important;
+  }
+
+  .fo-ai-current__invoice,
+  .fo-ai-current__signal {
+    transition: none !important;
+  }
+}

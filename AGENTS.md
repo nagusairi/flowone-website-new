@@ -39,3 +39,13 @@ This project uses **Tailwind CSS v4** through the `@tailwindcss/vite` plugin con
 - Use double quotes for strings containing apostrophes (`"We're here to help"`), or escape them in single-quoted strings. An unescaped apostrophe in a single-quoted string breaks the build.
 - Ensure JSX tags are closed and braces are balanced.
 - Export components as default exports.
+
+## UI/UX Design Principles
+
+### Section Background Differentiation
+As a general design rule, use subtle background variations between sections to establish clear visual separation, improve content readability, and create a strong visual hierarchy. Maintain sufficient contrast between text and backgrounds, ensure consistency with the design system, and avoid excessive color changes or decorative elements that could distract users. Background differentiation should support content scannability, accessibility, and a cohesive visual experience across desktop, tablet, and mobile devices.
+
+- **Alternating Rhythm**: Maintain an intentional cadence across the page: Pure White (`#FFFFFF`) ⇄ Subtle Cool Slate Tint (`#F8FAFC`) ⇄ FlowOne Tech Ice Tint (`#F6F9FD`) ⇄ Pure White (`#FFFFFF`).
+- **Zero Consecutive Duplication**: Never allow two adjacent sections to share identical solid background colors.
+- **Seamless Wave & Divider Integration**: Multi-layer wave dividers and transition borders must dynamically match the adjacent section background colors (`beforeSectionBg` and `afterSectionBg`).
+- **Contrast & Accessibility**: Maintain WCAG AAA compliance (min 7:1) for all text and UI elements against both pure white and tinted backgrounds.

@@ -7,10 +7,12 @@ export interface AIDataStreamConnectorsProps {
 export const AIDataStreamConnectors = memo(function AIDataStreamConnectors({
   className = "",
 }: AIDataStreamConnectorsProps) {
-  // Path A: From Invoice Port A (0, 155) across 60px gap to Stepper Port (60, 26)
+  // Path A: From Invoice Port A (0, 155) across 60px gap to Active Stage Inflow (60, 26)
   const pathA = "M 0 155 C 27 155, 33 26, 60 26";
-  // Path B: From Invoice Port B (0, 285) across 60px gap to Active Card Port (60, 119)
+  // Path B: Base rail geometry
   const pathB = "M 0 285 C 28 285, 32 119, 60 119";
+  // Path B Feedback: From Active Intelligence Stage (60, 119) back toward Invoice Context (0, 285)
+  const pathBFeedback = "M 60 119 C 32 119, 28 285, 0 285";
 
   return (
     <div
@@ -117,7 +119,7 @@ export const AIDataStreamConnectors = memo(function AIDataStreamConnectors({
             fill="none"
             filter="url(#fo-connector-glow)"
           />
-          {/* Traveling Pulse Particle B */}
+          {/* Traveling Pulse Particle B (Feedback Loop: Stage -> Invoice) */}
           <circle
             className="fo-ai-pulse-dot fo-ai-pulse-dot--b"
             r="5"
@@ -125,8 +127,8 @@ export const AIDataStreamConnectors = memo(function AIDataStreamConnectors({
             filter="url(#fo-connector-glow)"
           >
             <animateMotion
-              path={pathB}
-              dur="2.1s"
+              path={pathBFeedback}
+              dur="2.4s"
               repeatCount="indefinite"
             />
           </circle>
@@ -139,8 +141,8 @@ export const AIDataStreamConnectors = memo(function AIDataStreamConnectors({
             opacity="0.6"
           >
             <animateMotion
-              path={pathB}
-              dur="2.1s"
+              path={pathBFeedback}
+              dur="2.4s"
               repeatCount="indefinite"
             />
           </circle>

@@ -109,9 +109,19 @@ const timelineData: TimelinePoint[] = [
 function PredictiveSectionIntro() {
   return (
     <div className="fo-predictive__intro">
-      <div className="fo-predictive__eyebrow" role="note" aria-label="Predictive Business Decisions">
-        <span className="fo-predictive__beacon" aria-hidden="true" />
-        <span className="fo-predictive__eyebrow-text">PREDICTIVE BUSINESS DECISIONS</span>
+      <div className="hero-eyebrow-container" style={{ marginBottom: "0.85rem" }}>
+        <div className="hero-modern-eyebrow is-static" role="note" aria-label="Predictive Business Decisions">
+          <span className="hero-eyebrow-badge">
+            <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+            <span>PREDICTIVE</span>
+          </span>
+          <span className="hero-eyebrow-title">PREDICTIVE BUSINESS DECISIONS</span>
+          <span className="hero-eyebrow-arrow" aria-hidden="true">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+        </div>
       </div>
 
       <h2 className="fo-predictive__heading">

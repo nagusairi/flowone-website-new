@@ -1,0 +1,755 @@
+/* ==========================================================================
+   flowOne Section 07 — Business Outcomes: Direction 01 — The Outcome Gallery
+   Scoped Stylesheet (.fo-outcome-gallery-section)
+   Creative Direction: Premium editorial outcome gallery (2x2)
+   Typography: Bebas Neue (Headings) · Lorin (Body & Interface)
+   Motion: Subtle entrance sequence, static internal visuals
+   ========================================================================== */
+
+.fo-outcome-gallery-section {
+  position: relative;
+  width: 100%;
+  background: #FFFFFF;
+  color: var(--neutral-900, #0D0D0D);
+  padding: 6.5rem 0 7rem;
+  border-top: 1px solid rgba(13, 13, 13, 0.06);
+  border-bottom: 1px solid rgba(13, 13, 13, 0.06);
+  font-family: var(--font-family-body, "Lorin", "Manrope", sans-serif);
+  box-sizing: border-box;
+}
+
+.fo-outcome-gallery__container {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* ==========================================================================
+   1. EDITORIAL SECTION INTRODUCTION
+   ========================================================================== */
+
+.fo-outcome-gallery__intro {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  text-align: left;
+}
+
+.fo-outcome-gallery__heading {
+  margin: 0;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.4rem, 4.4vw, 3.65rem);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0B1020;
+  max-width: 660px; /* Intentional editorial line break */
+}
+
+.fo-outcome-gallery__copy {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.3vw, 1.15rem);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 580px;
+}
+
+/* ==========================================================================
+   2. 2x2 OUTCOME GALLERY GRID
+   ========================================================================== */
+
+.fo-outcome-gallery__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+/* Base Outcome Card */
+.fo-outcome-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.75rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02), 0 8px 24px -4px rgba(15, 23, 42, 0.04);
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* When in view via observer */
+.fo-outcome-gallery-section.is-entered .fo-outcome-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Entrance Sequence Stagger (~60ms) */
+.fo-outcome-gallery-section.is-entered .fo-outcome-card:nth-child(1) {
+  transition-delay: 0ms;
+}
+.fo-outcome-gallery-section.is-entered .fo-outcome-card:nth-child(2) {
+  transition-delay: 60ms;
+}
+.fo-outcome-gallery-section.is-entered .fo-outcome-card:nth-child(3) {
+  transition-delay: 120ms;
+}
+.fo-outcome-gallery-section.is-entered .fo-outcome-card:nth-child(4) {
+  transition-delay: 180ms;
+}
+
+/* Card Text Header */
+.fo-outcome-card__header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  text-align: left;
+}
+
+.fo-outcome-card__title {
+  margin: 0;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(1.75rem, 2.3vw, 2.15rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #0F172A;
+}
+
+.fo-outcome-card__description {
+  margin: 0;
+  font-size: 0.96rem;
+  line-height: 1.55;
+  color: #475569;
+  min-height: 3rem; /* Ensures aligned visual areas across cards */
+}
+
+/* Spacious Visual Field Base */
+.fo-outcome-card__visual {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+  border-radius: 12px;
+  border: 1px solid #E2E8F0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   3. CARD 01 VISUAL — CASHFLOW CLARITY
+   Visual Metaphor: Receivables becoming easier to distinguish
+   Three restrained horizontal tracks: Due, Overdue, Follow-up
+   Follow-up marker receives one restrained blue emphasis (#185FA5)
+   ========================================================================== */
+
+.fo-outcome-card__visual--cashflow {
+  background: #F8FAFF;
+  border-color: #E2E8F0;
+}
+
+.fo-cashflow-tracks {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.fo-cashflow-track {
+  display: grid;
+  grid-template-columns: 85px 1fr 105px;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fo-cashflow-label {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.fo-cashflow-track--followup .fo-cashflow-label {
+  color: #185FA5;
+  font-weight: 800;
+}
+
+.fo-cashflow-lane {
+  position: relative;
+  height: 2px;
+  background: #E2E8F0;
+  border-radius: 1px;
+  display: flex;
+  align-items: center;
+}
+
+.fo-cashflow-track--followup .fo-cashflow-lane {
+  background: #DCEBFA;
+}
+
+/* Restrained Track Markers */
+.fo-cashflow-marker {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #94A3B8;
+  transform: translate(-50%, 0);
+}
+
+.fo-cashflow-marker--due {
+  left: 38%;
+}
+
+.fo-cashflow-marker--overdue {
+  left: 64%;
+  background: #64748B;
+}
+
+/* The ONE Restrained Blue Emphasis */
+.fo-cashflow-marker--followup {
+  left: 82%;
+  width: 10px;
+  height: 10px;
+  background: #185FA5;
+  box-shadow: 0 0 0 3.5px rgba(24, 95, 165, 0.16);
+}
+
+.fo-cashflow-status {
+  text-align: right;
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+.fo-cashflow-track--followup .fo-cashflow-status {
+  color: #185FA5;
+  font-weight: 750;
+}
+
+/* ==========================================================================
+   4. CARD 02 VISUAL — CONNECTED OPERATIONS
+   Visual Metaphor: A transaction moving through clear handoffs
+   Milestones: Order → Invoice → Collection
+   Cool white with pale periwinkle accents (#E5E8FA, #534AB7)
+   ========================================================================== */
+
+.fo-outcome-card__visual--operations {
+  background: #FAFBFD;
+  border-color: #E2E8F0;
+}
+
+.fo-journey-flow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  max-width: 460px;
+}
+
+.fo-journey-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.fo-journey-capsule {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid #E5E8FA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #534AB7;
+  box-shadow: 0 2px 6px rgba(83, 74, 183, 0.06);
+}
+
+.fo-journey-node.is-active .fo-journey-capsule {
+  border-color: #534AB7;
+  background: #F4F4FD;
+  box-shadow: 0 0 0 3px rgba(83, 74, 183, 0.12);
+}
+
+.fo-journey-title {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.8rem;
+  font-weight: 750;
+  color: #0F172A;
+  letter-spacing: 0.02em;
+}
+
+.fo-journey-sub {
+  font-size: 0.68rem;
+  color: #64748B;
+  font-weight: 550;
+}
+
+/* Fine SVG Connector Line with Chevrons */
+.fo-journey-connector {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 2px;
+  background: #E5E8FA;
+  margin: 0 -4px 1.5rem;
+  z-index: 1;
+}
+
+.fo-journey-connector-arrow {
+  color: #534AB7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   5. CARD 03 VISUAL — CONTROL & COMPLIANCE
+   Visual Metaphor: Supporting information connected to its transaction
+   Minimal document outline with 2 connected references:
+   - Supporting document
+   - Exception record
+   Subtle neutral field with blue accents (#185FA5)
+   ========================================================================== */
+
+.fo-outcome-card__visual--compliance {
+  background: #F8FAFC;
+  border-color: #E2E8F0;
+}
+
+.fo-compliance-schema {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 120px 60px 1fr;
+  align-items: center;
+  max-width: 460px;
+}
+
+/* Minimal Document Outline */
+.fo-compliance-doc {
+  width: 108px;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  border-radius: 8px;
+  padding: 12px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+}
+
+.fo-compliance-doc-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.fo-compliance-doc-tag {
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #64748B;
+  text-transform: uppercase;
+}
+
+.fo-compliance-doc-line {
+  height: 3px;
+  background: #E2E8F0;
+  border-radius: 2px;
+}
+
+.fo-compliance-doc-line--short {
+  width: 55%;
+}
+
+.fo-compliance-doc-line--med {
+  width: 78%;
+}
+
+.fo-compliance-doc-line--accent {
+  width: 45%;
+  background: #DCEBFA;
+}
+
+/* Connected Branches (SVG Conduit Lines) */
+.fo-compliance-branches {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-compliance-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.fo-compliance-link-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  border: 1.25px solid #E2E8F0;
+  border-left: 2.5px solid #185FA5;
+  border-radius: 6px;
+  padding: 0.45rem 0.85rem;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03);
+}
+
+.fo-compliance-link-icon {
+  color: #185FA5;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.fo-compliance-link-text {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #0F172A;
+}
+
+/* ==========================================================================
+   6. CARD 04 VISUAL — BETTER DECISIONS
+   Visual Metaphor: Two types of context informing one point of focus
+   Inputs: Financial signals, Operational context
+   Focal point: Decision context (small and precise)
+   Near-white with restrained blue (#185FA5) and lavender (#534AB7)
+   ========================================================================== */
+
+.fo-outcome-card__visual--decisions {
+  background: #FAFBFD;
+  border-color: #E2E8F0;
+}
+
+.fo-decisions-schema {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 145px 55px 1fr;
+  align-items: center;
+  max-width: 470px;
+}
+
+.fo-decisions-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.fo-decisions-input-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: #FFFFFF;
+  border: 1.25px solid #E2E8F0;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+}
+
+.fo-decisions-input-chip--financial {
+  border-left: 2.5px solid #185FA5;
+}
+
+.fo-decisions-input-chip--operational {
+  border-left: 2.5px solid #534AB7;
+}
+
+.fo-decisions-chip-icon {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.fo-decisions-input-chip--financial .fo-decisions-chip-icon {
+  color: #185FA5;
+}
+
+.fo-decisions-input-chip--operational .fo-decisions-chip-icon {
+  color: #534AB7;
+}
+
+.fo-decisions-chip-label {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0F172A;
+  white-space: nowrap;
+}
+
+.fo-decisions-conduits {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Modest, Precise Focal Point */
+.fo-decisions-focal {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #FFFFFF;
+  border: 1.5px solid #185FA5;
+  border-radius: 9999px;
+  padding: 0.5rem 1rem;
+  box-shadow: 0 2px 10px rgba(24, 95, 165, 0.08);
+}
+
+.fo-decisions-focal-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #185FA5;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.16);
+  flex-shrink: 0;
+}
+
+.fo-decisions-focal-label {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: #185FA5;
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   7. COMPARISON SELECTOR BAR STYLING
+   ========================================================================== */
+
+.section-07-outcomes-comparison-bar {
+  background: #0B1020;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.85rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   8. RESPONSIVE BREAKPOINTS (Desktop 1440, Tablet 1024/768, Mobile 390/360)
+   ========================================================================== */
+
+@media (max-width: 1024px) {
+  .fo-outcome-gallery-section {
+    padding: 5rem 0 5.5rem;
+  }
+
+  .fo-outcome-gallery__grid {
+    gap: 20px;
+  }
+
+  .fo-outcome-card {
+    padding: 28px;
+    border-radius: 16px;
+  }
+
+  .fo-outcome-card__visual {
+    min-height: 180px;
+    padding: 18px;
+  }
+
+  .fo-compliance-schema,
+  .fo-decisions-schema {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .fo-compliance-branches,
+  .fo-decisions-conduits {
+    transform: rotate(90deg);
+    margin: -0.25rem 0;
+  }
+}
+
+@media (max-width: 820px) {
+  .fo-outcome-gallery__grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .fo-outcome-card__description {
+    min-height: auto;
+  }
+
+  .fo-compliance-schema {
+    grid-template-columns: 110px 50px 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .fo-compliance-branches {
+    transform: none;
+    margin: 0;
+  }
+
+  .fo-decisions-schema {
+    grid-template-columns: 140px 45px 1fr;
+    justify-items: start;
+    text-align: left;
+  }
+
+  .fo-decisions-conduits {
+    transform: none;
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .fo-outcome-gallery-section {
+    padding: 4rem 0 4.5rem;
+  }
+
+  .fo-outcome-gallery__container {
+    gap: 2.5rem;
+    padding-inline: 1rem;
+  }
+
+  .fo-outcome-card {
+    padding: 22px 20px;
+    border-radius: 14px;
+    gap: 1.35rem;
+  }
+
+  .fo-outcome-card__title {
+    font-size: 1.6rem;
+  }
+
+  .fo-outcome-card__description {
+    font-size: 0.9rem;
+  }
+
+  .fo-outcome-card__visual {
+    padding: 16px 12px;
+    min-height: 160px;
+  }
+
+  /* Compact Cashflow Tracks on Mobile */
+  .fo-cashflow-track {
+    grid-template-columns: 72px 1fr 85px;
+    gap: 0.5rem;
+  }
+
+  .fo-cashflow-label {
+    font-size: 0.65rem;
+  }
+
+  .fo-cashflow-status {
+    font-size: 0.65rem;
+  }
+
+  /* Compact Operations Journey on Mobile */
+  .fo-journey-flow {
+    max-width: 100%;
+  }
+
+  .fo-journey-capsule {
+    width: 32px;
+    height: 32px;
+  }
+
+  .fo-journey-title {
+    font-size: 0.72rem;
+  }
+
+  .fo-journey-sub {
+    font-size: 0.62rem;
+  }
+
+  /* Compact Compliance on Mobile */
+  .fo-compliance-schema {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    justify-items: center;
+  }
+
+  .fo-compliance-branches {
+    display: none;
+  }
+
+  .fo-compliance-links {
+    width: 100%;
+  }
+
+  .fo-compliance-link-chip {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+
+  /* Compact Decisions on Mobile */
+  .fo-decisions-schema {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+    justify-items: center;
+  }
+
+  .fo-decisions-conduits {
+    display: none;
+  }
+
+  .fo-decisions-inputs {
+    width: 100%;
+  }
+
+  .fo-decisions-input-chip {
+    width: 100%;
+    box-sizing: border-box;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .fo-cashflow-track {
+    grid-template-columns: 65px 1fr 75px;
+  }
+
+  .fo-outcome-card {
+    padding: 18px 16px;
+  }
+}
+
+/* ==========================================================================
+   9. REDUCED MOTION PREFERENCES
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .fo-outcome-card {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .fo-cashflow-marker,
+  .fo-cashflow-marker--followup {
+    animation: none !important;
+  }
+}

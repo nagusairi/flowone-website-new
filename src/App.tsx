@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import Homepage from "./Homepage";
 import NewHomepage from "./NewHomepage";
 import FinalHomepage from "./FinalHomepage";
-import MegaMenuHandoffViewer from "./components/MegaMenuHandoffViewer";
+import FlowoneFinal from "./FlowoneFinal";
+
+const MegaMenuHandoffViewer = lazy(() => import("./components/MegaMenuHandoffViewer"));
 
 export default function App() {
-  // Support URL-based switching via ?view=final or ?view=new or ?view=classic or ?view=megamenu
-  const [view, setView] = useState<"final" | "new" | "classic" | "megamenu">(() => {
+  // Support URL-based switching via ?view=final or ?view=flowone-final or ?view=new or ?view=classic or ?view=megamenu
+  const [view, setView] = useState<"final" | "flowone-final" | "new" | "classic" | "megamenu">(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
       const v = params.get("view");
       if (v === "final" || window.location.pathname === "/final") return "final";
+      if (v === "flowone-final" || window.location.pathname === "/flowone-final") return "flowone-final";
       if (v === "new" || window.location.pathname === "/new") return "new";
       if (v === "classic" || window.location.pathname === "/classic") return "classic";
       if (v === "megamenu" || window.location.pathname === "/megamenu") return "megamenu";
@@ -21,7 +24,7 @@ export default function App() {
   const [switcherVisible, setSwitcherVisible] = useState(true);
 
   // Sync browser URL when switching view
-  const handleSwitch = (nextView: "final" | "new" | "classic" | "megamenu") => {
+  const handleSwitch = (nextView: "final" | "flowone-final" | "new" | "classic" | "megamenu") => {
     setView(nextView);
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
@@ -37,6 +40,7 @@ export default function App() {
       if (v === "classic") setView("classic");
       else if (v === "megamenu") setView("megamenu");
       else if (v === "new") setView("new");
+      else if (v === "flowone-final") setView("flowone-final");
       else setView("final");
     };
     window.addEventListener("popstate", handlePopState);
@@ -47,10 +51,14 @@ export default function App() {
     <>
       {view === "final" ? (
         <FinalHomepage />
+      ) : view === "flowone-final" ? (
+        <FlowoneFinal />
       ) : view === "new" ? (
         <NewHomepage />
       ) : view === "megamenu" ? (
-        <MegaMenuHandoffViewer />
+        <Suspense fallback={<div style={{ padding: "4rem", textAlign: "center", color: "#64748B" }}>Loading Mega Menu Spec...</div>}>
+          <MegaMenuHandoffViewer />
+        </Suspense>
       ) : (
         <Homepage />
       )}
@@ -69,6 +77,14 @@ export default function App() {
             aria-pressed={view === "final"}
           >
             Final Home (Editable)
+          </button>
+          <button
+            type="button"
+            className={`flowone-switcher-btn ${view === "flowone-final" ? "is-active" : ""}`}
+            onClick={() => handleSwitch("flowone-final")}
+            aria-pressed={view === "flowone-final"}
+          >
+            Flowone Final
           </button>
           <button
             type="button"
@@ -115,7 +131,7 @@ export default function App() {
         >
           <span className="flowone-switcher-dot" aria-hidden="true" />
           <span style={{ padding: "0.2rem 0.5rem", color: "#CBD5E1", fontSize: "0.62rem", fontWeight: 700 }}>
-            {view === "new" ? "New Homepage" : "Classic Homepage"} ⇄
+            {view === "flowone-final" ? "Flowone Final" : view === "new" ? "New Homepage" : view === "final" ? "Final Home" : "Classic Homepage"} ⇄
           </span>
         </button>
       )}

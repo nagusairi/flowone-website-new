@@ -1,0 +1,750 @@
+/* ==========================================================================
+   flowOne New Homepage — Section 05: AI Advantage
+   Direction 01: The Signal Becomes Clear (Convergence Narrative)
+   Scoped CSS: .fo-ai-signal-clear-section
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Section Canvas Shell
+   -------------------------------------------------------------------------- */
+.fo-ai-signal-clear-section {
+  position: relative;
+  background-image: linear-gradient(190deg, #181A61 0%, #5356D6 100%);
+  color: #FFFFFF;
+  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  padding-bottom: clamp(5rem, 9vw, 8.5rem);
+  isolation: isolate;
+  overflow: clip;
+}
+
+.fo-ai-signal-clear__container {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. Editorial Section Header
+   -------------------------------------------------------------------------- */
+.fo-ai-signal-clear__header {
+  max-width: 780px;
+  margin-bottom: clamp(2.75rem, 4.5vw, 4rem);
+}
+
+.fo-ai-signal-clear__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 0.95rem;
+  background: rgba(9, 14, 32, 0.85);
+  border: 1px solid rgba(5, 199, 242, 0.4);
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 18px rgba(5, 199, 242, 0.18);
+}
+
+.fo-ai-signal-clear__eyebrow-lottie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.fo-ai-signal-clear__eyebrow-text {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-signal-clear__headline {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  margin: 0 0 1rem 0;
+}
+
+.fo-ai-signal-clear__copy {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  max-width: 680px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Workspace: Three-Zone Balanced Composition
+   -------------------------------------------------------------------------- */
+.fo-ai-signal-clear__workspace {
+  position: relative;
+  display: grid;
+  grid-template-columns: 380px 120px 1fr;
+  align-items: start;
+  gap: 0;
+}
+
+/* Zone B: Persistent Transaction Anchor (Left) */
+.fo-ai-signal-clear__invoice-col {
+  position: sticky;
+  top: 130px;
+  z-index: 15;
+  will-change: transform;
+}
+
+.fo-ai-signal-clear__invoice-card {
+  position: relative;
+  background: #090E20;
+  border: 1px solid rgba(5, 199, 242, 0.38);
+  border-radius: 16px;
+  padding: 1.75rem;
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.fo-ai-signal-clear__invoice-card.is-active-state {
+  border-color: rgba(5, 199, 242, 0.58);
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.65),
+    0 0 24px rgba(5, 199, 242, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Tech Corner Brackets */
+.fo-ai-signal-clear__corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #05C7F2;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.fo-ai-signal-clear__corner--tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-top-left-radius: 16px; }
+.fo-ai-signal-clear__corner--tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; border-top-right-radius: 16px; }
+.fo-ai-signal-clear__corner--bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; border-bottom-left-radius: 16px; }
+.fo-ai-signal-clear__corner--br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-bottom-right-radius: 16px; }
+
+.fo-ai-signal-clear__invoice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fo-ai-signal-clear__invoice-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-signal-clear__invoice-beacon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #38BDF8;
+}
+
+.fo-ai-signal-clear__beacon-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 8px #05C7F2;
+  animation: foAiPulseBeacon 2s infinite ease-in-out;
+}
+
+.fo-ai-signal-clear__invoice-payload {
+  margin-bottom: 1.35rem;
+}
+
+.fo-ai-signal-clear__invoice-ref {
+  display: block;
+  font-size: 1.55rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.fo-ai-signal-clear__invoice-amount {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #05C7F2;
+  margin: 0.15rem 0 0.3rem 0;
+}
+
+.fo-ai-signal-clear__invoice-client {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+}
+
+.fo-ai-signal-clear__invoice-telemetry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fo-ai-signal-clear__telemetry-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fo-ai-signal-clear__telemetry-box small {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #94A3B8;
+  text-transform: uppercase;
+}
+
+.fo-ai-signal-clear__telemetry-box strong {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.fo-ai-signal-clear__telemetry-box strong.is-verified {
+  color: #38BDF8;
+}
+
+/* Real-time State Badge */
+.fo-ai-signal-clear__invoice-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(5, 199, 242, 0.3);
+  border-radius: 8px;
+  font-size: 0.72rem;
+  color: #E2E8F0;
+}
+
+/* --------------------------------------------------------------------------
+   4. Signature Visual: Signals Become Clarity (Convergence Canvas)
+   -------------------------------------------------------------------------- */
+.fo-ai-signal-clear__convergence-col {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-signal-clear__convergence-shell {
+  position: sticky;
+  top: 180px;
+  width: 120px;
+  height: 320px;
+  pointer-events: none;
+  z-index: 8;
+}
+
+.fo-ai-signal-clear__convergence-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* Harmonic Convergence Vertical Stream Ribbons (Option 1) */
+.fo-ai-signal-clear__harmonic-layer-1 {
+  animation: foHarmonicSlide1 35s linear infinite alternate;
+  will-change: transform;
+}
+
+.fo-ai-signal-clear__harmonic-layer-2 {
+  animation: foHarmonicSlide2 28s linear infinite alternate;
+  will-change: transform;
+}
+
+.fo-ai-signal-clear__harmonic-layer-3 {
+  animation: foHarmonicSlide3 42s linear infinite alternate;
+  will-change: transform;
+}
+
+@keyframes foHarmonicSlide1 {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-14px) scaleY(1.03);
+  }
+  100% {
+    transform: translateY(12px) scaleY(0.97);
+  }
+}
+
+@keyframes foHarmonicSlide2 {
+  0% {
+    transform: translateY(0) scaleX(1);
+  }
+  50% {
+    transform: translateY(16px) scaleX(1.05);
+  }
+  100% {
+    transform: translateY(-10px) scaleX(0.95);
+  }
+}
+
+@keyframes foHarmonicSlide3 {
+  0% {
+    transform: translateY(0) scaleY(1);
+  }
+  50% {
+    transform: translateY(-10px) scaleY(0.98);
+  }
+  100% {
+    transform: translateY(14px) scaleY(1.02);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   5. Zone C: Clarity & Insight (Primary Evolution Panel)
+   -------------------------------------------------------------------------- */
+.fo-ai-signal-clear__insight-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 12;
+}
+
+/* 3-State Narrative Scrubber Bar */
+.fo-ai-signal-clear__scrubber {
+  position: sticky;
+  top: 130px;
+  margin-bottom: 1.35rem;
+  background: rgba(9, 14, 32, 0.94);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 0.5rem;
+  z-index: 30;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(5, 199, 242, 0.2);
+}
+
+.fo-ai-signal-clear__scrubber-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.fo-ai-signal-clear__scrubber-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 9px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.fo-ai-signal-clear__scrubber-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fo-ai-signal-clear__scrubber-btn.is-active {
+  background: linear-gradient(135deg, rgba(5, 199, 242, 0.22), rgba(0, 85, 255, 0.3));
+  border-color: rgba(5, 199, 242, 0.6);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(5, 199, 242, 0.35);
+}
+
+.fo-ai-signal-clear__scrubber-btn.is-complete {
+  color: rgba(56, 189, 248, 0.9);
+  background: rgba(5, 199, 242, 0.08);
+}
+
+.fo-ai-signal-clear__scrubber-num {
+  font-size: 0.74rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.fo-ai-signal-clear__scrubber-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+/* Primary Clarity Information Surface */
+.fo-ai-signal-clear__panel {
+  position: relative;
+  background: #090E20;
+  border: 1px solid rgba(5, 199, 242, 0.45);
+  border-radius: 20px;
+  padding: clamp(1.85rem, 3.2vw, 2.65rem);
+  box-shadow: 
+    0 28px 65px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: border-color 0.35s ease, box-shadow 0.35s ease;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Ambient Corner Synthesis Glow */
+.fo-ai-signal-clear__panel-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 199, 242, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.4s ease;
+}
+
+.fo-ai-signal-clear__panel-glow--step3 {
+  background: radial-gradient(circle, rgba(0, 85, 255, 0.32) 0%, transparent 70%);
+}
+
+.fo-ai-signal-clear__panel-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Card Header */
+.fo-ai-signal-clear__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.fo-ai-signal-clear__header-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.fo-ai-signal-clear__card-kicker {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-signal-clear__card-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(5, 199, 242, 0.14);
+  border: 1px solid rgba(5, 199, 242, 0.4);
+  color: #05C7F2;
+}
+
+.fo-ai-signal-clear__card-title {
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #FFFFFF;
+  margin: 0 0 1rem 0;
+}
+
+/* Focal Callout: The Clear Understanding */
+.fo-ai-signal-clear__focal-box {
+  background: linear-gradient(135deg, rgba(5, 199, 242, 0.12), rgba(0, 85, 255, 0.16));
+  border-left: 3px solid #05C7F2;
+  border-radius: 0 12px 12px 0;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.45rem;
+}
+
+.fo-ai-signal-clear__focal-quote {
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.5;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.fo-ai-signal-clear__supporting-line {
+  font-size: clamp(0.94rem, 1.2vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 1.85rem 0;
+}
+
+/* 3-Column Contextual Facts */
+.fo-ai-signal-clear__facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.85rem;
+}
+
+.fo-ai-signal-clear__fact-item {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: border-color 0.2s ease;
+}
+
+.fo-ai-signal-clear__fact-item:hover {
+  border-color: rgba(5, 199, 242, 0.35);
+}
+
+.fo-ai-signal-clear__fact-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.fo-ai-signal-clear__fact-val {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.fo-ai-signal-clear__fact-val.is-accent {
+  color: #05C7F2;
+}
+
+/* State 03 Considerations Card */
+.fo-ai-signal-clear__consideration-card {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.65rem;
+}
+
+.fo-ai-signal-clear__consideration-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38BDF8;
+  margin-bottom: 0.85rem;
+  display: block;
+}
+
+.fo-ai-signal-clear__consideration-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.15rem;
+}
+
+.fo-ai-signal-clear__consideration-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.fo-ai-signal-clear__bullet {
+  color: #05C7F2;
+  font-weight: 700;
+  margin-top: 0.1rem;
+}
+
+.fo-ai-signal-clear__action-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-signal-clear__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9px;
+  background: #0055FF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.4);
+}
+
+.fo-ai-signal-clear__action-btn:hover {
+  background: #1A68FF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 85, 255, 0.55);
+}
+
+.fo-ai-signal-clear__action-confirmed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 9px;
+  color: #34D399;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+/* Governance Footer */
+.fo-ai-signal-clear__panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.65);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-signal-clear__footer-shield {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fo-ai-signal-clear__footer-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsive Layouts
+   -------------------------------------------------------------------------- */
+@media (max-width: 1079px) {
+  .fo-ai-signal-clear__workspace {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .fo-ai-signal-clear__invoice-col {
+    position: relative;
+    top: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .fo-ai-signal-clear__convergence-col {
+    display: none;
+  }
+
+  .fo-ai-signal-clear__scrubber {
+    position: sticky;
+    top: 76px;
+  }
+
+  .fo-ai-signal-clear__mobile-wave {
+    display: block;
+    position: relative;
+    width: 100%;
+    margin: 1.5rem 0 2rem 0;
+    overflow: hidden;
+  }
+}
+
+.fo-ai-signal-clear__mobile-wave {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Deep Sapphire 3-Layer Boundary Waves (Option 2)
+   -------------------------------------------------------------------------- */
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--top {
+  filter: drop-shadow(0 6px 20px rgba(5, 199, 242, 0.32));
+  z-index: 5;
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--top .fo-ai-advantage__wave-layer--back {
+  fill: #38BDF8 !important;
+  opacity: 0.45 !important;
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--top .fo-ai-advantage__wave-layer--mid {
+  fill: #05C7F2 !important;
+  opacity: 0.3 !important;
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--top .fo-ai-advantage__wave-layer--front {
+  fill: #F8FAFC !important; /* Carves from Section 04 */
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--bottom {
+  filter: drop-shadow(0 -6px 20px rgba(83, 86, 214, 0.38));
+  z-index: 5;
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--bottom .fo-ai-advantage__wave-layer--back {
+  fill: #5356D6 !important;
+  opacity: 0.55 !important;
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--bottom .fo-ai-advantage__wave-layer--mid {
+  fill: #05C7F2 !important;
+  opacity: 0.35 !important;
+}
+
+.fo-ai-signal-clear-section .fo-ai-advantage__wave--bottom .fo-ai-advantage__wave-layer--front {
+  fill: #FAFBFD !important; /* Blends into Section 06 */
+}
+
+/* --------------------------------------------------------------------------
+   8. Reduced Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fo-ai-signal-clear__beacon-dot,
+  .fo-ai-signal-clear__harmonic-layer-1,
+  .fo-ai-signal-clear__harmonic-layer-2,
+  .fo-ai-signal-clear__harmonic-layer-3 {
+    animation: none !important;
+  }
+
+  .fo-ai-signal-clear__panel,
+  .fo-ai-signal-clear__invoice-card {
+    transition: none !important;
+  }
+}

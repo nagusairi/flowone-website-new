@@ -796,7 +796,7 @@ export default function Homepage() {
 
   return <main id="main-content" className="homepage">
     <a className="fo-skip-link" href="#home-hero">Skip to main content</a>
-    <WebsiteHeader onDemo={openDemo} />
+    <WebsiteHeader onDemo={openDemo} menuTrigger="click" />
     <section id="home-hero" className="home-hero">
       <div className="home-container hero-grid">
         <div className="hero-copy">
@@ -1633,6 +1633,7 @@ const heroRightFragments = [
 
 const HeroFlow = memo(function HeroFlow() {
   const [pulseIndex, setPulseIndex] = useState(0);
+  const [theme, setTheme] = useState<"light" | "dark">("light");
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -1644,7 +1645,7 @@ const HeroFlow = memo(function HeroFlow() {
 
   return (
     <div
-      className="hero-pipeline-console"
+      className={`hero-pipeline-console ${theme === "light" ? "is-light hero-pipeline-console--light" : ""}`}
       aria-label="flowOne Central Architecture: 6 business fragments connected to the central flowOne engine via live pipelines."
     >
       <div className="hero-pipeline-beam" aria-hidden="true" />
@@ -1658,6 +1659,15 @@ const HeroFlow = memo(function HeroFlow() {
         <div className="hero-topbar-sync">
           <span className="hero-sync-pulse-badge">6 OF 6 FRAGMENTS IN SYNC</span>
           <span className="hero-latency-tag">TXN-10482 · 14ms</span>
+          <button
+            type="button"
+            className="hero-console-theme-toggle"
+            onClick={() => setTheme(t => (t === "light" ? "dark" : "light"))}
+            aria-label={`Switch console to ${theme === "light" ? "dark" : "light"} mode`}
+            title={`Switch console to ${theme === "light" ? "dark" : "light"} mode`}
+          >
+            {theme === "light" ? "☀ LIGHT" : "☾ DARK"}
+          </button>
         </div>
       </div>
 

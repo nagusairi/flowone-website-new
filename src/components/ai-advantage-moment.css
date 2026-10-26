@@ -1,0 +1,714 @@
+/* ==========================================================================
+   flowOne New Homepage — Section 05: AI Advantage
+   Direction B: The Moment of Intelligence (3-State Progressive Narrative)
+   Scoped CSS: .fo-ai-moment-section
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Main Section Canvas
+   -------------------------------------------------------------------------- */
+.fo-ai-moment-section {
+  position: relative;
+  background-image: linear-gradient(190deg, #181A61 0%, #5356D6 100%);
+  color: #FFFFFF;
+  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  padding-bottom: clamp(5rem, 9vw, 8.5rem);
+  isolation: isolate;
+  overflow: clip;
+}
+
+.fo-ai-moment__container {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   2. Editorial Section Header
+   -------------------------------------------------------------------------- */
+.fo-ai-moment__header {
+  max-width: 760px;
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+
+.fo-ai-moment__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.4rem 0.9rem;
+  background: rgba(9, 14, 32, 0.85);
+  border: 1px solid rgba(5, 199, 242, 0.4);
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 0 18px rgba(5, 199, 242, 0.18);
+}
+
+.fo-ai-moment__beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 8px #05C7F2;
+  animation: foAiMomentPulse 2.2s infinite ease-in-out;
+}
+
+@keyframes foAiMomentPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.fo-ai-moment__eyebrow-text {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-moment__headline {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  margin: 0 0 1rem 0;
+}
+
+.fo-ai-moment__copy {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  max-width: 680px;
+}
+
+/* --------------------------------------------------------------------------
+   3. Two-Column Balanced Composition
+   -------------------------------------------------------------------------- */
+.fo-ai-moment__workspace {
+  position: relative;
+  display: grid;
+  grid-template-columns: 390px 70px 1fr;
+  align-items: start;
+}
+
+/* Left: Sticky Business Object (Invoice Anchor) */
+.fo-ai-moment__invoice-col {
+  position: sticky;
+  top: 130px;
+  z-index: 15;
+  will-change: transform;
+}
+
+.fo-ai-moment__invoice-card {
+  position: relative;
+  background: #090E20;
+  border: 1px solid rgba(5, 199, 242, 0.35);
+  border-radius: 16px;
+  padding: 1.85rem;
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.55),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.fo-ai-moment__invoice-card.is-moment-active {
+  border-color: rgba(5, 199, 242, 0.55);
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.6),
+    0 0 24px rgba(5, 199, 242, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+}
+
+/* Architectural Corner Accents */
+.fo-ai-moment__corner {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: #05C7F2;
+  border-style: solid;
+  pointer-events: none;
+}
+
+.fo-ai-moment__corner--tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-top-left-radius: 16px; }
+.fo-ai-moment__corner--tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; border-top-right-radius: 16px; }
+.fo-ai-moment__corner--bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; border-bottom-left-radius: 16px; }
+.fo-ai-moment__corner--br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-bottom-right-radius: 16px; }
+
+.fo-ai-moment__invoice-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.fo-ai-moment__invoice-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-moment__invoice-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #38BDF8;
+}
+
+.fo-ai-moment__status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 8px #05C7F2;
+  animation: foAiMomentPulse 1.8s infinite;
+}
+
+.fo-ai-moment__invoice-payload {
+  margin-bottom: 1.45rem;
+}
+
+.fo-ai-moment__invoice-ref {
+  display: block;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: #FFFFFF;
+}
+
+.fo-ai-moment__invoice-amount {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #05C7F2;
+  margin: 0.15rem 0 0.35rem 0;
+}
+
+.fo-ai-moment__invoice-client {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0;
+}
+
+.fo-ai-moment__invoice-telemetry {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.fo-ai-moment__telemetry-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.fo-ai-moment__telemetry-item small {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #94A3B8;
+  text-transform: uppercase;
+}
+
+.fo-ai-moment__telemetry-item strong {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.fo-ai-moment__telemetry-item strong.is-verified {
+  color: #38BDF8;
+}
+
+/* Invoice Active State Tag */
+.fo-ai-moment__invoice-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 1.15rem;
+  padding: 0.55rem 0.85rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(5, 199, 242, 0.3);
+  border-radius: 8px;
+  font-size: 0.72rem;
+  color: #E2E8F0;
+}
+
+.fo-ai-moment__tag-beacon {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 6px #05C7F2;
+}
+
+/* Port on Right Edge */
+.fo-ai-moment__invoice-port {
+  position: absolute;
+  right: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #090E20;
+  border: 2px solid #05C7F2;
+  box-shadow: 0 0 10px rgba(5, 199, 242, 0.8);
+  z-index: 10;
+}
+
+/* --------------------------------------------------------------------------
+   4. Center Single Curved SVG Connector
+   -------------------------------------------------------------------------- */
+.fo-ai-moment__connector-col {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-moment__connector-shell {
+  position: sticky;
+  top: 260px;
+  width: 70px;
+  height: 180px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.fo-ai-moment__connector-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --------------------------------------------------------------------------
+   5. Right: Intelligence Presentation (One Primary Panel)
+   -------------------------------------------------------------------------- */
+.fo-ai-moment__panel-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 12;
+}
+
+/* 3-State Stage Switcher Bar */
+.fo-ai-moment__state-bar {
+  position: sticky;
+  top: 130px;
+  margin-bottom: 1.35rem;
+  background: rgba(9, 14, 32, 0.94);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 0.5rem;
+  z-index: 30;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(5, 199, 242, 0.2);
+  will-change: transform;
+}
+
+.fo-ai-moment__state-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+
+.fo-ai-moment__state-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 9px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.fo-ai-moment__state-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fo-ai-moment__state-btn.is-active {
+  background: linear-gradient(135deg, rgba(5, 199, 242, 0.22), rgba(0, 85, 255, 0.3));
+  border-color: rgba(5, 199, 242, 0.6);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(5, 199, 242, 0.35);
+}
+
+.fo-ai-moment__state-btn.is-complete {
+  color: rgba(56, 189, 248, 0.9);
+  background: rgba(5, 199, 242, 0.08);
+}
+
+.fo-ai-moment__state-num {
+  font-size: 0.74rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.fo-ai-moment__state-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+}
+
+/* The Single Dominant Intelligence Panel */
+.fo-ai-moment__panel {
+  position: relative;
+  background: #090E20;
+  border: 1px solid rgba(5, 199, 242, 0.45);
+  border-radius: 20px;
+  padding: clamp(1.85rem, 3.2vw, 2.65rem);
+  box-shadow: 
+    0 28px 65px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Inlet Port on Left Edge */
+.fo-ai-moment__panel-port {
+  position: absolute;
+  left: -7px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #090E20;
+  border: 2px solid #05C7F2;
+  box-shadow: 0 0 10px rgba(5, 199, 242, 0.8);
+  z-index: 10;
+}
+
+/* Ambient Corner Glow */
+.fo-ai-moment__panel-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 199, 242, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.4s ease;
+}
+
+.fo-ai-moment__panel-glow--action {
+  background: radial-gradient(circle, rgba(0, 85, 255, 0.35) 0%, transparent 70%);
+}
+
+.fo-ai-moment__panel-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Panel Header */
+.fo-ai-moment__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.35rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.fo-ai-moment__header-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.fo-ai-moment__card-kicker {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-moment__card-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(5, 199, 242, 0.14);
+  border: 1px solid rgba(5, 199, 242, 0.4);
+  color: #05C7F2;
+}
+
+.fo-ai-moment__card-title {
+  font-size: clamp(1.45rem, 2.4vw, 1.95rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #FFFFFF;
+  margin: 0 0 1rem 0;
+}
+
+/* Primary Focal Callout (The Moment Highlight) */
+.fo-ai-moment__focal-box {
+  background: linear-gradient(135deg, rgba(5, 199, 242, 0.12), rgba(0, 85, 255, 0.16));
+  border-left: 3px solid #05C7F2;
+  border-radius: 0 12px 12px 0;
+  padding: 1.15rem 1.35rem;
+  margin-bottom: 1.45rem;
+}
+
+.fo-ai-moment__focal-box--action {
+  background: linear-gradient(135deg, rgba(0, 85, 255, 0.16), rgba(56, 189, 248, 0.14));
+  border-left-color: #38BDF8;
+}
+
+.fo-ai-moment__focal-text {
+  font-size: clamp(1.05rem, 1.4vw, 1.22rem);
+  font-weight: 600;
+  line-height: 1.5;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.fo-ai-moment__narrative {
+  font-size: clamp(0.94rem, 1.2vw, 1.05rem);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 0 0 1.85rem 0;
+}
+
+/* 3-Column Facts Grid */
+.fo-ai-moment__facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.85rem;
+}
+
+.fo-ai-moment__fact-item {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: border-color 0.2s ease;
+}
+
+.fo-ai-moment__fact-item:hover {
+  border-color: rgba(5, 199, 242, 0.35);
+}
+
+.fo-ai-moment__fact-label {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.fo-ai-moment__fact-value {
+  font-size: 0.98rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.fo-ai-moment__fact-value.is-accent {
+  color: #05C7F2;
+}
+
+/* State 03 Suggested Options Card */
+.fo-ai-moment__options-card {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.65rem;
+}
+
+.fo-ai-moment__options-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38BDF8;
+  margin-bottom: 0.85rem;
+  display: block;
+}
+
+.fo-ai-moment__options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-bottom: 1.15rem;
+}
+
+.fo-ai-moment__option-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.fo-ai-moment__option-bullet {
+  color: #05C7F2;
+  font-weight: 700;
+  margin-top: 0.1rem;
+}
+
+.fo-ai-moment__action-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-moment__action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.35rem;
+  border-radius: 9px;
+  background: #0055FF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.4);
+}
+
+.fo-ai-moment__action-btn:hover {
+  background: #1A68FF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 85, 255, 0.55);
+}
+
+.fo-ai-moment__action-confirmed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.25rem;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 9px;
+  color: #34D399;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+/* Panel Governance Footer */
+.fo-ai-moment__panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.15rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.65);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-moment__footer-governance {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fo-ai-moment__footer-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   6. Responsive Layouts
+   -------------------------------------------------------------------------- */
+@media (max-width: 1079px) {
+  .fo-ai-moment__workspace {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .fo-ai-moment__invoice-col {
+    position: relative;
+    top: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .fo-ai-moment__connector-col {
+    display: none;
+  }
+
+  .fo-ai-moment__state-bar {
+    position: sticky;
+    top: 76px;
+  }
+}
+
+@media (max-width: 767px) {
+  .fo-ai-moment__facts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fo-ai-moment__state-track {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .fo-ai-moment__state-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fo-ai-moment__state-btn {
+    flex-shrink: 0;
+    padding: 0.6rem 0.85rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   7. Reduced Motion Support
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fo-ai-moment__beacon,
+  .fo-ai-moment__status-dot {
+    animation: none;
+  }
+
+  .fo-ai-moment__panel,
+  .fo-ai-moment__invoice-card {
+    transition: none;
+  }
+}

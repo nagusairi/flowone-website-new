@@ -4510,6 +4510,610 @@
 }
 
 /* ==========================================================================
+   Redesigned Option A: Compact Stacking Deck (Viewport-Fold Calibrated)
+   - Consistent, viewport-height layout with balanced top & bottom boundaries
+   - Vertically centered content group (left editorial + right card deck)
+   - Restored typography matching "Option B: Full-Width Stacking Deck"
+   - Decreased right card width (max 580px), horizontally centered in right column
+   - Increased card height with generous 2x2 facts grid and breathing room
+   - Scrolling cards remain fully within the visible fold without peeking
+   - Zero unnecessary page overflow or dead voids
+   ========================================================================== */
+
+.new-homepage .living-stack-a-section {
+  --compact-dock-top: clamp(3.75rem, calc(50vh - 170px), 13rem);
+  --section-boundary-vpad: clamp(3.75rem, calc(50vh - 170px), 13rem);
+
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #F8FAFC;
+  background-image: 
+    radial-gradient(ellipse at 12% 15%, rgba(5, 40, 242, 0.035) 0%, transparent 60%),
+    radial-gradient(ellipse at 88% 75%, rgba(5, 199, 242, 0.04) 0%, transparent 60%);
+  padding: var(--section-boundary-vpad) 0;
+  border-top: 1px solid rgba(226, 232, 240, 0.9);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.9);
+  outline: none;
+}
+
+.new-homepage .living-stack-a-section.is-dark-theme-section {
+  background-color: #080C16;
+  background-image: 
+    radial-gradient(ellipse at 15% 15%, rgba(5, 40, 242, 0.16) 0%, transparent 60%),
+    radial-gradient(ellipse at 85% 80%, rgba(5, 199, 242, 0.14) 0%, transparent 60%);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-title {
+  color: #FFFFFF !important;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-desc {
+  color: #94A3B8 !important;
+}
+
+.new-homepage .stack-compact-layout {
+  display: grid;
+  grid-template-columns: minmax(380px, 0.44fr) 1fr;
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: start;
+}
+
+/* LEFT COLUMN: Clean, Clutter-Free Sticky Anchor (Vertically centered within the viewport) */
+.new-homepage .stack-compact-sticky-col {
+  position: sticky;
+  top: var(--compact-dock-top, clamp(3.75rem, calc(50vh - 170px), 13rem));
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 480px;
+  min-height: calc(340px + 93px); /* Perfectly aligns left bottom with Card 10 bottom (docked top + height) */
+  box-sizing: border-box;
+}
+
+.new-homepage .stack-compact-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.new-homepage .stack-compact-intro .hero-eyebrow-container {
+  margin-bottom: 0.35rem !important;
+}
+
+.new-homepage .stack-compact-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(2.4rem, 4vw, 3.4rem);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  color: #0B1020;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.new-homepage .stack-compact-desc {
+  font-family: "Lorin", var(--font-family-body);
+  font-size: clamp(0.95rem, 1.25vw, 1.05rem);
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+/* Minimalist Live Runway Progress Card */
+.new-homepage .stack-compact-meter-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 0.85rem;
+  padding: 0.85rem 1.05rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  box-shadow: 0 2px 12px -2px rgba(15, 23, 42, 0.04);
+  transition: all 0.25s ease;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-meter-card {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.new-homepage .stack-compact-meter-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.new-homepage .stack-compact-meter-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 8px #05C7F2;
+  animation: stackBeaconPulse 2s infinite ease-in-out;
+}
+
+.new-homepage .stack-compact-meter-caption {
+  font-family: var(--font-family-interface);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  color: #0528F2;
+  text-transform: uppercase;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-meter-caption {
+  color: #38BDF8;
+}
+
+.new-homepage .stack-compact-stage-badge {
+  margin-left: auto;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  background: #F1F5F9;
+  padding: 0.12rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-stage-badge {
+  background: rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
+}
+
+.new-homepage .stack-compact-meter-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.new-homepage .stack-compact-meter-active-name {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #0B1020;
+  font-family: var(--font-family-interface);
+  letter-spacing: 0.02em;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-meter-active-name {
+  color: #FFFFFF;
+}
+
+.new-homepage .stack-compact-meter-sub {
+  font-size: 0.72rem;
+  color: #64748B;
+  font-family: "Lorin", var(--font-family-body);
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-meter-sub {
+  color: #94A3B8;
+}
+
+.new-homepage .stack-compact-progress-track {
+  width: 100%;
+  height: 4px;
+  background: #E2E8F0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-progress-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.new-homepage .stack-compact-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0528F2, #05C7F2);
+  border-radius: 9999px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.new-homepage .stack-compact-quick-dots {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  margin-top: 0.15rem;
+}
+
+.new-homepage .stack-compact-dot-btn {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid #CBD5E1;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0;
+  position: relative;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-dot-btn {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.new-homepage .stack-compact-dot-btn:hover {
+  transform: scale(1.15);
+  border-color: #0528F2;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-dot-btn:hover {
+  border-color: #05C7F2;
+}
+
+.new-homepage .stack-compact-dot-btn.is-active {
+  background: #0528F2;
+  border-color: #0528F2;
+  transform: scale(1.25);
+  box-shadow: 0 0 8px rgba(5, 40, 242, 0.5);
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-dot-btn.is-active {
+  background: #05C7F2;
+  border-color: #05C7F2;
+  box-shadow: 0 0 10px rgba(5, 199, 242, 0.6);
+}
+
+.new-homepage .stack-compact-dot-btn.is-passed {
+  background: #94A3B8;
+  border-color: #94A3B8;
+}
+
+.new-homepage .is-dark-theme-section .stack-compact-dot-btn.is-passed {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+/* RIGHT COLUMN: Viewport-Fold Calibrated Stacking Cards Deck (Horizontally Centered) */
+.new-homepage .stack-compact-cards-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Horizontally centers cards in right section */
+  position: relative;
+  width: 100%;
+}
+
+.new-homepage .stack-compact-card {
+  position: sticky;
+  width: 100%;
+  max-width: 580px; /* Decreased width */
+  margin-inline: auto; /* Horizontally centered */
+  border-radius: 1.25rem;
+  padding: 1.45rem 1.75rem; /* Increased vertical height & breathing room */
+  /* Viewport-calibrated card separation: ensures the next card is completely below the visible viewport fold */
+  margin-bottom: clamp(300px, calc(50vh + 50px), 500px);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  transition: transform 0.24s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.24s ease, border-color 0.24s ease;
+  box-sizing: border-box;
+}
+
+.new-homepage .stack-compact-card:last-child {
+  margin-bottom: clamp(480px, 75vh, 680px);
+}
+
+/* LIGHT ENTERPRISE VARIANT */
+.new-homepage .stack-compact-card.is-light-card {
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  box-shadow: 
+    0 4px 20px -2px rgba(15, 23, 42, 0.08),
+    0 1px 4px rgba(15, 23, 42, 0.04);
+}
+
+.new-homepage .stack-compact-card.is-light-card:hover,
+.new-homepage .stack-compact-card.is-light-card.is-current-active {
+  border-color: #0528F2;
+  box-shadow: 
+    0 16px 36px -4px rgba(5, 40, 242, 0.16),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+/* DARK STUDIO VARIANT (DIRECT MATCH TO REFERENCE IMAGE) */
+.new-homepage .stack-compact-card.is-dark-card {
+  background: #0F172A;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    0 14px 32px -4px rgba(0, 0, 0, 0.6),
+    0 2px 6px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.new-homepage .stack-compact-card.is-dark-card:hover,
+.new-homepage .stack-compact-card.is-dark-card.is-current-active {
+  border-color: #05C7F2;
+  box-shadow: 
+    0 18px 42px -4px rgba(0, 0, 0, 0.75),
+    0 0 24px rgba(5, 199, 242, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Card Header & Kicker */
+.new-homepage .stack-compact-top-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.1rem;
+}
+
+.new-homepage .stack-compact-kicker-group {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.new-homepage .stack-compact-num-pill {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.65rem;
+  font-weight: 800;
+  padding: 0.12rem 0.45rem;
+  border-radius: 9999px;
+  background: #EFF6FF;
+  color: #0528F2;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-num-pill {
+  background: rgba(5, 199, 242, 0.15);
+  color: #38BDF8;
+}
+
+.new-homepage .stack-compact-kicker {
+  font-family: var(--font-family-interface);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-kicker {
+  color: #94A3B8;
+}
+
+.new-homepage .stack-compact-status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  color: #0F172A;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-status-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #F1F5F9;
+}
+
+/* Primary Card Header: Circular Emblem + Title */
+.new-homepage .stack-compact-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.new-homepage .stack-compact-icon-badge {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  transition: all 0.2s ease;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-icon-badge {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: 0 0 14px rgba(5, 199, 242, 0.18);
+}
+
+.new-homepage .stack-compact-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+  min-width: 0;
+}
+
+.new-homepage .stack-compact-card-title {
+  font-family: var(--font-family-display);
+  font-size: clamp(1.75rem, 2.6vw, 2.25rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  margin: 0;
+  text-transform: uppercase;
+  color: #0B1020;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-card-title {
+  color: #FFFFFF;
+}
+
+.new-homepage .stack-compact-id-tag {
+  font-family: "Lorin", var(--font-family-body);
+  font-size: 0.76rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-id-tag {
+  color: #94A3B8;
+}
+
+/* Clean Horizontal Divider */
+.new-homepage .stack-compact-divider {
+  height: 1px;
+  width: 100%;
+  margin: 0.25rem 0 0.1rem 0;
+  background: #E2E8F0;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Body Narrative */
+.new-homepage .stack-compact-narrative {
+  font-family: "Lorin", var(--font-family-body);
+  font-size: clamp(0.88rem, 1.05vw, 0.96rem);
+  line-height: 1.5;
+  margin: 0;
+  color: #334155;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-narrative {
+  color: #CBD5E1;
+}
+
+/* Essential Details Facts Grid (2x2 Balanced Layout) */
+.new-homepage .stack-compact-facts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin-top: 0.15rem;
+}
+
+.new-homepage .stack-compact-fact-tile {
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.55rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  min-width: 0;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-fact-tile {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.new-homepage .stack-compact-fact-tile .fact-label {
+  font-family: var(--font-family-interface);
+  font-size: 0.6rem;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.new-homepage .stack-compact-fact-tile .fact-value {
+  font-family: var(--font-family-interface);
+  font-size: clamp(0.88rem, 1.05vw, 1rem);
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #0F172A;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-fact-tile .fact-value {
+  color: #F8FAFC;
+}
+
+/* Footer / Audit Lineage */
+.new-homepage .stack-compact-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.55rem;
+  border-top: 1px solid #F1F5F9;
+  margin-top: 0.1rem;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-card-footer {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.new-homepage .stack-compact-assurance {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #059669;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-assurance {
+  color: #10B981;
+}
+
+.new-homepage .assurance-check {
+  font-weight: 900;
+}
+
+.new-homepage .stack-compact-counter {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748B;
+}
+
+.new-homepage .stack-compact-card.is-dark-card .stack-compact-counter {
+  color: #94A3B8;
+}
+
+/* Responsive Overrides */
+@media (max-width: 1024px) {
+  .new-homepage .living-stack-a-section {
+    --compact-dock-top: 4.5rem;
+    --section-boundary-vpad: 3.5rem;
+    padding: 3.5rem 0;
+  }
+
+  .new-homepage .stack-compact-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .new-homepage .stack-compact-sticky-col {
+    position: static;
+    max-width: 100%;
+  }
+
+  .new-homepage .stack-compact-card {
+    max-width: 100%;
+    top: calc(4.5rem + 6px);
+    margin-bottom: clamp(260px, calc(50vh + 30px), 380px);
+  }
+
+  .new-homepage .stack-compact-card:last-child {
+    margin-bottom: clamp(320px, 60vh, 480px);
+  }
+}
+
+@media (max-width: 640px) {
+  .new-homepage .living-stack-a-section {
+    padding: 2.5rem 0;
+  }
+
+  .new-homepage .stack-compact-facts-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .new-homepage .stack-compact-card {
+    padding: 1.15rem 1.25rem;
+    margin-bottom: clamp(240px, calc(50vh + 20px), 340px);
+  }
+}
+
+/* ==========================================================================
    flowOne New Homepage — Section 03B: Living Transaction (Option B)
    "Full-Width Stacking Deck"
    Editorial full-width top header with horizontal stage navigator rail,

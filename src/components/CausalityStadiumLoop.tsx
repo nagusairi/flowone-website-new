@@ -115,26 +115,29 @@ const stadiumStages: StadiumStage[] = [
 export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
   const [activeStageId, setActiveStageId] = useState<string>("order");
   const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [timerResetKey, setTimerResetKey] = useState<number>(0);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const mobileRailRef = useRef<HTMLDivElement | null>(null);
 
   const activeIndex = stadiumStages.findIndex(s => s.id === activeStageId);
   const activeStage = stadiumStages[activeIndex] || stadiumStages[0];
 
-  // Auto-progress stages every 4.2s when not hovered
+  // Auto-progress stages in a continuous loop right from page load (4.6s per stage)
   useEffect(() => {
     if (isPaused) return;
-    timerRef.current = setInterval(() => {
+    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    timerRef.current = setTimeout(() => {
       setActiveStageId(prev => {
         const idx = stadiumStages.findIndex(s => s.id === prev);
         return stadiumStages[(idx + 1) % stadiumStages.length].id;
       });
-    }, 4200);
+    }, 4600);
 
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [isPaused]);
+  }, [activeStageId, isPaused, timerResetKey]);
 
   // Smoothly center the active stage button within the mobile horizontal ribbon
   useEffect(() => {
@@ -156,11 +159,20 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
     }
   }, [activeStageId]);
 
+  // When user clicks a stage: jump immediately, reset dwell timer, and resume auto-loop
+  const selectStage = (id: string) => {
+    setActiveStageId(id);
+    setIsPaused(false);
+    setTimerResetKey(k => k + 1);
+  };
+
   const goToNext = () => {
     setActiveStageId(prev => {
       const idx = stadiumStages.findIndex(s => s.id === prev);
       return stadiumStages[(idx + 1) % stadiumStages.length].id;
     });
+    setIsPaused(false);
+    setTimerResetKey(k => k + 1);
   };
 
   const goToPrev = () => {
@@ -168,6 +180,8 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
       const idx = stadiumStages.findIndex(s => s.id === prev);
       return stadiumStages[(idx - 1 + stadiumStages.length) % stadiumStages.length].id;
     });
+    setIsPaused(false);
+    setTimerResetKey(k => k + 1);
   };
 
   return (
@@ -177,19 +191,25 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
       aria-labelledby="causality-heading"
     >
       <div className="home-container">
-        <div
-          className="causality-panel fo-causality-stadium"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-        >
+        <div className="causality-panel fo-causality-stadium">
           {/* Subtle Ambient Decorative Glow */}
           <div className="causality-ambient-glow" aria-hidden="true" />
 
           {/* Section Introduction */}
           <div className="causality-intro">
-            <div className="causality-label-pill" role="note" aria-label="Section label: The Business Loop">
-              <span className="causality-label-beacon" aria-hidden="true" />
-              <span>THE BUSINESS LOOP</span>
+            <div className="hero-eyebrow-container" style={{ marginBottom: "1rem" }}>
+              <div className="hero-modern-eyebrow is-static is-dark-theme" role="note" aria-label="The Business Loop">
+                <span className="hero-eyebrow-badge">
+                  <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                  <span>THE LOOP</span>
+                </span>
+                <span className="hero-eyebrow-title">CLOSED-CIRCUIT CAUSALITY</span>
+                <span className="hero-eyebrow-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
             </div>
             <h2 id="causality-heading" className="causality-heading">
               Business doesn’t happen in modules.
@@ -314,7 +334,7 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                         tabIndex={isActive ? 0 : -1}
                         className={`fo-causality-stadium__node-btn is-${stage.placement} ${isActive ? "is-active" : ""}`}
                         style={{ left: `${leftPct}%`, top: `${topPct}%` }}
-                        onClick={() => setActiveStageId(stage.id)}
+                        onClick={() => selectStage(stage.id)}
                       >
                         <div className="fo-causality-stadium__node-core">
                           <span className="fo-causality-stadium__node-num">{stage.num}</span>
@@ -335,13 +355,32 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                   aria-live="polite"
                   aria-label={`Active stage telemetry: ${activeStage.name}`}
                 >
+                  {/* Dynamic Loop Progress Bar */}
+                  {!isPaused && (
+                    <div className="fo-stadium-loop-progress-bar" key={`hub-bar-${activeStage.id}-${timerResetKey}`} aria-hidden="true">
+                      <div className="fo-stadium-loop-progress-fill" />
+                    </div>
+                  )}
+
                   <div className="fo-causality-stadium__hub-top">
                     <span className="fo-causality-stadium__hub-pill">
                       STAGE {activeStage.num} · {activeStage.tag}
                     </span>
-                    <span className="fo-causality-stadium__hub-status">
-                      {activeStage.contextTag}
-                    </span>
+                    <div className="fo-causality-stadium__hub-top-right">
+                      <span className="fo-causality-stadium__hub-status">
+                        {activeStage.contextTag}
+                      </span>
+                      <button
+                        type="button"
+                        className={`fo-stadium-loop-badge ${isPaused ? "is-paused" : "is-looping"}`}
+                        onClick={() => setIsPaused(p => !p)}
+                        aria-label={isPaused ? "Resume auto-loop" : "Pause auto-loop"}
+                        title={isPaused ? "Click to resume loop" : "Click to pause loop"}
+                      >
+                        <span className="fo-stadium-loop-beacon" aria-hidden="true" />
+                        <span>{isPaused ? "PAUSED" : "AUTO LOOP"}</span>
+                      </button>
+                    </div>
                   </div>
 
                   <h3 className="fo-causality-stadium__hub-title">
@@ -397,7 +436,7 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                       role="tab"
                       aria-selected={isActive}
                       className={`fo-stadium-mobile__stage-pill ${isActive ? "is-active" : ""}`}
-                      onClick={() => setActiveStageId(stage.id)}
+                      onClick={() => selectStage(stage.id)}
                     >
                       <span className="fo-stadium-mobile__pill-num">{stage.num}</span>
                       <span className="fo-stadium-mobile__pill-name">{stage.name}</span>
@@ -417,13 +456,26 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
 
             {/* Mobile Active Stage Cockpit Card */}
             <div className="fo-stadium-mobile__card" role="region" aria-live="polite">
+              {/* Dynamic Loop Progress Bar */}
+              {!isPaused && (
+                <div className="fo-stadium-loop-progress-bar" key={`mob-bar-${activeStage.id}-${timerResetKey}`} aria-hidden="true">
+                  <div className="fo-stadium-loop-progress-fill" />
+                </div>
+              )}
+
               <div className="fo-stadium-mobile__card-top">
                 <span className="fo-stadium-mobile__card-badge">
                   STAGE {activeStage.num} · {activeStage.tag}
                 </span>
-                <span className="fo-stadium-mobile__card-status">
-                  {activeStage.contextTag}
-                </span>
+                <button
+                  type="button"
+                  className={`fo-stadium-loop-badge fo-stadium-loop-badge--mobile ${isPaused ? "is-paused" : "is-looping"}`}
+                  onClick={() => setIsPaused(p => !p)}
+                  aria-label={isPaused ? "Resume auto-loop" : "Pause auto-loop"}
+                >
+                  <span className="fo-stadium-loop-beacon" aria-hidden="true" />
+                  <span>{isPaused ? "PAUSED" : "LOOP"}</span>
+                </button>
               </div>
 
               <h3 className="fo-stadium-mobile__card-title">
@@ -482,7 +534,7 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                     key={s.id}
                     type="button"
                     className={`fo-stadium-mobile__step-dot ${s.id === activeStageId ? "is-active" : ""}`}
-                    onClick={() => setActiveStageId(s.id)}
+                    onClick={() => selectStage(s.id)}
                     aria-label={`Jump to stage ${s.num}`}
                   />
                 ))}

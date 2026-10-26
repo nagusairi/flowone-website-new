@@ -10,8 +10,19 @@ import ConnectedBusinessBlueprint from "./components/ConnectedBusinessBlueprint"
 import PerspectiveShift from "./components/PerspectiveShift";
 import ConnectedBusinessAtlas from "./components/ConnectedBusinessAtlas";
 import AIAdvantageSection from "./components/AIAdvantageSection";
+import AIAdvantageIntelligenceUnfoldsView from "./components/AIAdvantageIntelligenceUnfoldsView";
+import IntelligenceMomentView from "./components/IntelligenceMomentView";
+import SignalBecomesClearSection from "./components/SignalBecomesClearSection";
+import IntelligenceCurrentSection from "./components/IntelligenceCurrentSection";
+import ClarityLensSection from "./components/ClarityLensSection";
+import ConnectedPathSection from "./components/ConnectedPathSection";
+import ConnectedCurrentSection from "./components/ConnectedCurrentSection";
+import AIAdvantageConceptBar from "./components/AIAdvantageConceptBar";
 import PredictiveDecisionsSection from "./components/PredictiveDecisionsSection";
 import DecisionObservatorySection from "./components/DecisionObservatorySection";
+import PredictiveOneInsightView from "./components/PredictiveOneInsightView";
+import PredictiveForecastBriefView from "./components/PredictiveForecastBriefView";
+import PredictiveSignalToConsequenceView from "./components/PredictiveSignalToConsequenceView";
 import BusinessOutcomesSection from "./components/BusinessOutcomesSection";
 import "./new-homepage.css";
 
@@ -786,7 +797,8 @@ export default function NewHomepage() {
   const closeDemo = () => setDemoOpen(false);
 
   // Section 03 Experimental Concept Comparator: Option A vs Option B vs Concept B vs Concept A vs All
-  const [livingConcept, setLivingConcept] = useState<"stackA" | "stackB" | "B" | "A" | "all">("stackA");
+  // Section 03 Experimental Concept Comparator: Option A (Redesigned Compact Deck · Light Enterprise) vs Option A2 (Dark Studio · Reference Image Edition) vs Option B (Full-Width Stacking Deck) vs Concept B vs Concept A vs All
+  const [livingConcept, setLivingConcept] = useState<"stackA" | "stackADark" | "stackB" | "B" | "A" | "all">("stackA");
 
   // Section 04 Experimental Concept Comparator: Concept 04B vs Concept 04A vs All
   const [section04Concept, setSection04Concept] = useState<"04B" | "04A" | "all">("all");
@@ -794,16 +806,41 @@ export default function NewHomepage() {
   // Section 05 Experimental Concept Comparator: Direction 05B (The Business Control Atlas) vs Direction 05A (The Perspective Shift) vs All
   const [section05Concept, setSection05Concept] = useState<"05B" | "05A" | "all">("05B");
 
-  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06A (The Future Signal) vs All
-  const [section06Concept, setSection06Concept] = useState<"06B" | "06A" | "all">("06B");
+  // Section 05 AI Advantage Concept Comparator: "unfolds" (Direction A) vs "current" (Baseline Stack) vs "moment" (Direction B) vs "signal-clear" (Direction 01) vs "intelligence-current" (01 — The Intelligence Current) vs "clarity-lens" (02 — The Clarity Lens) vs "connected-path" (03 — The Connected Path) vs "connected-current" (03B — The Connected Current)
+  const [section05AIConcept, setSection05AIConcept] = useState<"current" | "unfolds" | "moment" | "signal-clear" | "intelligence-current" | "clarity-lens" | "connected-path" | "connected-current">("unfolds");
+
+  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06A (The Future Signal) vs View C (The One Insight) vs View D (The Forecast Brief) vs View E (Signal to Consequence) vs All
+  const [section06Concept, setSection06Concept] = useState<"06B" | "06A" | "06C" | "06D" | "06E" | "all">("06B");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const conceptParam = params.get("concept")?.toLowerCase();
     const hash = window.location.hash.toLowerCase();
+
+    // Section 05 AI Advantage URL query / hash parsing
+    const aiParam = params.get("ai")?.toLowerCase();
+    if (aiParam === "connected-current" || aiParam === "the-connected-current" || aiParam === "03b" || aiParam === "current-path" || hash.includes("connected-current") || hash.includes("03b")) {
+      setSection05AIConcept("connected-current");
+    } else if (aiParam === "connected-path" || aiParam === "the-connected-path" || aiParam === "direction-03" || aiParam === "03" || hash.includes("connected-path")) {
+      setSection05AIConcept("connected-path");
+    } else if (aiParam === "clarity-lens" || aiParam === "the-clarity-lens" || aiParam === "direction-02" || aiParam === "02" || hash.includes("clarity-lens")) {
+      setSection05AIConcept("clarity-lens");
+    } else if (aiParam === "intelligence-current" || aiParam === "the-intelligence-current" || aiParam === "current-flow" || aiParam === "flow-current" || hash.includes("intelligence-current") || hash.includes("the-intelligence-current")) {
+      setSection05AIConcept("intelligence-current");
+    } else if (aiParam === "signal-clear" || aiParam === "direction-01" || aiParam === "01" || aiParam === "clear" || hash.includes("signal-clear") || hash.includes("direction-01")) {
+      setSection05AIConcept("signal-clear");
+    } else if (aiParam === "moment" || aiParam === "direction-b" || aiParam === "05b" || hash.includes("ai-moment") || hash.includes("direction-b")) {
+      setSection05AIConcept("moment");
+    } else if (aiParam === "unfolds" || aiParam === "direction-a" || aiParam === "05a" || hash.includes("ai-unfolds") || hash.includes("direction-a")) {
+      setSection05AIConcept("unfolds");
+    } else if (aiParam === "current" || hash.includes("ai-current")) {
+      setSection05AIConcept("current");
+    }
     if (conceptParam === "stackb" || conceptParam === "b-deck" || hash.includes("stack-b")) {
       setLivingConcept("stackB");
-    } else if (conceptParam === "stacka" || conceptParam === "cards" || hash.includes("stack-a")) {
+    } else if (conceptParam === "stackadark" || conceptParam === "dark" || hash.includes("stack-a-dark") || hash.includes("dark-studio")) {
+      setLivingConcept("stackADark");
+    } else if (conceptParam === "stacka" || conceptParam === "cards" || hash.includes("stack-a") || hash.includes("compact")) {
       setLivingConcept("stackA");
     } else if (conceptParam === "a" || hash.includes("concept-a")) {
       setLivingConcept("A");
@@ -834,6 +871,12 @@ export default function NewHomepage() {
       setSection06Concept("06A");
     } else if (sec6Param === "06b" || sec6Param === "observatory" || hash.includes("observatory")) {
       setSection06Concept("06B");
+    } else if (sec6Param === "06c" || sec6Param === "one-insight" || sec6Param === "view-c" || hash.includes("one-insight")) {
+      setSection06Concept("06C");
+    } else if (sec6Param === "06d" || sec6Param === "forecast-brief" || sec6Param === "brief" || sec6Param === "view-d" || hash.includes("forecast-brief") || hash.includes("brief")) {
+      setSection06Concept("06D");
+    } else if (sec6Param === "06e" || sec6Param === "signal-consequence" || sec6Param === "chain" || sec6Param === "view-e" || hash.includes("signal-consequence") || hash.includes("view-e")) {
+      setSection06Concept("06E");
     } else if (sec6Param === "all" || hash.includes("sec6-all")) {
       setSection06Concept("all");
     }
@@ -930,22 +973,32 @@ export default function NewHomepage() {
               <button
                 type="button"
                 role="tab"
+                aria-selected={livingConcept === "stackA"}
+                className={`living-concept-btn ${livingConcept === "stackA" ? "is-active" : ""}`}
+                onClick={() => setLivingConcept("stackA")}
+              >
+                <span>Option A: Compact Off-Canvas Deck</span>
+                <span className="concept-pill-badge">Redesigned · Light Enterprise</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={livingConcept === "stackADark"}
+                className={`living-concept-btn ${livingConcept === "stackADark" ? "is-active" : ""}`}
+                onClick={() => setLivingConcept("stackADark")}
+              >
+                <span>Option A2: Dark Studio Deck</span>
+                <span className="concept-pill-badge">Reference Image Edition</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
                 aria-selected={livingConcept === "stackB"}
                 className={`living-concept-btn ${livingConcept === "stackB" ? "is-active" : ""}`}
                 onClick={() => setLivingConcept("stackB")}
               >
                 <span>Option B: Full-Width Stacking Deck</span>
-                <span className="concept-pill-badge">Cascading Cockpit</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={livingConcept === "stackA"}
-                className={`living-concept-btn ${livingConcept === "stackA" ? "is-active" : ""}`}
-                onClick={() => setLivingConcept("stackA")}
-              >
-                <span>Option A: Two-Column Cards</span>
-                <span className="concept-pill-badge">Sticky Left Rail</span>
+                <span className="concept-pill-badge">Cascading Horizon</span>
               </button>
               <button
                 type="button"
@@ -981,14 +1034,19 @@ export default function NewHomepage() {
         </div>
       </div>
 
+      {/* Render Option A (Redesigned Compact Stacking Deck · Light Enterprise) */}
+      {(livingConcept === "stackA" || livingConcept === "all") && (
+        <LivingTransactionStackA theme="light" id="living-stack-compact-light" />
+      )}
+
+      {/* Render Option A2 (Redesigned Dark Studio Stacking Deck · Direct Match to Reference Image) */}
+      {(livingConcept === "stackADark" || livingConcept === "all") && (
+        <LivingTransactionStackA theme="dark" id="living-stack-compact-dark" />
+      )}
+
       {/* Render Option B: Full-Width Stacking Deck */}
       {(livingConcept === "stackB" || livingConcept === "all") && (
         <LivingTransactionStackB />
-      )}
-
-      {/* Render Option A: Sticky Stacking Cards (Two-Column Stacking Deck) */}
-      {(livingConcept === "stackA" || livingConcept === "all") && (
-        <LivingTransactionStackA />
       )}
 
       {/* Render Concept B: Precision Financial Instrument */}
@@ -1059,9 +1117,30 @@ export default function NewHomepage() {
 
       {/* ==============================================================
           AI ADVANTAGE · THE INTELLIGENCE MOMENT
-          Gradient Canvas · Sticky Invoice · Layered AI Cards · Wave Dividers
+          Concept Comparator: Current Design vs Direction A vs Direction B vs Direction 01 vs 01 — The Intelligence Current vs 02 — The Clarity Lens vs 03 — The Connected Path vs 03B — The Connected Current
           ============================================================== */}
-      <AIAdvantageSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      <AIAdvantageConceptBar
+        activeConcept={section05AIConcept}
+        onSelectConcept={(c) => setSection05AIConcept(c as "current" | "unfolds" | "moment" | "signal-clear" | "intelligence-current" | "clarity-lens" | "connected-path" | "connected-current")}
+      />
+
+      {section05AIConcept === "connected-current" ? (
+        <ConnectedCurrentSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "connected-path" ? (
+        <ConnectedPathSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "clarity-lens" ? (
+        <ClarityLensSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "intelligence-current" ? (
+        <IntelligenceCurrentSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "signal-clear" ? (
+        <SignalBecomesClearSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "moment" ? (
+        <IntelligenceMomentView beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "unfolds" ? (
+        <AIAdvantageIntelligenceUnfoldsView beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : (
+        <AIAdvantageSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      )}
 
       {/* ==============================================================
           PREDICTIVE BUSINESS DECISIONS EXPERIMENTS
@@ -1098,11 +1177,41 @@ export default function NewHomepage() {
               <button
                 type="button"
                 role="tab"
+                aria-selected={section06Concept === "06C"}
+                className={`living-concept-btn ${section06Concept === "06C" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06C")}
+              >
+                <span>View C: The One Insight</span>
+                <span className="concept-pill-badge">Single Narrative</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={section06Concept === "06D"}
+                className={`living-concept-btn ${section06Concept === "06D" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06D")}
+              >
+                <span>View D: The Forecast Brief</span>
+                <span className="concept-pill-badge">Executive Briefing</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={section06Concept === "06E"}
+                className={`living-concept-btn ${section06Concept === "06E" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06E")}
+              >
+                <span>View E: Signal to Consequence</span>
+                <span className="concept-pill-badge">Causal Chain</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
                 aria-selected={section06Concept === "all"}
                 className={`living-concept-btn ${section06Concept === "all" ? "is-active" : ""}`}
                 onClick={() => setSection06Concept("all")}
               >
-                <span>View Both Sequentially</span>
+                <span>View All Sequentially</span>
               </button>
             </div>
           </div>
@@ -1117,6 +1226,21 @@ export default function NewHomepage() {
       {/* Render Direction 06A: The Future Signal (Preserved complete design) */}
       {(section06Concept === "06A" || section06Concept === "all") && (
         <PredictiveDecisionsSection />
+      )}
+
+      {/* Render View C: The One Insight (New Editorial Concept) */}
+      {(section06Concept === "06C" || section06Concept === "all") && (
+        <PredictiveOneInsightView />
+      )}
+
+      {/* Render View D: The Forecast Brief (New Executive Briefing Concept) */}
+      {(section06Concept === "06D" || section06Concept === "all") && (
+        <PredictiveForecastBriefView />
+      )}
+
+      {/* Render View E: Signal to Consequence (New Causal Chain Concept) */}
+      {(section06Concept === "06E" || section06Concept === "all") && (
+        <PredictiveSignalToConsequenceView />
       )}
 
       {/* ==============================================================

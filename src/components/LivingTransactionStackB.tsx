@@ -82,9 +82,19 @@ export const LivingTransactionStackB = memo(function LivingTransactionStackB() {
             TOP: Full-Width Editorial Header
             ============================================================== */}
         <header className="stack-b-header">
-          <div className="stack-b-eyebrow" role="note" aria-label="Living Transaction">
-            <span className="stack-b-beacon" aria-hidden="true" />
-            <span>LIVING TRANSACTION</span>
+          <div className="hero-eyebrow-container" style={{ marginBottom: "1.15rem" }}>
+            <div className="hero-modern-eyebrow is-static" role="note" aria-label="Living Transaction">
+              <span className="hero-eyebrow-badge">
+                <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                <span>TRANSACTION</span>
+              </span>
+              <span className="hero-eyebrow-title">THE LIVING TRANSACTION</span>
+              <span className="hero-eyebrow-arrow" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </div>
           </div>
 
           <h2 id="stack-b-heading" className="stack-b-title">

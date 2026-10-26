@@ -130,11 +130,19 @@ export const AIAdvantageSection = memo(function AIAdvantageSection({
             Exact Approved Copy + FlowOne Brand Signature Gradient
             ============================================================== */}
         <div className="fo-ai-advantage__header">
-          <div className="fo-ai-advantage__eyebrow" role="note" aria-label="AI Advantage">
-            <span className="fo-ai-advantage__beacon" aria-hidden="true" />
-            <span className="fo-ai-advantage__eyebrow-text">
-              AI ADVANTAGE · THE INTELLIGENCE MOMENT
-            </span>
+          <div className="hero-eyebrow-container" style={{ marginBottom: "1rem" }}>
+            <div className="hero-modern-eyebrow is-static" role="note" aria-label="AI Advantage">
+              <span className="hero-eyebrow-badge">
+                <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                <span>AI ADVANTAGE</span>
+              </span>
+              <span className="hero-eyebrow-title">THE INTELLIGENCE MOMENT</span>
+              <span className="hero-eyebrow-arrow" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </span>
+            </div>
           </div>
 
           <h2 id="fo-ai-heading" className="fo-ai-advantage__headline">

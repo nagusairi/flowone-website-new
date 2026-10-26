@@ -1,0 +1,893 @@
+/* ==========================================================================
+   flowOne Section 06 — Predictive Business Decisions
+   View C: The One Insight — Editorial Intelligence Concept
+   Scoped Stylesheet (.fo-one-insight-section)
+   Single Coherent Surface · 3-Stage Causality Narrative:
+   Signal → Predicted Consequence → Decision to Consider
+   ========================================================================== */
+
+.fo-one-insight-section {
+  position: relative;
+  width: 100%;
+  background: var(--neutral-50, #F8FAFC);
+  color: var(--neutral-900, #0F172A);
+  padding: clamp(4.5rem, 6vw, 6rem) 0;
+  border-top: 1px solid var(--neutral-200, #E2E8F0);
+  border-bottom: 1px solid var(--neutral-200, #E2E8F0);
+  font-family: var(--font-family-body, "Lorin", "Manrope", sans-serif);
+  overflow: hidden;
+}
+
+/* Background Subtle Ambience */
+.fo-one-insight-ambient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(5, 40, 242, 0.035) 0%, rgba(5, 199, 242, 0.02) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fo-one-insight-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 3vw, 2.75rem);
+}
+
+/* ==========================================================================
+   1. EDITORIAL HEADER & INTRO
+   ========================================================================== */
+
+.fo-one-insight-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 860px;
+}
+
+.fo-one-insight-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(5, 40, 242, 0.06);
+  border: 1px solid rgba(5, 40, 242, 0.16);
+  color: var(--flow-primary, #0528F2);
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 3px rgba(5, 40, 242, 0.04);
+}
+
+.fo-one-insight-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+  box-shadow: 0 0 8px rgba(5, 40, 242, 0.65);
+  animation: foInsightBeaconPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes foInsightBeaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.45; }
+}
+
+.fo-one-insight-heading {
+  margin: 0;
+  font-family: var(--font-family-primary, "Lorin", "Manrope", sans-serif);
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--neutral-900, #0F172A);
+}
+
+.fo-one-insight-heading em {
+  font-style: normal;
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-one-insight-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.58;
+  color: var(--neutral-600, #475569);
+  max-width: 720px;
+}
+
+/* ==========================================================================
+   2. MAIN 2-COLUMN COCKPIT LAYOUT (Left: Signal Selector / Right: The One Insight)
+   ========================================================================== */
+
+.fo-one-insight-workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: BUSINESS SIGNALS SELECTOR
+   ========================================================================== */
+
+.fo-one-insight-signals-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fo-signals-col-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--neutral-200, #E2E8F0);
+}
+
+.fo-signals-col-label {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--flow-primary, #0528F2);
+  text-transform: uppercase;
+}
+
+.fo-signals-col-hint {
+  font-size: 0.82rem;
+  color: var(--neutral-600, #64748B);
+  line-height: 1.4;
+}
+
+/* Desktop Signals List */
+.fo-one-insight-signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.fo-one-signal-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 12px;
+  padding: 0.95rem 1.15rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-one-signal-card:hover {
+  border-color: rgba(5, 40, 242, 0.35);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  transform: translateX(3px);
+}
+
+.fo-one-signal-card:focus-visible {
+  outline: 2px solid var(--flow-primary, #0528F2);
+  outline-offset: 2px;
+}
+
+/* Selected Signal State */
+.fo-one-signal-card.is-selected {
+  background: #FFFFFF;
+  border-color: var(--flow-primary, #0528F2);
+  box-shadow: 0 4px 16px rgba(5, 40, 242, 0.1), 0 1px 3px rgba(5, 40, 242, 0.06);
+  transform: translateX(4px);
+}
+
+.fo-one-signal-card.is-selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3.5px;
+  background: var(--flow-primary, #0528F2);
+  border-radius: 0 4px 4px 0;
+}
+
+.fo-one-signal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fo-one-signal-name {
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: var(--neutral-900, #0F172A);
+  letter-spacing: -0.01em;
+}
+
+.fo-one-signal-card.is-selected .fo-one-signal-name {
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-one-signal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+  box-shadow: 0 0 6px var(--flow-primary, #0528F2);
+}
+
+.fo-one-signal-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+}
+
+.fo-one-signal-metric {
+  font-family: var(--font-family-mono, monospace);
+  font-weight: 750;
+  color: #1E293B;
+  background: #F1F5F9;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.fo-one-signal-card.is-selected .fo-one-signal-metric {
+  background: rgba(5, 40, 242, 0.08);
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-one-signal-label {
+  color: var(--neutral-500, #64748B);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tablet & Mobile Capsule Navigator (Hidden on Desktop) */
+.fo-one-insight-mobile-capsule {
+  display: none;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: THE ONE INSIGHT (Single Coherent Surface)
+   ========================================================================== */
+
+.fo-one-insight-editorial-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fo-one-insight-surface {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 18px;
+  padding: clamp(1.75rem, 3.2vw, 2.75rem);
+  box-shadow: 
+    0 4px 20px -2px rgba(15, 23, 42, 0.05),
+    0 1px 4px -1px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+}
+
+.fo-one-insight-surface:hover {
+  box-shadow: 
+    0 8px 30px -4px rgba(15, 23, 42, 0.08),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04);
+}
+
+/* Insight Card Top Context Strip */
+.fo-one-insight-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.fo-one-insight-context-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #334155;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+}
+
+.fo-context-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+}
+
+.fo-one-insight-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #0369A1;
+  background: #F0F9FF;
+  border: 1px solid #BAE6FD;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+}
+
+.fo-status-pill-beacon {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #0284C7;
+  box-shadow: 0 0 5px #0284C7;
+}
+
+/* ==========================================================================
+   3-STAGE CONNECTED STORY STREAM
+   Stage 01: Observed Signal
+   Stage 02: Predicted Consequence (Primary Visual Focus)
+   Stage 03: Decision to Consider
+   ========================================================================== */
+
+.fo-one-insight-stream {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  animation: foInsightFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes foInsightFadeIn {
+  from {
+    opacity: 0.3;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Individual Stage Container */
+.fo-stage-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 36px 1fr;
+  gap: 1.25rem;
+}
+
+/* The Vertical Continuous Rail Connector */
+.fo-stage-rail-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.fo-stage-node {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  z-index: 2;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+/* Stage Node Variations */
+.fo-stage-node--01 {
+  background: #EFF6FF;
+  border: 1.5px solid #BFDBFE;
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-stage-node--02 {
+  background: #0528F2;
+  border: 1.5px solid #0528F2;
+  color: #FFFFFF;
+  box-shadow: 0 0 12px rgba(5, 40, 242, 0.35);
+}
+
+.fo-stage-node--03 {
+  background: #ECFDF5;
+  border: 1.5px solid #A7F3D0;
+  color: #059669;
+}
+
+/* Connector Line Running Between Nodes */
+.fo-stage-line {
+  width: 2px;
+  flex: 1;
+  min-height: 48px;
+  margin: 6px 0;
+  border-radius: 1px;
+}
+
+.fo-stage-line--1to2 {
+  background: linear-gradient(180deg, #BFDBFE 0%, #3B82F6 100%);
+}
+
+.fo-stage-line--2to3 {
+  background: linear-gradient(180deg, #3B82F6 0%, #A7F3D0 100%);
+}
+
+/* Stage Content Body */
+.fo-stage-body {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 2rem;
+}
+
+.fo-stage-row:last-child .fo-stage-body {
+  padding-bottom: 0.5rem;
+}
+
+/* Stage Label Kicker */
+.fo-stage-kicker-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.fo-stage-kicker {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fo-stage-kicker--01 {
+  color: #64748B;
+}
+
+.fo-stage-kicker--02 {
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-stage-kicker--03 {
+  color: #059669;
+}
+
+.fo-stage-pill-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  font-family: var(--font-family-mono, monospace);
+}
+
+.fo-stage-pill-tag--signal {
+  background: #F1F5F9;
+  color: #475569;
+}
+
+.fo-stage-pill-tag--focus {
+  background: rgba(5, 40, 242, 0.08);
+  color: var(--flow-primary, #0528F2);
+  border: 1px solid rgba(5, 40, 242, 0.18);
+}
+
+.fo-stage-pill-tag--action {
+  background: rgba(16, 185, 129, 0.1);
+  color: #065F46;
+}
+
+/* Stage 01 Copy: Restrained, precise */
+.fo-stage-statement {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.55;
+  color: #334155;
+  font-weight: 500;
+}
+
+.fo-stage-subcontext {
+  margin-top: 0.35rem;
+  font-size: 0.78rem;
+  color: #64748B;
+  font-family: var(--font-family-mono, monospace);
+}
+
+/* Stage 02: Business Consequence (Strongest visual emphasis) */
+.fo-stage-consequence-headline {
+  margin: 0;
+  font-size: clamp(1.25rem, 1.9vw, 1.6rem);
+  font-weight: 750;
+  line-height: 1.32;
+  letter-spacing: -0.02em;
+  color: var(--neutral-900, #0F172A);
+}
+
+.fo-stage-consequence-body {
+  margin: 0.55rem 0 0;
+  font-size: 0.96rem;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* Consequence Callout Strip */
+.fo-consequence-callout {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.95rem;
+  padding: 0.65rem 0.95rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.fo-consequence-callout--negative {
+  background: #FEF2F2;
+  border-left: 3px solid #EF4444;
+  color: #991B1B;
+}
+
+.fo-consequence-callout--warning {
+  background: #FFFBEB;
+  border-left: 3px solid #F59E0B;
+  color: #92400E;
+}
+
+.fo-consequence-callout--caution {
+  background: #EFF6FF;
+  border-left: 3px solid var(--flow-primary, #0528F2);
+  color: #1E40AF;
+}
+
+.fo-callout-icon {
+  font-size: 0.9rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.fo-callout-label {
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.fo-callout-sep {
+  opacity: 0.4;
+}
+
+.fo-callout-value {
+  font-weight: 600;
+}
+
+/* Stage 03: Decision to Consider (Practical, structured) */
+.fo-stage-decision-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1.38;
+  color: var(--neutral-900, #0F172A);
+  letter-spacing: -0.01em;
+}
+
+.fo-stage-decision-desc {
+  margin: 0.45rem 0 0;
+  font-size: 0.94rem;
+  line-height: 1.58;
+  color: #475569;
+}
+
+/* Projected Outcome Pill */
+.fo-decision-outcome-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+  padding: 0.4rem 0.85rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.24);
+  border-radius: 9999px;
+  color: #065F46;
+  font-size: 0.82rem;
+  font-weight: 700;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.fo-outcome-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 9px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Editorial Surface Bottom Trust Footer */
+.fo-one-insight-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.fo-one-insight-governance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  color: #64748B;
+}
+
+.fo-governance-shield {
+  color: var(--flow-primary, #0528F2);
+  font-size: 0.85rem;
+}
+
+.fo-one-insight-sim-status {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #059669;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   3. RESPONSIVE BREAKPOINTS (Tablet & Mobile Adaptations)
+   ========================================================================== */
+
+/* Tablet Breakpoint (<= 1024px) */
+@media (max-width: 1024px) {
+  .fo-one-insight-workspace {
+    grid-template-columns: minmax(240px, 300px) 1fr;
+    gap: 1.75rem;
+  }
+
+  .fo-one-signal-card {
+    padding: 0.85rem 1rem;
+  }
+
+  .fo-one-insight-surface {
+    padding: 1.75rem 1.5rem;
+  }
+}
+
+/* Compact Tablet & Mobile Breakpoint (<= 840px) */
+@media (max-width: 840px) {
+  .fo-one-insight-workspace {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Hide Desktop Signal List on Mobile */
+  .fo-one-insight-signals-list {
+    display: none;
+  }
+
+  /* Show Capsule Navigator on Mobile/Tablet */
+  .fo-one-insight-mobile-capsule {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid var(--neutral-200, #E2E8F0);
+    border-radius: 9999px;
+    padding: 4px 8px;
+    gap: 0.35rem;
+    height: 44px;
+    min-height: 44px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 0.5rem auto;
+    position: relative;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    box-sizing: border-box;
+  }
+
+  .fo-capsule-btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #F1F5F9;
+    border: none;
+    color: #1E293B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .fo-capsule-btn-arrow:hover:not(:disabled) {
+    background: #E2E8F0;
+  }
+
+  .fo-capsule-btn-arrow:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .fo-capsule-active-bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: var(--flow-primary, #0528F2);
+    color: #FFFFFF;
+    border-radius: 9999px;
+    padding: 0 16px;
+    height: 32px;
+    font-size: 0.82rem;
+    font-weight: 750;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(5, 40, 242, 0.35);
+    flex: 1;
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fo-capsule-active-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 5px #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  /* Segmented pills below capsule for fast direct jump */
+  .fo-one-insight-mobile-pills {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.45rem;
+    padding: 0.25rem 0 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .fo-one-insight-mobile-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fo-mobile-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    background: #FFFFFF;
+    border: 1px solid var(--neutral-200, #E2E8F0);
+    color: #475569;
+    font-size: 0.76rem;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .fo-mobile-pill-btn.is-active {
+    background: var(--flow-primary, #0528F2);
+    border-color: var(--flow-primary, #0528F2);
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(5, 40, 242, 0.3);
+  }
+
+  .fo-one-insight-surface {
+    padding: 1.35rem 1.15rem;
+    border-radius: 14px;
+  }
+
+  .fo-stage-row {
+    grid-template-columns: 28px 1fr;
+    gap: 0.85rem;
+  }
+
+  .fo-stage-node {
+    width: 26px;
+    height: 26px;
+    font-size: 0.65rem;
+  }
+
+  .fo-stage-consequence-headline {
+    font-size: 1.18rem;
+  }
+
+  .fo-consequence-callout {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+  }
+
+  .fo-callout-sep {
+    display: none;
+  }
+}
+
+/* Mobile Screen (<= 480px) */
+@media (max-width: 480px) {
+  .fo-one-insight-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .fo-one-insight-heading {
+    font-size: 1.85rem;
+  }
+
+  .fo-one-insight-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .fo-one-insight-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   4. REDUCED MOTION PREFERENCE
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .fo-one-insight-beacon,
+  .fo-one-insight-stream {
+    animation: none !important;
+  }
+
+  .fo-one-signal-card,
+  .fo-one-insight-surface,
+  .fo-stage-node,
+  .fo-mobile-pill-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}

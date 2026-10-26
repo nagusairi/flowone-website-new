@@ -1,0 +1,1075 @@
+/* ==========================================================================
+   SECTION 05 — AI ADVANTAGE · 03B: THE CONNECTED CURRENT
+   Fusion: "The Connected Path" (Operations, Finance, Compliance) married with
+   the spacious editorial elegance of "The Intelligence Current".
+   Supports 3 In-Section Variants:
+   - Option 1: Balanced Fusion (Central Invoice + 3 Satellite Nodes)
+   - Option 2: Tri-Stream River (3 Flowing Color Currents Converging)
+   - Option 3: Unified Ledger (Ultra-Clean Single Document with Embedded Telemetry)
+   ========================================================================== */
+
+.fo-ai-conn-current-section {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(180deg, #F8FAFC 0%, #F8FAFF 48%, #FAFBFD 100%);
+  color: #0F172A;
+  padding: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.fo-ai-conn-current__container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: clamp(3rem, 6vw, 5.5rem) clamp(1.25rem, 3.5vw, 3rem);
+  box-sizing: border-box;
+}
+
+/* Two-Part Workspace (~52% Visual, ~48% Editorial) */
+.fo-ai-conn-current__workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) 72px minmax(0, 0.95fr);
+  align-items: center;
+  position: relative;
+  width: 100%;
+  gap: 0;
+}
+
+/* --------------------------------------------------------------------------
+   1. Left-Side Visual Column & Canvas
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__visual-col {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+/* In-Section Variant Switcher Bar */
+.fo-ai-conn-current__variant-nav {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.22rem;
+  background: #EEF2F6;
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fo-ai-conn-current__variant-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.fo-ai-conn-current__variant-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-family: var(--font-family-interface, -apple-system, sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-ai-conn-current__variant-btn:hover {
+  color: #0F172A;
+}
+
+.fo-ai-conn-current__variant-btn.is-active {
+  background: #FFFFFF;
+  color: #185FA5;
+  font-weight: 700;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+
+/* Canvas Box */
+.fo-ai-conn-current__canvas {
+  position: relative;
+  width: 100%;
+  max-width: 610px;
+  min-height: 500px;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #F8FAFD 60%, #F1F5F9 100%);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: 24px;
+  box-shadow: 
+    0 20px 48px -12px rgba(15, 23, 42, 0.07),
+    0 1px 3px rgba(15, 23, 42, 0.03);
+  padding: 1.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-conn-current__grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(to right, rgba(24, 95, 165, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(24, 95, 165, 0.04) 1px, transparent 1px);
+  background-size: 26px 26px;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* SVG Conduits Layer */
+.fo-ai-conn-current__svg-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --------------------------------------------------------------------------
+   2. Option 1: Balanced Fusion (Central Invoice + 3 Satellite Nodes)
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__hero-invoice {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-50%, -50%);
+  width: 310px;
+  background: #FFFFFF;
+  border: 1px solid rgba(24, 95, 165, 0.3);
+  border-radius: 16px;
+  padding: 1.15rem 1.25rem;
+  box-shadow: 
+    0 16px 36px -8px rgba(24, 95, 165, 0.12),
+    0 2px 6px rgba(15, 23, 42, 0.04);
+  z-index: 4;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.fo-ai-conn-current__invoice-hdr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #F1F5F9;
+  margin-bottom: 0.65rem;
+}
+
+.fo-ai-conn-current__invoice-pill {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #185FA5;
+  background: rgba(24, 95, 165, 0.08);
+  padding: 0.18rem 0.5rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.fo-ai-conn-current__invoice-ref {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748B;
+}
+
+.fo-ai-conn-current__invoice-client {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #0F172A;
+  display: block;
+}
+
+.fo-ai-conn-current__invoice-amt-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0.2rem 0 0.55rem 0;
+}
+
+.fo-ai-conn-current__invoice-amt {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: 1.85rem;
+  line-height: 1;
+  color: #0F172A;
+  letter-spacing: 0.02em;
+}
+
+.fo-ai-conn-current__invoice-terms {
+  font-size: 0.66rem;
+  font-weight: 600;
+  color: #0284C7;
+  background: #F0F9FF;
+  padding: 0.18rem 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #BAE6FD;
+}
+
+.fo-ai-conn-current__invoice-ftr {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: #64748B;
+  padding-top: 0.55rem;
+  border-top: 1px solid #F1F5F9;
+}
+
+/* Satellite Context Nodes (Floating around Hero Invoice) */
+.fo-ai-conn-current__sat-node {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(8px);
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 0.65rem 0.85rem;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.05);
+  z-index: 5;
+  box-sizing: border-box;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+
+.fo-ai-conn-current__sat-node:hover {
+  transform: translateY(-2px);
+  border-color: rgba(24, 95, 165, 0.45);
+  box-shadow: 0 10px 24px rgba(24, 95, 165, 0.1);
+}
+
+.fo-ai-conn-current__sat-node.is-active {
+  border-color: #185FA5;
+  box-shadow: 0 8px 24px -4px rgba(24, 95, 165, 0.2), 0 0 0 2px rgba(24, 95, 165, 0.12);
+  background: #FFFFFF;
+}
+
+/* Node Positions in Option 1 */
+.fo-ai-conn-current__sat--ops {
+  top: 18px;
+  left: 18px;
+  width: 195px;
+}
+
+.fo-ai-conn-current__sat--fin {
+  bottom: 22px;
+  left: 18px;
+  width: 200px;
+}
+
+.fo-ai-conn-current__sat--comp {
+  bottom: 22px;
+  right: 18px;
+  width: 205px;
+}
+
+.fo-ai-conn-current__sat-tag {
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.2rem;
+}
+
+.fo-ai-conn-current__sat-title {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0 0 0.15rem 0;
+}
+
+.fo-ai-conn-current__sat-sub {
+  font-size: 0.62rem;
+  color: #64748B;
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   3. The 52px Cosmic AI Intelligence Convergence Hub
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__hub {
+  position: absolute;
+  top: 50%;
+  left: 54%;
+  transform: translate(-100%, -50%);
+  margin-left: -14px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-conn-current__hub-orb {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 30%, #172554 0%, #0F172A 60%, #020617 100%);
+  border: 2px solid rgba(5, 199, 242, 0.85);
+  box-shadow: 
+    0 0 24px rgba(5, 199, 242, 0.45),
+    0 0 45px rgba(24, 95, 165, 0.35),
+    inset 0 0 14px rgba(217, 41, 155, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-conn-current__hub-halo {
+  position: absolute;
+  inset: -22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 199, 242, 0.22) 0%, rgba(217, 41, 155, 0.12) 50%, transparent 72%);
+  animation: foConnHaloPulse 3s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+.fo-ai-conn-current__hub-orbit {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(5, 199, 242, 0.6);
+  animation: foConnOrbitRotate 20s linear infinite;
+  pointer-events: none;
+}
+
+.fo-ai-conn-current__hub-beacon {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid rgba(24, 95, 165, 0.45);
+  animation: foConnBeaconRings 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  pointer-events: none;
+}
+
+.fo-ai-conn-current__hub-tag {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.15rem 0.5rem;
+  background: rgba(15, 23, 42, 0.94);
+  border: 1px solid rgba(5, 199, 242, 0.5);
+  border-radius: 9999px;
+  font-size: 0.58rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #38BDF8;
+  white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  pointer-events: none;
+}
+
+.fo-ai-conn-current__hub-tag-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 6px #05C7F2;
+}
+
+.fo-ai-conn-current__hub-icon-shell {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-conn-current__hub-lottie {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.fo-ai-conn-current__hub-spark-svg {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  filter: drop-shadow(0 0 8px rgba(5, 199, 242, 0.9)) drop-shadow(0 0 14px rgba(217, 41, 155, 0.6));
+  animation: foConnSparkPulse 2.8s ease-in-out infinite alternate;
+  z-index: 1;
+  pointer-events: none;
+}
+
+@keyframes foConnOrbitRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes foConnHaloPulse {
+  0% { transform: scale(0.9); opacity: 0.6; }
+  100% { transform: scale(1.15); opacity: 1; }
+}
+
+@keyframes foConnSparkPulse {
+  0% { transform: scale(0.92); opacity: 0.85; }
+  100% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes foConnBeaconRings {
+  0% { transform: scale(0.85); opacity: 0.8; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* --------------------------------------------------------------------------
+   4. Option 2: The Tri-Stream River (Continuous Fluid Streams)
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__river-shell {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.fo-ai-conn-current__river-card {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  width: 255px;
+  background: #FFFFFF;
+  border: 1px solid rgba(24, 95, 165, 0.32);
+  border-radius: 16px;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 16px 36px -8px rgba(24, 95, 165, 0.12);
+  z-index: 4;
+}
+
+.fo-ai-conn-current__river-badge {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(8px);
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  padding: 0.28rem 0.65rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  z-index: 5;
+}
+
+.fo-ai-conn-current__river-badge--ops {
+  top: 75px;
+  left: 28px;
+  color: #059669;
+  border-color: rgba(5, 150, 105, 0.3);
+}
+
+.fo-ai-conn-current__river-badge--fin {
+  top: 228px;
+  left: 28px;
+  color: #185FA5;
+  border-color: rgba(24, 95, 165, 0.3);
+}
+
+.fo-ai-conn-current__river-badge--comp {
+  bottom: 80px;
+  left: 28px;
+  color: #534AB7;
+  border-color: rgba(83, 74, 183, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   5. Option 3: The Unified Ledger (Ultra-Clean Single Document)
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__ledger-shell {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fo-ai-conn-current__ledger-aura {
+  position: absolute;
+  width: 440px;
+  height: 440px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(24, 95, 165, 0.08) 0%, rgba(83, 74, 183, 0.04) 55%, transparent 75%);
+  pointer-events: none;
+  animation: foConnLedgerBreathe 6s ease-in-out infinite alternate;
+}
+
+@keyframes foConnLedgerBreathe {
+  0% { transform: scale(0.95); opacity: 0.7; }
+  100% { transform: scale(1.05); opacity: 1; }
+}
+
+.fo-ai-conn-current__ledger-card {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  background: #FFFFFF;
+  border: 1px solid rgba(24, 95, 165, 0.3);
+  border-radius: 20px;
+  padding: 1.35rem 1.45rem;
+  box-shadow: 
+    0 24px 50px -12px rgba(24, 95, 165, 0.14),
+    0 2px 6px rgba(15, 23, 42, 0.04);
+  z-index: 4;
+}
+
+.fo-ai-conn-current__telemetry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin: 0.85rem 0;
+}
+
+.fo-ai-conn-current__telemetry-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  background: #F8FAFC;
+  border: 1px solid #EEF2F6;
+  border-radius: 8px;
+  font-size: 0.68rem;
+}
+
+.fo-ai-conn-current__telemetry-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.64rem;
+}
+
+.fo-ai-conn-current__telemetry-val {
+  font-family: var(--font-family-mono, monospace);
+  font-weight: 600;
+  color: #334155;
+}
+
+.fo-ai-conn-current__ledger-ai-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.85rem;
+  background: linear-gradient(90deg, rgba(24, 95, 165, 0.08) 0%, rgba(83, 74, 183, 0.08) 100%);
+  border: 1px solid rgba(24, 95, 165, 0.2);
+  border-radius: 8px;
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #185FA5;
+}
+
+/* --------------------------------------------------------------------------
+   6. Center: Signature 3-Layer Organic Current Divider (from Direction 01)
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__divider-col {
+  position: relative;
+  width: 72px;
+  height: 100%;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.fo-ai-conn-current__vertical-divider-shell {
+  position: relative;
+  width: 72px;
+  height: 520px;
+  overflow: hidden;
+}
+
+.fo-ai-conn-current__vertical-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.fo-ai-conn-current__layer-back {
+  fill: #E5E8FA;
+  opacity: 0.55;
+  animation: foConnCurrentWaveDrift 35s linear infinite alternate;
+  transform-origin: center center;
+}
+
+.fo-ai-conn-current__layer-mid {
+  fill: #DCEBFA;
+  opacity: 0.75;
+  animation: foConnCurrentWaveDrift 28s ease-in-out infinite alternate-reverse;
+  transform-origin: center center;
+}
+
+.fo-ai-conn-current__layer-front {
+  fill: #F8FAFF;
+  opacity: 0.98;
+  animation: foConnCurrentWaveDrift 42s linear infinite alternate;
+  transform-origin: center center;
+}
+
+@keyframes foConnCurrentWaveDrift {
+  0% { transform: translateY(16px) scaleY(1.03); }
+  50% { transform: translateY(-12px) scaleY(0.98); }
+  100% { transform: translateY(16px) scaleY(1.03); }
+}
+
+/* Mobile Horizontal Divider (Hidden on Desktop) */
+.fo-ai-conn-current__horizontal-divider-shell {
+  display: none;
+}
+
+/* --------------------------------------------------------------------------
+   7. Right-Side Editorial Content (~48%)
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__content-col {
+  padding-left: clamp(1.75rem, 3.5vw, 3.5rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 580px;
+}
+
+.fo-ai-conn-current__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(24, 95, 165, 0.08);
+  border: 1px solid rgba(24, 95, 165, 0.22);
+  border-radius: 9999px;
+  margin-bottom: 1.25rem;
+  align-self: flex-start;
+}
+
+.fo-ai-conn-current__eyebrow-lottie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.fo-ai-conn-current__eyebrow-text {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+.fo-ai-conn-current__headline {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.06;
+  letter-spacing: 0.02em;
+  color: #0F172A;
+  margin: 0 0 1.25rem 0;
+}
+
+.fo-ai-conn-current__desc {
+  font-family: var(--font-family-body, "Lorin", sans-serif);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  line-height: 1.68;
+  color: #334155;
+  margin: 0;
+  max-width: 520px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Connected Journey Stepper (Matching Direction 01's Pill Track)
+   -------------------------------------------------------------------------- */
+.fo-ai-conn-current__pills-wrapper {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 540px;
+}
+
+.fo-ai-conn-current__pills-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-conn-current__pills-caption {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.fo-ai-conn-current__mode-toggle {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem;
+  background: #EEF2F6;
+  border-radius: 9999px;
+  border: 1px solid #E2E8F0;
+}
+
+.fo-ai-conn-current__mode-btn {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  padding: 0.22rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.64rem;
+  font-weight: 600;
+  color: #64748B;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fo-ai-conn-current__mode-btn.is-active {
+  background: #FFFFFF;
+  color: #185FA5;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
+}
+
+.fo-ai-conn-current__pills-track {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem;
+  background: rgba(241, 245, 249, 0.85);
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.fo-ai-conn-current__pills-track::-webkit-scrollbar {
+  display: none;
+}
+
+.fo-ai-conn-current__pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: #64748B;
+  font-family: var(--font-family-interface, -apple-system, sans-serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-ai-conn-current__pill-btn:hover {
+  color: #0F172A;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.fo-ai-conn-current__pill-btn.is-active {
+  background: #FFFFFF;
+  border-color: rgba(24, 95, 165, 0.32);
+  color: #0284C7;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(24, 95, 165, 0.1), 0 1px 2px rgba(15, 23, 42, 0.05);
+}
+
+.fo-ai-conn-current__pill-num {
+  font-size: 0.66rem;
+  opacity: 0.85;
+  font-variant-numeric: tabular-nums;
+}
+
+.fo-ai-conn-current__pill-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0284C7;
+  box-shadow: 0 0 6px rgba(2, 132, 199, 0.7);
+  animation: foConnPillPulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes foConnPillPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.85); opacity: 0.4; }
+}
+
+/* Detail Card (Interactive Mode) */
+.fo-ai-conn-current__pill-detail {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
+  padding: 1.1rem 1.3rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  animation: foConnFadeIn 0.28s ease;
+}
+
+@keyframes foConnFadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fo-ai-conn-current__detail-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fo-ai-conn-current__detail-kicker {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+.fo-ai-conn-current__detail-metric {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.66rem;
+  font-weight: 700;
+  color: #534AB7;
+  background: #EEEDFA;
+  padding: 0.18rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.fo-ai-conn-current__detail-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #0F172A;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.fo-ai-conn-current__detail-desc {
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0;
+}
+
+/* Ambient Mode Minimal Caption */
+.fo-ai-conn-current__ambient-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(241, 245, 249, 0.75);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  font-size: 0.72rem;
+  animation: foConnFadeIn 0.3s ease;
+}
+
+.fo-ai-conn-current__ambient-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #185FA5;
+  font-size: 0.69rem;
+  text-transform: uppercase;
+}
+
+.fo-ai-conn-current__ambient-tagline {
+  font-size: 0.69rem;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1080px) {
+  .fo-ai-conn-current__workspace {
+    grid-template-columns: minmax(0, 1fr) 56px minmax(0, 1fr);
+  }
+
+  .fo-ai-conn-current__canvas {
+    max-width: 500px;
+    min-height: 470px;
+  }
+
+  .fo-ai-conn-current__hero-invoice {
+    width: 275px;
+  }
+
+  .fo-ai-conn-current__sat--ops { width: 170px; }
+  .fo-ai-conn-current__sat--fin { width: 170px; }
+  .fo-ai-conn-current__sat--comp { width: 175px; }
+}
+
+@media (max-width: 960px) {
+  .fo-ai-conn-current__workspace {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .fo-ai-conn-current__visual-col {
+    width: 100%;
+  }
+
+  .fo-ai-conn-current__divider-col {
+    display: none;
+  }
+
+  .fo-ai-conn-current__horizontal-divider-shell {
+    display: block;
+    width: 100%;
+    height: 50px;
+    position: relative;
+    overflow: hidden;
+    margin: 1.5rem 0;
+  }
+
+  .fo-ai-conn-current__horizontal-track {
+    width: 100%;
+    height: 100%;
+  }
+
+  .fo-ai-conn-current__horizontal-svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .fo-ai-conn-current__content-col {
+    padding-left: 0;
+    max-width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+
+  .fo-ai-conn-current__eyebrow {
+    align-self: center;
+  }
+
+  .fo-ai-conn-current__desc {
+    max-width: 600px;
+  }
+
+  .fo-ai-conn-current__pills-wrapper {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .fo-ai-conn-current__pills-header {
+    justify-content: center;
+  }
+
+  .fo-ai-conn-current__pill-detail {
+    text-align: left;
+  }
+}
+
+@media (max-width: 640px) {
+  .fo-ai-conn-current__container {
+    padding: 2.5rem 1rem 3.5rem 1rem;
+  }
+
+  .fo-ai-conn-current__canvas {
+    min-height: 450px;
+    padding: 0.85rem;
+    border-radius: 18px;
+  }
+
+  .fo-ai-conn-current__hero-invoice {
+    width: 250px;
+    left: 50%;
+  }
+
+  .fo-ai-conn-current__sat--ops {
+    top: 10px;
+    left: 10px;
+    width: 145px;
+    padding: 0.45rem 0.6rem;
+  }
+
+  .fo-ai-conn-current__sat--fin {
+    bottom: 12px;
+    left: 10px;
+    width: 145px;
+    padding: 0.45rem 0.6rem;
+  }
+
+  .fo-ai-conn-current__sat--comp {
+    bottom: 12px;
+    right: 10px;
+    width: 145px;
+    padding: 0.45rem 0.6rem;
+  }
+
+  .fo-ai-conn-current__hub {
+    left: 50%;
+    top: 48%;
+  }
+
+  .fo-ai-conn-current__pills-track {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    justify-content: flex-start;
+    padding: 0.3rem;
+  }
+
+  .fo-ai-conn-current__pill-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.68rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Reduced Motion
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .fo-ai-conn-current__layer-back,
+  .fo-ai-conn-current__layer-mid,
+  .fo-ai-conn-current__layer-front,
+  .fo-ai-conn-current__hub-orbit,
+  .fo-ai-conn-current__hub-beacon,
+  .fo-ai-conn-current__hub-spark-svg,
+  .fo-ai-conn-current__pill-dot {
+    animation: none !important;
+  }
+
+  .fo-ai-conn-current__hero-invoice,
+  .fo-ai-conn-current__sat-node {
+    transition: none !important;
+  }
+}

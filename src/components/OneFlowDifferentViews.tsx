@@ -208,7 +208,20 @@ export const OneFlowDifferentViews = memo(function OneFlowDifferentViews({
       <div className="home-container">
         <div className="section-heading-row">
           <div>
-            <span className="home-index">BUILT FOR EVERY ROLE</span>
+            <div className="hero-eyebrow-container" style={{ marginBottom: "0.85rem" }}>
+              <div className="hero-modern-eyebrow is-static" role="note" aria-label="Built for Every Role">
+                <span className="hero-eyebrow-badge">
+                  <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                  <span>ROLES</span>
+                </span>
+                <span className="hero-eyebrow-title">BUILT FOR EVERY ROLE</span>
+                <span className="hero-eyebrow-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
+            </div>
             <h2 className="role-main-title">One flow.<br />Different views.</h2>
           </div>
           <p className="role-main-desc">Every team works from the same transaction context—focused on the decisions that matter to them.</p>

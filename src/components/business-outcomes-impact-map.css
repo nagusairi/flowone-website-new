@@ -1,0 +1,544 @@
+/* ==========================================================================
+   flowOne Section 07 — Business Outcomes: Direction 03
+   "03 — The Business Impact Map"
+   Scoped Stylesheet (.fo-impact-map-section)
+   Creative Concept: Central flowOne anchor with 4 connecting paths
+   Desktop: 65% Interactive Map + 35% Shared Editorial Detail
+   Mobile: Dedicated vertical spine tree with stacked branch controls
+   ========================================================================== */
+
+.fo-impact-map-section {
+  position: relative;
+  width: 100%;
+  background: #FFFFFF;
+  color: var(--neutral-900, #0D0D0D);
+  padding: 6.5rem 0 7rem;
+  border-top: 1px solid rgba(13, 13, 13, 0.06);
+  border-bottom: 1px solid rgba(13, 13, 13, 0.06);
+  font-family: var(--font-family-body, "Lorin", "Manrope", sans-serif);
+  box-sizing: border-box;
+}
+
+.fo-impact-map__container {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding-inline: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   1. EDITORIAL SECTION INTRODUCTION
+   ========================================================================== */
+
+.fo-impact-map__intro {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-impact-map-section.is-entered .fo-impact-map__intro {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fo-impact-map__heading {
+  margin: 0;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.4rem, 4.4vw, 3.65rem);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0B1020;
+}
+
+.fo-impact-map__copy {
+  margin: 0;
+  font-size: clamp(1.05rem, 1.3vw, 1.15rem);
+  line-height: 1.6;
+  color: #475569;
+  max-width: 580px;
+}
+
+/* ==========================================================================
+   2. DESKTOP WORKSPACE (~65% Map Canvas, ~35% Shared Detail Area)
+   ========================================================================== */
+
+.fo-impact-map__workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1.85fr) minmax(320px, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+}
+
+/* ==========================================================================
+   3. MAP CANVAS & COORDINATE FIELD (DESKTOP)
+   ========================================================================== */
+
+.fo-impact-map__canvas-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 640 / 370;
+  min-height: 350px;
+  background: #FAFBFD;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Fine SVG Conduits Layer */
+.fo-impact-map__svg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Central Anchor (flowOne Platform) */
+.fo-impact-map__anchor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #FFFFFF;
+  border: 1.5px solid #DCEBFA;
+  border-radius: 9999px;
+  padding: 0.48rem 1.1rem;
+  box-shadow: 0 2px 10px rgba(24, 95, 165, 0.08), 0 8px 24px -4px rgba(15, 23, 42, 0.04);
+  user-select: none;
+}
+
+.fo-impact-map__anchor-spark {
+  color: #185FA5;
+  font-size: 0.75rem;
+}
+
+.fo-impact-map__anchor-text {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0F172A;
+}
+
+.fo-impact-map__anchor-badge {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.62rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #185FA5;
+  background: #EFF6FF;
+  padding: 0.12rem 0.4rem;
+  border-radius: 9999px;
+}
+
+/* Four Destination Controls (HTML Buttons placed around anchor) */
+.fo-impact-destination {
+  position: absolute;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #FFFFFF;
+  border: 1.25px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 0.65rem 0.95rem;
+  box-shadow: 0 1px 4px rgba(15, 23, 42, 0.03);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  max-width: 210px;
+}
+
+.fo-impact-destination:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.fo-impact-destination:focus-visible {
+  outline: 2px solid #185FA5;
+  outline-offset: 2px;
+}
+
+/* Active Destination */
+.fo-impact-destination.is-selected {
+  border-color: #185FA5;
+  background: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.12), 0 4px 12px rgba(24, 95, 165, 0.08);
+}
+
+/* Destination Node Indicator */
+.fo-impact-destination__node {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #CBD5E1;
+  flex-shrink: 0;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.fo-impact-destination.is-selected .fo-impact-destination__node {
+  background: #185FA5;
+  box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.18);
+}
+
+.fo-impact-destination__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.fo-impact-destination__title {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: 1.15rem;
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #0F172A;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s ease;
+}
+
+.fo-impact-destination.is-selected .fo-impact-destination__title {
+  color: #185FA5;
+}
+
+.fo-impact-destination__subtitle {
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #64748B;
+  white-space: nowrap;
+}
+
+/* Desktop Absolute Positions (640x370 Canvas) */
+.fo-dest--cashflow {
+  top: 14%;
+  left: 6%;
+}
+
+.fo-dest--operations {
+  top: 14%;
+  right: 6%;
+}
+
+.fo-dest--control {
+  bottom: 14%;
+  left: 6%;
+}
+
+.fo-dest--decisions {
+  bottom: 14%;
+  right: 6%;
+}
+
+/* SVG Paths Inactive vs Active */
+.fo-impact-path {
+  fill: none;
+  stroke: #E2E8F0;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+}
+
+.fo-impact-path.is-active {
+  stroke: #185FA5;
+  stroke-width: 2.5;
+}
+
+/* Traveling Highlight Circle */
+.fo-impact-traveler {
+  fill: #185FA5;
+  filter: drop-shadow(0 0 3px rgba(24, 95, 165, 0.5));
+}
+
+/* ==========================================================================
+   4. SHARED EDITORIAL DETAIL AREA (~35% Desktop)
+   Open, calm, stable height (zero layout shift)
+   ========================================================================== */
+
+.fo-impact-map__detail-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 280px;
+  padding: 1.75rem 2rem;
+  background: #FAFBFD;
+  border: 1px solid #E2E8F0;
+  border-radius: 16px;
+  box-sizing: border-box;
+}
+
+.fo-impact-detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  text-align: left;
+  animation: foDetailFadeIn 0.22s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes foDetailFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fo-impact-detail-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #185FA5;
+}
+
+.fo-impact-detail-label-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #185FA5;
+}
+
+.fo-impact-detail-heading {
+  margin: 0;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(1.85rem, 2.4vw, 2.3rem);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #0F172A;
+}
+
+.fo-impact-detail-desc {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #475569;
+}
+
+/* Shared Context Micro Signal */
+.fo-impact-detail-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-family-interface, "Lorin", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 650;
+  color: #64748B;
+  padding-top: 0.85rem;
+  margin-top: 0.25rem;
+  border-top: 1px dashed #E2E8F0;
+}
+
+/* ==========================================================================
+   5. MOBILE VERTICAL SPINE TREE (< 768px)
+   ========================================================================== */
+
+.fo-impact-map__mobile-tree {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .fo-impact-map__workspace {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .fo-impact-map__canvas-wrap {
+    aspect-ratio: 640 / 380;
+    min-height: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .fo-impact-map-section {
+    padding: 4rem 0 4.5rem;
+  }
+
+  .fo-impact-map__container {
+    gap: 2.25rem;
+    padding-inline: 1rem;
+  }
+
+  /* Hide Desktop SVG Canvas on Mobile */
+  .fo-impact-map__canvas-wrap {
+    display: none;
+  }
+
+  /* Show Dedicated Mobile Vertical Spine Tree */
+  .fo-impact-map__mobile-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  /* Top Anchor on Mobile */
+  .fo-impact-map__mobile-anchor-bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 0.5rem;
+  }
+
+  .fo-impact-map__mobile-anchor {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #FFFFFF;
+    border: 1.5px solid #DCEBFA;
+    border-radius: 9999px;
+    padding: 0.4rem 0.95rem;
+    box-shadow: 0 2px 8px rgba(24, 95, 165, 0.06);
+  }
+
+  /* Vertical Tree Container */
+  .fo-impact-map__mobile-spine-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding-left: 28px;
+  }
+
+  /* Left Continuous Spine Line */
+  .fo-impact-map__mobile-spine-line {
+    position: absolute;
+    left: 10px;
+    top: 14px;
+    bottom: 24px;
+    width: 2px;
+    background: #E2E8F0;
+    border-radius: 1px;
+  }
+
+  /* Each Stacked Outcome Branch Item */
+  .fo-impact-mobile-branch-item {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Horizontal Connector Branch */
+  .fo-impact-mobile-branch-link {
+    position: absolute;
+    left: -18px;
+    width: 18px;
+    height: 2px;
+    background: #E2E8F0;
+    transition: background 0.2s ease;
+  }
+
+  .fo-impact-mobile-branch-item.is-selected .fo-impact-mobile-branch-link {
+    background: #185FA5;
+  }
+
+  /* Mobile Destination Button */
+  .fo-impact-mobile-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    background: #FFFFFF;
+    border: 1.25px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.18s ease;
+  }
+
+  .fo-impact-mobile-btn.is-selected {
+    border-color: #185FA5;
+    background: #FAFBFD;
+    box-shadow: 0 0 0 3px rgba(24, 95, 165, 0.1);
+  }
+
+  .fo-impact-mobile-btn__left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .fo-impact-mobile-btn__title {
+    font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+    font-size: 1.2rem;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: #0F172A;
+  }
+
+  .fo-impact-mobile-btn.is-selected .fo-impact-mobile-btn__title {
+    color: #185FA5;
+  }
+
+  .fo-impact-mobile-btn__subtitle {
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #64748B;
+  }
+
+  .fo-impact-map__detail-area {
+    padding: 1.4rem 1.25rem;
+    min-height: auto;
+  }
+
+  .fo-impact-detail-heading {
+    font-size: 1.65rem;
+  }
+
+  .fo-impact-detail-desc {
+    font-size: 0.92rem;
+  }
+}
+
+/* ==========================================================================
+   6. REDUCED MOTION PREFERENCES
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .fo-impact-map__intro,
+  .fo-impact-detail-content {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .fo-impact-path {
+    stroke-dashoffset: 0 !important;
+    transition: stroke 0.15s ease !important;
+  }
+
+  .fo-impact-traveler {
+    display: none !important;
+  }
+}

@@ -1,0 +1,789 @@
+/* ==========================================================================
+   flowOne New Homepage — Section 05: AI Advantage
+   Direction A: The Intelligence Unfolds (Scroll-Driven Layered Stacking Deck)
+   Scoped CSS: .fo-ai-unfolds-section & .section-05-ai-comparison-bar
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Comparison Bar at Top of Section 05
+   -------------------------------------------------------------------------- */
+.section-05-ai-comparison-bar {
+  background: #090E20;
+  border-bottom: 1px solid rgba(5, 199, 242, 0.22);
+  padding: 0.85rem 0;
+  position: relative;
+  z-index: 40;
+}
+
+.section-05-ai-comparison-bar .living-concept-selector-shell {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.section-05-ai-comparison-bar .living-concept-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.section-05-ai-comparison-bar .living-concept-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #05C7F2;
+  box-shadow: 0 0 10px #05C7F2, 0 0 18px rgba(5, 199, 242, 0.6);
+  animation: foAiPulseBeacon 2.4s ease-in-out infinite;
+}
+
+@keyframes foAiPulseBeacon {
+  0%, 100% { opacity: 0.6; transform: scale(0.92); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.section-05-ai-comparison-bar .living-concept-tag {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #E2E8F0;
+}
+
+.section-05-ai-comparison-bar .living-concept-buttons {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(15, 23, 42, 0.7);
+  padding: 0.3rem 0.35rem;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section-05-ai-comparison-bar .living-concept-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #94A3B8;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.section-05-ai-comparison-bar .living-concept-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.section-05-ai-comparison-bar .living-concept-btn.is-active {
+  background: rgba(5, 199, 242, 0.14);
+  border-color: rgba(5, 199, 242, 0.48);
+  color: #FFFFFF;
+  box-shadow: 0 0 16px rgba(5, 199, 242, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.section-05-ai-comparison-bar .concept-pill-badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #94A3B8;
+}
+
+.section-05-ai-comparison-bar .living-concept-btn.is-active .concept-pill-badge {
+  background: rgba(5, 199, 242, 0.28);
+  color: #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   2. Direction A Main Section Shell
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds-section {
+  position: relative;
+  background-image: linear-gradient(190deg, #181A61 0%, #5356D6 100%);
+  color: #FFFFFF;
+  isolation: isolate;
+  overflow: clip;
+}
+
+/* On Desktop: Scroll runway to allow smooth 6-stage progressive unfolding */
+@media (min-width: 1080px) {
+  .fo-ai-unfolds-section {
+    min-height: 220vh;
+  }
+
+  .fo-ai-unfolds__pin-wrapper {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: clamp(3.5rem, 6vw, 5.5rem);
+    padding-bottom: clamp(3.5rem, 6vw, 5.5rem);
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 1079px) {
+  .fo-ai-unfolds-section {
+    padding-top: clamp(4.5rem, 8vw, 7.5rem);
+    padding-bottom: clamp(5rem, 9vw, 8.5rem);
+  }
+
+  .fo-ai-unfolds__pin-wrapper {
+    position: relative;
+  }
+}
+
+.fo-ai-unfolds__container {
+  position: relative;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. Section Editorial Header
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds__header {
+  max-width: 780px;
+  margin-bottom: clamp(2.5rem, 4vw, 3.8rem);
+}
+
+.fo-ai-unfolds__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.4rem 0.95rem;
+  background: rgba(9, 14, 32, 0.85);
+  border: 1px solid rgba(5, 199, 242, 0.4);
+  border-radius: 9999px;
+  margin-bottom: 1.15rem;
+  box-shadow: 0 0 18px rgba(5, 199, 242, 0.18);
+}
+
+.fo-ai-unfolds__eyebrow-lottie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.fo-ai-unfolds__eyebrow-text {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-unfolds__headline {
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: #FFFFFF;
+  margin: 0 0 1rem 0;
+}
+
+.fo-ai-unfolds__copy {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0;
+  max-width: 660px;
+}
+
+/* --------------------------------------------------------------------------
+   4. Two-Column Living Intelligence Workspace
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds__workspace {
+  position: relative;
+  display: grid;
+  grid-template-columns: 390px 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* Left Sticky Invoice Column */
+.fo-ai-unfolds__invoice-col {
+  position: sticky;
+  top: 130px;
+  z-index: 15;
+  will-change: transform;
+}
+
+/* --------------------------------------------------------------------------
+   5. Right Unfolding Progression Workbench
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds__progression-col {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  z-index: 12;
+}
+
+/* Sticky Cognitive Stages Stepper */
+.fo-ai-unfolds__stepper {
+  position: relative;
+  margin-bottom: 1.5rem;
+  background: rgba(9, 14, 32, 0.94);
+  backdrop-filter: blur(18px);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 14px;
+  padding: 0.55rem;
+  z-index: 35;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(5, 199, 242, 0.2);
+}
+
+.fo-ai-unfolds__stepper-track {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.4rem;
+}
+
+.fo-ai-unfolds__stepper-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem 0.45rem;
+  border-radius: 9px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.fo-ai-unfolds__stepper-btn:hover {
+  color: #FFFFFF;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.fo-ai-unfolds__stepper-btn.is-active {
+  background: linear-gradient(135deg, rgba(5, 199, 242, 0.22), rgba(0, 85, 255, 0.3));
+  border-color: rgba(5, 199, 242, 0.6);
+  color: #FFFFFF;
+  box-shadow: 0 0 14px rgba(5, 199, 242, 0.35);
+}
+
+.fo-ai-unfolds__stepper-btn.is-complete {
+  color: rgba(56, 189, 248, 0.85);
+  background: rgba(5, 199, 242, 0.06);
+}
+
+.fo-ai-unfolds__stepper-num {
+  font-size: 0.7rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.fo-ai-unfolds__stepper-label {
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.fo-ai-unfolds__stepper-check {
+  font-size: 0.72rem;
+  color: #05C7F2;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   6. Layered Stacking Intelligence Panels Deck
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds__deck {
+  position: relative;
+  width: 100%;
+  min-height: 480px;
+}
+
+/* Individual Stage Card in Deck */
+.fo-ai-unfolds__stage-card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #090E20;
+  border: 1px solid rgba(5, 199, 242, 0.35);
+  border-radius: 18px;
+  padding: clamp(1.65rem, 2.8vw, 2.25rem);
+  box-shadow: 
+    0 24px 50px rgba(0, 0, 0, 0.65),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.42s ease,
+              box-shadow 0.42s ease;
+  will-change: transform, opacity;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Card State: Active Foreground */
+.fo-ai-unfolds__stage-card.is-active {
+  z-index: 30;
+  transform: translateY(0) scale(1);
+  opacity: 1;
+  pointer-events: auto;
+  border-color: rgba(5, 199, 242, 0.65);
+  box-shadow: 
+    0 32px 70px rgba(0, 0, 0, 0.75),
+    0 0 28px rgba(5, 199, 242, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Card State: Receded Previous Layers */
+.fo-ai-unfolds__stage-card.is-receded {
+  pointer-events: none;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.5);
+}
+
+/* Card State: Upcoming Layers (Waiting to enter) */
+.fo-ai-unfolds__stage-card.is-upcoming {
+  z-index: 5;
+  transform: translateY(32px) scale(0.96);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Corner ambient glow */
+.fo-ai-unfolds__stage-glow {
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(5, 199, 242, 0.25) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fo-ai-unfolds__stage-glow--magenta {
+  background: radial-gradient(circle, rgba(226, 41, 145, 0.28) 0%, transparent 70%);
+}
+
+.fo-ai-unfolds__stage-inner {
+  position: relative;
+  z-index: 1;
+}
+
+/* Stage Card Header */
+.fo-ai-unfolds__card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.95rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-wrap: wrap;
+}
+
+.fo-ai-unfolds__kicker-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.fo-ai-unfolds__static-spark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: #05C7F2;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.fo-ai-unfolds__kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+.fo-ai-unfolds__badge {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.22rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(5, 199, 242, 0.14);
+  border: 1px solid rgba(5, 199, 242, 0.4);
+  color: #05C7F2;
+}
+
+.fo-ai-unfolds__badge--act {
+  background: rgba(226, 41, 145, 0.16);
+  border-color: rgba(226, 41, 145, 0.48);
+  color: #F472B6;
+}
+
+.fo-ai-unfolds__card-title {
+  font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #FFFFFF;
+  margin: 0 0 0.85rem 0;
+}
+
+.fo-ai-unfolds__card-summary {
+  font-size: clamp(0.92rem, 1.2vw, 1.02rem);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0 0 1.5rem 0;
+}
+
+/* 2-Column Metrics Grid */
+.fo-ai-unfolds__metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.45rem;
+}
+
+.fo-ai-unfolds__metric-box {
+  background: rgba(15, 23, 42, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: border-color 0.2s ease;
+}
+
+.fo-ai-unfolds__metric-box:hover {
+  border-color: rgba(5, 199, 242, 0.35);
+}
+
+.fo-ai-unfolds__metric-label {
+  font-size: 0.64rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94A3B8;
+}
+
+.fo-ai-unfolds__metric-val {
+  font-size: clamp(1.1rem, 1.6vw, 1.28rem);
+  font-weight: 800;
+  color: #05C7F2;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Contextual Lineage Chips */
+.fo-ai-unfolds__details-box {
+  background: rgba(15, 23, 42, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  margin-bottom: 1.5rem;
+}
+
+.fo-ai-unfolds__details-title {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin-bottom: 0.65rem;
+  display: block;
+}
+
+.fo-ai-unfolds__details-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem 1.15rem;
+}
+
+.fo-ai-unfolds__detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+}
+
+.fo-ai-unfolds__detail-label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.fo-ai-unfolds__detail-val {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+/* --------------------------------------------------------------------------
+   7. Interactive Stage 06 Execution Action Block
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds__action-card {
+  background: linear-gradient(135deg, rgba(226, 41, 145, 0.12), rgba(83, 86, 214, 0.15));
+  border: 1px solid rgba(226, 41, 145, 0.38);
+  border-radius: 14px;
+  padding: 1.25rem;
+  margin-bottom: 1.45rem;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+}
+
+.fo-ai-unfolds__action-status {
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #F472B6;
+  margin-bottom: 0.45rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fo-ai-unfolds__action-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #E22991;
+  box-shadow: 0 0 8px #E22991;
+  animation: foAiPulseBeacon 1.8s infinite;
+}
+
+.fo-ai-unfolds__action-headline {
+  font-size: 1.02rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 0.35rem 0;
+}
+
+.fo-ai-unfolds__action-subhead {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.78);
+  margin: 0 0 1.15rem 0;
+  line-height: 1.45;
+}
+
+.fo-ai-unfolds__action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-unfolds__btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.25rem;
+  border-radius: 8px;
+  background: #0055FF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.22s ease;
+  box-shadow: 0 4px 14px rgba(0, 85, 255, 0.4);
+}
+
+.fo-ai-unfolds__btn-primary:hover {
+  background: #1A68FF;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(0, 85, 255, 0.55);
+}
+
+.fo-ai-unfolds__btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #FFFFFF;
+  font-size: 0.84rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.fo-ai-unfolds__btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.fo-ai-unfolds__action-executed {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.5);
+  border-radius: 8px;
+  color: #34D399;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   8. Bottom Workbench Governance Footer
+   -------------------------------------------------------------------------- */
+.fo-ai-unfolds__workbench-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.74rem;
+  color: rgba(255, 255, 255, 0.65);
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.fo-ai-unfolds__footer-shield {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.fo-ai-unfolds__footer-tag {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   9. Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 1079px) {
+  .fo-ai-unfolds__workspace {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .fo-ai-unfolds__invoice-col {
+    position: relative;
+    top: 0;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Connectors hidden on single column mobile/tablet */
+  .fo-ai-advantage__connectors {
+    display: none;
+  }
+
+  .fo-ai-unfolds__stepper {
+    position: sticky;
+    top: 76px;
+  }
+
+  .fo-ai-unfolds__deck {
+    min-height: auto;
+  }
+
+  .fo-ai-unfolds__stage-card {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none !important;
+  }
+
+  .fo-ai-unfolds__stage-card.is-upcoming {
+    display: none;
+  }
+
+  .fo-ai-unfolds__stage-card.is-receded {
+    display: none;
+  }
+
+  .fo-ai-unfolds__details-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-05-ai-comparison-bar .living-concept-selector-shell {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+
+  .section-05-ai-comparison-bar .living-concept-buttons {
+    width: 100%;
+    justify-content: stretch;
+    display: flex;
+    overflow-x: auto;
+  }
+
+  .section-05-ai-comparison-bar .living-concept-btn {
+    flex-shrink: 0;
+    font-size: 0.76rem;
+    padding: 0.45rem 0.65rem;
+  }
+
+  .fo-ai-unfolds__metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .fo-ai-unfolds__stepper-track {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+  }
+
+  .fo-ai-unfolds__stepper-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fo-ai-unfolds__stepper-btn {
+    flex-shrink: 0;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .fo-ai-unfolds__stepper-label {
+    display: inline;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   10. Reduced Motion Overrides
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .section-05-ai-comparison-bar .living-concept-beacon,
+  .fo-ai-unfolds__action-status-dot {
+    animation: none;
+  }
+
+  .fo-ai-unfolds__stage-card {
+    transition: none;
+  }
+}

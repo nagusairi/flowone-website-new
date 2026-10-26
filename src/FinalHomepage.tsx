@@ -1,14 +1,26 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Button, Icon } from "./components/flowone";
 import { WebsiteHeader } from "./components/navigation-system";
-import LivingTransactionStackB from "./components/LivingTransactionStackB";
-import BlueShiftCanvas from "./components/BlueShiftCanvas";
+import LivingTransactionStackC from "./components/LivingTransactionStackC";
+import ConnectedRealityNestedTabs from "./components/ConnectedRealityNestedTabs";
 import PerspectiveShift from "./components/PerspectiveShift";
 import ConnectedBusinessAtlas from "./components/ConnectedBusinessAtlas";
 import AIAdvantageSection from "./components/AIAdvantageSection";
+import AIAdvantageIntelligenceUnfoldsView from "./components/AIAdvantageIntelligenceUnfoldsView";
+import IntelligenceMomentView from "./components/IntelligenceMomentView";
+import SignalBecomesClearSection from "./components/SignalBecomesClearSection";
+import IntelligenceCurrentSection from "./components/IntelligenceCurrentSection";
+import ClarityLensSection from "./components/ClarityLensSection";
+import ConnectedPathSection from "./components/ConnectedPathSection";
+import ConnectedCurrentSection from "./components/ConnectedCurrentSection";
+import AIAdvantageConceptBar from "./components/AIAdvantageConceptBar";
 import PredictiveDecisionsSection from "./components/PredictiveDecisionsSection";
 import DecisionObservatorySection from "./components/DecisionObservatorySection";
-import BusinessOutcomesSection from "./components/BusinessOutcomesSection";
+import DecisionObservatoryTabsView from "./components/DecisionObservatoryTabsView";
+import PredictiveOneInsightView from "./components/PredictiveOneInsightView";
+import PredictiveForecastBriefView from "./components/PredictiveForecastBriefView";
+import PredictiveSignalToConsequenceView from "./components/PredictiveSignalToConsequenceView";
+import BusinessOutcomesBreakthroughs from "./components/BusinessOutcomesBreakthroughs";
 import OneFlowDifferentViews from "./components/OneFlowDifferentViews";
 import CausalityStadiumLoop from "./components/CausalityStadiumLoop";
 import "./final-homepage.css";
@@ -219,9 +231,19 @@ function FinalFooter({ onDemo }: { onDemo: () => void }) {
         <section className="footer-launchpad" aria-label="Ready to connect your business flow">
           <div className="footer-launchpad__ambient-glow" aria-hidden="true" />
           <div className="footer-launchpad__content">
-            <div className="footer-launchpad__eyebrow">
-              <span className="footer-beacon" aria-hidden="true" />
-              <span>ONE CONNECTED BUSINESS FLOW</span>
+            <div className="hero-eyebrow-container" style={{ marginBottom: "1.1rem" }}>
+              <div className="hero-modern-eyebrow is-static is-dark-theme" role="note" aria-label="One Connected Business Flow">
+                <span className="hero-eyebrow-badge">
+                  <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                  <span>CONVERGENCE</span>
+                </span>
+                <span className="hero-eyebrow-title">ONE CONNECTED BUSINESS FLOW</span>
+                <span className="hero-eyebrow-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
             </div>
             <h2 className="footer-launchpad__title">
               Ready to connect the work that moves your business?
@@ -654,9 +676,19 @@ const CausalityMap = memo(function CausalityMap() {
 
           {/* Section Introduction */}
           <div className="causality-intro">
-            <div className="causality-label-pill" role="note" aria-label="Section label: The Business Loop">
-              <span className="causality-label-beacon" aria-hidden="true" />
-              <span>THE BUSINESS LOOP</span>
+            <div className="hero-eyebrow-container" style={{ marginBottom: "1rem" }}>
+              <div className="hero-modern-eyebrow is-static is-dark-theme" role="note" aria-label="The Business Loop">
+                <span className="hero-eyebrow-badge">
+                  <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                  <span>THE LOOP</span>
+                </span>
+                <span className="hero-eyebrow-title">CLOSED-CIRCUIT CAUSALITY</span>
+                <span className="hero-eyebrow-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
             </div>
             <h2 id="causality-heading" className="causality-heading">
               Business doesn’t happen in modules.
@@ -786,12 +818,35 @@ export default function FinalHomepage() {
   // Section 05 Concept Comparator: Classic ("One flow. Different views.") vs Direction 05B (The Business Control Atlas) vs Direction 05A (The Perspective Shift) vs All
   const [section05Concept, setSection05Concept] = useState<"classic" | "05B" | "05A" | "all">("classic");
 
-  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06A (The Future Signal) vs All
-  const [section06Concept, setSection06Concept] = useState<"06B" | "06A" | "all">("06B");
+  // Section 05 AI Advantage Concept Comparator: "unfolds" (Direction A) vs "current" (Baseline Stack) vs "moment" (Direction B) vs "signal-clear" (Direction 01) vs "intelligence-current" (01 — The Intelligence Current) vs "clarity-lens" (02 — The Clarity Lens) vs "connected-path" (03 — The Connected Path) vs "connected-current" (03B — The Connected Current)
+  const [section05AIConcept, setSection05AIConcept] = useState<"current" | "unfolds" | "moment" | "signal-clear" | "intelligence-current" | "clarity-lens" | "connected-path" | "connected-current">("unfolds");
+
+  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06B-tabs (Observatory Top Tabs) vs Direction 06A (The Future Signal) vs View C (The One Insight) vs View D (The Forecast Brief) vs View E (Signal to Consequence) vs All
+  const [section06Concept, setSection06Concept] = useState<"06B" | "06B-tabs" | "06A" | "06C" | "06D" | "06E" | "all">("06B-tabs");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const hash = window.location.hash.toLowerCase();
+
+    // Section 05 AI Advantage URL query / hash parsing
+    const aiParam = params.get("ai")?.toLowerCase();
+    if (aiParam === "connected-current" || aiParam === "the-connected-current" || aiParam === "03b" || aiParam === "current-path" || hash.includes("connected-current") || hash.includes("03b")) {
+      setSection05AIConcept("connected-current");
+    } else if (aiParam === "connected-path" || aiParam === "the-connected-path" || aiParam === "direction-03" || aiParam === "03" || hash.includes("connected-path")) {
+      setSection05AIConcept("connected-path");
+    } else if (aiParam === "clarity-lens" || aiParam === "the-clarity-lens" || aiParam === "direction-02" || aiParam === "02" || hash.includes("clarity-lens")) {
+      setSection05AIConcept("clarity-lens");
+    } else if (aiParam === "intelligence-current" || aiParam === "the-intelligence-current" || aiParam === "current-flow" || aiParam === "flow-current" || hash.includes("intelligence-current") || hash.includes("the-intelligence-current")) {
+      setSection05AIConcept("intelligence-current");
+    } else if (aiParam === "signal-clear" || aiParam === "direction-01" || aiParam === "01" || aiParam === "clear" || hash.includes("signal-clear") || hash.includes("direction-01")) {
+      setSection05AIConcept("signal-clear");
+    } else if (aiParam === "moment" || aiParam === "direction-b" || aiParam === "05b" || hash.includes("ai-moment") || hash.includes("direction-b")) {
+      setSection05AIConcept("moment");
+    } else if (aiParam === "unfolds" || aiParam === "direction-a" || aiParam === "05a" || hash.includes("ai-unfolds") || hash.includes("direction-a")) {
+      setSection05AIConcept("unfolds");
+    } else if (aiParam === "current" || hash.includes("ai-current")) {
+      setSection05AIConcept("current");
+    }
 
     const sec5Param = params.get("sec5")?.toLowerCase();
     if (sec5Param === "05b" || sec5Param === "atlas" || hash.includes("atlas")) {
@@ -805,10 +860,18 @@ export default function FinalHomepage() {
     }
 
     const sec6Param = params.get("sec6")?.toLowerCase();
-    if (sec6Param === "06a" || sec6Param === "future-signal" || hash.includes("future-signal")) {
+    if (sec6Param === "06b-tabs" || sec6Param === "tabs" || sec6Param === "observatory-tabs" || hash.includes("observatory-tabs") || hash.includes("tabs")) {
+      setSection06Concept("06B-tabs");
+    } else if (sec6Param === "06a" || sec6Param === "future-signal" || hash.includes("future-signal")) {
       setSection06Concept("06A");
     } else if (sec6Param === "06b" || sec6Param === "observatory" || hash.includes("observatory")) {
       setSection06Concept("06B");
+    } else if (sec6Param === "06c" || sec6Param === "one-insight" || sec6Param === "view-c" || hash.includes("one-insight")) {
+      setSection06Concept("06C");
+    } else if (sec6Param === "06d" || sec6Param === "forecast-brief" || sec6Param === "brief" || sec6Param === "view-d" || hash.includes("forecast-brief") || hash.includes("brief")) {
+      setSection06Concept("06D");
+    } else if (sec6Param === "06e" || sec6Param === "signal-consequence" || sec6Param === "chain" || sec6Param === "view-e" || hash.includes("signal-consequence") || hash.includes("view-e")) {
+      setSection06Concept("06E");
     } else if (sec6Param === "all" || hash.includes("sec6-all")) {
       setSection06Concept("all");
     }
@@ -826,7 +889,7 @@ export default function FinalHomepage() {
         <div className="home-container hero-grid">
           <div className="hero-copy">
             <div className="hero-eyebrow-container">
-              <div className="hero-modern-eyebrow" role="note" aria-label="Connected Business Platform">
+              <div className="hero-modern-eyebrow is-static" role="note" aria-label="Connected Business Platform">
                 <span className="hero-eyebrow-badge">
                   <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
                   <span>PLATFORM</span>
@@ -893,21 +956,48 @@ export default function FinalHomepage() {
       {/* 3. SECTION 02 — THE BUSINESS LOOP (THE STADIUM CLOSED-CIRCUIT LOOP) */}
       <CausalityStadiumLoop />
 
-      {/* 4. SECTION 03 — ONE TRANSACTION. CONNECTED FROM START TO CASH (OPTION B: FULL-WIDTH STACKING DECK) */}
-      <LivingTransactionStackB />
+      {/* ==============================================================
+          4. SECTION 03 — THE LIVING TRANSACTION
+          Option C: Compact Stacking Deck (Cockpit Top · Compact 760px)
+          ============================================================== */}
+      <LivingTransactionStackC />
 
-      {/* 5. SECTION 04 — THE CONNECTED REALITY (THE BLUE-SHIFT CANVAS · TRANSFORMATION MATRIX) */}
-      <BlueShiftCanvas />
+      {/* ==============================================================
+          5. SECTION 04 — THE CONNECTED REALITY
+          Suggestion 1: Department Nested Tabs (Stripe / Docs Reference Style)
+          ============================================================== */}
+      <ConnectedRealityNestedTabs />
 
       {/* ==============================================================
           AI ADVANTAGE · THE INTELLIGENCE MOMENT
-          Gradient Canvas · Sticky Invoice · Layered AI Cards · Wave Dividers
+          Concept Comparator: Current Design vs Direction A vs Direction B vs Direction 01 vs 01 — The Intelligence Current vs 02 — The Clarity Lens vs 03 — The Connected Path vs 03B — The Connected Current
           ============================================================== */}
-      <AIAdvantageSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      <AIAdvantageConceptBar
+        activeConcept={section05AIConcept}
+        onSelectConcept={(c) => setSection05AIConcept(c as "current" | "unfolds" | "moment" | "signal-clear" | "intelligence-current" | "clarity-lens" | "connected-path" | "connected-current")}
+      />
+
+      {section05AIConcept === "connected-current" ? (
+        <ConnectedCurrentSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "connected-path" ? (
+        <ConnectedPathSection beforeSectionBg="#FFFFFF" afterSectionBg="#F8FAFC" />
+      ) : section05AIConcept === "clarity-lens" ? (
+        <ClarityLensSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "intelligence-current" ? (
+        <IntelligenceCurrentSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "signal-clear" ? (
+        <SignalBecomesClearSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "moment" ? (
+        <IntelligenceMomentView beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : section05AIConcept === "unfolds" ? (
+        <AIAdvantageIntelligenceUnfoldsView beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      ) : (
+        <AIAdvantageSection beforeSectionBg="#F8FAFC" afterSectionBg="#FAFBFD" />
+      )}
 
       {/* ==============================================================
           PREDICTIVE BUSINESS DECISIONS EXPERIMENTS
-          Direction B: The Decision Observatory vs Direction A: The Future Signal
+          Direction B: The Decision Observatory vs Direction A: The Future Signal vs View C: The One Insight
           ============================================================== */}
       <div className="living-concept-comparison-bar section-06-comparison-bar" aria-label="Predictive Decisions Concept Selector">
         <div className="home-container">
@@ -917,6 +1007,16 @@ export default function FinalHomepage() {
               <span className="living-concept-tag">Predictive Decisions · Compare Concepts</span>
             </div>
             <div className="living-concept-buttons" role="tablist" aria-label="Choose Predictive Decisions Concept">
+              <button
+                type="button"
+                role="tab"
+                aria-selected={section06Concept === "06B-tabs"}
+                className={`living-concept-btn ${section06Concept === "06B-tabs" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06B-tabs")}
+              >
+                <span>Direction B2: Observatory (Top Tabs)</span>
+                <span className="concept-pill-badge">Top Tabs · 2-Col Deck</span>
+              </button>
               <button
                 type="button"
                 role="tab"
@@ -940,18 +1040,53 @@ export default function FinalHomepage() {
               <button
                 type="button"
                 role="tab"
+                aria-selected={section06Concept === "06C"}
+                className={`living-concept-btn ${section06Concept === "06C" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06C")}
+              >
+                <span>View C: The One Insight</span>
+                <span className="concept-pill-badge">Single Narrative</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={section06Concept === "06D"}
+                className={`living-concept-btn ${section06Concept === "06D" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06D")}
+              >
+                <span>View D: The Forecast Brief</span>
+                <span className="concept-pill-badge">Executive Briefing</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
+                aria-selected={section06Concept === "06E"}
+                className={`living-concept-btn ${section06Concept === "06E" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06E")}
+              >
+                <span>View E: Signal to Consequence</span>
+                <span className="concept-pill-badge">Causal Chain</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
                 aria-selected={section06Concept === "all"}
                 className={`living-concept-btn ${section06Concept === "all" ? "is-active" : ""}`}
                 onClick={() => setSection06Concept("all")}
               >
-                <span>View Both Sequentially</span>
+                <span>View All Sequentially</span>
               </button>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Render Direction 06B: The Decision Observatory (Default per Prompt) */}
+      {/* Render Direction 06B-tabs: The Decision Observatory (Top Tabs View) */}
+      {(section06Concept === "06B-tabs" || section06Concept === "all") && (
+        <DecisionObservatoryTabsView />
+      )}
+
+      {/* Render Direction 06B: The Decision Observatory (Preserved) */}
       {(section06Concept === "06B" || section06Concept === "all") && (
         <DecisionObservatorySection />
       )}
@@ -961,11 +1096,26 @@ export default function FinalHomepage() {
         <PredictiveDecisionsSection />
       )}
 
+      {/* Render View C: The One Insight (New Editorial Concept) */}
+      {(section06Concept === "06C" || section06Concept === "all") && (
+        <PredictiveOneInsightView />
+      )}
+
+      {/* Render View D: The Forecast Brief (New Executive Briefing Concept) */}
+      {(section06Concept === "06D" || section06Concept === "all") && (
+        <PredictiveForecastBriefView />
+      )}
+
+      {/* Render View E: Signal to Consequence (New Causal Chain Concept) */}
+      {(section06Concept === "06E" || section06Concept === "all") && (
+        <PredictiveSignalToConsequenceView />
+      )}
+
       {/* ==============================================================
-          BUSINESS OUTCOMES
-          Better visibility. Stronger control. Clearer decisions.
+          7. SECTION 07 — BUSINESS OUTCOMES
+          Direction 02: One Business. Four Breakthroughs. (Connected Thread)
           ============================================================== */}
-      <BusinessOutcomesSection />
+      <BusinessOutcomesBreakthroughs />
 
       {/* ==============================================================
           ROLE-BASED INTELLIGENCE / CONNECTED BUSINESS ARCHITECTURE

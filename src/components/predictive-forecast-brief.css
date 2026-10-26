@@ -1,0 +1,774 @@
+/* ==========================================================================
+   flowOne Section 06 — Predictive Business Decisions
+   View D: The Forecast Brief — Executive Briefing Concept
+   Scoped Stylesheet (.fo-forecast-brief-section)
+   Restrained Executive Forecast:
+   Projected Impact (Dominant) → Why It Matters → Decision to Consider
+   ========================================================================== */
+
+.fo-forecast-brief-section {
+  position: relative;
+  width: 100%;
+  background: var(--neutral-50, #F8FAFC);
+  color: var(--neutral-900, #0F172A);
+  padding: clamp(4.5rem, 6vw, 6rem) 0;
+  border-top: 1px solid var(--neutral-200, #E2E8F0);
+  border-bottom: 1px solid var(--neutral-200, #E2E8F0);
+  font-family: var(--font-family-body, "Lorin", "Manrope", sans-serif);
+  overflow: hidden;
+}
+
+/* Background Subtle Ambience */
+.fo-forecast-brief-ambient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(5, 40, 242, 0.03) 0%, rgba(5, 199, 242, 0.015) 50%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fo-forecast-brief-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 3vw, 2.75rem);
+}
+
+/* ==========================================================================
+   1. EDITORIAL HEADER & INTRO
+   ========================================================================== */
+
+.fo-forecast-brief-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 860px;
+}
+
+.fo-forecast-brief-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(5, 40, 242, 0.06);
+  border: 1px solid rgba(5, 40, 242, 0.16);
+  color: var(--flow-primary, #0528F2);
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 3px rgba(5, 40, 242, 0.04);
+}
+
+.fo-forecast-brief-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+  box-shadow: 0 0 8px rgba(5, 40, 242, 0.65);
+  animation: foForecastBriefBeaconPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes foForecastBriefBeaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.45; }
+}
+
+.fo-forecast-brief-heading {
+  margin: 0;
+  font-family: var(--font-family-primary, "Lorin", "Manrope", sans-serif);
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--neutral-900, #0F172A);
+}
+
+.fo-forecast-brief-heading em {
+  font-style: normal;
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-forecast-brief-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.58;
+  color: var(--neutral-600, #475569);
+  max-width: 720px;
+}
+
+/* ==========================================================================
+   2. MAIN 2-COLUMN COCKPIT (Left: Signals / Right: Forecast Brief Card)
+   ========================================================================== */
+
+.fo-forecast-brief-workspace {
+  display: grid;
+  grid-template-columns: minmax(280px, 340px) 1fr;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: BUSINESS SIGNALS SELECTOR
+   ========================================================================== */
+
+.fo-forecast-signals-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fo-forecast-signals-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--neutral-200, #E2E8F0);
+}
+
+.fo-forecast-signals-label {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--flow-primary, #0528F2);
+  text-transform: uppercase;
+}
+
+.fo-forecast-signals-hint {
+  font-size: 0.82rem;
+  color: var(--neutral-600, #64748B);
+  line-height: 1.4;
+}
+
+/* Desktop Signals List */
+.fo-forecast-signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.fo-forecast-signal-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 12px;
+  padding: 0.95rem 1.15rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-forecast-signal-card:hover {
+  border-color: rgba(5, 40, 242, 0.35);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  transform: translateX(3px);
+}
+
+.fo-forecast-signal-card:focus-visible {
+  outline: 2px solid var(--flow-primary, #0528F2);
+  outline-offset: 2px;
+}
+
+/* Selected Signal State */
+.fo-forecast-signal-card.is-selected {
+  background: #FFFFFF;
+  border-color: var(--flow-primary, #0528F2);
+  box-shadow: 0 4px 16px rgba(5, 40, 242, 0.1), 0 1px 3px rgba(5, 40, 242, 0.06);
+  transform: translateX(4px);
+}
+
+.fo-forecast-signal-card.is-selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3.5px;
+  background: var(--flow-primary, #0528F2);
+  border-radius: 0 4px 4px 0;
+}
+
+.fo-forecast-signal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fo-forecast-signal-name {
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: var(--neutral-900, #0F172A);
+  letter-spacing: -0.01em;
+}
+
+.fo-forecast-signal-card.is-selected .fo-forecast-signal-name {
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-forecast-signal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+  box-shadow: 0 0 6px var(--flow-primary, #0528F2);
+}
+
+.fo-forecast-signal-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+}
+
+.fo-forecast-signal-badge {
+  font-family: var(--font-family-mono, monospace);
+  font-weight: 750;
+  color: #1E293B;
+  background: #F1F5F9;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.fo-forecast-signal-card.is-selected .fo-forecast-signal-badge {
+  background: rgba(5, 40, 242, 0.08);
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-forecast-signal-context {
+  color: var(--neutral-500, #64748B);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tablet & Mobile Capsule Navigator (Hidden on Desktop) */
+.fo-forecast-mobile-capsule {
+  display: none;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: THE FORECAST BRIEF (Executive Single Surface)
+   ========================================================================== */
+
+.fo-forecast-brief-editorial-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fo-forecast-brief-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 18px;
+  padding: clamp(2rem, 3.5vw, 3rem);
+  box-shadow: 
+    0 4px 24px -2px rgba(15, 23, 42, 0.05),
+    0 1px 4px -1px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+}
+
+.fo-forecast-brief-card:hover {
+  box-shadow: 
+    0 8px 32px -4px rgba(15, 23, 42, 0.08),
+    0 2px 8px -2px rgba(15, 23, 42, 0.04);
+}
+
+/* Top Meta Strip */
+.fo-forecast-brief-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.fo-forecast-brief-entity-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 650;
+  color: #334155;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+}
+
+.fo-entity-tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+}
+
+.fo-forecast-brief-horizon-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--flow-primary, #0528F2);
+  background: rgba(5, 40, 242, 0.06);
+  border: 1px solid rgba(5, 40, 242, 0.18);
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+  font-family: var(--font-family-mono, monospace);
+}
+
+/* ==========================================================================
+   BRIEFING CONTENT STREAM
+   Level 1: Projected Impact (Dominant Element)
+   Level 2: Why It Matters
+   Level 3: Decision to Consider
+   ========================================================================== */
+
+.fo-forecast-brief-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  animation: foBriefFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes foBriefFadeIn {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ---------------- LEVEL 1: PROJECTED IMPACT (DOMINANT) ---------------- */
+.fo-brief-impact-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.fo-brief-impact-eyebrow {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--flow-primary, #0528F2);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fo-brief-impact-eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+}
+
+.fo-brief-impact-headline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fo-brief-impact-stat-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.fo-brief-impact-stat {
+  font-family: var(--font-family-primary, "Lorin", "Manrope", sans-serif);
+  font-size: clamp(2.35rem, 4vw, 3.35rem);
+  font-weight: 850;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  color: var(--neutral-900, #0F172A);
+  font-variant-numeric: tabular-nums;
+}
+
+.fo-brief-impact-unit {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #475569;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  padding: 0.25rem 0.65rem;
+  border-radius: 6px;
+  letter-spacing: -0.01em;
+}
+
+.fo-brief-impact-takeaway {
+  margin: 0;
+  font-size: clamp(1.18rem, 1.75vw, 1.45rem);
+  font-weight: 750;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--neutral-900, #0F172A);
+}
+
+/* Subtle Horizontal Rule */
+.fo-brief-divider {
+  height: 1px;
+  background: #F1F5F9;
+  width: 100%;
+}
+
+/* ---------------- LEVEL 2: WHY IT MATTERS ---------------- */
+.fo-brief-why-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.fo-brief-section-kicker {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748B;
+}
+
+.fo-brief-why-text {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.62;
+  color: #334155;
+  max-width: 58rem;
+}
+
+/* ---------------- LEVEL 3: DECISION TO CONSIDER ---------------- */
+.fo-brief-decision-box {
+  background: #F8FAFC;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-left: 3.5px solid var(--flow-primary, #0528F2);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.02);
+}
+
+.fo-brief-decision-kicker {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-brief-decision-action {
+  margin: 0;
+  font-size: 1.06rem;
+  font-weight: 750;
+  line-height: 1.45;
+  color: var(--neutral-900, #0F172A);
+  letter-spacing: -0.01em;
+}
+
+.fo-brief-decision-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  border-radius: 9999px;
+  color: #065F46;
+  font-size: 0.8rem;
+  font-weight: 700;
+  width: fit-content;
+  max-width: 100%;
+}
+
+.fo-brief-check-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10B981;
+  color: #FFFFFF;
+  font-size: 8px;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Briefing Footer Strip */
+.fo-forecast-brief-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.fo-forecast-brief-governance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  color: #64748B;
+}
+
+.fo-brief-shield {
+  color: var(--flow-primary, #0528F2);
+  font-size: 0.85rem;
+}
+
+.fo-forecast-brief-status-tag {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #059669;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   3. RESPONSIVE ADAPTATIONS (Tablet & Mobile)
+   ========================================================================== */
+
+/* Tablet Breakpoint (<= 1024px) */
+@media (max-width: 1024px) {
+  .fo-forecast-brief-workspace {
+    grid-template-columns: minmax(240px, 300px) 1fr;
+    gap: 1.75rem;
+  }
+
+  .fo-forecast-signal-card {
+    padding: 0.85rem 1rem;
+  }
+
+  .fo-forecast-brief-card {
+    padding: 1.75rem 1.5rem;
+  }
+
+  .fo-brief-impact-stat {
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+  }
+}
+
+/* Compact Tablet & Mobile Breakpoint (<= 840px) */
+@media (max-width: 840px) {
+  .fo-forecast-brief-workspace {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Hide Desktop Signals List on Mobile */
+  .fo-forecast-signals-list {
+    display: none;
+  }
+
+  /* Show Capsule Navigator on Mobile/Tablet */
+  .fo-forecast-mobile-capsule {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid var(--neutral-200, #E2E8F0);
+    border-radius: 9999px;
+    padding: 4px 8px;
+    gap: 0.35rem;
+    height: 44px;
+    min-height: 44px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 0.5rem auto;
+    position: relative;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    box-sizing: border-box;
+  }
+
+  .fo-brief-capsule-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #F1F5F9;
+    border: none;
+    color: #1E293B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .fo-brief-capsule-btn:hover:not(:disabled) {
+    background: #E2E8F0;
+  }
+
+  .fo-brief-capsule-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .fo-brief-capsule-active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: var(--flow-primary, #0528F2);
+    color: #FFFFFF;
+    border-radius: 9999px;
+    padding: 0 16px;
+    height: 32px;
+    font-size: 0.82rem;
+    font-weight: 750;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(5, 40, 242, 0.35);
+    flex: 1;
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fo-brief-capsule-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 5px #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  /* Segmented pills below capsule for fast direct jump */
+  .fo-forecast-mobile-pills {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.45rem;
+    padding: 0.25rem 0 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .fo-forecast-mobile-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fo-forecast-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    background: #FFFFFF;
+    border: 1px solid var(--neutral-200, #E2E8F0);
+    color: #475569;
+    font-size: 0.76rem;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .fo-forecast-pill-btn.is-active {
+    background: var(--flow-primary, #0528F2);
+    border-color: var(--flow-primary, #0528F2);
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(5, 40, 242, 0.3);
+  }
+
+  .fo-forecast-brief-card {
+    padding: 1.35rem 1.15rem;
+    border-radius: 14px;
+  }
+
+  .fo-brief-impact-stat {
+    font-size: 2.2rem;
+  }
+
+  .fo-brief-impact-takeaway {
+    font-size: 1.15rem;
+  }
+
+  .fo-brief-decision-box {
+    padding: 1rem 1.15rem;
+  }
+}
+
+/* Mobile Screen (<= 480px) */
+@media (max-width: 480px) {
+  .fo-forecast-brief-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .fo-forecast-brief-heading {
+    font-size: 1.85rem;
+  }
+
+  .fo-forecast-brief-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .fo-forecast-brief-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   4. REDUCED MOTION PREFERENCE
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .fo-forecast-brief-beacon,
+  .fo-forecast-brief-content {
+    animation: none !important;
+  }
+
+  .fo-forecast-signal-card,
+  .fo-forecast-brief-card,
+  .fo-forecast-pill-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}

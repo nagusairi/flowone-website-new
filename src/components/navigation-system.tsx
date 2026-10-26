@@ -742,19 +742,21 @@ export function MobileAccordion({ menu, expanded, onToggle, onNavigate, disabled
   );
 }
 
-export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScrolled = false, initialMenu = null, onDemo }: { forceMobile?: boolean; forceDark?: boolean; forceScrolled?: boolean; initialMenu?: MenuKey | null; onDemo?: () => void }) {
+export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScrolled = false, initialMenu = null, onDemo, menuTrigger = "hover" }: { forceMobile?: boolean; forceDark?: boolean; forceScrolled?: boolean; initialMenu?: MenuKey | null; onDemo?: () => void; menuTrigger?: "hover" | "click" }) {
   const searchParams = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : null;
   const paramMenu = searchParams?.get("menu") as MenuKey | null;
   const paramScrolled = searchParams?.get("scrolled") === "1";
   const paramMobile = searchParams?.get("mobile") === "1";
   const paramDrawer = searchParams?.get("drawer") === "1";
   const paramHover = searchParams?.get("hover");
+  const paramTrigger = searchParams?.get("menuTrigger") as "hover" | "click" | null;
+  const effectiveTrigger = paramTrigger || menuTrigger;
 
   const [openMenu, setOpenMenu] = useState<MenuKey | null>(paramMenu || initialMenu);
   const [mobileOpen, setMobileOpen] = useState(paramDrawer || (paramMobile && paramMenu !== null) || (forceMobile && initialMenu !== null));
   const [mobileSection, setMobileSection] = useState<MenuKey | null>(paramMenu || initialMenu);
   const [scrolled, setScrolled] = useState(paramScrolled || forceScrolled);
-  const menuTrigger = useRef<HTMLButtonElement>(null);
+  const menuTriggerBtn = useRef<HTMLButtonElement>(null);
   const mobilePanel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -767,7 +769,7 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
       if (event.key !== "Escape") return;
-      if (mobileOpen) { setMobileOpen(false); menuTrigger.current?.focus(); }
+      if (mobileOpen) { setMobileOpen(false); menuTriggerBtn.current?.focus(); }
       setOpenMenu(null);
     };
     document.addEventListener("keydown", onKey);
@@ -781,9 +783,11 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
   const headerRef = useRef<HTMLDivElement>(null);
   const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // Hover is enabled ONLY for desktop environments with a fine pointer (mouse) and viewport > 1024px.
-  // For mobile and tablet devices (touchscreens, iPads, Android tablets, coarse pointers), menus open strictly on click.
+  // Hover is enabled ONLY for desktop environments with a fine pointer (mouse) and viewport > 1024px,
+  // and only when effectiveTrigger is not "click".
+  // For mobile/tablet devices, or when menuTrigger="click", menus open strictly on click.
   const isHoverSupported = () => {
+    if (effectiveTrigger === "click") return false;
     if (typeof window === "undefined") return false;
     const hasFinePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     const isDesktopWidth = window.innerWidth > 1024;
@@ -831,7 +835,7 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
     };
   }, []);
 
-  // Click outside listener: ensures menus opened on mobile/tablet close cleanly when tapping outside
+  // Click outside listener: ensures menus opened on click close cleanly when tapping outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent | TouchEvent) => {
       if (headerRef.current && !headerRef.current.contains(event.target as Node)) {
@@ -850,15 +854,15 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
   }, [openMenu]);
 
   const toggleMenu = (menu: MenuKey) => setOpenMenu(current => current === menu ? null : menu);
-  const closeMobile = () => { setMobileOpen(false); menuTrigger.current?.focus(); };
+  const closeMobile = () => { setMobileOpen(false); menuTriggerBtn.current?.focus(); };
   const handleDemo = () => { clearCloseTimer(); setOpenMenu(null); setMobileOpen(false); onDemo?.(); };
   const classes = `fo-header ${scrolled ? "is-scrolled" : ""} ${forceDark ? "is-dark" : ""} ${openMenu ? "has-mega-open" : ""} ${mobileOpen ? "has-mobile-open" : ""} ${forceMobile ? "is-forced-mobile" : ""}`;
 
-  return <div ref={headerRef} className={classes} onMouseLeave={handleNavMouseLeave}>
+  return <div ref={headerRef} className={classes} onMouseLeave={isHoverSupported() ? handleNavMouseLeave : undefined}>
     <div className="fo-scroll-progress" aria-hidden="true"><i /></div>
     <header className="fo-header__bar">
-      <a className="fo-header__logo" href="#home-hero" aria-label="flowOne home" onMouseEnter={() => scheduleClose(0)}><img src="/assets/flowone-logo.svg" alt="" /></a>
-      <nav className="fo-nav" aria-label="Primary navigation" onMouseLeave={handleNavMouseLeave}>
+      <a className="fo-header__logo" href="#home-hero" aria-label="flowOne home" onMouseEnter={() => { if (isHoverSupported()) scheduleClose(0); }}><img src="/assets/flowone-logo.svg" alt="" /></a>
+      <nav className="fo-nav" aria-label="Primary navigation" onMouseLeave={isHoverSupported() ? handleNavMouseLeave : undefined}>
         {(Object.keys(navigationContent) as MenuKey[]).map(menu => (
           <NavItem
             key={menu}
@@ -869,20 +873,20 @@ export function WebsiteHeader({ forceMobile = false, forceDark = false, forceScr
           />
         ))}
       </nav>
-      <div className="fo-header__actions" onMouseEnter={() => scheduleClose(0)}>
+      <div className="fo-header__actions" onMouseEnter={() => { if (isHoverSupported()) scheduleClose(0); }}>
         <div className="fd-pill">
           <a className={`fd-pill__btn ${paramHover === "fd" ? "is-hover" : ""}`} href="/founders-diary/">{"Founder's Diary"}</a>
         </div>
         <DemoCTA state={paramHover === "demo" ? "hover" : "default"} compact={forceMobile} onClick={handleDemo} />
-        <button ref={menuTrigger} className="fo-mobile-trigger" type="button" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileOpen} onClick={() => mobileOpen ? closeMobile() : setMobileOpen(true)}>{mobileOpen ? <Icon name="close" size={20} /> : <span><i /><i /><i /></span>}</button>
+        <button ref={menuTriggerBtn} className="fo-mobile-trigger" type="button" aria-label={mobileOpen ? "Close navigation" : "Open navigation"} aria-expanded={mobileOpen} onClick={() => mobileOpen ? closeMobile() : setMobileOpen(true)}>{mobileOpen ? <Icon name="close" size={20} /> : <span><i /><i /><i /></span>}</button>
       </div>
     </header>
     {openMenu && (
       <MegaMenu
         menu={openMenu}
         onNavigate={() => { clearCloseTimer(); setOpenMenu(null); }}
-        onMouseEnter={handleMegaMouseEnter}
-        onMouseLeave={handleMegaMouseLeave}
+        onMouseEnter={isHoverSupported() ? handleMegaMouseEnter : undefined}
+        onMouseLeave={isHoverSupported() ? handleMegaMouseLeave : undefined}
       />
     )}
     <div className="fo-mobile-nav" ref={mobilePanel} aria-hidden={!mobileOpen} inert={!mobileOpen}>

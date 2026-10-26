@@ -606,6 +606,277 @@
   background: rgba(255, 255, 255, 0.1);
 }
 
+/* ==========================================================================
+   Hero Pipeline Console — LIGHT MODE (Visually Stunning & Brand Expressive)
+   Active in Classic Homepage by default and whenever .is-light is applied
+   ========================================================================== */
+.hero-pipeline-console.is-light,
+.hero-pipeline-console--light {
+  background: linear-gradient(168deg, #FFFFFF 0%, #F8FAFD 50%, #F0F5FD 100%);
+  color: #0B1020;
+  border: 1px solid rgba(5, 40, 242, 0.16);
+  box-shadow: 
+    0 24px 64px -12px rgba(5, 40, 242, 0.13),
+    0 8px 24px -4px rgba(11, 16, 32, 0.04),
+    inset 0 1px 0 #FFFFFF;
+}
+
+.hero-pipeline-console.is-light .hero-pipeline-beam,
+.hero-pipeline-console--light .hero-pipeline-beam {
+  height: 3px;
+  background: linear-gradient(90deg, #0528F2 0%, #05C7F2 50%, #D9299B 100%);
+  box-shadow: 0 1px 6px rgba(5, 199, 242, 0.45);
+}
+
+.hero-pipeline-console.is-light .hero-pipeline-topbar,
+.hero-pipeline-console--light .hero-pipeline-topbar {
+  border-bottom: 1px solid rgba(5, 40, 242, 0.09);
+}
+
+.hero-pipeline-console.is-light .hero-live-beacon span,
+.hero-pipeline-console--light .hero-live-beacon span {
+  color: #0B1020;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
+.hero-pipeline-console.is-light .hero-live-beacon i,
+.hero-pipeline-console--light .hero-live-beacon i {
+  background: #10B981;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.7);
+}
+
+.hero-pipeline-console.is-light .hero-sync-pulse-badge,
+.hero-pipeline-console--light .hero-sync-pulse-badge {
+  color: #0528F2;
+  background: rgba(5, 40, 242, 0.07);
+  border: 1px solid rgba(5, 40, 242, 0.22);
+  font-weight: 800;
+}
+
+.hero-pipeline-console.is-light .hero-latency-tag,
+.hero-pipeline-console--light .hero-latency-tag {
+  color: #475569;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  font-weight: 700;
+}
+
+/* Console Theme Toggle */
+.hero-console-theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.14rem 0.45rem;
+  background: rgba(5, 40, 242, 0.06);
+  border: 1px solid rgba(5, 40, 242, 0.2);
+  border-radius: 4px;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.52rem;
+  font-weight: 750;
+  color: #0528F2;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hero-console-theme-toggle:hover {
+  background: rgba(5, 40, 242, 0.12);
+  border-color: rgba(5, 40, 242, 0.35);
+  transform: translateY(-1px);
+}
+
+.hero-pipeline-console:not(.is-light) .hero-console-theme-toggle {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: #CBD5E1;
+}
+
+/* Flank Cards (6 fragments) */
+.hero-pipeline-console.is-light .hero-frag-card,
+.hero-pipeline-console--light .hero-frag-card {
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 2px 6px rgba(11, 16, 32, 0.04), 0 1px 2px rgba(11, 16, 32, 0.02);
+}
+
+.hero-pipeline-console.is-light .hero-frag-card:hover,
+.hero-pipeline-console.is-light .hero-frag-card.is-pulsing,
+.hero-pipeline-console--light .hero-frag-card:hover,
+.hero-pipeline-console--light .hero-frag-card.is-pulsing {
+  background: #FFFFFF;
+  border-color: #0528F2;
+  box-shadow: 0 8px 22px rgba(5, 40, 242, 0.16), 0 0 0 1px rgba(5, 40, 242, 0.25);
+  transform: translateY(-1.5px);
+}
+
+.hero-pipeline-console.is-light .hero-frag-tag,
+.hero-pipeline-console--light .hero-frag-tag {
+  color: #64748B;
+  font-weight: 800;
+}
+
+.hero-pipeline-console.is-light .hero-frag-status,
+.hero-pipeline-console--light .hero-frag-status {
+  color: #0D864D;
+  background: #E8F8F0;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  font-weight: 750;
+}
+
+.hero-pipeline-console.is-light .hero-frag-body strong,
+.hero-pipeline-console--light .hero-frag-body strong {
+  color: #0B1020;
+  font-weight: 800;
+}
+
+.hero-pipeline-console.is-light .hero-frag-body small,
+.hero-pipeline-console--light .hero-frag-body small {
+  color: #64748B;
+  font-weight: 600;
+}
+
+/* Flank Port Connector Nodes */
+.hero-pipeline-console.is-light .hero-frag-port,
+.hero-pipeline-console--light .hero-frag-port {
+  background: #FFFFFF;
+  border: 2px solid #0528F2;
+  box-shadow: 0 0 6px rgba(5, 40, 242, 0.25);
+}
+
+.hero-pipeline-console.is-light .hero-frag-port i,
+.hero-pipeline-console--light .hero-frag-port i {
+  background: #05C7F2;
+  box-shadow: 0 0 4px #05C7F2;
+}
+
+/* SVG Conduits / Pipelines */
+.hero-pipeline-console.is-light .conduit-rail-path,
+.hero-pipeline-console--light .conduit-rail-path {
+  stroke: #CBD5E1;
+  stroke-width: 2px;
+}
+
+.hero-pipeline-console.is-light .conduit-rail-glow,
+.hero-pipeline-console--light .conduit-rail-glow {
+  stroke: #0528F2;
+  stroke-width: 2.2px;
+  opacity: 0.95;
+  filter: drop-shadow(0 0 3px rgba(5, 199, 242, 0.6));
+}
+
+.hero-pipeline-console.is-light .conduit-pulse-bead,
+.hero-pipeline-console--light .conduit-pulse-bead {
+  fill: #0528F2;
+  filter: drop-shadow(0 0 4px #05C7F2);
+}
+
+/* Center Engine Hub */
+.hero-pipeline-console.is-light .hub-ring,
+.hero-pipeline-console--light .hub-ring {
+  border-color: rgba(5, 40, 242, 0.28);
+}
+
+.hero-pipeline-console.is-light .hero-hub-card,
+.hero-pipeline-console--light .hero-hub-card {
+  background: linear-gradient(165deg, #FFFFFF 0%, #F5F9FF 55%, #EAF2FF 100%);
+  border: 2px solid rgba(5, 40, 242, 0.35);
+  box-shadow: 
+    0 16px 40px -8px rgba(5, 40, 242, 0.22),
+    0 4px 16px rgba(11, 16, 32, 0.06),
+    inset 0 1px 0 #FFFFFF;
+}
+
+.hero-pipeline-console.is-light .hero-hub-header,
+.hero-pipeline-console--light .hero-hub-header {
+  border-bottom: 1px solid rgba(5, 40, 242, 0.08);
+}
+
+.hero-pipeline-console.is-light .hero-hub-logo-img,
+.hero-pipeline-console--light .hero-hub-logo-img {
+  filter: drop-shadow(0 2px 6px rgba(5, 40, 242, 0.35));
+}
+
+.hero-pipeline-console.is-light .hero-hub-brand-name,
+.hero-pipeline-console--light .hero-hub-brand-name {
+  color: #0B1020;
+  font-weight: 850;
+}
+
+.hero-pipeline-console.is-light .hero-hub-brand-sub,
+.hero-pipeline-console--light .hero-hub-brand-sub {
+  color: #0528F2;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.hero-pipeline-console.is-light .hero-hub-kicker,
+.hero-pipeline-console--light .hero-hub-kicker {
+  color: #0528F2;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.hero-pipeline-console.is-light .hero-hub-txn,
+.hero-pipeline-console--light .hero-hub-txn {
+  color: #0B1020;
+  font-weight: 850;
+}
+
+.hero-pipeline-console.is-light .hero-hub-amount,
+.hero-pipeline-console--light .hero-hub-amount {
+  color: #0B1020;
+  font-weight: 850;
+}
+
+.hero-pipeline-console.is-light .hero-hub-state-pill,
+.hero-pipeline-console--light .hero-hub-state-pill {
+  color: #0D864D;
+  background: #E8F8F0;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  font-weight: 750;
+}
+
+.hero-pipeline-console.is-light .hero-hub-sync-status,
+.hero-pipeline-console--light .hero-hub-sync-status {
+  border-top: 1px solid rgba(5, 40, 242, 0.08);
+  color: #475569;
+  font-weight: 600;
+}
+
+/* Footer Telemetry Bar */
+.hero-pipeline-console.is-light .hero-pipeline-footer,
+.hero-pipeline-console--light .hero-pipeline-footer {
+  border-top: 1px solid rgba(5, 40, 242, 0.09);
+}
+
+.hero-pipeline-console.is-light .hero-footer-stat span,
+.hero-pipeline-console--light .hero-footer-stat span {
+  color: #64748B;
+  font-weight: 750;
+}
+
+.hero-pipeline-console.is-light .hero-footer-stat strong,
+.hero-pipeline-console--light .hero-footer-stat strong {
+  color: #0B1020;
+  font-weight: 800;
+}
+
+.hero-pipeline-console.is-light .hero-footer-stat:nth-child(1) strong,
+.hero-pipeline-console--light .hero-footer-stat:nth-child(1) strong {
+  color: #0528F2;
+}
+
+.hero-pipeline-console.is-light .hero-footer-stat:nth-child(3) strong,
+.hero-pipeline-console--light .hero-footer-stat:nth-child(3) strong {
+  color: #0D864D;
+}
+
+.hero-pipeline-console.is-light .hero-footer-divider,
+.hero-pipeline-console--light .hero-footer-divider {
+  background: rgba(5, 40, 242, 0.12);
+}
+
 /* SECTION 02: Dual-Rail Operating Bus */
 .home-problem { background: var(--color-surface-page); }
 .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-10); align-items: start; }

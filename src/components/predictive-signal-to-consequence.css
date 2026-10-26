@@ -1,0 +1,865 @@
+/* ==========================================================================
+   flowOne Section 06 — Predictive Business Decisions
+   View E: Signal to Consequence — Visual Causal Chain Concept
+   Scoped Stylesheet (.fo-signal-consequence-section)
+   Spatial Causal Chain:
+   01 Signal ──→ 02 Consequence (Focal) ──→ 03 Decision
+   ========================================================================== */
+
+.fo-signal-consequence-section {
+  position: relative;
+  width: 100%;
+  background: var(--neutral-50, #F8FAFC);
+  color: var(--neutral-900, #0F172A);
+  padding: clamp(4.5rem, 6vw, 6rem) 0;
+  border-top: 1px solid var(--neutral-200, #E2E8F0);
+  border-bottom: 1px solid var(--neutral-200, #E2E8F0);
+  font-family: var(--font-family-body, "Lorin", "Manrope", sans-serif);
+  overflow: hidden;
+}
+
+/* Background Subtle Ambience */
+.fo-chain-ambient {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(5, 40, 242, 0.035) 0%, rgba(5, 199, 242, 0.02) 45%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fo-chain-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1360px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2rem, 3vw, 2.75rem);
+}
+
+/* ==========================================================================
+   1. EDITORIAL HEADER & INTRO
+   ========================================================================== */
+
+.fo-chain-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-width: 860px;
+}
+
+.fo-chain-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  background: rgba(5, 40, 242, 0.06);
+  border: 1px solid rgba(5, 40, 242, 0.16);
+  color: var(--flow-primary, #0528F2);
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 3px rgba(5, 40, 242, 0.04);
+}
+
+.fo-chain-beacon {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+  box-shadow: 0 0 8px rgba(5, 40, 242, 0.65);
+  animation: foChainBeaconPulse 2.4s infinite ease-in-out;
+}
+
+@keyframes foChainBeaconPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.3); opacity: 0.45; }
+}
+
+.fo-chain-heading {
+  margin: 0;
+  font-family: var(--font-family-primary, "Lorin", "Manrope", sans-serif);
+  font-size: clamp(2rem, 3.6vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--neutral-900, #0F172A);
+}
+
+.fo-chain-heading em {
+  font-style: normal;
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-chain-lead {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.58;
+  color: var(--neutral-600, #475569);
+  max-width: 720px;
+}
+
+/* ==========================================================================
+   2. MAIN 2-COLUMN COCKPIT (Left: Signals / Right: Visual Causal Chain)
+   ========================================================================== */
+
+.fo-chain-workspace {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: start;
+}
+
+/* ==========================================================================
+   LEFT COLUMN: BUSINESS SIGNALS SELECTOR
+   ========================================================================== */
+
+.fo-chain-signals-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fo-chain-signals-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--neutral-200, #E2E8F0);
+}
+
+.fo-chain-signals-label {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--flow-primary, #0528F2);
+  text-transform: uppercase;
+}
+
+.fo-chain-signals-hint {
+  font-size: 0.82rem;
+  color: var(--neutral-600, #64748B);
+  line-height: 1.4;
+}
+
+/* Desktop Signals List */
+.fo-chain-signals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.fo-chain-signal-card {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 12px;
+  padding: 0.95rem 1.15rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  user-select: none;
+  outline: none;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03);
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fo-chain-signal-card:hover {
+  border-color: rgba(5, 40, 242, 0.35);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+  transform: translateX(3px);
+}
+
+.fo-chain-signal-card:focus-visible {
+  outline: 2px solid var(--flow-primary, #0528F2);
+  outline-offset: 2px;
+}
+
+/* Selected Signal State */
+.fo-chain-signal-card.is-selected {
+  background: #FFFFFF;
+  border-color: var(--flow-primary, #0528F2);
+  box-shadow: 0 4px 16px rgba(5, 40, 242, 0.1), 0 1px 3px rgba(5, 40, 242, 0.06);
+  transform: translateX(4px);
+}
+
+.fo-chain-signal-card.is-selected::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 15%;
+  bottom: 15%;
+  width: 3.5px;
+  background: var(--flow-primary, #0528F2);
+  border-radius: 0 4px 4px 0;
+}
+
+.fo-chain-signal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.fo-chain-signal-name {
+  font-size: 0.92rem;
+  font-weight: 750;
+  color: var(--neutral-900, #0F172A);
+  letter-spacing: -0.01em;
+}
+
+.fo-chain-signal-card.is-selected .fo-chain-signal-name {
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-chain-signal-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+  box-shadow: 0 0 6px var(--flow-primary, #0528F2);
+}
+
+.fo-chain-signal-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+}
+
+.fo-chain-signal-badge {
+  font-family: var(--font-family-mono, monospace);
+  font-weight: 750;
+  color: #1E293B;
+  background: #F1F5F9;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.fo-chain-signal-card.is-selected .fo-chain-signal-badge {
+  background: rgba(5, 40, 242, 0.08);
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-chain-signal-context {
+  color: var(--neutral-500, #64748B);
+  font-size: 0.72rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tablet & Mobile Capsule Navigator (Hidden on Desktop) */
+.fo-chain-mobile-capsule {
+  display: none;
+}
+
+/* ==========================================================================
+   RIGHT COLUMN: THE VISUAL CAUSAL CHAIN
+   Single Canvas with 3 Connected Horizontal Stages:
+   01 Signal ──→ 02 Consequence (Focal) ──→ 03 Decision
+   ========================================================================== */
+
+.fo-chain-editorial-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.fo-chain-canvas {
+  position: relative;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 18px;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  box-shadow: 
+    0 4px 24px -2px rgba(15, 23, 42, 0.05),
+    0 1px 4px -1px rgba(15, 23, 42, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  overflow: hidden;
+  transition: box-shadow 0.25s ease;
+}
+
+.fo-chain-canvas:hover {
+  box-shadow: 
+    0 8px 32px -4px rgba(15, 23, 42, 0.08),
+    0 2px 8px -2px rgba(15, 23, 42, 0.04);
+}
+
+/* Top Meta Strip */
+.fo-chain-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 1.15rem;
+  border-bottom: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.fo-chain-entity-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.74rem;
+  font-weight: 650;
+  color: #334155;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 6px;
+}
+
+.fo-chain-entity-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--flow-primary, #0528F2);
+}
+
+.fo-chain-meta-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--flow-primary, #0528F2);
+  background: rgba(5, 40, 242, 0.06);
+  border: 1px solid rgba(5, 40, 242, 0.18);
+  padding: 0.25rem 0.7rem;
+  border-radius: 9999px;
+  font-family: var(--font-family-mono, monospace);
+}
+
+/* ==========================================================================
+   HORIZONTAL CAUSAL CHAIN TRACK (Desktop 3-Stage Row with Connectors)
+   ========================================================================== */
+
+.fo-chain-track {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  position: relative;
+  animation: foChainFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes foChainFadeIn {
+  from {
+    opacity: 0.35;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Individual Stage Node */
+.fo-chain-stage {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+  border: 1px solid var(--neutral-200, #E2E8F0);
+  border-radius: 14px;
+  padding: 1.35rem 1.25rem;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+/* Stage 02: Consequence — Visual Center of Gravity */
+.fo-chain-stage--consequence {
+  flex: 1.25;
+  background: #FAFBFD;
+  border-color: rgba(5, 40, 242, 0.28);
+  box-shadow: 
+    0 4px 16px -2px rgba(5, 40, 242, 0.07),
+    0 1px 3px rgba(5, 40, 242, 0.04);
+}
+
+.fo-chain-stage-header {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 0.75rem;
+}
+
+.fo-chain-step-pill {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.72rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.fo-chain-step-pill--signal {
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: #475569;
+}
+
+.fo-chain-step-pill--consequence {
+  background: var(--flow-primary, #0528F2);
+  border: 1px solid var(--flow-primary, #0528F2);
+  color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(5, 40, 242, 0.4);
+}
+
+.fo-chain-step-pill--decision {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #059669;
+}
+
+.fo-chain-step-title {
+  font-family: var(--font-family-interface, "Lorin", "Manrope", sans-serif);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fo-chain-stage--signal .fo-chain-step-title {
+  color: #64748B;
+}
+
+.fo-chain-stage--consequence .fo-chain-step-title {
+  color: var(--flow-primary, #0528F2);
+}
+
+.fo-chain-stage--decision .fo-chain-step-title {
+  color: #059669;
+}
+
+.fo-chain-focus-chip {
+  margin-left: auto;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.6rem;
+  font-weight: 750;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  background: rgba(5, 40, 242, 0.08);
+  color: var(--flow-primary, #0528F2);
+  border: 1px solid rgba(5, 40, 242, 0.16);
+}
+
+/* Stage Headings & Narrative */
+.fo-chain-node-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 750;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  color: var(--neutral-900, #0F172A);
+}
+
+.fo-chain-stage--consequence .fo-chain-node-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--neutral-900, #0F172A);
+  line-height: 1.3;
+}
+
+.fo-chain-node-desc {
+  margin: 0.45rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #475569;
+}
+
+.fo-chain-stage--consequence .fo-chain-node-desc {
+  color: #334155;
+  font-size: 0.9rem;
+}
+
+/* Stage Bottom Badges / Telemetry */
+.fo-chain-stage-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.fo-chain-telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  background: #F1F5F9;
+  border-radius: 4px;
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.72rem;
+  color: #475569;
+  font-weight: 600;
+  max-width: 100%;
+}
+
+.fo-chain-consequence-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  background: #EFF6FF;
+  border-left: 3px solid var(--flow-primary, #0528F2);
+  color: #1E40AF;
+  font-size: 0.78rem;
+  font-weight: 750;
+  max-width: 100%;
+}
+
+.fo-chain-decision-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.22);
+  color: #065F46;
+  font-size: 0.76rem;
+  font-weight: 750;
+  max-width: 100%;
+}
+
+/* ==========================================================================
+   HORIZONTAL CONNECTORS BETWEEN STAGES
+   ========================================================================== */
+
+.fo-chain-connector {
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.fo-chain-line-track {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  transform: translateY(-50%);
+  background: #E2E8F0;
+  overflow: hidden;
+}
+
+.fo-chain-line-pulse {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(90deg, transparent, var(--flow-primary, #0528F2), transparent);
+  animation: foChainFlow 1.8s infinite ease-in-out;
+}
+
+@keyframes foChainFlow {
+  0% { left: -50%; }
+  100% { left: 100%; }
+}
+
+.fo-chain-arrow-head {
+  position: relative;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  color: var(--flow-primary, #0528F2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.fo-chain-arrow-head svg {
+  width: 10px;
+  height: 10px;
+}
+
+/* Bottom Canvas Trust Footer */
+.fo-chain-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #F1F5F9;
+  flex-wrap: wrap;
+}
+
+.fo-chain-governance {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.74rem;
+  color: #64748B;
+}
+
+.fo-chain-shield {
+  color: var(--flow-primary, #0528F2);
+  font-size: 0.85rem;
+}
+
+.fo-chain-status-tag {
+  font-family: var(--font-family-mono, monospace);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #059669;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   3. RESPONSIVE ADAPTATIONS (Tablet & Mobile)
+   ========================================================================== */
+
+/* Tablet (<= 1120px): Compress Stage Gaps */
+@media (max-width: 1120px) {
+  .fo-chain-stage {
+    padding: 1.15rem 1rem;
+  }
+
+  .fo-chain-connector {
+    width: 22px;
+  }
+
+  .fo-chain-node-title {
+    font-size: 0.98rem;
+  }
+
+  .fo-chain-stage--consequence .fo-chain-node-title {
+    font-size: 1.05rem;
+  }
+
+  .fo-chain-node-desc {
+    font-size: 0.84rem;
+  }
+}
+
+/* Medium Tablet & Stacked Layout (<= 940px) */
+@media (max-width: 940px) {
+  .fo-chain-workspace {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  /* Hide Desktop Signal List on Tablet/Mobile */
+  .fo-chain-signals-list {
+    display: none;
+  }
+
+  /* Show Capsule Navigator on Mobile/Tablet */
+  .fo-chain-mobile-capsule {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFF;
+    border: 1px solid var(--neutral-200, #E2E8F0);
+    border-radius: 9999px;
+    padding: 4px 8px;
+    gap: 0.35rem;
+    height: 44px;
+    min-height: 44px;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 0.5rem auto;
+    position: relative;
+    user-select: none;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    box-sizing: border-box;
+  }
+
+  .fo-chain-capsule-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    border-radius: 50%;
+    background: #F1F5F9;
+    border: none;
+    color: #1E293B;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    flex-shrink: 0;
+  }
+
+  .fo-chain-capsule-btn:hover:not(:disabled) {
+    background: #E2E8F0;
+  }
+
+  .fo-chain-capsule-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .fo-chain-capsule-active {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    background: var(--flow-primary, #0528F2);
+    color: #FFFFFF;
+    border-radius: 9999px;
+    padding: 0 16px;
+    height: 32px;
+    font-size: 0.82rem;
+    font-weight: 750;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(5, 40, 242, 0.35);
+    flex: 1;
+    max-width: 260px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .fo-chain-capsule-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #FFFFFF;
+    box-shadow: 0 0 5px #FFFFFF;
+    flex-shrink: 0;
+  }
+
+  /* Segmented pills below capsule for fast direct jump */
+  .fo-chain-mobile-pills {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.45rem;
+    padding: 0.25rem 0 0.5rem;
+    scrollbar-width: none;
+  }
+
+  .fo-chain-mobile-pills::-webkit-scrollbar {
+    display: none;
+  }
+
+  .fo-chain-pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    background: #FFFFFF;
+    border: 1px solid var(--neutral-200, #E2E8F0);
+    color: #475569;
+    font-size: 0.76rem;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.15s ease;
+  }
+
+  .fo-chain-pill-btn.is-active {
+    background: var(--flow-primary, #0528F2);
+    border-color: var(--flow-primary, #0528F2);
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(5, 40, 242, 0.3);
+  }
+
+  /* Vertical Stack for the 3 Stages on Tablet/Mobile */
+  .fo-chain-track {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .fo-chain-stage {
+    width: 100%;
+    border-radius: 12px;
+  }
+
+  .fo-chain-connector {
+    width: 100%;
+    height: 28px;
+    flex-direction: column;
+  }
+
+  .fo-chain-line-track {
+    left: 50%;
+    right: auto;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    height: 100%;
+    transform: translateX(-50%);
+  }
+
+  .fo-chain-arrow-head {
+    transform: rotate(90deg);
+  }
+
+  .fo-chain-canvas {
+    padding: 1.35rem 1.15rem;
+    border-radius: 14px;
+  }
+}
+
+/* Mobile Screen (<= 480px) */
+@media (max-width: 480px) {
+  .fo-signal-consequence-section {
+    padding: 3.5rem 0 4rem;
+  }
+
+  .fo-chain-heading {
+    font-size: 1.85rem;
+  }
+
+  .fo-chain-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .fo-chain-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+/* ==========================================================================
+   4. REDUCED MOTION PREFERENCE
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .fo-chain-beacon,
+  .fo-chain-line-pulse,
+  .fo-chain-track {
+    animation: none !important;
+  }
+
+  .fo-chain-signal-card,
+  .fo-chain-stage,
+  .fo-chain-pill-btn {
+    transition: none !important;
+    transform: none !important;
+  }
+}

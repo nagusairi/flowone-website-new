@@ -1,0 +1,232 @@
+{
+  "version": "0.4",
+  "title": "flowOne — Eyebrow Capsule V2 (Native Flexbox Container - Static No Hover)",
+  "type": "container",
+  "content": [
+    {
+      "id": "fo_eyebrow_capsule_root",
+      "elType": "container",
+      "isInner": false,
+      "settings": {
+        "content_width": "full",
+        "_element_width": "auto",
+        "flex_direction": "row",
+        "flex_wrap": "nowrap",
+        "flex_justify_content": "flex-start",
+        "flex_align_items": "center",
+        "flex_gap": {
+          "unit": "px",
+          "size": 10,
+          "column": "10",
+          "row": "0"
+        },
+        "min_height": {
+          "unit": "px",
+          "size": 34
+        },
+        "padding": {
+          "unit": "px",
+          "top": "5",
+          "right": "12",
+          "bottom": "5",
+          "left": "6",
+          "isLinked": false
+        },
+        "background_background": "gradient",
+        "background_color": "#FFFFFF",
+        "background_color_b": "#F8FAFC",
+        "background_gradient_type": "linear",
+        "background_gradient_angle": {
+          "unit": "deg",
+          "size": 135
+        },
+        "border_border": "solid",
+        "border_width": {
+          "unit": "px",
+          "top": "1",
+          "right": "1",
+          "bottom": "1",
+          "left": "1",
+          "isLinked": true
+        },
+        "border_color": "rgba(5, 40, 242, 0.16)",
+        "border_radius": {
+          "unit": "px",
+          "top": "9999",
+          "right": "9999",
+          "bottom": "9999",
+          "left": "9999",
+          "isLinked": true
+        },
+        "box_shadow_box_shadow_type": "yes",
+        "box_shadow_box_shadow": {
+          "horizontal": 0,
+          "vertical": 2,
+          "blur": 10,
+          "spread": -2,
+          "color": "rgba(5, 40, 242, 0.08)"
+        },
+        "_css_classes": "fo-hero-eyebrow-container-native is-static",
+        "custom_css": "selector {\n  user-select: none;\n  backdrop-filter: blur(16px);\n  -webkit-backdrop-filter: blur(16px);\n  cursor: default !important;\n}\nselector:hover {\n  transform: none !important;\n}\nselector .fo-chip-spark i, selector .fo-chip-spark svg {\n  animation: foSparkRotate 4s linear infinite;\n}\n@keyframes foSparkRotate {\n  0% { transform: scale(1) rotate(0deg); }\n  50% { transform: scale(1.18) rotate(180deg); }\n  100% { transform: scale(1) rotate(360deg); }\n}"
+      },
+      "elements": [
+        {
+          "id": "fo_chip_container",
+          "elType": "container",
+          "isInner": true,
+          "settings": {
+            "content_width": "full",
+            "_element_width": "auto",
+            "flex_direction": "row",
+            "flex_wrap": "nowrap",
+            "flex_align_items": "center",
+            "flex_justify_content": "center",
+            "flex_gap": {
+              "unit": "px",
+              "size": 5,
+              "column": "5",
+              "row": "0"
+            },
+            "min_height": {
+              "unit": "px",
+              "size": 22
+            },
+            "padding": {
+              "unit": "px",
+              "top": "3",
+              "right": "9",
+              "bottom": "3",
+              "left": "7",
+              "isLinked": false
+            },
+            "background_background": "gradient",
+            "background_color": "#0528F2",
+            "background_color_b": "#049DD9",
+            "background_gradient_type": "linear",
+            "background_gradient_angle": {
+              "unit": "deg",
+              "size": 135
+            },
+            "border_radius": {
+              "unit": "px",
+              "top": "9999",
+              "right": "9999",
+              "bottom": "9999",
+              "left": "9999",
+              "isLinked": true
+            },
+            "box_shadow_box_shadow_type": "yes",
+            "box_shadow_box_shadow": {
+              "horizontal": 0,
+              "vertical": 2,
+              "blur": 6,
+              "spread": 0,
+              "color": "rgba(5, 40, 242, 0.32)"
+            },
+            "_css_classes": "fo-leading-chip-native"
+          },
+          "elements": [
+            {
+              "id": "fo_chip_icon_spark",
+              "elType": "widget",
+              "widgetType": "icon",
+              "settings": {
+                "selected_icon": {
+                  "value": "fas fa-sparkles",
+                  "library": "fa-solid"
+                },
+                "view": "default",
+                "primary_color": "#FFFFFF",
+                "size": {
+                  "unit": "px",
+                  "size": 10
+                },
+                "_css_classes": "fo-chip-spark"
+              },
+              "elements": []
+            },
+            {
+              "id": "fo_chip_text_heading",
+              "elType": "widget",
+              "widgetType": "heading",
+              "settings": {
+                "title": "PLATFORM",
+                "header_size": "span",
+                "title_color": "#FFFFFF",
+                "typography_typography": "custom",
+                "typography_font_family": "Manrope",
+                "typography_font_size": {
+                  "unit": "px",
+                  "size": 9
+                },
+                "typography_font_weight": "800",
+                "typography_text_transform": "uppercase",
+                "typography_letter_spacing": {
+                  "unit": "em",
+                  "size": 0.08
+                },
+                "typography_line_height": {
+                  "unit": "em",
+                  "size": 1
+                }
+              },
+              "elements": []
+            }
+          ]
+        },
+        {
+          "id": "fo_title_heading",
+          "elType": "widget",
+          "widgetType": "heading",
+          "settings": {
+            "title": "CONNECTED BUSINESS PLATFORM",
+            "header_size": "span",
+            "title_color": "#0D0D0D",
+            "typography_typography": "custom",
+            "typography_font_family": "Manrope",
+            "typography_font_size": {
+              "unit": "px",
+              "size": 11.5
+            },
+            "typography_font_weight": "800",
+            "typography_text_transform": "uppercase",
+            "typography_letter_spacing": {
+              "unit": "em",
+              "size": 0.09
+            },
+            "typography_line_height": {
+              "unit": "em",
+              "size": 1
+            }
+          },
+          "elements": []
+        },
+        {
+          "id": "fo_arrow_icon",
+          "elType": "widget",
+          "widgetType": "icon",
+          "settings": {
+            "selected_icon": {
+              "value": "fas fa-arrow-right",
+              "library": "fa-solid"
+            },
+            "view": "stacked",
+            "shape": "circle",
+            "primary_color": "rgba(5, 40, 242, 0.07)",
+            "secondary_color": "#0528F2",
+            "size": {
+              "unit": "px",
+              "size": 9
+            },
+            "icon_padding": {
+              "unit": "px",
+              "size": 4.5
+            },
+            "_css_classes": "fo-end-arrow"
+          },
+          "elements": []
+        }
+      ]
+    }
+  ]
+}

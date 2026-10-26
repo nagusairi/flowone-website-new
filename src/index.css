@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;650;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap");
 @import "tailwindcss";
 @import "./components/flowone.css";
 @import "./components/flow-system.css";
@@ -6,6 +7,10 @@
 @import "./components/navigation-system.css";
 @import "./components/motion-system.css";
 @import "./components/accessibility-system.css";
+@import "./components/business-outcomes-gallery.css";
+@import "./components/business-outcomes-scroll-gallery.css";
+@import "./components/business-outcomes-breakthroughs.css";
+@import "./components/business-outcomes-impact-map.css";
 @import "./homepage.css";
 
 /* Lorin @font-face declarations (Self-hosted Web Fonts) */
@@ -183,6 +188,7 @@
 
   /* Typography */
   --font-family-primary: "Lorin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-display-xl: clamp(3rem, 5.28vw, 4.75rem);
   --font-display-lg: clamp(2.75rem, 4.45vw, 4rem);
   --font-h1: clamp(2.5rem, 3.9vw, 3.5rem);

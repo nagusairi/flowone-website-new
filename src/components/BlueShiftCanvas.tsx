@@ -214,9 +214,19 @@ export const BlueShiftCanvas = memo(function BlueShiftCanvas() {
             ============================================================== */}
         <div className="blue-shift-intro">
           <div className="blue-shift-intro-left">
-            <div className="blue-shift-eyebrow" role="note" aria-label="The Connected Reality">
-              <span className="blue-shift-beacon" aria-hidden="true" />
-              <span>THE CONNECTED REALITY · TRANSFORMATION MATRIX</span>
+            <div className="hero-eyebrow-container" style={{ marginBottom: "1rem" }}>
+              <div className="hero-modern-eyebrow is-static" role="note" aria-label="The Connected Reality">
+                <span className="hero-eyebrow-badge">
+                  <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
+                  <span>REALITY</span>
+                </span>
+                <span className="hero-eyebrow-title">THE CONNECTED REALITY</span>
+                <span className="hero-eyebrow-arrow" aria-hidden="true">
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </span>
+              </div>
             </div>
 
             <h2 id="blue-shift-heading" className="blue-shift-title">
