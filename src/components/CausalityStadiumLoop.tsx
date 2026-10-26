@@ -355,41 +355,6 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                     y2={300}
                     className="fo-stadium-connector-line"
                   />
-
-                  {/* Left Return Indicator Badge */}
-                  <g transform="translate(105, 272)">
-                    <rect
-                      width="122"
-                      height="56"
-                      rx="8"
-                      fill="rgba(18, 29, 47, 0.75)"
-                      stroke="rgba(233, 182, 107, 0.3)"
-                      strokeWidth="1.2"
-                    />
-                    <text
-                      x="61"
-                      y="24"
-                      fill="#E9B66B"
-                      fontSize="8.5"
-                      fontWeight="800"
-                      fontFamily="monospace"
-                      textAnchor="middle"
-                      letterSpacing="0.08em"
-                    >
-                      HANDOFF GAP
-                    </text>
-                    <text
-                      x="61"
-                      y="42"
-                      fill="#F5F7FC"
-                      fontSize="10.5"
-                      fontWeight="600"
-                      fontFamily="sans-serif"
-                      textAnchor="middle"
-                    >
-                      Context Breaks
-                    </text>
-                  </g>
                 </svg>
 
                 {/* Six Interactive Stage Nodes Positioned Around Track */}
