@@ -99,7 +99,7 @@
   position: relative;
   width: 100%;
   max-width: 960px;
-  aspect-ratio: 960 / 540;
+  aspect-ratio: 960 / 600;
   margin: 0 auto;
 }
 

@@ -16,7 +16,7 @@ export interface ConsequenceStage {
   explanation: string;
   consequence: string;
   placement: "top" | "bottom" | "right";
-  // Coordinates on stadium racetrack (viewBox 960 x 540)
+  // Coordinates on stadium racetrack (viewBox 960 x 600)
   x: number;
   y: number;
   // Outgoing path segment from this stage to next stage
@@ -35,8 +35,8 @@ export const consequenceStages: ConsequenceStage[] = [
     consequence: "Operations plans against outdated delivery information.",
     placement: "top",
     x: 260,
-    y: 100,
-    segmentPath: "M 260 100 L 480 100",
+    y: 75,
+    segmentPath: "M 260 75 L 480 75",
   },
   {
     id: "inventory",
@@ -49,8 +49,8 @@ export const consequenceStages: ConsequenceStage[] = [
     consequence: "Invoice preparation waits for clarification.",
     placement: "top",
     x: 480,
-    y: 100,
-    segmentPath: "M 480 100 L 700 100",
+    y: 75,
+    segmentPath: "M 480 75 L 700 75",
   },
   {
     id: "invoice",
@@ -63,8 +63,8 @@ export const consequenceStages: ConsequenceStage[] = [
     consequence: "The collection clock starts later.",
     placement: "top",
     x: 700,
-    y: 100,
-    segmentPath: "M 700 100 A 170 170 0 0 1 870 270",
+    y: 75,
+    segmentPath: "M 700 75 A 180 225 0 0 1 880 300",
   },
   {
     id: "receivable",
@@ -76,9 +76,9 @@ export const consequenceStages: ConsequenceStage[] = [
       "The outstanding invoice reaches collections without the delivery clarification that explains the delay.",
     consequence: "Reminders repeat while the underlying issue remains unresolved.",
     placement: "right",
-    x: 870,
-    y: 270,
-    segmentPath: "M 870 270 A 170 170 0 0 1 620 440",
+    x: 880,
+    y: 300,
+    segmentPath: "M 880 300 A 180 225 0 0 1 700 525 L 620 525",
   },
   {
     id: "cash",
@@ -91,8 +91,8 @@ export const consequenceStages: ConsequenceStage[] = [
     consequence: "Planned outflows face tighter cash headroom.",
     placement: "bottom",
     x: 620,
-    y: 440,
-    segmentPath: "M 620 440 L 340 440",
+    y: 525,
+    segmentPath: "M 620 525 L 340 525",
   },
   {
     id: "decision",
@@ -105,8 +105,8 @@ export const consequenceStages: ConsequenceStage[] = [
     consequence: "Decisions wait while teams reconcile the picture.",
     placement: "bottom",
     x: 340,
-    y: 440,
-    segmentPath: "M 340 440 L 260 440 A 170 170 0 0 1 260 100",
+    y: 525,
+    segmentPath: "M 340 525 L 260 525 A 180 225 0 0 1 260 75",
   },
 ];
 
@@ -320,7 +320,7 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
               <div className="fo-causality-stadium__circuit-canvas">
                 <svg
                   className="fo-causality-stadium__svg"
-                  viewBox="0 0 960 540"
+                  viewBox="0 0 960 600"
                   fill="none"
                   aria-hidden="true"
                 >
@@ -337,7 +337,7 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
 
                   {/* Base Quiet Slate Racetrack Path */}
                   <path
-                    d="M 260 100 L 700 100 A 170 170 0 0 1 700 440 L 260 440 A 170 170 0 0 1 260 100 Z"
+                    d="M 260 75 L 700 75 A 180 225 0 0 1 700 525 L 260 525 A 180 225 0 0 1 260 75 Z"
                     className="fo-stadium-loop-path"
                   />
 
@@ -352,12 +352,12 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                     x1={activeStage.x}
                     y1={activeStage.y}
                     x2={480}
-                    y2={270}
+                    y2={300}
                     className="fo-stadium-connector-line"
                   />
 
                   {/* Left Return Indicator Badge */}
-                  <g transform="translate(45, 242)">
+                  <g transform="translate(105, 272)">
                     <rect
                       width="122"
                       height="56"
@@ -402,7 +402,7 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                     const isActive = stage.id === activeStageId;
                     const isNextAffected = stage.id === nextStage.id;
                     const leftPct = (stage.x / 960) * 100;
-                    const topPct = (stage.y / 540) * 100;
+                    const topPct = (stage.y / 600) * 100;
 
                     return (
                       <button
