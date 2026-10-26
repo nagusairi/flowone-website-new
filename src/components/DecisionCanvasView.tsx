@@ -386,21 +386,6 @@ function MicroVisualCard3({ signalId }: { signalId: CanvasSignalId }) {
   }
 }
 
-/* ==========================================================================
-   Converging Motif for Decision Strip (Two lines joining into one forward path)
-   ========================================================================== */
-function DecisionConvergingMotif() {
-  return (
-    <svg viewBox="0 0 54 38" fill="none" className="fo-decision-motif-svg" aria-hidden="true">
-      {/* Top flow line */}
-      <path d="M 4 8 C 22 8, 28 19, 44 19" stroke="#185FA5" strokeWidth="2.2" strokeLinecap="round" />
-      {/* Bottom flow line */}
-      <path d="M 4 30 C 22 30, 28 19, 44 19" stroke="#534AB7" strokeWidth="2.2" strokeLinecap="round" />
-      {/* Converged forward arrowhead */}
-      <path d="M 37 14 L 46 19 L 37 24" stroke="#0022FF" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
 
 /* ==========================================================================
    Main Component: DecisionCanvasView
@@ -573,17 +558,12 @@ export const DecisionCanvasView = memo(function DecisionCanvasView() {
         {/* 4. FULL-WIDTH DECISION STRIP (Spanning all 3 columns beneath) */}
         <div className="fo-decision-strip" role="region" aria-label="Decision to Consider">
           <div className="fo-decision-strip-main">
-            {/* Left Area: Motif & Kicker */}
-            <div className="fo-decision-motif-wrap">
-              <DecisionConvergingMotif />
-              <span className="fo-decision-kicker">
-                <span className="fo-decision-kicker-dot" aria-hidden="true" />
-                DECISION TO CONSIDER
-              </span>
-            </div>
-
-            {/* Center Area: Action Headline, Desc & Benefit */}
+            {/* Main Content Area: Eyebrow Kicker, Action Headline, Desc & Benefit */}
             <div className="fo-decision-content-col">
+              <div className="fo-decision-kicker">
+                <span className="fo-decision-kicker-dot" aria-hidden="true" />
+                <span>DECISION TO CONSIDER</span>
+              </div>
               <h3 className="fo-decision-headline">{currentSignal.decisionHeadline}</h3>
               <p className="fo-decision-desc">{currentSignal.decisionDesc}</p>
               <p className="fo-decision-benefit">

@@ -335,7 +335,7 @@
 
 .fo-decision-strip-main {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr auto;
   align-items: center;
   gap: 1.75rem;
 }
@@ -347,29 +347,16 @@
   }
 }
 
-/* Left Motif: Two lines converging into one forward path */
-.fo-decision-motif-wrap {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  min-width: 150px;
-}
-
-.fo-decision-motif-svg {
-  width: 54px;
-  height: 38px;
-}
-
 .fo-decision-kicker {
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: #185FA5;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.4rem;
+  margin-bottom: 0.15rem;
 }
 
 .fo-decision-kicker-dot {
