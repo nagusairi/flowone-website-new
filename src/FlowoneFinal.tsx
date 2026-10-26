@@ -6,13 +6,7 @@ import ConnectedRealityNestedTabs from "./components/ConnectedRealityNestedTabs"
 import PerspectiveShift from "./components/PerspectiveShift";
 import ConnectedBusinessAtlas from "./components/ConnectedBusinessAtlas";
 import ConnectedPathSection from "./components/ConnectedPathSection";
-import PredictiveDecisionsSection from "./components/PredictiveDecisionsSection";
-import DecisionObservatorySection from "./components/DecisionObservatorySection";
-import DecisionObservatoryTabsView from "./components/DecisionObservatoryTabsView";
 import DecisionCanvasView from "./components/DecisionCanvasView";
-import PredictiveOneInsightView from "./components/PredictiveOneInsightView";
-import PredictiveForecastBriefView from "./components/PredictiveForecastBriefView";
-import PredictiveSignalToConsequenceView from "./components/PredictiveSignalToConsequenceView";
 import BusinessOutcomesBreakthroughs from "./components/BusinessOutcomesBreakthroughs";
 import OneFlowDifferentViews from "./components/OneFlowDifferentViews";
 import CausalityStadiumLoop from "./components/CausalityStadiumLoop";
@@ -811,9 +805,6 @@ export default function FlowoneFinal() {
   // Section 05 Concept Comparator: Classic ("One flow. Different views.") vs Direction 05B (The Business Control Atlas) vs Direction 05A (The Perspective Shift) vs All
   const [section05Concept, setSection05Concept] = useState<"classic" | "05B" | "05A" | "all">("classic");
 
-  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06B-tabs (Observatory Top Tabs) vs Direction 06B3 (The Decision Canvas) vs Direction 06A (The Future Signal) vs View C (The One Insight) vs View D (The Forecast Brief) vs View E (Signal to Consequence) vs All
-  const [section06Concept, setSection06Concept] = useState<"06B" | "06B-tabs" | "06B3" | "06A" | "06C" | "06D" | "06E" | "all">("06B-tabs");
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const hash = window.location.hash.toLowerCase();
@@ -827,25 +818,6 @@ export default function FlowoneFinal() {
       setSection05Concept("all");
     } else if (sec5Param === "classic" || hash.includes("roles") || hash.includes("classic")) {
       setSection05Concept("classic");
-    }
-
-    const sec6Param = params.get("sec6")?.toLowerCase();
-    if (sec6Param === "06b-tabs" || sec6Param === "tabs" || sec6Param === "observatory-tabs" || hash.includes("observatory-tabs") || hash.includes("tabs")) {
-      setSection06Concept("06B-tabs");
-    } else if (sec6Param === "06b3" || sec6Param === "b3" || sec6Param === "canvas" || sec6Param === "decision-canvas" || hash.includes("decision-canvas") || hash.includes("b3")) {
-      setSection06Concept("06B3");
-    } else if (sec6Param === "06a" || sec6Param === "future-signal" || hash.includes("future-signal")) {
-      setSection06Concept("06A");
-    } else if (sec6Param === "06b" || sec6Param === "observatory" || hash.includes("observatory")) {
-      setSection06Concept("06B");
-    } else if (sec6Param === "06c" || sec6Param === "one-insight" || sec6Param === "view-c" || hash.includes("one-insight")) {
-      setSection06Concept("06C");
-    } else if (sec6Param === "06d" || sec6Param === "forecast-brief" || sec6Param === "brief" || sec6Param === "view-d" || hash.includes("forecast-brief") || hash.includes("brief")) {
-      setSection06Concept("06D");
-    } else if (sec6Param === "06e" || sec6Param === "signal-consequence" || sec6Param === "chain" || sec6Param === "view-e" || hash.includes("signal-consequence") || hash.includes("view-e")) {
-      setSection06Concept("06E");
-    } else if (sec6Param === "all" || hash.includes("sec6-all")) {
-      setSection06Concept("all");
     }
   }, []);
 
@@ -946,135 +918,10 @@ export default function FlowoneFinal() {
       <ConnectedPathSection beforeSectionBg="#FFFFFF" afterSectionBg="#F8FAFC" />
 
       {/* ==============================================================
-          PREDICTIVE BUSINESS DECISIONS EXPERIMENTS
-          Direction B: The Decision Observatory vs Direction A: The Future Signal vs View C: The One Insight
+          6. SECTION 06 — PREDICTIVE BUSINESS DECISIONS
+          Direction B3: The Decision Canvas (Signal → Impact → Decision)
           ============================================================== */}
-      <div className="living-concept-comparison-bar section-06-comparison-bar" aria-label="Predictive Decisions Concept Selector">
-        <div className="home-container">
-          <div className="living-concept-selector-shell">
-            <div className="living-concept-meta">
-              <span className="living-concept-beacon" aria-hidden="true" />
-              <span className="living-concept-tag">Predictive Decisions · Compare Concepts</span>
-            </div>
-            <div className="living-concept-buttons" role="tablist" aria-label="Choose Predictive Decisions Concept">
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06B-tabs"}
-                className={`living-concept-btn ${section06Concept === "06B-tabs" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06B-tabs")}
-              >
-                <span>Direction B2: Observatory (Top Tabs)</span>
-                <span className="concept-pill-badge">Top Tabs · 2-Col Deck</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06B3"}
-                className={`living-concept-btn ${section06Concept === "06B3" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06B3")}
-              >
-                <span>Direction B3: The Decision Canvas</span>
-                <span className="concept-pill-badge">Signal → Impact → Decision</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06B"}
-                className={`living-concept-btn ${section06Concept === "06B" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06B")}
-              >
-                <span>Direction B: The Decision Observatory</span>
-                <span className="concept-pill-badge">Interactive Signal Map</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06A"}
-                className={`living-concept-btn ${section06Concept === "06A" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06A")}
-              >
-                <span>Direction A: The Future Signal</span>
-                <span className="concept-pill-badge">Forecast Progression</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06C"}
-                className={`living-concept-btn ${section06Concept === "06C" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06C")}
-              >
-                <span>View C: The One Insight</span>
-                <span className="concept-pill-badge">Single Narrative</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06D"}
-                className={`living-concept-btn ${section06Concept === "06D" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06D")}
-              >
-                <span>View D: The Forecast Brief</span>
-                <span className="concept-pill-badge">Executive Briefing</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "06E"}
-                className={`living-concept-btn ${section06Concept === "06E" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("06E")}
-              >
-                <span>View E: Signal to Consequence</span>
-                <span className="concept-pill-badge">Causal Chain</span>
-              </button>
-              <button
-                type="button"
-                role="tab"
-                aria-selected={section06Concept === "all"}
-                className={`living-concept-btn ${section06Concept === "all" ? "is-active" : ""}`}
-                onClick={() => setSection06Concept("all")}
-              >
-                <span>View All Sequentially</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Render Direction 06B-tabs: The Decision Observatory (Top Tabs View) */}
-      {(section06Concept === "06B-tabs" || section06Concept === "all") && (
-        <DecisionObservatoryTabsView />
-      )}
-
-      {/* Render Direction 06B3: The Decision Canvas (New View) */}
-      {(section06Concept === "06B3" || section06Concept === "all") && (
-        <DecisionCanvasView />
-      )}
-
-      {/* Render Direction 06B: The Decision Observatory (Preserved) */}
-      {(section06Concept === "06B" || section06Concept === "all") && (
-        <DecisionObservatorySection />
-      )}
-
-      {/* Render Direction 06A: The Future Signal (Preserved complete design) */}
-      {(section06Concept === "06A" || section06Concept === "all") && (
-        <PredictiveDecisionsSection />
-      )}
-
-      {/* Render View C: The One Insight (New Editorial Concept) */}
-      {(section06Concept === "06C" || section06Concept === "all") && (
-        <PredictiveOneInsightView />
-      )}
-
-      {/* Render View D: The Forecast Brief (New Executive Briefing Concept) */}
-      {(section06Concept === "06D" || section06Concept === "all") && (
-        <PredictiveForecastBriefView />
-      )}
-
-      {/* Render View E: Signal to Consequence (New Causal Chain Concept) */}
-      {(section06Concept === "06E" || section06Concept === "all") && (
-        <PredictiveSignalToConsequenceView />
-      )}
+      <DecisionCanvasView />
 
       {/* ==============================================================
           7. SECTION 07 — BUSINESS OUTCOMES
