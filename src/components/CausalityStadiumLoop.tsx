@@ -1,194 +1,266 @@
-import React, { memo, useState, useEffect, useRef } from "react";
+import React, { memo, useState, useEffect, useRef, useCallback } from "react";
 import "./causality-loops.css";
 
 /* ==========================================================================
-   Section 02 — The Business Loop (Causality Map)
-   Suggestion 2: The Stadium Closed-Circuit Loop
-   Circular Racetrack Circuit · Closed Loop Closure · Central Telemetry Hub
+   Section 02 — Business Problem: The Consequence Loop
+   Racetrack Circuit · Missing Context Handoffs · Downstream Consequences
+   Demonstrates why the connected solution (Section 03) matters.
    ========================================================================== */
 
-interface StadiumStage {
+export interface ConsequenceStage {
   id: string;
   num: string;
   name: string;
-  tag: string;
-  triggerEvent: string;
+  shortProblem: string;
+  panelHeading: string;
+  explanation: string;
   consequence: string;
-  metricBadge: string;
-  contextTag: string;
-  rippleTarget: string;
   placement: "top" | "bottom" | "right";
-  isFinal?: boolean;
-  // Coordinate on stadium racetrack (viewBox 960 x 540)
+  // Coordinates on stadium racetrack (viewBox 960 x 540)
   x: number;
   y: number;
+  // Outgoing path segment from this stage to next stage
+  segmentPath: string;
 }
 
-const stadiumStages: StadiumStage[] = [
+export const consequenceStages: ConsequenceStage[] = [
   {
     id: "order",
     num: "01",
     name: "Order",
-    tag: "COMMERCIAL ORIGIN",
-    triggerEvent: "Sales Order Locked (SO-10482)",
-    consequence: "Commercial terms, customer GSTIN, and line items are locked into one shared transaction context without re-entry.",
-    metricBadge: "SO-10482 · Confirmed",
-    contextTag: "Commercial Context Formed",
-    rippleTarget: "Allocates 125 Units at DC-02 Warehouse",
+    shortProblem: "Change stays in sales",
+    panelHeading: "The update stops with one team.",
+    explanation:
+      "Revised delivery terms remain in the sales record while other teams continue using the original commitment.",
+    consequence: "Operations plans against outdated delivery information.",
     placement: "top",
     x: 260,
     y: 100,
+    segmentPath: "M 260 100 L 480 100",
   },
   {
     id: "inventory",
     num: "02",
     name: "Inventory",
-    tag: "STOCK ALLOCATION",
-    triggerEvent: "DC-02 Stock Reservation",
-    consequence: "Stock is allocated in real time. Physical goods lock against the sales order with zero spreadsheet drift.",
-    metricBadge: "125 Units · DC-02",
-    contextTag: "Inventory In Sync",
-    rippleTarget: "Initiates E-Invoice Generation & IRN Filing",
+    shortProblem: "Fulfilment context is missing",
+    panelHeading: "Billing waits for the latest fulfilment status.",
+    explanation:
+      "Stock or dispatch changes do not reach finance promptly, leaving billing teams to request confirmation.",
+    consequence: "Invoice preparation waits for clarification.",
     placement: "top",
     x: 480,
     y: 100,
+    segmentPath: "M 480 100 L 700 100",
   },
   {
     id: "invoice",
     num: "03",
     name: "Invoice",
-    tag: "STATUTORY TAX",
-    triggerEvent: "Tax Invoice & IRN Generated",
-    consequence: "Operational fulfillment converts into a statutory tax invoice with IRN and tax metadata permanently attached.",
-    metricBadge: "INV-10482 · 18% GST",
-    contextTag: "Tax Cleared & Issued",
-    rippleTarget: "Debits Accounts Receivable Ledger with Net-30 Terms",
+    shortProblem: "Billing needs clarification",
+    panelHeading: "The invoice starts with a reconciliation task.",
+    explanation:
+      "Finance must reconcile order and delivery details before issuing the invoice.",
+    consequence: "The collection clock starts later.",
     placement: "top",
     x: 700,
     y: 100,
+    segmentPath: "M 700 100 A 170 170 0 0 1 870 270",
   },
   {
     id: "receivable",
     num: "04",
     name: "Receivable",
-    tag: "LEDGER POSTING",
-    triggerEvent: "Real-Time Ledger Debit",
-    consequence: "The open balance posts directly to the accounting ledger. Finance sees terms, due dates, and aging without lag.",
-    metricBadge: "₹5,90,000 · Net 30",
-    contextTag: "Real-Time Ledger Posted",
-    rippleTarget: "Monitors Inward NEFT Settlement at HDFC Bank",
+    shortProblem: "Follow-up lacks context",
+    panelHeading: "Collections sees the balance, not the issue.",
+    explanation:
+      "The outstanding invoice reaches collections without the delivery clarification that explains the delay.",
+    consequence: "Reminders repeat while the underlying issue remains unresolved.",
     placement: "right",
     x: 870,
     y: 270,
+    segmentPath: "M 870 270 A 170 170 0 0 1 620 440",
   },
   {
     id: "cash",
     num: "05",
     name: "Cash",
-    tag: "BANK RECONCILIATION",
-    triggerEvent: "Inbound NEFT Matched",
-    consequence: "Inbound payment matches the invoice automatically. Ledger clears and UTR is logged with zero statement ticking.",
-    metricBadge: "HDFC Matched 98%",
-    contextTag: "Auto-Reconciled",
-    rippleTarget: "Closes Loop & Updates Executive Working Capital",
+    shortProblem: "Expected receipts shift",
+    panelHeading: "The cash plan keeps the original assumption.",
+    explanation:
+      "Expected payment timing changes while the cash plan still assumes the earlier receipt date.",
+    consequence: "Planned outflows face tighter cash headroom.",
     placement: "bottom",
     x: 620,
     y: 440,
+    segmentPath: "M 620 440 L 340 440",
   },
   {
     id: "decision",
     num: "06",
     name: "Decision",
-    tag: "EXECUTIVE TRUTH",
-    triggerEvent: "Continuous Loop Complete",
-    consequence: "Real-time working capital, liquidity, and operational metrics update instantly. Leadership acts on verified truth.",
-    metricBadge: "Working Capital Updated",
-    contextTag: "Continuous Loop Complete",
-    rippleTarget: "Loops Back into Continuous Commercial Pipeline",
-    isFinal: true,
+    shortProblem: "Leaders see the impact late",
+    panelHeading: "The business picture needs reconciling.",
+    explanation:
+      "Teams report different versions of the same transaction, leaving leadership to piece together the wider impact.",
+    consequence: "Decisions wait while teams reconcile the picture.",
     placement: "bottom",
     x: 340,
     y: 440,
+    segmentPath: "M 340 440 L 260 440 A 170 170 0 0 1 260 100",
   },
 ];
 
 export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
   const [activeStageId, setActiveStageId] = useState<string>("order");
-  const [isPaused, setIsPaused] = useState<boolean>(false);
+  const [isExplicitlyPaused, setIsExplicitlyPaused] = useState<boolean>(false);
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+  const [isFocused, setIsFocused] = useState<boolean>(false);
+  const [isInViewport, setIsInViewport] = useState<boolean>(true);
   const [timerResetKey, setTimerResetKey] = useState<number>(0);
+  const [isFading, setIsFading] = useState<boolean>(false);
+
+  const sectionRef = useRef<HTMLElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const mobileRailRef = useRef<HTMLDivElement | null>(null);
 
-  const activeIndex = stadiumStages.findIndex(s => s.id === activeStageId);
-  const activeStage = stadiumStages[activeIndex] || stadiumStages[0];
+  const activeIndex = consequenceStages.findIndex((s) => s.id === activeStageId);
+  const activeStage = consequenceStages[activeIndex] || consequenceStages[0];
+  const nextStage = consequenceStages[(activeIndex + 1) % consequenceStages.length];
 
-  // Auto-progress stages in a continuous loop right from page load (4.6s per stage)
+  // Check prefers-reduced-motion
+  const prefersReducedMotion =
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // Viewport intersection observer: pause when section is out of view
   useEffect(() => {
-    if (isPaused) return;
-    if (typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!sectionRef.current || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInViewport(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  // Document visibility listener: pause when tab is hidden
+  useEffect(() => {
+    const handleVisibility = () => {
+      if (document.hidden) {
+        setIsInViewport(false);
+      } else if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setIsInViewport(rect.top < window.innerHeight && rect.bottom > 0);
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibility);
+    return () => document.removeEventListener("visibilitychange", handleVisibility);
+  }, []);
+
+  // Automatic cycling: 8 seconds per stage
+  const shouldCycle =
+    !isExplicitlyPaused &&
+    !isHovered &&
+    !isFocused &&
+    isInViewport &&
+    !prefersReducedMotion;
+
+  useEffect(() => {
+    if (!shouldCycle) {
+      if (timerRef.current) clearTimeout(timerRef.current);
+      return;
+    }
 
     timerRef.current = setTimeout(() => {
-      setActiveStageId(prev => {
-        const idx = stadiumStages.findIndex(s => s.id === prev);
-        return stadiumStages[(idx + 1) % stadiumStages.length].id;
-      });
-    }, 4600);
+      setIsFading(true);
+      setTimeout(() => {
+        setActiveStageId((prev) => {
+          const idx = consequenceStages.findIndex((s) => s.id === prev);
+          return consequenceStages[(idx + 1) % consequenceStages.length].id;
+        });
+        setIsFading(false);
+      }, 200);
+    }, 8000);
 
     return () => {
       if (timerRef.current) clearTimeout(timerRef.current);
     };
-  }, [activeStageId, isPaused, timerResetKey]);
+  }, [activeStageId, shouldCycle, timerResetKey]);
 
-  // Smoothly center the active stage button within the mobile horizontal ribbon
+  // Center active stage pill in mobile rail
   useEffect(() => {
     if (!mobileRailRef.current) return;
     const container = mobileRailRef.current;
-    const activeBtn = container.querySelector<HTMLButtonElement>(".fo-stadium-mobile__stage-pill.is-active");
+    const activeBtn = container.querySelector<HTMLButtonElement>(
+      ".fo-stadium-mobile__stage-pill.is-active"
+    );
 
     if (activeBtn) {
       const containerRect = container.getBoundingClientRect();
       const btnRect = activeBtn.getBoundingClientRect();
       const currentScroll = container.scrollLeft;
       const offsetWithinContainer = btnRect.left - containerRect.left;
-      const targetScroll = currentScroll + offsetWithinContainer - (containerRect.width / 2) + (btnRect.width / 2);
+      const targetScroll =
+        currentScroll + offsetWithinContainer - containerRect.width / 2 + btnRect.width / 2;
 
       container.scrollTo({
         left: Math.max(0, targetScroll),
-        behavior: "smooth"
+        behavior: "smooth",
       });
     }
   }, [activeStageId]);
 
-  // When user clicks a stage: jump immediately, reset dwell timer, and resume auto-loop
-  const selectStage = (id: string) => {
-    setActiveStageId(id);
-    setIsPaused(false);
-    setTimerResetKey(k => k + 1);
-  };
+  // Manual stage selection
+  const selectStage = useCallback((id: string) => {
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveStageId(id);
+      setIsFading(false);
+    }, 150);
+    setTimerResetKey((k) => k + 1);
+  }, []);
 
-  const goToNext = () => {
-    setActiveStageId(prev => {
-      const idx = stadiumStages.findIndex(s => s.id === prev);
-      return stadiumStages[(idx + 1) % stadiumStages.length].id;
-    });
-    setIsPaused(false);
-    setTimerResetKey(k => k + 1);
-  };
+  const goToNext = useCallback(() => {
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveStageId((prev) => {
+        const idx = consequenceStages.findIndex((s) => s.id === prev);
+        return consequenceStages[(idx + 1) % consequenceStages.length].id;
+      });
+      setIsFading(false);
+    }, 150);
+    setTimerResetKey((k) => k + 1);
+  }, []);
 
-  const goToPrev = () => {
-    setActiveStageId(prev => {
-      const idx = stadiumStages.findIndex(s => s.id === prev);
-      return stadiumStages[(idx - 1 + stadiumStages.length) % stadiumStages.length].id;
-    });
-    setIsPaused(false);
-    setTimerResetKey(k => k + 1);
-  };
+  const goToPrev = useCallback(() => {
+    setIsFading(true);
+    setTimeout(() => {
+      setActiveStageId((prev) => {
+        const idx = consequenceStages.findIndex((s) => s.id === prev);
+        return consequenceStages[
+          (idx - 1 + consequenceStages.length) % consequenceStages.length
+        ].id;
+      });
+      setIsFading(false);
+    }, 150);
+    setTimerResetKey((k) => k + 1);
+  }, []);
+
+  const togglePause = useCallback(() => {
+    setIsExplicitlyPaused((prev) => !prev);
+    setTimerResetKey((k) => k + 1);
+  }, []);
 
   return (
     <section
       id="business-causality"
+      ref={sectionRef}
       className="new-home-section new-home-causality-section fo-causality-stadium-section"
       aria-labelledby="causality-heading"
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
     >
       <div className="home-container">
         <div className="causality-panel fo-causality-stadium">
@@ -196,41 +268,53 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
           <div className="causality-ambient-glow" aria-hidden="true" />
 
           {/* Section Introduction */}
-          <div className="causality-intro">
-            <div className="hero-eyebrow-container" style={{ marginBottom: "1rem" }}>
-              <div className="hero-modern-eyebrow is-static is-dark-theme" role="note" aria-label="The Business Loop">
+          <header className="causality-intro">
+            <div className="hero-eyebrow-container" style={{ marginBottom: "0.85rem" }}>
+              <div
+                className="hero-modern-eyebrow is-static is-dark-theme"
+                role="note"
+                aria-label="The Business Problem"
+              >
                 <span className="hero-eyebrow-badge">
                   <span className="hero-eyebrow-spark" aria-hidden="true">✦</span>
-                  <span>THE LOOP</span>
+                  <span>PROBLEM</span>
                 </span>
-                <span className="hero-eyebrow-title">CLOSED-CIRCUIT CAUSALITY</span>
+                <span className="hero-eyebrow-title">THE BUSINESS PROBLEM</span>
                 <span className="hero-eyebrow-arrow" aria-hidden="true">
                   <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path
+                      d="M2.5 6H9.5M9.5 6L6.5 3M9.5 6L6.5 9"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
                   </svg>
                 </span>
               </div>
             </div>
+
             <h2 id="causality-heading" className="causality-heading">
-              Business doesn’t happen in modules.
+              One disconnected step.<br />
+              <em>Consequences across the business.</em>
             </h2>
+
             <p className="causality-subtext">
-              One continuous path. Six business stages. A chain of consequences.
+              An order changes. The update stays with one team. Billing, collections and cash planning continue with yesterday’s information.
             </p>
-          </div>
+          </header>
 
           {/* Subtle Horizontal Divider */}
           <div className="causality-divider" aria-hidden="true" />
 
           {/* ==============================================================
-              1. DESKTOP VIEW: STADIUM CLOSED-CIRCUIT TRACK ARENA (Desktop Only)
-              Preserved 100% intact without modifying desktop coordinates or layout
+              1. DESKTOP VIEW: RACETRACK CIRCUIT & DETAIL PANEL
               ============================================================== */}
           <div className="fo-causality-stadium__desktop-view">
             <div
               className="fo-causality-stadium__track-wrapper"
               role="region"
-              aria-label="Closed-Loop Business Racetrack Circuit"
+              aria-label="The Consequence Loop Racetrack"
             >
               {/* SVG Circuit Canvas */}
               <div className="fo-causality-stadium__circuit-canvas">
@@ -241,87 +325,82 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                   aria-hidden="true"
                 >
                   <defs>
-                    <linearGradient id="stadiumGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#0528F2" />
-                      <stop offset="50%" stopColor="#05C7F2" />
-                      <stop offset="100%" stopColor="#0528F2" />
+                    <linearGradient id="consequenceAmberGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#E9B66B" />
+                      <stop offset="100%" stopColor="#F5D6A6" />
                     </linearGradient>
-                    <filter id="stadiumGlow" x="-20%" y="-20%" width="140%" height="140%">
-                      <feGaussianBlur stdDeviation="4" result="blur" />
+                    <filter id="consequenceGlow" x="-20%" y="-20%" width="140%" height="140%">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
                       <feComposite in="SourceGraphic" in2="blur" operator="over" />
                     </filter>
                   </defs>
 
-                  {/* Base Stadium Racetrack Path */}
-                  {/* Top straight: 260,100 -> 700,100 | Right arc: to 700,440 | Bottom straight: to 260,440 | Left arc: back to 260,100 */}
+                  {/* Base Quiet Slate Racetrack Path */}
                   <path
                     d="M 260 100 L 700 100 A 170 170 0 0 1 700 440 L 260 440 A 170 170 0 0 1 260 100 Z"
                     className="fo-stadium-loop-path"
                   />
 
-                  {/* Continuous Flowing Energy Pulse Stream */}
+                  {/* Highlighted Outgoing Handoff Gap (Missing Context) */}
                   <path
-                    d="M 260 100 L 700 100 A 170 170 0 0 1 700 440 L 260 440 A 170 170 0 0 1 260 100 Z"
-                    className="fo-stadium-pulse-path"
+                    d={activeStage.segmentPath}
+                    className="fo-stadium-handoff-gap"
                   />
 
-                  {/* Left Return Conduit Loop Badge */}
-                  <g transform="translate(45, 242)">
-                    <rect
-                      width="120"
-                      height="56"
-                      rx="8"
-                      fill="rgba(5, 40, 242, 0.25)"
-                      stroke="rgba(5, 199, 242, 0.45)"
-                      strokeWidth="1.5"
-                    />
-                    <text
-                      x="60"
-                      y="24"
-                      fill="#05C7F2"
-                      fontSize="9"
-                      fontWeight="800"
-                      fontFamily="monospace"
-                      textAnchor="middle"
-                      letterSpacing="0.08em"
-                    >
-                      CLOSED LOOP
-                    </text>
-                    <text
-                      x="60"
-                      y="42"
-                      fill="#FFFFFF"
-                      fontSize="11"
-                      fontWeight="700"
-                      fontFamily="sans-serif"
-                      textAnchor="middle"
-                    >
-                      ↻ RECIRCULATES
-                    </text>
-                  </g>
-
-                  {/* Connector lines to central hub for active stage */}
+                  {/* Fine connector line from active node to central panel */}
                   <line
                     x1={activeStage.x}
                     y1={activeStage.y}
                     x2={480}
                     y2={270}
-                    stroke="#05C7F2"
-                    strokeWidth="1.5"
-                    strokeDasharray="4 4"
-                    opacity="0.6"
+                    className="fo-stadium-connector-line"
                   />
+
+                  {/* Left Return Indicator Badge */}
+                  <g transform="translate(45, 242)">
+                    <rect
+                      width="122"
+                      height="56"
+                      rx="8"
+                      fill="rgba(18, 29, 47, 0.75)"
+                      stroke="rgba(233, 182, 107, 0.3)"
+                      strokeWidth="1.2"
+                    />
+                    <text
+                      x="61"
+                      y="24"
+                      fill="#E9B66B"
+                      fontSize="8.5"
+                      fontWeight="800"
+                      fontFamily="monospace"
+                      textAnchor="middle"
+                      letterSpacing="0.08em"
+                    >
+                      HANDOFF GAP
+                    </text>
+                    <text
+                      x="61"
+                      y="42"
+                      fill="#F5F7FC"
+                      fontSize="10.5"
+                      fontWeight="600"
+                      fontFamily="sans-serif"
+                      textAnchor="middle"
+                    >
+                      Context Breaks
+                    </text>
+                  </g>
                 </svg>
 
-                {/* 6 Interactive Perimeter Nodes (HTML positioned over SVG) */}
+                {/* Six Interactive Stage Nodes Positioned Around Track */}
                 <div
                   className="fo-causality-stadium__nodes-overlay"
                   role="tablist"
-                  aria-label="Stadium Loop Stages"
+                  aria-label="Consequence Loop Stages"
                 >
-                  {stadiumStages.map(stage => {
+                  {consequenceStages.map((stage) => {
                     const isActive = stage.id === activeStageId;
-                    // Percentage coordinates for responsive positioning (960 x 540)
+                    const isNextAffected = stage.id === nextStage.id;
                     const leftPct = (stage.x / 960) * 100;
                     const topPct = (stage.y / 540) * 100;
 
@@ -332,7 +411,9 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                         role="tab"
                         aria-selected={isActive}
                         tabIndex={isActive ? 0 : -1}
-                        className={`fo-causality-stadium__node-btn is-${stage.placement} ${isActive ? "is-active" : ""}`}
+                        className={`fo-causality-stadium__node-btn is-${stage.placement} ${
+                          isActive ? "is-active" : isNextAffected ? "is-next-affected" : ""
+                        }`}
                         style={{ left: `${leftPct}%`, top: `${topPct}%` }}
                         onClick={() => selectStage(stage.id)}
                       >
@@ -341,74 +422,96 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                         </div>
                         <div className="fo-causality-stadium__node-callout">
                           <span className="fo-causality-stadium__node-name">{stage.name}</span>
-                          <span className="fo-causality-stadium__node-badge">{stage.metricBadge}</span>
+                          <span className="fo-causality-stadium__node-badge">
+                            {stage.shortProblem}
+                          </span>
                         </div>
                       </button>
                     );
                   })}
                 </div>
 
-                {/* Central Command & Telemetry Console */}
+                {/* Central Consequence Detail Panel */}
                 <div
                   className="fo-causality-stadium__center-hub"
                   role="region"
                   aria-live="polite"
-                  aria-label={`Active stage telemetry: ${activeStage.name}`}
+                  aria-label={`Active stage consequence: ${activeStage.name}`}
+                  onPointerEnter={() => setIsHovered(true)}
+                  onPointerLeave={() => setIsHovered(false)}
                 >
-                  {/* Dynamic Loop Progress Bar */}
-                  {!isPaused && (
-                    <div className="fo-stadium-loop-progress-bar" key={`hub-bar-${activeStage.id}-${timerResetKey}`} aria-hidden="true">
+                  {/* Dwell Progress Bar */}
+                  {shouldCycle && (
+                    <div
+                      className="fo-stadium-loop-progress-bar"
+                      key={`dwell-bar-${activeStage.id}-${timerResetKey}`}
+                      aria-hidden="true"
+                    >
                       <div className="fo-stadium-loop-progress-fill" />
                     </div>
                   )}
 
+                  {/* Panel Top Header */}
                   <div className="fo-causality-stadium__hub-top">
                     <span className="fo-causality-stadium__hub-pill">
-                      STAGE {activeStage.num} · {activeStage.tag}
+                      STAGE {activeStage.num} · {activeStage.name.toUpperCase()}
                     </span>
-                    <div className="fo-causality-stadium__hub-top-right">
-                      <span className="fo-causality-stadium__hub-status">
-                        {activeStage.contextTag}
+                    <button
+                      type="button"
+                      className={`fo-stadium-loop-badge ${
+                        isExplicitlyPaused ? "is-paused" : "is-looping"
+                      }`}
+                      onClick={togglePause}
+                      aria-label={
+                        isExplicitlyPaused
+                          ? "Resume automatic stage cycling"
+                          : "Pause automatic stage cycling"
+                      }
+                      title={
+                        isExplicitlyPaused
+                          ? "Click to resume automatic cycling"
+                          : "Click to pause automatic cycling"
+                      }
+                    >
+                      <span className="fo-stadium-loop-beacon" aria-hidden="true" />
+                      <span>{isExplicitlyPaused ? "PAUSED" : "AUTO CYCLING"}</span>
+                    </button>
+                  </div>
+
+                  {/* Dynamic Panel Content */}
+                  <div
+                    className={`fo-stadium-hub-content-deck ${
+                      isFading ? "is-fading" : ""
+                    }`}
+                  >
+                    <h3 className="fo-causality-stadium__hub-title">
+                      {activeStage.panelHeading}
+                    </h3>
+
+                    <p className="fo-causality-stadium__hub-desc">
+                      {activeStage.explanation}
+                    </p>
+
+                    <div className="fo-causality-hub-divider" aria-hidden="true" />
+
+                    <div className="fo-causality-consequence-box">
+                      <span className="fo-causality-consequence-kicker">
+                        DOWNSTREAM CONSEQUENCE
                       </span>
-                      <button
-                        type="button"
-                        className={`fo-stadium-loop-badge ${isPaused ? "is-paused" : "is-looping"}`}
-                        onClick={() => setIsPaused(p => !p)}
-                        aria-label={isPaused ? "Resume auto-loop" : "Pause auto-loop"}
-                        title={isPaused ? "Click to resume loop" : "Click to pause loop"}
-                      >
-                        <span className="fo-stadium-loop-beacon" aria-hidden="true" />
-                        <span>{isPaused ? "PAUSED" : "AUTO LOOP"}</span>
-                      </button>
+                      <p className="fo-causality-consequence-text">
+                        {activeStage.consequence}
+                      </p>
                     </div>
                   </div>
 
-                  <h3 className="fo-causality-stadium__hub-title">
-                    {activeStage.triggerEvent}
-                  </h3>
-
-                  <p className="fo-causality-stadium__hub-desc">
-                    {activeStage.consequence}
-                  </p>
-
+                  {/* Panel Bottom Footer */}
                   <div className="fo-causality-stadium__hub-footer">
-                    <div className="fo-causality-stadium__hub-ripple">
-                      <span className="fo-causality-stadium__hub-ripple-label">
-                        NEXT RIPPLE:
-                      </span>
-                      <strong className="fo-causality-stadium__hub-ripple-val">
-                        {activeStage.rippleTarget}
-                      </strong>
-                    </div>
-
-                    <div className="fo-causality-stadium__hub-pills">
-                      <span className="fo-causality-stadium__hub-badge is-active">
-                        {activeStage.isFinal ? "Loop Complete" : "Zero Re-Keying"}
-                      </span>
-                      <span className="fo-causality-stadium__hub-badge">
-                        {activeStage.metricBadge}
-                      </span>
-                    </div>
+                    <span className="fo-causality-scenario-tag">
+                      Illustrative business scenario
+                    </span>
+                    <span className="fo-causality-hub-stage-counter">
+                      {activeStage.num} / 06
+                    </span>
                   </div>
                 </div>
               </div>
@@ -416,18 +519,21 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
           </div>
 
           {/* ==============================================================
-              2. MOBILE VIEW: THE CLOSED-LOOP CIRCUIT COCKPIT (Mobile Only <= 768px)
-              Creative, tactile, responsive vertical circuit layout with zero overlap
+              2. MOBILE VIEW: COMPACT STAGE SELECTOR & CONSEQUENCE CARD (<= 768px)
               ============================================================== */}
           <div
             className="fo-causality-stadium__mobile-view"
             role="region"
-            aria-label="Mobile Business Loop Closed-Circuit View"
+            aria-label="Mobile Consequence Loop View"
           >
-            {/* Top Circuit Stage Rail with Infinite Loop Indicator */}
+            {/* Horizontal Stage Ribbon */}
             <div className="fo-stadium-mobile__rail-shell" ref={mobileRailRef}>
-              <div className="fo-stadium-mobile__rail-track" role="tablist" aria-label="Business loop stages">
-                {stadiumStages.map((stage, idx) => {
+              <div
+                className="fo-stadium-mobile__rail-track"
+                role="tablist"
+                aria-label="Business loop stages"
+              >
+                {consequenceStages.map((stage, idx) => {
                   const isActive = stage.id === activeStageId;
                   return (
                     <button
@@ -435,85 +541,92 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                       type="button"
                       role="tab"
                       aria-selected={isActive}
-                      className={`fo-stadium-mobile__stage-pill ${isActive ? "is-active" : ""}`}
+                      className={`fo-stadium-mobile__stage-pill ${
+                        isActive ? "is-active" : ""
+                      }`}
                       onClick={() => selectStage(stage.id)}
                     >
                       <span className="fo-stadium-mobile__pill-num">{stage.num}</span>
                       <span className="fo-stadium-mobile__pill-name">{stage.name}</span>
-                      {idx < stadiumStages.length - 1 && (
-                        <span className="fo-stadium-mobile__pill-arrow" aria-hidden="true">→</span>
+                      {idx < consequenceStages.length - 1 && (
+                        <span
+                          className="fo-stadium-mobile__pill-arrow"
+                          aria-hidden="true"
+                        >
+                          →
+                        </span>
                       )}
                     </button>
                   );
                 })}
-                {/* Loop Closure Conduit Badge */}
-                <div className="fo-stadium-mobile__loop-badge" aria-hidden="true">
-                  <span>↻</span>
-                  <span>CLOSED LOOP</span>
-                </div>
               </div>
             </div>
 
-            {/* Mobile Active Stage Cockpit Card */}
-            <div className="fo-stadium-mobile__card" role="region" aria-live="polite">
-              {/* Dynamic Loop Progress Bar */}
-              {!isPaused && (
-                <div className="fo-stadium-loop-progress-bar" key={`mob-bar-${activeStage.id}-${timerResetKey}`} aria-hidden="true">
+            {/* Mobile Active Stage Card */}
+            <div
+              className="fo-stadium-mobile__card"
+              role="region"
+              aria-live="polite"
+              onPointerEnter={() => setIsHovered(true)}
+              onPointerLeave={() => setIsHovered(false)}
+            >
+              {shouldCycle && (
+                <div
+                  className="fo-stadium-loop-progress-bar"
+                  key={`mob-dwell-${activeStage.id}-${timerResetKey}`}
+                  aria-hidden="true"
+                >
                   <div className="fo-stadium-loop-progress-fill" />
                 </div>
               )}
 
               <div className="fo-stadium-mobile__card-top">
                 <span className="fo-stadium-mobile__card-badge">
-                  STAGE {activeStage.num} · {activeStage.tag}
+                  STAGE {activeStage.num} · {activeStage.name.toUpperCase()}
                 </span>
                 <button
                   type="button"
-                  className={`fo-stadium-loop-badge fo-stadium-loop-badge--mobile ${isPaused ? "is-paused" : "is-looping"}`}
-                  onClick={() => setIsPaused(p => !p)}
-                  aria-label={isPaused ? "Resume auto-loop" : "Pause auto-loop"}
+                  className={`fo-stadium-loop-badge fo-stadium-loop-badge--mobile ${
+                    isExplicitlyPaused ? "is-paused" : "is-looping"
+                  }`}
+                  onClick={togglePause}
+                  aria-label={
+                    isExplicitlyPaused
+                      ? "Resume automatic stage cycling"
+                      : "Pause automatic stage cycling"
+                  }
                 >
                   <span className="fo-stadium-loop-beacon" aria-hidden="true" />
-                  <span>{isPaused ? "PAUSED" : "LOOP"}</span>
+                  <span>{isExplicitlyPaused ? "PAUSED" : "CYCLING"}</span>
                 </button>
               </div>
 
-              <h3 className="fo-stadium-mobile__card-title">
-                {activeStage.triggerEvent}
-              </h3>
+              <div
+                className={`fo-stadium-hub-content-deck ${
+                  isFading ? "is-fading" : ""
+                }`}
+              >
+                <h3 className="fo-stadium-mobile__card-title">
+                  {activeStage.panelHeading}
+                </h3>
 
-              <p className="fo-stadium-mobile__card-desc">
-                {activeStage.consequence}
-              </p>
+                <p className="fo-stadium-mobile__card-desc">
+                  {activeStage.explanation}
+                </p>
 
-              {/* Ripple Conduit Alert */}
-              <div className="fo-stadium-mobile__ripple-banner">
-                <span className="fo-stadium-mobile__ripple-label">NEXT RIPPLE:</span>
-                <strong className="fo-stadium-mobile__ripple-val">{activeStage.rippleTarget}</strong>
+                <div className="fo-causality-consequence-box">
+                  <span className="fo-causality-consequence-kicker">
+                    DOWNSTREAM CONSEQUENCE
+                  </span>
+                  <p className="fo-causality-consequence-text">
+                    {activeStage.consequence}
+                  </p>
+                </div>
               </div>
 
-              {/* Telemetry Pills */}
               <div className="fo-stadium-mobile__card-footer">
-                <span className="fo-stadium-mobile__tag-pill is-primary">
-                  {activeStage.isFinal ? "Loop Complete" : "Zero Re-Keying"}
-                </span>
-                <span className="fo-stadium-mobile__tag-pill">
-                  {activeStage.metricBadge}
-                </span>
-              </div>
-            </div>
-
-            {/* Closed Loop Continuous Flow Banner */}
-            <div className={`fo-stadium-mobile__circuit-banner ${activeStage.isFinal ? "is-closing" : ""}`}>
-              <div className="fo-stadium-mobile__circuit-icon" aria-hidden="true">
-                ↻
-              </div>
-              <div className="fo-stadium-mobile__circuit-text">
-                <strong>{activeStage.isFinal ? "Closed Loop Complete" : "Continuous Closed Circuit"}</strong>
-                <span>
-                  {activeStage.isFinal
-                    ? "Executive truth loops back to commercial origin with zero silo drift."
-                    : `Stage ${activeStage.num} of 06 connected in real-time causality.`}
+                <span className="fo-causality-scenario-tag">
+                  Illustrative business scenario
                 </span>
               </div>
             </div>
@@ -529,11 +642,13 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
                 ← Prev
               </button>
               <div className="fo-stadium-mobile__step-dots" aria-hidden="true">
-                {stadiumStages.map(s => (
+                {consequenceStages.map((s) => (
                   <button
                     key={s.id}
                     type="button"
-                    className={`fo-stadium-mobile__step-dot ${s.id === activeStageId ? "is-active" : ""}`}
+                    className={`fo-stadium-mobile__step-dot ${
+                      s.id === activeStageId ? "is-active" : ""
+                    }`}
                     onClick={() => selectStage(s.id)}
                     aria-label={`Jump to stage ${s.num}`}
                   />
@@ -553,15 +668,15 @@ export const CausalityStadiumLoop = memo(function CausalityStadiumLoop() {
           {/* Subtle Horizontal Divider */}
           <div className="causality-divider" aria-hidden="true" />
 
-          {/* Concluding Statement (Preserved exactly per approved design) */}
-          <div className="causality-closing">
+          {/* Concluding Statement */}
+          <footer className="causality-closing">
             <h3 className="causality-closing-headline">
-              ONE BUSINESS EVENT. A CHAIN OF CONSEQUENCES.
+              The transaction keeps moving. The context doesn’t always follow.
             </h3>
             <p className="causality-closing-sub">
-              Your software should understand the whole journey.
+              Illustrative business scenario · Section 03 demonstrates the connected solution.
             </p>
-          </div>
+          </footer>
         </div>
       </div>
     </section>
