@@ -1,0 +1,552 @@
+/* ==========================================================================
+   Section 06 — Predictive Business Decisions
+   Direction B3 — The Decision Canvas
+   Layout: 3 Equal-Width Insight Cards + 1 Full-Width Decision Strip
+   Visual Direction: Premium Editorial · Softly Tinted · Precise & Compact
+   ========================================================================== */
+
+.fo-decision-canvas {
+  position: relative;
+  background-color: #FFFFFF;
+  color: #0F172A;
+  padding: 5rem 0 5.5rem;
+  overflow: hidden;
+  border-top: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E2E8F0;
+  font-family: "Lorin", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.fo-decision-canvas__container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3.5vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+/* --------------------------------------------------------------------------
+   1. SECTION INTRODUCTION
+   -------------------------------------------------------------------------- */
+.fo-canvas-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  max-width: 760px;
+}
+
+.fo-canvas-intro .hero-eyebrow-container {
+  margin-bottom: 0.25rem;
+}
+
+.fo-canvas-heading {
+  margin: 0;
+  font-family: "Bebas Neue", "Lorin", sans-serif;
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: #0F172A;
+}
+
+.fo-canvas-heading em {
+  font-style: normal;
+  color: #0022FF;
+}
+
+.fo-canvas-copy {
+  margin: 0;
+  font-size: 1.05rem;
+  line-height: 1.5;
+  color: #475569;
+  max-width: 680px;
+}
+
+/* --------------------------------------------------------------------------
+   2. HORIZONTAL SIGNAL TABS (Reference Pill Track)
+   -------------------------------------------------------------------------- */
+.fo-canvas-tabs-track {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.35rem 0.4rem;
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: 9999px;
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.fo-canvas-tabs-track::-webkit-scrollbar {
+  display: none;
+}
+
+.fo-canvas-tab-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #475569;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.fo-canvas-tab-pill:hover:not(.is-active) {
+  color: #0F172A;
+  background: rgba(226, 232, 240, 0.5);
+}
+
+.fo-canvas-tab-pill:focus-visible {
+  box-shadow: 0 0 0 2px #0022FF;
+}
+
+.fo-canvas-tab-pill.is-active {
+  background: #0F172A;
+  color: #FFFFFF;
+  border-color: #0F172A;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+}
+
+.fo-canvas-tab-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38BDF8;
+  box-shadow: 0 0 8px #38BDF8;
+}
+
+/* --------------------------------------------------------------------------
+   3. THREE EQUAL-WIDTH INSIGHT CARDS
+   -------------------------------------------------------------------------- */
+.fo-canvas-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem; /* ~20px gap */
+}
+
+@media (max-width: 980px) {
+  .fo-canvas-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.fo-canvas-card {
+  position: relative;
+  border-radius: 22px;
+  padding: 1.65rem 1.65rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 290px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.fo-canvas-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px -6px rgba(15, 23, 42, 0.06);
+}
+
+/* CARD 1 — WHAT CHANGED (Ice Blue) */
+.fo-card-changed {
+  background-color: #F2F7FD;
+  border: 1px solid #D7E5F4;
+}
+
+.fo-card-changed .fo-card-kicker {
+  color: #185FA5;
+}
+
+.fo-card-changed .fo-card-wash {
+  background: radial-gradient(circle at 85% 20%, rgba(24, 95, 165, 0.12) 0%, transparent 65%);
+}
+
+/* CARD 2 — BUSINESS IMPACT (Soft Lavender) */
+.fo-card-impact {
+  background-color: #F5F3FC;
+  border: 1px solid #E3DDF4;
+}
+
+.fo-card-impact .fo-card-kicker {
+  color: #534AB7;
+}
+
+.fo-card-impact .fo-card-wash {
+  background: radial-gradient(circle at 85% 20%, rgba(83, 74, 183, 0.12) 0%, transparent 65%);
+}
+
+/* CARD 3 — WHAT IT AFFECTS (Cool Mineral) */
+.fo-card-affects {
+  background-color: #F1F7F7;
+  border: 1px solid #D8E7E7;
+}
+
+.fo-card-affects .fo-card-kicker {
+  color: #316C72;
+}
+
+.fo-card-affects .fo-card-wash {
+  background: radial-gradient(circle at 85% 20%, rgba(49, 108, 114, 0.12) 0%, transparent 65%);
+}
+
+.fo-card-wash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.fo-card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.15rem;
+  position: relative;
+  z-index: 1;
+}
+
+.fo-card-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fo-card-microvisual {
+  width: 58px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.fo-card-body {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.fo-card-headline {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0F172A;
+  letter-spacing: -0.015em;
+}
+
+.fo-card-explanation {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #334155;
+}
+
+/* Card 3 Affected Domains Stack */
+.fo-affects-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+.fo-affect-item {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid #D8E7E7;
+  border-radius: 10px;
+  padding: 0.55rem 0.75rem;
+}
+
+.fo-affect-title {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #1E293B;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  margin-bottom: 0.15rem;
+}
+
+.fo-affect-desc {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+  color: #475569;
+}
+
+/* Card Bottom Metadata Chip */
+.fo-card-footer {
+  position: relative;
+  z-index: 1;
+  margin-top: 1.25rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.fo-card-pill-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #475569;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.fo-card-pill-tag strong {
+  color: #0F172A;
+}
+
+/* --------------------------------------------------------------------------
+   4. FULL-WIDTH DECISION STRIP (Reference bottom card)
+   -------------------------------------------------------------------------- */
+.fo-decision-strip {
+  position: relative;
+  background: linear-gradient(135deg, #F0F6FD 0%, #FFFFFF 45%, #F6F4FD 100%);
+  border: 1px solid #DCE6F5;
+  border-radius: 22px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+}
+
+.fo-decision-strip-main {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+@media (max-width: 900px) {
+  .fo-decision-strip-main {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}
+
+/* Left Motif: Two lines converging into one forward path */
+.fo-decision-motif-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  min-width: 150px;
+}
+
+.fo-decision-motif-svg {
+  width: 54px;
+  height: 38px;
+}
+
+.fo-decision-kicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #185FA5;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.fo-decision-kicker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #185FA5;
+}
+
+/* Center Content */
+.fo-decision-content-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.fo-decision-headline {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.3;
+  color: #0F172A;
+  letter-spacing: -0.015em;
+}
+
+.fo-decision-desc {
+  margin: 0;
+  font-size: 0.925rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.fo-decision-benefit {
+  margin: 0.15rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: #0369A1;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.fo-decision-benefit-icon {
+  font-size: 0.95rem;
+  color: #0284C7;
+}
+
+/* Right Details Toggle */
+.fo-decision-actions-col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+
+@media (max-width: 900px) {
+  .fo-decision-actions-col {
+    align-items: flex-start;
+  }
+}
+
+.fo-decision-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.15rem;
+  background: #FFFFFF;
+  border: 1px solid #CBD5E1;
+  border-radius: 9999px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #0F172A;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.fo-decision-toggle-btn:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  color: #0022FF;
+}
+
+.fo-decision-toggle-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.fo-decision-toggle-btn.is-expanded svg {
+  transform: rotate(180deg);
+}
+
+.fo-decision-review-tag {
+  font-size: 0.72rem;
+  color: #64748B;
+  font-weight: 500;
+}
+
+/* Expandable Details Drawer */
+.fo-decision-drawer {
+  padding-top: 1.25rem;
+  border-top: 1px solid #E2E8F0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  animation: fo-fade-slide 0.25s ease-out;
+}
+
+@media (max-width: 768px) {
+  .fo-decision-drawer {
+    grid-template-columns: 1fr;
+  }
+}
+
+@keyframes fo-fade-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fo-drawer-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #E2E8F0;
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+}
+
+.fo-drawer-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748B;
+  margin-bottom: 0.25rem;
+}
+
+.fo-drawer-val {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.45;
+  color: #1E293B;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------------------
+   5. FOOTNOTE & CONTEXT ANCHOR
+   -------------------------------------------------------------------------- */
+.fo-canvas-footnote {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: #64748B;
+  padding: 0 0.25rem;
+}
+
+.fo-canvas-footnote-text {
+  margin: 0;
+}
+
+.fo-canvas-footnote-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #475569;
+}

@@ -9,6 +9,7 @@ import ConnectedPathSection from "./components/ConnectedPathSection";
 import PredictiveDecisionsSection from "./components/PredictiveDecisionsSection";
 import DecisionObservatorySection from "./components/DecisionObservatorySection";
 import DecisionObservatoryTabsView from "./components/DecisionObservatoryTabsView";
+import DecisionCanvasView from "./components/DecisionCanvasView";
 import PredictiveOneInsightView from "./components/PredictiveOneInsightView";
 import PredictiveForecastBriefView from "./components/PredictiveForecastBriefView";
 import PredictiveSignalToConsequenceView from "./components/PredictiveSignalToConsequenceView";
@@ -810,8 +811,8 @@ export default function FlowoneFinal() {
   // Section 05 Concept Comparator: Classic ("One flow. Different views.") vs Direction 05B (The Business Control Atlas) vs Direction 05A (The Perspective Shift) vs All
   const [section05Concept, setSection05Concept] = useState<"classic" | "05B" | "05A" | "all">("classic");
 
-  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06B-tabs (Observatory Top Tabs) vs Direction 06A (The Future Signal) vs View C (The One Insight) vs View D (The Forecast Brief) vs View E (Signal to Consequence) vs All
-  const [section06Concept, setSection06Concept] = useState<"06B" | "06B-tabs" | "06A" | "06C" | "06D" | "06E" | "all">("06B-tabs");
+  // Section 06 Experimental Concept Comparator: Direction 06B (The Decision Observatory) vs Direction 06B-tabs (Observatory Top Tabs) vs Direction 06B3 (The Decision Canvas) vs Direction 06A (The Future Signal) vs View C (The One Insight) vs View D (The Forecast Brief) vs View E (Signal to Consequence) vs All
+  const [section06Concept, setSection06Concept] = useState<"06B" | "06B-tabs" | "06B3" | "06A" | "06C" | "06D" | "06E" | "all">("06B-tabs");
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -831,6 +832,8 @@ export default function FlowoneFinal() {
     const sec6Param = params.get("sec6")?.toLowerCase();
     if (sec6Param === "06b-tabs" || sec6Param === "tabs" || sec6Param === "observatory-tabs" || hash.includes("observatory-tabs") || hash.includes("tabs")) {
       setSection06Concept("06B-tabs");
+    } else if (sec6Param === "06b3" || sec6Param === "b3" || sec6Param === "canvas" || sec6Param === "decision-canvas" || hash.includes("decision-canvas") || hash.includes("b3")) {
+      setSection06Concept("06B3");
     } else if (sec6Param === "06a" || sec6Param === "future-signal" || hash.includes("future-signal")) {
       setSection06Concept("06A");
     } else if (sec6Param === "06b" || sec6Param === "observatory" || hash.includes("observatory")) {
@@ -967,6 +970,16 @@ export default function FlowoneFinal() {
               <button
                 type="button"
                 role="tab"
+                aria-selected={section06Concept === "06B3"}
+                className={`living-concept-btn ${section06Concept === "06B3" ? "is-active" : ""}`}
+                onClick={() => setSection06Concept("06B3")}
+              >
+                <span>Direction B3: The Decision Canvas</span>
+                <span className="concept-pill-badge">Signal → Impact → Decision</span>
+              </button>
+              <button
+                type="button"
+                role="tab"
                 aria-selected={section06Concept === "06B"}
                 className={`living-concept-btn ${section06Concept === "06B" ? "is-active" : ""}`}
                 onClick={() => setSection06Concept("06B")}
@@ -1031,6 +1044,11 @@ export default function FlowoneFinal() {
       {/* Render Direction 06B-tabs: The Decision Observatory (Top Tabs View) */}
       {(section06Concept === "06B-tabs" || section06Concept === "all") && (
         <DecisionObservatoryTabsView />
+      )}
+
+      {/* Render Direction 06B3: The Decision Canvas (New View) */}
+      {(section06Concept === "06B3" || section06Concept === "all") && (
+        <DecisionCanvasView />
       )}
 
       {/* Render Direction 06B: The Decision Observatory (Preserved) */}
