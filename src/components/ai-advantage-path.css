@@ -668,8 +668,8 @@
 /* Headline (Bebas Neue) */
 .fo-ai-path__headline {
   font-family: var(--font-family-display, "Bebas Neue", sans-serif);
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  line-height: 1.06;
+  font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+  line-height: 1.05;
   letter-spacing: 0.02em;
   color: #0F172A;
   margin: 0 0 1.25rem 0;

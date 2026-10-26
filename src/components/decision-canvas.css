@@ -41,11 +41,12 @@
 
 .fo-canvas-heading {
   margin: 0;
-  font-family: "Bebas Neue", "Lorin", sans-serif;
-  font-size: clamp(2.2rem, 4vw, 3.25rem);
-  font-weight: 800;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2.2rem, 3.8vw, 3.25rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   color: #0F172A;
 }
 

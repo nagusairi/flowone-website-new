@@ -61,7 +61,7 @@
 .fo-breakthroughs__heading {
   margin: 0;
   font-family: var(--font-family-display, "Bebas Neue", sans-serif);
-  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  font-size: clamp(2.2rem, 3.8vw, 3.25rem);
   line-height: 1.05;
   letter-spacing: 0.02em;
   text-transform: uppercase;

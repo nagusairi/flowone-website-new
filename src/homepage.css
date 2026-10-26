@@ -4685,10 +4685,12 @@
 }
 
 .footer-launchpad__title {
-  font-size: clamp(1.6rem, 2.5vw, 2.15rem);
-  font-weight: 800;
-  line-height: 1.18;
-  letter-spacing: -0.03em;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif);
+  font-size: clamp(2rem, 3.5vw, 2.85rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   color: #FFFFFF;
   margin: 0;
 }

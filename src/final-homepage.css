@@ -173,12 +173,12 @@
 .new-homepage .home-roles h2,
 .new-homepage .home-roles .role-main-title,
 .new-homepage .home-roles .section-heading-row h2 {
-  font-family: var(--font-family-primary, "Lorin", "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
-  font-size: clamp(2.25rem, 3.4vw, 3rem) !important;
-  line-height: 1.1 !important;
-  letter-spacing: -0.04em !important;
-  font-weight: 700 !important;
-  text-transform: none !important;
+  font-family: var(--font-family-display, "Bebas Neue", sans-serif) !important;
+  font-size: clamp(2.2rem, 3.8vw, 3.25rem) !important;
+  line-height: 1.05 !important;
+  letter-spacing: 0.02em !important;
+  font-weight: 400 !important;
+  text-transform: uppercase !important;
   color: var(--neutral-900, #0D0D0D) !important;
   margin: 1rem 0 0 0 !important;
 }
