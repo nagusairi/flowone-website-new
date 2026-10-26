@@ -280,24 +280,41 @@ export const OneFlowDifferentViews = memo(function OneFlowDifferentViews({
           </button>
         </div>
 
-        {/* Desktop Role Navigation List & Main Card */}
-        <div className="role-selector">
-          <div role="tablist" aria-label="Business roles" className="role-tablist">
-            {roles.map((x, i) => (
-              <button
-                role="tab"
-                aria-selected={role === i}
-                onClick={() => setRole(i)}
-                key={x.name}
-                className="role-tab-btn"
-              >
-                <span>{x.name}</span>
-              </button>
-            ))}
-          </div>
+        {/* Desktop Role Navigation List & Main Card — Unified Connected Reality Frame */}
+        <div className="role-selector connected-tabs-frame role-tabs-frame" role="region" aria-label="Role views comparison">
+          {/* LEFT SIDEBAR: Flat 7-Role List with Continuous Spine Track */}
+          <aside className="connected-tabs-sidebar role-tabs-sidebar" aria-label="Business roles navigation">
+            <div
+              className="connected-sidebar-items-list role-sidebar-items-list"
+              role="tablist"
+              aria-label="Business roles"
+            >
+              {roles.map((x, i) => {
+                const isActive = role === i;
+                return (
+                  <button
+                    key={x.id}
+                    type="button"
+                    role="tab"
+                    id={`role-tab-${x.id}`}
+                    aria-selected={isActive}
+                    aria-controls={`role-panel-${x.id}`}
+                    onClick={() => setRole(i)}
+                    className={`connected-sidebar-tab-btn role-sidebar-tab-btn ${isActive ? "is-active" : ""}`}
+                  >
+                    <span className="connected-tab-text">{x.name}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </aside>
 
-          <div
-            className="role-view"
+          {/* RIGHT CONTENT PANE: Active Role View */}
+          <main
+            id={`role-panel-${roles[role].id}`}
+            role="tabpanel"
+            aria-labelledby={`role-tab-${roles[role].id}`}
+            className="role-view role-tabs-content"
             onTouchStart={handleRoleTouchStart}
             onTouchEnd={handleRoleTouchEnd}
           >
@@ -335,7 +352,7 @@ export const OneFlowDifferentViews = memo(function OneFlowDifferentViews({
                 />
               ))}
             </div>
-          </div>
+          </main>
         </div>
       </div>
     </section>
