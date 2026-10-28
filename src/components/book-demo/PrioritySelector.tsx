@@ -45,7 +45,7 @@ export const PrioritySelector = memo(function PrioritySelector({
         Where should we focus?
       </h2>
       <p className="demo-subtitle" id="demo-subtitle">
-        Choose up to three priorities.
+        Choose up to three priorities to personalize your walkthrough.
       </p>
 
       <div
@@ -68,38 +68,64 @@ export const PrioritySelector = memo(function PrioritySelector({
               aria-pressed={isPressed}
               onClick={() => handleToggle(opt.id)}
             >
-              <svg
-                className="option-icon"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
-              >
-                <path d={opt.svgPath} />
-              </svg>
-              <span className="option-text">
-                <strong>{opt.label}</strong>
-              </span>
-              <i className="demo-check" aria-hidden="true" />
+              <div className="option-icon-box" aria-hidden="true">
+                <svg
+                  className="option-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.6"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d={opt.svgPath} />
+                </svg>
+              </div>
+
+              <div className="option-text">
+                <strong className="option-label">{opt.label}</strong>
+              </div>
+
+              <div className="demo-check" aria-hidden="true">
+                <svg
+                  className="demo-check-svg"
+                  width="10"
+                  height="8"
+                  viewBox="0 0 10 8"
+                  fill="none"
+                >
+                  <path
+                    d="M1 4L3.8 7L9 1"
+                    stroke="currentColor"
+                    strokeWidth="1.9"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </button>
           );
         })}
       </div>
 
       <div className="demo-selection-note">
-        <span>A tailored walkthrough starts here.</span>
+        <span className="demo-note-left">A tailored walkthrough starts here.</span>
         <span id="demo-selected-count" aria-live="polite">
-          {selected.length} / 3 selected
+          <strong className="count-num">{selected.length}</strong> / 3 selected
         </span>
       </div>
 
       {error && (
-        <p className="demo-error" id="demo-error" role="alert">
-          {error}
-        </p>
+        <div className="demo-error-box" role="alert">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <circle cx="12" cy="12" r="10" />
+            <line x1="12" y1="8" x2="12" y2="12" />
+            <line x1="12" y1="16" x2="12.01" y2="16" />
+          </svg>
+          <p className="demo-error" id="demo-error">
+            {error}
+          </p>
+        </div>
       )}
     </section>
   );

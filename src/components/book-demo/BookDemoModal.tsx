@@ -303,7 +303,7 @@ export const BookDemoModal = memo(function BookDemoModal({
                     <span>
                       {step === 2 ? "Request my demo" : "Continue"}
                     </span>
-                    <span aria-hidden="true">→</span>
+                    <span className="demo-btn-arrow" aria-hidden="true">→</span>
                   </button>
                 </div>
 

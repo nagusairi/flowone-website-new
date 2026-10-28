@@ -68,7 +68,7 @@ export const DemoBriefConfirmation = memo(function DemoBriefConfirmation({
           onClick={onClose}
         >
           <span>Back to the page</span>
-          <span aria-hidden="true">↗</span>
+          <span className="demo-btn-arrow" aria-hidden="true">↗</span>
         </button>
 
         <button
