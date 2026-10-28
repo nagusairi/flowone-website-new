@@ -1,6 +1,7 @@
 import { memo, useEffect, useRef, useState } from "react";
 import { Button, Icon } from "./components/flowone";
 import { WebsiteHeader } from "./components/navigation-system";
+import { BookDemoModal } from "./components/book-demo";
 import LivingTransactionStackC from "./components/LivingTransactionStackC";
 import ConnectedRealityNestedTabs from "./components/ConnectedRealityNestedTabs";
 import PerspectiveShift from "./components/PerspectiveShift";
@@ -492,84 +493,7 @@ function FinalFooter({ onDemo }: { onDemo: () => void }) {
   );
 }
 
-/* ==========================================================================
-   DemoDialog — Accessible Modal Dialog
-   ========================================================================== */
-function DemoDialog({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const closeRef = useRef<HTMLButtonElement>(null);
-  const dialogRef = useRef<HTMLDivElement>(null);
-  const previousFocus = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (!open) return;
-    previousFocus.current = document.activeElement as HTMLElement;
-    document.body.classList.add("fo-nav-lock");
-    closeRef.current?.focus();
-    const fn = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-        return;
-      }
-      if (e.key !== "Tab") return;
-      const items = Array.from(dialogRef.current?.querySelectorAll<HTMLElement>("button,input,select,a[href]") || []);
-      if (!items.length) return;
-      if (e.shiftKey && document.activeElement === items[0]) {
-        e.preventDefault();
-        items.at(-1)?.focus();
-      } else if (!e.shiftKey && document.activeElement === items.at(-1)) {
-        e.preventDefault();
-        items[0].focus();
-      }
-    };
-    document.addEventListener("keydown", fn);
-    return () => {
-      document.removeEventListener("keydown", fn);
-      document.body.classList.remove("fo-nav-lock");
-      previousFocus.current?.focus();
-    };
-  }, [open, onClose]);
-
-  return (
-    <div className={`home-demo-layer ${open ? "is-open" : ""}`} inert={!open} aria-hidden={!open}>
-      <button className="home-demo-backdrop" onClick={onClose} aria-label="Close demo request" />
-      <div ref={dialogRef} role="dialog" aria-modal="true" aria-labelledby="demo-title" aria-describedby="demo-description" className="home-demo-dialog">
-        <header>
-          <div>
-            <span>BOOK A DEMO</span>
-            <h2 id="demo-title">Let’s connect your first flow.</h2>
-          </div>
-          <button ref={closeRef} onClick={onClose} aria-label="Close">
-            <Icon name="close" size={20} />
-          </button>
-        </header>
-        <p id="demo-description">Tell us where your business flow breaks today. A flowOne specialist will continue the conversation.</p>
-        <form onSubmit={e => { e.preventDefault(); onClose(); }}>
-          <label>
-            <span>Work email</span>
-            <input type="email" required placeholder="you@company.com" />
-          </label>
-          <label>
-            <span>Company</span>
-            <input required placeholder="Company name" />
-          </label>
-          <label>
-            <span>Where should we start?</span>
-            <select defaultValue="">
-              <option value="" disabled>Select a workflow</option>
-              <option>Get paid faster</option>
-              <option>Control procurement</option>
-              <option>Run inventory better</option>
-              <option>Control cash & banking</option>
-              <option>Stay compliant</option>
-            </select>
-          </label>
-          <Button>Request a Demo</Button>
-        </form>
-        <small>Prototype only. No information is submitted.</small>
-      </div>
-    </div>
-  );
-}
 
 /* ==========================================================================
    CausalityStage Definition & Verified Data
@@ -1003,8 +927,8 @@ export default function FlowoneFinal() {
       {/* DEDICATED FINAL FOOTER */}
       <FinalFooter onDemo={openDemo} />
 
-      {/* Interactive Demo Dialog Modal */}
-      <DemoDialog open={demoOpen} onClose={closeDemo} />
+      {/* Interactive 3-Step Demo Modal System */}
+      <BookDemoModal open={demoOpen} onClose={closeDemo} />
     </main>
   );
 }
